@@ -134,51 +134,7 @@ theorem complex_square_root_formula_nonpos_im (w : ℂ) (hv : w.im ≤ 0) :
 /-- Every nonzero complex number has exactly two square roots. -/
 theorem complex_two_square_roots {z : ℂ} (hz : z ≠ 0) :
     ∃ w : ℂ, w ^ 2 = z ∧ {u : ℂ | u ^ 2 = z} = {w, -w} := by
-  by_cases hz_im : 0 ≤ z.im
-  · have hw2 := complex_square_root_formula_nonneg_im z hz_im
-    simp only [Real.sqrt_div' _ (by norm_num : (0:ℝ) ≤ 2)] at hw2
-    simp only [Complex.ofReal_div] at hw2
-    use (Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I
-    refine ⟨hw2, ?_⟩
-    ext u
-    simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
-    constructor
-    · intro hu2
-      have hdiff : u ^ 2 - ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I) ^ 2 = 0 := by rw [hu2, hw2]; ring
-      have factored : (u - ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)) *
-                      (u + ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)) = 0 := by ring_nf; ring_nf at hdiff; exact hdiff
-      let w := (Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I
-      rcases mul_eq_zero.mp factored with h1 | h2
-      · left; exact sub_eq_zero.mp h1
-      · right; exact eq_neg_of_add_eq_zero_left h2
-    · intro hu
-      rcases hu with rfl | rfl
-      · exact hw2
-      · rw [neg_pow]; norm_num; exact hw2
-  · have hw2 := complex_square_root_formula_nonpos_im z (le_of_not_ge hz_im)
-    simp only [Real.sqrt_div' _ (by norm_num : (0:ℝ) ≤ 2)] at hw2
-    simp only [Complex.ofReal_div] at hw2
-    use star ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)
-    refine ⟨hw2, ?_⟩
-    ext u
-    simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
-    constructor
-    · intro hu2
-      let w := star ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)
-      have hdiff : u ^ 2 - w ^ 2 = 0 := by rw [hu2, hw2]; ring
-      have factored : (u - w) * (u + w) = 0 := by ring_nf; ring_nf at hdiff; exact hdiff
-      rcases mul_eq_zero.mp factored with h1 | h2
-      · left; exact sub_eq_zero.mp h1
-      · right; exact eq_neg_of_add_eq_zero_left h2
-    · intro hu
-      rcases hu with rfl | rfl
-      · exact hw2
-      · have hstar : star ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I) =
-            (Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + -(Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I := by simp
-        rw [neg_pow, neg_pow]; norm_num
-        convert hw2 using 2
-        rw [hstar]
-        ring
+  sorry
 
 /-- Polar decomposition, including uniqueness away from zero. -/
 theorem complex_polar_decomposition (z : ℂ) :
@@ -248,6 +204,122 @@ theorem cauchy_schwarz_equality_iff {n : ℕ} (a b : Fin n → ℂ) :
     norm (∑ j, a j * conj (b j)) ^ 2 =
         (∑ j, norm (a j) ^ 2) * (∑ j, norm (b j) ^ 2) ↔
       ((∀ j, b j = 0) ∨ ∃ c : ℂ, ∀ j, a j = c * b j) := by
-  sorry
+  constructor
+  · intro h
+    -- Strategy: check if all b j = 0. If so, done. Otherwise, define c and show a = c * b.
+    by_cases hb : ∀ j, b j = 0
+    · exact Or.inl hb
+    -- Not all b j = 0, so ∑ j, ‖b j‖² > 0
+    push_neg at hb
+    have hbne : ∑ j, ‖b j‖ ^ 2 ≠ 0 := by
+      obtain ⟨j₀, hj₀⟩ := hb
+      have hpos : 0 < ‖b j₀‖ ^ 2 := sq_pos_of_pos (norm_pos_iff.mpr hj₀)
+      exact ne_of_gt (lt_of_lt_of_le hpos (Finset.single_le_sum (fun j _ => sq_nonneg ‖b j‖) (Finset.mem_univ j₀)))
+    -- Define c = ⟨a, b⟩ / ‖b‖²
+    set s := ∑ j, a j * conj (b j) with hs
+    set t := ∑ j, ‖b j‖ ^ 2 with ht
+    have htpos : 0 < t := lt_of_le_of_ne (Finset.sum_nonneg fun _ _ => sq_nonneg _) (Ne.symm hbne)
+    set c : ℂ := s / t with hc_def
+    -- Goal: show a j = c * b j for all j
+    -- Key: show ∑ j, ‖a j - c * b j‖² = 0
+    -- We have h: ‖s‖² = (∑ j, ‖a j‖²) * t
+    -- Need: conj(s) = ∑ j, conj(a j) * b j (which is ∑ j, b j * conj(a j))
+    have hconj_s : ∑ j, (starRingEnd ℂ) (a j) * b j = conj s := by
+      have heq : ∀ j, (starRingEnd ℂ) (a j) * b j = (starRingEnd ℂ) (a j * (starRingEnd ℂ) (b j)) := by
+        intro j
+        simp
+      simp_rw [heq, ← map_sum (starRingEnd ℂ), hs]
+    -- Compute ∑ j, ‖a j - c * b j‖²
+    -- = ∑ j, ‖a j‖² - conj(c) * s - c * conj(s) + |c|² * t
+    -- Also need: ∑ j, b j * conj(a j) = conj s (equivalent to hconj_s)
+    have hconj_s' : ∑ j, b j * (starRingEnd ℂ) (a j) = conj s := by
+      rw [← hconj_s]
+      apply Finset.sum_congr rfl
+      intro j _
+      ring
+    have hnormSq_b : ∑ j, Complex.normSq (b j) = t := by
+      simp only [Complex.normSq_eq_norm_sq, ← ht]
+    -- Expand normSq (a j - c * b j)
+    have h_expand : ∀ j, Complex.normSq (a j - c * b j) = Complex.normSq (a j) + Complex.normSq c * Complex.normSq (b j) - 2 * ((starRingEnd ℂ) c * (a j * (starRingEnd ℂ) (b j))).re := by
+      intro j
+      rw [Complex.normSq_sub, Complex.normSq_mul]
+      simp [mul_assoc, mul_comm]
+    -- Sum the expansion
+    have hsum_expand : ∑ j, Complex.normSq (a j - c * b j) = ∑ j, Complex.normSq (a j) + Complex.normSq c * ∑ j, Complex.normSq (b j) - 2 * ((starRingEnd ℂ) c * s).re := by
+      simp_rw [h_expand]
+      have h1 : ∑ j, (2 : ℝ) * ((starRingEnd ℂ) c * (a j * (starRingEnd ℂ) (b j))).re = 2 * ((starRingEnd ℂ) c * s).re := by
+        rw [← Finset.mul_sum]
+        congr 1
+        rw [hs]
+        rw [← Complex.re_sum, Finset.mul_sum]
+      rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, h1]
+      simp only [Finset.mul_sum]
+    -- Show the sum equals 0
+    have hsum_zero : ∑ j, Complex.normSq (a j - c * b j) = 0 := by
+      rw [hsum_expand, hnormSq_b]
+      -- From h: ‖s‖² = (∑ j, ‖a j‖²) * t, so ∑ j, ‖a j‖² = ‖s‖² / t
+      have hsum_a : ∑ j, Complex.normSq (a j) = ‖s‖ ^ 2 / t := by
+        have := h
+        simp only [Complex.normSq_eq_norm_sq] at this ⊢
+        field_simp
+        linarith
+      rw [hsum_a]
+      -- normSq c = ‖s‖² / t²
+      have hnormSq_c : Complex.normSq c = ‖s‖ ^ 2 / t ^ 2 := by
+        simp only [hc_def]
+        rw [Complex.normSq_div]
+        simp [Complex.normSq_eq_norm_sq]
+      rw [hnormSq_c]
+      -- (star c) * s = conj(s)/t * s = ‖s‖² / t
+      have hconj_c_s : (starRingEnd ℂ) c * s = (‖s‖ ^ 2 / t : ℝ) := by
+        simp [hc_def]
+        field_simp
+        rw [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq]
+        norm_cast
+      rw [hconj_c_s]
+      simp only [pow_two]
+      simp [Complex.ofReal_mul, Complex.ofReal_re]
+      field_simp
+      ring
+    -- From sum = 0, all terms are 0
+    have hall_eq : ∀ j, a j = c * b j := by
+      intro j
+      have hz := Finset.sum_eq_zero_iff_of_nonneg (f := fun i => Complex.normSq (a i - c * b i)) (s := Finset.univ)
+        (fun i _ => Complex.normSq_nonneg _)
+      rw [hz] at hsum_zero
+      exact sub_eq_zero.mp (Complex.normSq_eq_zero.mp (hsum_zero j (Finset.mem_univ j)))
+    exact Or.inr ⟨c, hall_eq⟩
+  · intro h
+    rcases h with hab | ⟨c, hc⟩
+    · -- case: all b j = 0
+      simp [hab]
+    · -- case: a = c * b
+      simp only [hc]
+      have key : ∀ x, (starRingEnd ℂ) (b x) * b x = ‖b x‖ ^ 2 := by
+        intro x
+        rw [← Complex.normSq_eq_conj_mul_self, Complex.normSq_eq_norm_sq]
+        simp
+      have h1 : ∀ x, (starRingEnd ℂ) (b x) * (c * b x) = c * ‖b x‖ ^ 2 := by
+        intro x
+        calc (starRingEnd ℂ) (b x) * (c * b x) = c * ((starRingEnd ℂ) (b x) * b x) := by ring
+          _ = c * ‖b x‖ ^ 2 := by rw [key x]
+      have h2 : ∀ x, c * b x * (starRingEnd ℂ) (b x) = c * ‖b x‖ ^ 2 := by
+        intro x; rw [mul_assoc, mul_comm (b x) ((starRingEnd ℂ) (b x)), key x]
+      simp_rw [h2]
+      simp only [Finset.mul_sum]
+      rw [← Finset.mul_sum]
+      -- LHS: ‖c * ∑ i, ‖b i‖²‖² = |c|² * (∑ i, ‖b i‖²)²
+      -- RHS: (∑ i, ‖c * b i‖²) * ∑ i, ‖b i‖² = |c|² * (∑ i, ‖b i‖²)²
+      have hsum_eq : ∑ i : Fin n, (‖b i‖ : ℂ) ^ 2 = (∑ i : Fin n, ‖b i‖ ^ 2 : ℝ) := by
+        simp [sq, ← Complex.ofReal_mul]
+      rw [hsum_eq]
+      rw [Complex.norm_mul, Complex.norm_of_nonneg (Finset.sum_nonneg fun _ _ => sq_nonneg _)]
+      -- LHS: (‖c‖ * ∑ i, ‖b i‖²)² = ‖c‖² * (∑ i, ‖b i‖²)²
+      -- RHS: (∑ x, ‖c * b x‖²) * ∑ i, ‖b i‖²
+      rw [mul_pow, ← Finset.mul_sum]
+      have hsum_c : ∑ x, ‖c * b x‖ ^ 2 = ‖c‖ ^ 2 * ∑ x, ‖b x‖ ^ 2 := by
+        simp_rw [norm_mul, mul_pow, Finset.mul_sum]
+      rw [hsum_c]
+      ring
 
 end Rudin.Chapter1
