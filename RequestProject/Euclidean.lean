@@ -44,7 +44,39 @@ theorem euclidean_parallelogram {k : ℕ} (x y : EuclideanSpace ℝ (Fin k)) :
 theorem exists_nonzero_orthogonal {k : ℕ} (hk : 2 ≤ k)
     (x : EuclideanSpace ℝ (Fin k)) :
     ∃ y : EuclideanSpace ℝ (Fin k), y ≠ 0 ∧ inner ℝ x y = 0 := by
-  sorry
+  by_cases h : x ⟨0, by linarith⟩ = 0 ∧ x ⟨1, by omega⟩ = 0
+  · -- Case: x₀ = 0 and x₁ = 0, use e₀
+    let y := EuclideanSpace.single (𝕜 := ℝ) (ι := Fin k) ⟨0, by linarith⟩ 1
+    refine ⟨y, ?_, ?_⟩
+    · have : y (⟨0, by linarith⟩ : Fin k) = 1 := by simp [y]
+      exact fun hy => by simp [hy] at this
+    · simp [inner, PiLp.innerProductSpace]
+      rw [Finset.sum_eq_single (⟨0, by linarith⟩ : Fin k)]
+      · simp [h.1]
+      · intro b _ hb
+        simp [y, hb]
+      · intro h
+        exact absurd (h (Finset.mem_univ _)) (by simp)
+  · -- Case: either x₀ ≠ 0 or x₁ ≠ 0, use y = (-x₁, x₀, 0, ..., 0)
+    let i0 : Fin k := ⟨0, by linarith⟩
+    let i1 : Fin k := ⟨1, by omega⟩
+    let y : EuclideanSpace ℝ (Fin k) := WithLp.toLp (p := 2) (V := Fin k → ℝ) (fun j =>
+      if j = i0 then -x i1 else if j = i1 then x i0 else 0)
+    refine ⟨y, ?_, ?_⟩
+    · intro hy
+      simp [y] at hy
+      by_cases hx0 : x i0 = 0
+      · have := congrFun hy i0
+        simp [y, i0, i1] at this
+        exact h ⟨hx0, this⟩
+      · have := congrFun hy i1
+        simp [y, i0, i1] at this
+        exact hx0 this
+    · simp [inner, WithLp.ofLp_toLp, y]
+      rw [Finset.sum_ite, Finset.sum_ite]
+      simp [Finset.sum_filter]
+      simp [i0, i1]
+      ring
 
 /-- In one dimension a nonzero vector has no nonzero orthogonal vector. -/
 theorem one_dimensional_no_nonzero_orthogonal {x y : ℝ} (hx : x ≠ 0) (hy : y ≠ 0) :
