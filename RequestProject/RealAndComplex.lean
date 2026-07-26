@@ -65,7 +65,7 @@ theorem complex_polar_decomposition (z : ℂ) :
 /-- The triangle inequality for a finite family of complex numbers. -/
 theorem complex_sum_abs_le {ι : Type*} (s : Finset ι) (z : ι → ℂ) :
     norm (∑ i ∈ s, z i) ≤ ∑ i ∈ s, norm (z i) := by
-  sorry
+  apply norm_sum_le
 
 /-- The reverse triangle inequality. -/
 theorem complex_reverse_triangle (x y : ℂ) :
