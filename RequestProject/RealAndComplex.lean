@@ -111,7 +111,50 @@ theorem complex_square_root_formula_nonneg_im (w : ℂ) (hv : 0 ≤ w.im) :
     let a := Real.sqrt ((norm w + w.re) / 2)
     let b := Real.sqrt ((norm w - w.re) / 2)
     (a + b * Complex.I) ^ 2 = w := by
-  sorry
+  apply Complex.ext
+  · simp [sq, Complex.add_re, Complex.mul_re, Complex.I_re, Complex.I_im]
+    have h1 : 0 ≤ ‖w‖ + w.re := by
+      have := Complex.abs_re_le_norm w
+      linarith [abs_le.mp this]
+    have h2 : 0 ≤ ‖w‖ - w.re := by
+      have := Complex.abs_re_le_norm w
+      linarith [abs_le.mp this]
+    have eq1 : Real.sqrt (‖w‖ + w.re) / Real.sqrt 2 = Real.sqrt ((‖w‖ + w.re) / 2) := by
+      rw [Real.sqrt_div h1]
+    have eq2 : Real.sqrt (‖w‖ - w.re) / Real.sqrt 2 = Real.sqrt ((‖w‖ - w.re) / 2) := by
+      rw [Real.sqrt_div h2]
+    rw [eq1, eq2]
+    have hr : Real.sqrt ((‖w‖ + w.re) / 2) * Real.sqrt ((‖w‖ + w.re) / 2) = (‖w‖ + w.re) / 2 := Real.mul_self_sqrt (by positivity)
+    have hi : Real.sqrt ((‖w‖ - w.re) / 2) * Real.sqrt ((‖w‖ - w.re) / 2) = (‖w‖ - w.re) / 2 := Real.mul_self_sqrt (by positivity)
+    linarith
+  · simp [sq, Complex.add_im, Complex.mul_im, Complex.I_re, Complex.I_im]
+    have h1 : 0 ≤ ‖w‖ + w.re := by
+      have := Complex.abs_re_le_norm w
+      linarith [abs_le.mp this]
+    have h2 : 0 ≤ ‖w‖ - w.re := by
+      have := Complex.abs_re_le_norm w
+      linarith [abs_le.mp this]
+    have eq1 : Real.sqrt (‖w‖ + w.re) / Real.sqrt 2 = Real.sqrt ((‖w‖ + w.re) / 2) := by
+      rw [Real.sqrt_div h1]
+    have eq2 : Real.sqrt (‖w‖ - w.re) / Real.sqrt 2 = Real.sqrt ((‖w‖ - w.re) / 2) := by
+      rw [Real.sqrt_div h2]
+    rw [eq1, eq2]
+    -- Goal: √((‖w‖ + w.re)/2) * √((‖w‖ - w.re)/2) + √((‖w‖ - w.re)/2) * √((‖w‖ + w.re)/2) = w.im
+    -- Simplifies to: 2 * √((‖w‖ + w.re)(‖w‖ - w.re) / 4) = w.im
+    have hprod : Real.sqrt ((‖w‖ + w.re) / 2) * Real.sqrt ((‖w‖ - w.re) / 2) = w.im / 2 := by
+      rw [← Real.sqrt_mul (by positivity : 0 ≤ (‖w‖ + w.re) / 2)]
+      have harg : (‖w‖ + w.re) / 2 * ((‖w‖ - w.re) / 2) = w.im^2 / 4 := by
+        have hsq : ‖w‖^2 = w.re^2 + w.im^2 := by
+          have := Complex.normSq_eq_norm_sq w
+          simp [Complex.normSq_apply] at this
+          linarith
+        linarith [hsq]
+      rw [harg, Real.sqrt_div' _ (by norm_num : (0:ℝ) ≤ 4)]
+      rw [Real.sqrt_sq hv]
+      norm_num
+    have him : Real.sqrt (w.im^2) = w.im := Real.sqrt_sq hv
+    rw [hprod]
+    linarith
 
 /-- Rudin's explicit square-root formula in the lower half-plane. -/
 theorem complex_square_root_formula_nonpos_im (w : ℂ) (hv : w.im ≤ 0) :
