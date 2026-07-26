@@ -51,7 +51,54 @@ theorem euclidean_parallelogram {k : ℕ} (x y : EuclideanSpace ℝ (Fin k)) :
 theorem exists_nonzero_orthogonal {k : ℕ} (hk : 2 ≤ k)
     (x : EuclideanSpace ℝ (Fin k)) :
     ∃ y : EuclideanSpace ℝ (Fin k), y ≠ 0 ∧ inner ℝ x y = 0 := by
-  sorry
+  by_cases hx : x = 0
+  · use EuclideanSpace.single ⟨0, by omega⟩ 1
+    simp [hx]
+  · -- x ≠ 0, so there exists some coordinate where x is nonzero
+    by_cases hx0 : x ⟨0, by omega⟩ = 0
+    · -- x 0 = 0, so e_0 is orthogonal to x
+      use EuclideanSpace.single ⟨0, by omega⟩ 1
+      refine ⟨?_, ?_⟩
+      · show ¬ EuclideanSpace.single (⟨0, by omega⟩ : Fin k) (1 : ℝ) = 0
+        intro h
+        have := congr_arg (fun y : EuclideanSpace ℝ (Fin k) => y ⟨0, by omega⟩) h
+        simp at this
+      · simp only [inner]
+        rw [Finset.sum_eq_single ⟨0, by omega⟩]
+        · simp [hx0]
+        · intro b _ hb
+          simp [EuclideanSpace.single_apply, hb]
+        · intro h
+          exact absurd (Finset.mem_univ _) h
+    · -- x 0 ≠ 0, use y = x 1 • e_0 - x 0 • e_1
+      let i0 : Fin k := ⟨0, by omega⟩
+      let i1 : Fin k := ⟨1, by omega⟩
+      use (x i1) • EuclideanSpace.single i0 1 - (x i0) • EuclideanSpace.single i1 1
+      refine ⟨?_, ?_⟩
+      · -- y ≠ 0
+        intro h
+        have := congr_arg (fun y : EuclideanSpace ℝ (Fin k) => y i1) h
+        have hne : i1 ≠ i0 := by simp [i0, i1]
+        simp [EuclideanSpace.single_apply, hne] at this
+        exact hx0 this
+      · -- inner product: x i0 * x i1 - x i1 * x i0 = 0
+        rw [inner_sub_right, inner_smul_right, inner_smul_right]
+        have h1 : ⟪x, EuclideanSpace.single i0 1⟫ = x i0 := by
+          simp only [inner]
+          rw [Finset.sum_eq_single i0]
+          · simp
+          · intro b _ hb
+            simp [EuclideanSpace.single_apply, hb]
+          · simp
+        have h2 : ⟪x, EuclideanSpace.single i1 1⟫ = x i1 := by
+          simp only [inner]
+          rw [Finset.sum_eq_single i1]
+          · simp
+          · intro b _ hb
+            simp [EuclideanSpace.single_apply, hb]
+          · simp
+        rw [h1, h2]
+        ring
 
 /-- In one dimension a nonzero vector has no nonzero orthogonal vector. -/
 theorem one_dimensional_no_nonzero_orthogonal {x y : ℝ} (hx : x ≠ 0) (hy : y ≠ 0) :
