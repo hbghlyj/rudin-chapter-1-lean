@@ -34,7 +34,7 @@ theorem rpow_eq_sup_rationalPowerSet {b x : ℝ} (hb : 1 < b) :
 /-- The exponent addition law for all real exponents. -/
 theorem real_rpow_add {b : ℝ} (hb : 0 < b) (x y : ℝ) :
     b ^ (x + y) = b ^ x * b ^ y := by
-  sorry
+  exact Real.rpow_add hb x y
 
 /-- Exercise 7(a), Bernoulli's inequality for a base greater than one. -/
 theorem pow_sub_one_ge {b : ℝ} (hb : 1 < b) {n : ℕ} (hn : 0 < n) :
