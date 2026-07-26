@@ -32,7 +32,13 @@ theorem equal_radius_line_close_empty (x y : ℝ) (r : ℝ) (hr : 0 < r)
 /-- The parallelogram identity in real Euclidean space. -/
 theorem euclidean_parallelogram {k : ℕ} (x y : EuclideanSpace ℝ (Fin k)) :
     ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * ‖x‖ ^ 2 + 2 * ‖y‖ ^ 2 := by
-  sorry
+  have h1 : ‖x + y‖ ^ 2 = inner ℝ (x + y) (x + y) := (real_inner_self_eq_norm_sq (x + y)).symm
+  have h2 : ‖x - y‖ ^ 2 = inner ℝ (x - y) (x - y) := (real_inner_self_eq_norm_sq (x - y)).symm
+  have h3 : ‖x‖ ^ 2 = inner ℝ x x := (real_inner_self_eq_norm_sq x).symm
+  have h4 : ‖y‖ ^ 2 = inner ℝ y y := (real_inner_self_eq_norm_sq y).symm
+  rw [h1, h2, h3, h4]
+  simp only [inner_add_left, inner_add_right, inner_sub_left, inner_sub_right]
+  ring
 
 /-- In dimension at least two, every vector has a nonzero orthogonal vector. -/
 theorem exists_nonzero_orthogonal {k : ℕ} (hk : 2 ≤ k)
