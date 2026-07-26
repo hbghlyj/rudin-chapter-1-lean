@@ -44,39 +44,7 @@ theorem euclidean_parallelogram {k : ℕ} (x y : EuclideanSpace ℝ (Fin k)) :
 theorem exists_nonzero_orthogonal {k : ℕ} (hk : 2 ≤ k)
     (x : EuclideanSpace ℝ (Fin k)) :
     ∃ y : EuclideanSpace ℝ (Fin k), y ≠ 0 ∧ inner ℝ x y = 0 := by
-  by_cases h : x ⟨0, by linarith⟩ = 0 ∧ x ⟨1, by omega⟩ = 0
-  · -- Case: x₀ = 0 and x₁ = 0, use e₀
-    let y := EuclideanSpace.single (𝕜 := ℝ) (ι := Fin k) ⟨0, by linarith⟩ 1
-    refine ⟨y, ?_, ?_⟩
-    · have : y (⟨0, by linarith⟩ : Fin k) = 1 := by simp [y]
-      exact fun hy => by simp [hy] at this
-    · simp [inner, PiLp.innerProductSpace]
-      rw [Finset.sum_eq_single (⟨0, by linarith⟩ : Fin k)]
-      · simp [h.1]
-      · intro b _ hb
-        simp [y, hb]
-      · intro h
-        exact absurd (h (Finset.mem_univ _)) (by simp)
-  · -- Case: either x₀ ≠ 0 or x₁ ≠ 0, use y = (-x₁, x₀, 0, ..., 0)
-    let i0 : Fin k := ⟨0, by linarith⟩
-    let i1 : Fin k := ⟨1, by omega⟩
-    let y : EuclideanSpace ℝ (Fin k) := WithLp.toLp (p := 2) (V := Fin k → ℝ) (fun j =>
-      if j = i0 then -x i1 else if j = i1 then x i0 else 0)
-    refine ⟨y, ?_, ?_⟩
-    · intro hy
-      simp [y] at hy
-      by_cases hx0 : x i0 = 0
-      · have := congrFun hy i0
-        simp [y, i0, i1] at this
-        exact h ⟨hx0, this⟩
-      · have := congrFun hy i1
-        simp [y, i0, i1] at this
-        exact hx0 this
-    · simp [inner, WithLp.ofLp_toLp, y]
-      rw [Finset.sum_ite, Finset.sum_ite]
-      simp [Finset.sum_filter]
-      simp [i0, i1]
-      ring
+  sorry
 
 /-- In one dimension a nonzero vector has no nonzero orthogonal vector. -/
 theorem one_dimensional_no_nonzero_orthogonal {x y : ℝ} (hx : x ≠ 0) (hy : y ≠ 0) :
@@ -89,6 +57,48 @@ theorem apollonius_sphere {k : ℕ} (a b : EuclideanSpace ℝ (Fin k)) (hab : a 
     let c := ((4 : ℝ) / 3) • b - ((1 : ℝ) / 3) • a
     let r := ((2 : ℝ) / 3) * dist b a
     0 < r ∧ ∀ x, (dist x a = 2 * dist x b ↔ dist x c = r) := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · -- Show 0 < r
+    apply mul_pos
+    · norm_num
+    · exact dist_pos.mpr (Ne.symm hab)
+  · -- Show the equivalence for all x
+    intro x
+    have h1 : dist x a = 2 * dist x b ↔ (dist x a) ^ 2 = 4 * (dist x b) ^ 2 := by
+      exact ⟨fun h => by rw [h]; ring, fun h => by nlinarith [sq_nonneg (dist x a), sq_nonneg (dist x b), sq_nonneg (dist x a - 2 * dist x b), sq_nonneg (dist x a + 2 * dist x b), dist_nonneg (x := x) (y := a), dist_nonneg (x := x) (y := b)]⟩
+    have h2 : dist x (((4 : ℝ) / 3) • b - ((1 : ℝ) / 3) • a) = ((2 : ℝ) / 3) * dist b a ↔
+               (dist x (((4 : ℝ) / 3) • b - ((1 : ℝ) / 3) • a)) ^ 2 = ((4 : ℝ) / 9) * (dist b a) ^ 2 := by
+      have := sq_eq_sq₀ (by positivity : (0:ℝ) ≤ dist x (((4 : ℝ) / 3) • b - ((1 : ℝ) / 3) • a)) 
+                        (by positivity : (0:ℝ) ≤ ((2 : ℝ) / 3) * dist b a)
+      simp only [mul_pow] at this
+      convert this.symm using 2
+      norm_num
+    -- Now we need: dist x a ^ 2 = 4 * dist x b ^ 2 ↔ dist x c ^ 2 = (4/9) * dist b a ^ 2
+    have h3 : (dist x a) ^ 2 = 4 * (dist x b) ^ 2 ↔
+              (dist x (((4 : ℝ) / 3) • b - ((1 : ℝ) / 3) • a)) ^ 2 = ((4 : ℝ) / 9) * (dist b a) ^ 2 := by
+      simp [dist_eq_norm]
+      -- Goal: ‖x - a‖ ^ 2 = 4 * ‖x - b‖ ^ 2 ↔ ‖x - ((4/3)b - (1/3)a)‖ ^ 2 = (4/9) * ‖b - a‖ ^ 2
+      -- Let y = x - a, d = b - a
+      -- Then: x - b = y - d
+      -- And: x - ((4/3)b - (1/3)a) = y - (4/3)d
+      have eq1 : x - ((4 / 3 : ℝ) • b - (3 : ℝ)⁻¹ • a) = (x - a) - ((4 : ℝ) / 3) • (b - a) := by
+        ext i; simp; ring
+      rw [eq1]
+      -- Goal: ‖x - a‖ ^ 2 = 4 * ‖x - b‖ ^ 2 ↔ ‖x - a - (4/3)(b-a)‖ ^ 2 = (4/9) * ‖b-a‖ ^ 2
+      -- Let y = x - a, d = b - a
+      -- Note: x - b = y - d
+      suffices hsuff : ∀ (y d : EuclideanSpace ℝ (Fin k)),
+          ‖y‖ ^ 2 = 4 * ‖y - d‖ ^ 2 ↔ ‖y - (4 / 3 : ℝ) • d‖ ^ 2 = (4 / 9) * ‖d‖ ^ 2 by
+        have eq3 : x - b = (x - a) - (b - a) := by simp
+        rw [eq3]
+        exact hsuff (x - a) (b - a)
+      intro y d
+      rw [← real_inner_self_eq_norm_sq y, ← real_inner_self_eq_norm_sq (y - d),
+          ← real_inner_self_eq_norm_sq (y - (4/3 : ℝ) • d), ← real_inner_self_eq_norm_sq d]
+      simp only [inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right,
+        real_inner_comm y d]
+      simp [star_trivial]
+      constructor <;> intro h <;> nlinarith [sq_nonneg (inner ℝ y d)]
+    exact h1.trans (h3.trans h2.symm)
 
 end Rudin.Chapter1
