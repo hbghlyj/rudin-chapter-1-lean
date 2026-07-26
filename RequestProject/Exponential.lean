@@ -37,7 +37,53 @@ theorem rational_power_is_sup {b : ℝ} (hb : 1 < b) (r : ℚ) :
 /-- Rudin's supremum definition agrees with real exponentiation. -/
 theorem rpow_eq_sup_rationalPowerSet {b x : ℝ} (hb : 1 < b) :
     b ^ x = sSup (rationalPowerSet b x) := by
-  sorry
+  apply le_antisymm
+  · -- b^x is ≤ the supremum (supremum is ≥ b^x)
+    rw [le_csSup_iff]
+    · intro c hc
+      by_contra h
+      push_neg at h
+      -- There exists ε > 0 such that c + ε < b^x
+      obtain ⟨ε, hε_pos, hε⟩ : ∃ ε > 0, c + ε < b ^ x := ⟨(b ^ x - c) / 2, by linarith, by linarith⟩
+      -- Use continuity: there exists δ > 0 such that t ∈ (x-δ, x+δ) implies b^t > c
+      have hcont : ContinuousAt (fun t => b ^ t) x := (continuous_const.rpow continuous_id <| by intros; exact Or.inl (ne_of_gt (by linarith : 0 < b))).continuousAt
+      rw [Metric.continuousAt_iff] at hcont
+      obtain ⟨δ, hδ_pos, hδ⟩ := hcont ((b ^ x - c) / 2) (by linarith)
+      -- Find a rational t with x - δ < t ≤ x
+      obtain ⟨t, ht₁, ht₂⟩ := exists_rat_btwn (by linarith : x - δ < x)
+      -- t satisfies x - δ < t < x, so |t - x| < δ
+      have ht_dist : dist (t : ℝ) x < δ := by
+        rw [Real.dist_eq]
+        rw [abs_lt]
+        constructor <;> linarith
+      have ht_le : (t : ℝ) ≤ x := by linarith
+      -- Apply continuity bound
+      have ht_rpow : dist (b ^ (t : ℝ)) (b ^ x) < (b ^ x - c) / 2 := hδ ht_dist
+      -- From distance bound, b^t > c
+      have ht_gt_c : b ^ (t : ℝ) > c := by
+        rw [Real.dist_eq] at ht_rpow
+        have : |b ^ (t : ℝ) - b ^ x| < (b ^ x - c) / 2 := ht_rpow
+        linarith [abs_lt.mp this]
+      -- But c is an upper bound
+      have ht_mem : b ^ (t : ℝ) ∈ rationalPowerSet b x := ⟨t, ht_le, rfl⟩
+      have hcb : b ^ (t : ℝ) ≤ c := hc ht_mem
+      linarith
+    · use b ^ x
+      intro y hy
+      obtain ⟨t, ht, rfl⟩ := hy
+      exact Real.rpow_le_rpow_of_exponent_le hb.le ht
+    · use b ^ ((⌊x⌋ : ℚ) : ℝ)
+      refine ⟨(⌊x⌋ : ℚ), ?_, rfl⟩
+      simp [Int.floor_le]
+  · -- supremum is ≤ b^x (b^x is an upper bound)
+    apply csSup_le
+    · use (b ^ ((⌊x⌋ : ℚ) : ℝ))
+      refine ⟨(⌊x⌋ : ℚ), ?_, ?_⟩
+      · simp [Int.floor_le]
+      · norm_cast
+    · intro y hy
+      obtain ⟨t, ht, rfl⟩ := hy
+      exact Real.rpow_le_rpow_of_exponent_le hb.le ht
 
 /-- The exponent addition law for all real exponents. -/
 theorem real_rpow_add {b : ℝ} (hb : 0 < b) (x y : ℝ) :
