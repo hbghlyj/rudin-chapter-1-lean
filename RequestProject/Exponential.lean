@@ -19,7 +19,8 @@ theorem rational_power_well_defined {b : ℝ} (hb : 0 < b)
 /-- The addition law for rational exponents. -/
 theorem rational_rpow_add {b : ℝ} (hb : 0 < b) (r s : ℚ) :
     b ^ ((r + s : ℚ) : ℝ) = b ^ (r : ℝ) * b ^ (s : ℝ) := by
-  sorry
+  rw [← Real.rpow_add hb]
+  norm_cast
 
 /-- At a rational argument, Rudin's supremum construction gives the rational power. -/
 theorem rational_power_is_sup {b : ℝ} (hb : 1 < b) (r : ℚ) :
