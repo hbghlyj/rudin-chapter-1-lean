@@ -49,7 +49,7 @@ theorem exists_nonzero_orthogonal {k : ℕ} (hk : 2 ≤ k)
 /-- In one dimension a nonzero vector has no nonzero orthogonal vector. -/
 theorem one_dimensional_no_nonzero_orthogonal {x y : ℝ} (hx : x ≠ 0) (hy : y ≠ 0) :
     x * y ≠ 0 := by
-  sorry
+  exact mul_ne_zero hx hy
 
 /-- The Apollonius sphere with distance ratio two.  The positivity condition on
 `r` requires distinct foci, which is implicit in the exercise's request `r > 0`. -/
