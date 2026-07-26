@@ -93,7 +93,22 @@ theorem real_rpow_add {b : ℝ} (hb : 0 < b) (x y : ℝ) :
 /-- Exercise 7(a), Bernoulli's inequality for a base greater than one. -/
 theorem pow_sub_one_ge {b : ℝ} (hb : 1 < b) {n : ℕ} (hn : 0 < n) :
     n * (b - 1) ≤ b ^ n - 1 := by
-  sorry
+  induction n with
+  | zero => contradiction
+  | succ n ih =>
+    by_cases hz : n = 0
+    · simp [hz]
+    · have hn' : 0 < n := Nat.pos_of_ne_zero hz
+      have ih' := ih hn'
+      have hb_pow : 1 ≤ b ^ n := one_le_pow₀ hb.le
+      have key : b * (b ^ n - 1) + (b - 1) = b ^ (n + 1) - 1 := by ring
+      rw [← key]
+      have cast_eq : ((n + 1 : ℕ) : ℝ) = (n : ℝ) + 1 := by norm_cast
+      rw [cast_eq]
+      ring_nf
+      have h1 : (n : ℝ) * (b - 1) + (b - 1) ≤ b * (b ^ n - 1) + (b - 1) := by
+        nlinarith
+      linarith
 
 /-- Exercise 7(b), the corresponding bound for positive `n`th roots. -/
 theorem root_sub_one_bound {b : ℝ} (hb : 1 < b) {n : ℕ} (hn : 0 < n) :
