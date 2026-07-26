@@ -147,7 +147,22 @@ theorem root_lt_of_large_n {b t : ℝ} (hb : 1 < b) (ht : 1 < t) {n : ℕ}
 /-- Exercise 7(d). -/
 theorem rpow_step_up_below {b y w : ℝ} (hb : 1 < b) (hy : 0 < y)
     (hw : b ^ w < y) : ∃ n : ℕ, 0 < n ∧ b ^ (w + (n : ℝ)⁻¹) < y := by
-  sorry
+  have hbpos : 0 < b := lt_trans (by norm_num : (0 : ℝ) < 1) hb
+  have hbw_pos : 0 < b ^ w := Real.rpow_pos_of_pos hbpos w
+  set t := y / b ^ w with ht_def
+  have ht_gt_one : 1 < t := by rw [ht_def]; rw [lt_div_iff₀ hbw_pos]; linarith
+  -- Find n such that (b - 1) / (t - 1) < n
+  obtain ⟨n, hn⟩ := exists_nat_gt ((b - 1) / (t - 1))
+  have hn_pos : 0 < n := Nat.pos_of_ne_zero fun h => by
+    simp [h] at hn
+    have hb1 : 0 < b - 1 := by linarith
+    have ht1 : 0 < t - 1 := by linarith
+    linarith [div_pos hb1 ht1]
+  have hn' := root_lt_of_large_n hb ht_gt_one hn
+  use n, hn_pos
+  calc b ^ (w + (n : ℝ)⁻¹) = b ^ w * b ^ ((n : ℝ)⁻¹) := by rw [← Real.rpow_add hbpos]
+    _ < b ^ w * t := by apply mul_lt_mul_of_pos_left hn' hbw_pos
+    _ = y := by rw [mul_div_cancel₀ _ (ne_of_gt hbw_pos)]
 
 /-- Exercise 7(e). -/
 theorem rpow_step_down_above {b y w : ℝ} (hb : 1 < b) (hy : 0 < y)
