@@ -27,7 +27,14 @@ distinct centers are closer than twice the radius. -/
 theorem equal_radius_line_close_empty (x y : ℝ) (r : ℝ) (hr : 0 < r)
     (hxy : x ≠ y) (hclose : dist x y < 2 * r) :
     {z | dist z x = r ∧ dist z y = r} = ∅ := by
-  sorry
+  ext z
+  simp
+  intro hzx hzy
+  simp only [Real.dist_eq] at hclose hzx hzy
+  rw [abs_eq (le_of_lt hr)] at hzx hzy
+  rw [abs_lt] at hclose
+  rcases hzx with hzx | hzx <;> rcases hzy with hzy | hzy
+  all_goals first | exact hxy (by linarith) | linarith
 
 /-- The parallelogram identity in real Euclidean space. -/
 theorem euclidean_parallelogram {k : ℕ} (x y : EuclideanSpace ℝ (Fin k)) :

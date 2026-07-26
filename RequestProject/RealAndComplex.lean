@@ -134,7 +134,51 @@ theorem complex_square_root_formula_nonpos_im (w : ℂ) (hv : w.im ≤ 0) :
 /-- Every nonzero complex number has exactly two square roots. -/
 theorem complex_two_square_roots {z : ℂ} (hz : z ≠ 0) :
     ∃ w : ℂ, w ^ 2 = z ∧ {u : ℂ | u ^ 2 = z} = {w, -w} := by
-  sorry
+  by_cases hz_im : 0 ≤ z.im
+  · have hw2 := complex_square_root_formula_nonneg_im z hz_im
+    simp only [Real.sqrt_div' _ (by norm_num : (0:ℝ) ≤ 2)] at hw2
+    simp only [Complex.ofReal_div] at hw2
+    use (Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I
+    refine ⟨hw2, ?_⟩
+    ext u
+    simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
+    constructor
+    · intro hu2
+      have hdiff : u ^ 2 - ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I) ^ 2 = 0 := by rw [hu2, hw2]; ring
+      have factored : (u - ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)) *
+                      (u + ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)) = 0 := by ring_nf; ring_nf at hdiff; exact hdiff
+      let w := (Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I
+      rcases mul_eq_zero.mp factored with h1 | h2
+      · left; exact sub_eq_zero.mp h1
+      · right; exact eq_neg_of_add_eq_zero_left h2
+    · intro hu
+      rcases hu with rfl | rfl
+      · exact hw2
+      · rw [neg_pow]; norm_num; exact hw2
+  · have hw2 := complex_square_root_formula_nonpos_im z (le_of_not_ge hz_im)
+    simp only [Real.sqrt_div' _ (by norm_num : (0:ℝ) ≤ 2)] at hw2
+    simp only [Complex.ofReal_div] at hw2
+    use star ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)
+    refine ⟨hw2, ?_⟩
+    ext u
+    simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
+    constructor
+    · intro hu2
+      let w := star ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I)
+      have hdiff : u ^ 2 - w ^ 2 = 0 := by rw [hu2, hw2]; ring
+      have factored : (u - w) * (u + w) = 0 := by ring_nf; ring_nf at hdiff; exact hdiff
+      rcases mul_eq_zero.mp factored with h1 | h2
+      · left; exact sub_eq_zero.mp h1
+      · right; exact eq_neg_of_add_eq_zero_left h2
+    · intro hu
+      rcases hu with rfl | rfl
+      · exact hw2
+      · have hstar : star ((Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + (Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I) =
+            (Real.sqrt (‖z‖ + z.re) / Real.sqrt 2 : ℂ) + -(Real.sqrt (‖z‖ - z.re) / Real.sqrt 2 : ℂ) * Complex.I := by simp
+        rw [neg_pow, neg_pow]; norm_num
+        convert hw2 using 2
+        rw [hstar]
+        ring
 
 /-- Polar decomposition, including uniqueness away from zero. -/
 theorem complex_polar_decomposition (z : ℂ) :
