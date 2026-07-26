@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{exercise}{Exercise}
+\title{Measure and Integral: Chapter 2 Exercises}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{exercise}
+Let $f(x)=x\sin(1/x)$ for $0<x\le 1$ and $f(0)=0$. Show that $f$ is bounded and continuous on $[0,1]$, but that $V[f;0,1]=+\infty$.
+\end{exercise}
+
+\begin{proof}
+For $0<x\le1$,
+\[
+ |f(x)|=x|\sin(1/x)|\le x\le1,
+\]
+while $f(0)=0$; hence $f$ is bounded.  It is continuous on $(0,1]$ as a product and composition of continuous functions.  Moreover,
+\[
+ |f(x)-f(0)|=|f(x)|\le x\longrightarrow0
+ \qquad(x\downarrow0),
+\]
+so it is continuous at $0$ as well.
+
+To prove that its total variation is infinite, set
+\[
+ x_k=\frac{2}{(2k+1)\pi}\qquad(k=0,1,2,\ldots).
+\]
+Then $x_k\downarrow0$ and
+\[
+ \sin(1/x_k)=\sin\!\left(\frac{(2k+1)\pi}{2}\right)=(-1)^k,
+ \qquad f(x_k)=(-1)^k x_k.
+\]
+For each $N\ge1$, use the partition
+\[
+ 0<x_N<x_{N-1}<\cdots<x_1<x_0<1
+\]
+(with $0$ and $1$ included as endpoints).  Its variation sum contains the successive terms
+\begin{align*}
+ \sum_{k=0}^{N-1}|f(x_{k+1})-f(x_k)|
+ &=\sum_{k=0}^{N-1}(x_{k+1}+x_k)\\
+ &\ge\sum_{k=1}^{N}x_k
+ =\frac{2}{\pi}\sum_{k=1}^{N}\frac{1}{2k+1}.
+\end{align*}
+The last partial sums are unbounded, since the series over the odd reciprocals diverges.  Thus variation sums for $f$ are arbitrarily large, and therefore
+\[
+ V[f;0,1]=+\infty.
+\]
+\end{proof}
+
+\end{document}
