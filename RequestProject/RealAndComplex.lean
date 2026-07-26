@@ -70,7 +70,7 @@ theorem complex_sum_abs_le {ι : Type*} (s : Finset ι) (z : ι → ℂ) :
 /-- The reverse triangle inequality. -/
 theorem complex_reverse_triangle (x y : ℂ) :
     |norm x - norm y| ≤ norm (x - y) := by
-  sorry
+  exact abs_norm_sub_norm_le x y
 
 /-- The requested computation for a unit complex number. -/
 theorem complex_unit_parallelogram {z : ℂ} (hz : norm z = 1) :
