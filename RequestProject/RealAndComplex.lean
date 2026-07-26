@@ -24,7 +24,10 @@ theorem exists_unique_rpow_eq {b y : ℝ} (hb : 1 < b) (hy : 0 < y) :
 /-- No linear order compatible with the ring operations can exist on `ℂ`. -/
 theorem complex_cannot_be_ordered_field :
     ¬ ∃ (_ : LinearOrder ℂ), ∃ (_ : IsStrictOrderedRing ℂ), True := by
-  sorry
+  intro ⟨_, _, _⟩
+  have hI : (0 : ℂ) < Complex.I ^ 2 := pow_two_pos_of_ne_zero Complex.I_ne_zero
+  simp only [Complex.I_sq] at hI
+  linarith [neg_one_lt_zero (R := ℂ)]
 
 /-- The lexicographic order on complex numbers, viewed as pairs of reals. -/
 noncomputable def complexLex : LinearOrder ℂ := LinearOrder.lift' (fun z : ℂ => toLex (z.re, z.im)) (by
