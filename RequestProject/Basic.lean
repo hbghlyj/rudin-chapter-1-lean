@@ -15,7 +15,12 @@ theorem irrational_add_rat {r x : ℝ} (hr : r ∈ Set.range ((↑) : ℚ → �
 /-- Multiplying an irrational real number by a nonzero rational number preserves irrationality. -/
 theorem irrational_mul_rat {r x : ℝ} (hrat : r ∈ Set.range ((↑) : ℚ → ℝ))
     (hr : r ≠ 0) (hx : Irrational x) : Irrational (r * x) := by
-  sorry
+  obtain ⟨q, rfl⟩ := hrat
+  intro ⟨y, hy⟩
+  have hxy : x = y / q := by
+    field_simp at hy ⊢
+    linarith
+  exact hx ⟨y / q, hxy.symm ▸ by simp⟩
 
 /-- No rational number has square `12`. -/
 theorem no_rational_sq_twelve (x : ℚ) : x ^ 2 ≠ 12 := by
