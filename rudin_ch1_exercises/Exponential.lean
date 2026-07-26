@@ -129,7 +129,20 @@ theorem root_sub_one_bound {b : ℝ} (hb : 1 < b) {n : ℕ} (hn : 0 < n) :
 /-- Exercise 7(c): sufficiently high roots of `b` lie below every `t > 1`. -/
 theorem root_lt_of_large_n {b t : ℝ} (hb : 1 < b) (ht : 1 < t) {n : ℕ}
     (hn : (b - 1) / (t - 1) < n) : b ^ ((n : ℝ)⁻¹) < t := by
-  sorry
+  have hn' : 0 < n := by
+    by_contra h
+    push_neg at h
+    interval_cases n
+    simp at hn
+    linarith [div_nonneg (by linarith : 0 ≤ b - 1) (by linarith : 0 ≤ t - 1)]
+  have hn'' : (0 : ℝ) < n := Nat.cast_pos.mpr hn'
+  have hdiv : b - 1 < n * (t - 1) := by
+    have hsub : 0 < t - 1 := by linarith
+    rwa [div_lt_iff₀ hsub] at hn
+  have hbound := root_sub_one_bound hb hn'
+  have : n * (b ^ ((n : ℝ)⁻¹) - 1) < n * (t - 1) := lt_of_le_of_lt hbound hdiv
+  have : b ^ ((n : ℝ)⁻¹) - 1 < t - 1 := by nlinarith
+  linarith
 
 /-- Exercise 7(d). -/
 theorem rpow_step_up_below {b y w : ℝ} (hb : 1 < b) (hy : 0 < y)
