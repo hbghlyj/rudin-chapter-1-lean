@@ -7,7 +7,10 @@ namespace Rudin.Chapter1
 /-- Adding a nonzero rational number to an irrational real number preserves irrationality. -/
 theorem irrational_add_rat {r x : ℝ} (hr : r ∈ Set.range ((↑) : ℚ → ℝ))
     (hx : Irrational x) : Irrational (r + x) := by
-  sorry
+  obtain ⟨q, rfl⟩ := hr
+  intro ⟨y, hy⟩
+  have : x = y - q := by simp [hy]
+  exact hx ⟨y - q, by simp [this]⟩
 
 /-- Multiplying an irrational real number by a nonzero rational number preserves irrationality. -/
 theorem irrational_mul_rat {r x : ℝ} (hrat : r ∈ Set.range ((↑) : ℚ → ℝ))
