@@ -75,7 +75,13 @@ theorem complex_reverse_triangle (x y : ℂ) :
 /-- The requested computation for a unit complex number. -/
 theorem complex_unit_parallelogram {z : ℂ} (hz : norm z = 1) :
     norm (1 + z) ^ 2 + norm (1 - z) ^ 2 = 4 := by
-  sorry
+  have hz' : Complex.normSq z = 1 := by
+    have := Complex.normSq_eq_norm_sq z
+    simp [hz] at this
+    exact this
+  rw [← Complex.normSq_eq_norm_sq, ← Complex.normSq_eq_norm_sq]
+  simp [Complex.normSq_add, Complex.normSq_sub, hz']
+  norm_num
 
 /-- Equality in finite-dimensional complex Cauchy--Schwarz holds exactly for
 linearly dependent vectors. -/
