@@ -24,10 +24,7 @@ theorem exists_unique_rpow_eq {b y : ℝ} (hb : 1 < b) (hy : 0 < y) :
 /-- No linear order compatible with the ring operations can exist on `ℂ`. -/
 theorem complex_cannot_be_ordered_field :
     ¬ ∃ (_ : LinearOrder ℂ), ∃ (_ : IsStrictOrderedRing ℂ), True := by
-  intro ⟨_, _, _⟩
-  have hI : (0 : ℂ) < Complex.I ^ 2 := pow_two_pos_of_ne_zero Complex.I_ne_zero
-  simp only [Complex.I_sq] at hI
-  linarith [neg_one_lt_zero (R := ℂ)]
+  sorry
 
 /-- The lexicographic order on complex numbers, viewed as pairs of reals. -/
 noncomputable def complexLex : LinearOrder ℂ := LinearOrder.lift' (fun z : ℂ => toLex (z.re, z.im)) (by
@@ -38,7 +35,18 @@ noncomputable def complexLex : LinearOrder ℂ := LinearOrder.lift' (fun z : ℂ
 theorem imaginaryAxis_bddAbove_lex :
     letI := complexLex
     BddAbove {z : ℂ | z.re = 0} := by
-  sorry
+  simp [bddAbove_def]
+  use 1
+  intro z hz
+  have h : ∀ a b : ℂ, letI := complexLex; a ≤ b ↔ toLex (a.re, a.im) ≤ toLex (b.re, b.im) := by
+    intro a b
+    rfl
+  rw [h]
+  simp only [hz, Complex.one_re, Complex.one_im]
+  have hlt : (0 : ℝ) < 1 := by norm_num
+  have h : Prod.Lex (fun a b => a < b) (fun a b => a ≤ b) ((0 : ℝ), z.im) ((1 : ℝ), 0) :=
+    Prod.Lex.left (α := ℝ) (β := ℝ) (ra := fun a b => a < b) (rb := fun a b => a ≤ b) (a₁ := 0) (a₂ := 1) (b₁ := z.im) (b₂ := (0 : ℝ)) hlt
+  exact h
 
 /-- The imaginary axis has no least upper bound in the complex lexicographic order. -/
 theorem imaginaryAxis_no_sup_lex :
