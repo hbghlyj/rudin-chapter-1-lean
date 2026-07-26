@@ -14,7 +14,12 @@ theorem rational_power_well_defined {b : ℝ} (hb : 0 < b)
     {m n p q : ℤ} (hn : 0 < n) (hq : 0 < q)
     (hfrac : (m : ℚ) / n = (p : ℚ) / q) :
     (b ^ (m : ℝ)) ^ ((n : ℝ)⁻¹) = (b ^ (p : ℝ)) ^ ((q : ℝ)⁻¹) := by
-  sorry
+  rw [← Real.rpow_mul (le_of_lt hb), ← Real.rpow_mul (le_of_lt hb)]
+  congr 1
+  rw [div_eq_mul_inv, div_eq_mul_inv] at hfrac
+  have : ((m : ℚ) * (n : ℚ)⁻¹ : ℝ) = ((p : ℚ) * (q : ℚ)⁻¹ : ℝ) := by exact_mod_cast hfrac
+  simp at this
+  exact this
 
 /-- The addition law for rational exponents. -/
 theorem rational_rpow_add {b : ℝ} (hb : 0 < b) (r s : ℚ) :
