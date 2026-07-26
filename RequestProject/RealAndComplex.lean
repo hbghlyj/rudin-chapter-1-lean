@@ -60,7 +60,41 @@ theorem complex_polar_decomposition (z : ℂ) :
     ∃ r : ℝ, 0 ≤ r ∧ ∃ w : ℂ, norm w = 1 ∧ z = r * w ∧
       (z ≠ 0 → ∀ r' : ℝ, 0 ≤ r' → ∀ w' : ℂ,
         norm w' = 1 → z = r' * w' → r' = r ∧ w' = w) := by
-  sorry
+  use norm z
+  refine ⟨norm_nonneg z, ?_⟩
+  by_cases hz : z = 0
+  · -- Case z = 0
+    refine ⟨1, ?_, ?_, ?_⟩
+    · simp
+    · simp [hz]
+    · intro hz' r' hr' w' hw' hzw'
+      exfalso
+      exact hz' hz
+  · -- Case z ≠ 0
+    use z / norm z
+    have hnne : norm z ≠ 0 := norm_ne_zero_iff.mpr hz
+    have hn_norm : norm (↑(norm z) : ℂ) = norm z := by simp [Complex.norm_def]
+    have h1 : norm (z / norm z) = 1 := by
+      rw [norm_div, hn_norm, div_self hnne]
+    have h2 : z = norm z * (z / norm z) := by field_simp [hnne]
+    refine ⟨h1, h2, ?_⟩
+    intro hz' r' hr' w' hw' hzw'
+    -- From z = r' * w', take norms: norm z = r' * norm w' = r'
+    have hnorm : norm z = r' := by
+      rw [hzw']
+      simp [hw', Real.norm_eq_abs, abs_of_nonneg hr']
+    -- So r' = norm z and w' = z / norm z
+    refine ⟨hnorm.symm, ?_⟩
+    -- From z = r' * w', we get w' = z / r' = z / norm z
+    have hr'pos : r' > 0 := by rw [← hnorm]; exact norm_pos_iff.mpr hz
+    have hw'_eq : w' = z / norm z := by
+      rw [hnorm]
+      have hr'_ne : (r' : ℂ) ≠ 0 := by
+        simp [hr'pos.ne']
+      rw [eq_div_iff hr'_ne]
+      rw [mul_comm]
+      exact hzw'.symm
+    exact hw'_eq
 
 /-- The triangle inequality for a finite family of complex numbers. -/
 theorem complex_sum_abs_le {ι : Type*} (s : Finset ι) (z : ι → ℂ) :
