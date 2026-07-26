@@ -1,0 +1,988 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\title{Principles of Mathematical Analysis: Chapter 3 Exercises}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent The solutions below give concise proofs, with hypotheses and limiting arguments made explicit.
+
+Prove that convergence of $\{s_n\}$ implies convergence of $\{\left\vert s_n\right\vert\}$. Is the converse true?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Suppose $\{s_n\}$ converges to some $s$, then for $\varepsilon>0$, there exists an integer $N$ such that  $\left\vert s_n-s\right\vert<\varepsilon$ for all $n\ge N$. It follows that $\left\vert\left\vert s_n\right\vert-\left\vert s\right\vert\right\vert\le \left\vert s_n-s\right\vert<\varepsilon$ for $n\ge N$, and then $\{\left\vert s_n\right\vert\}$ converges to $\left\vert s\right\vert$.
+(ii) No. For example, let $s_n=(-1)^n$ for $n=1,2,\ldots$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Calculate $\lim_{n\to\infty}\left(\sqrt{n^2+n}-n\right)$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+We have
+\begin{align*}
+\lim_{n\to\infty}\left(\sqrt{n^2+n}-n\right)
+&=\lim_{n\to\infty}\left[\left(\sqrt{n^2+n}-n\right)\cdot
+\frac{\sqrt{n^2+n}+n}{\sqrt{n^2+n}+n}\right]\\
+&=\lim_{n\to\infty}\left(\frac{n^2+n-n^2}{\sqrt{n^2+n}+n}\right)\\
+&=\lim_{n\to\infty}\left(\frac{n}{\sqrt{n^2+n}+n}\right)\\
+&=\lim_{n\to\infty}\left(\frac{1}{\sqrt{1+\frac{1}{n}}+1}\right)\\
+&=\frac{1}{2}
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $s_1=\sqrt{2}$, and
+\begin{align*}
+s_{n+1}=\sqrt{2+\sqrt{s_{n}}}\quad(n=1,2,3,\ldots)
+\end{align*}
+prove that $\{s_n\}$ converges, and that $s_n<2$ for $n=1,2,3,\ldots$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+First, it is easy to prove that $s_n<2$ for $n=1,2,\ldots$, and that $\{s_n\}$ is bounded above. To show it, use induction on $n$. At first, $s_1=\sqrt{2}<2$ is immediate. Now suppose $s_n<2$ for some positive integer $n$, then
+\begin{align*}
+s_{n+1}=\sqrt{2+\sqrt{s_n}}<\sqrt{2+\sqrt{2}}<2
+\end{align*}
+Hence $s_n<2$ for all $n$. Next, we show that $\{s_n\}$ is monotonically increasing, and so the convergence of $\{s_n\}$ follows by Theorem 3.14, completing this exercise. Use induction again, at first, clearly $s_1<s_2$. Now suppose $s_n\le s_{n+1}$ for some positive integer $n$, then
+\begin{align*}
+s_{n+1}=\sqrt{2+\sqrt{s_n}}\le\sqrt{2+\sqrt{s_{n+1}}}=s_{n+2}
+\end{align*}
+Hence $\{s_n\}$ is monotonically increasing.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Find the upper and lower limits of the sequence $\{s_n\}$ defined by
+\begin{align*}
+s_1=0;\quad s_{2m}=\frac{s_{2m-1}}{2};\quad s_{2m+1}=\frac{1}{2}+s_{2m}
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+By some observation, we show that, for $m=1,2,\ldots$,
+\begin{align*}
+s_{2m}=\frac{1}{2}-\frac{1}{2^m} \quad\mbox{and}\quad 
+s_{2m+1}=1-\frac{1}{2^m}
+\end{align*}
+Note that the second equality is a direct consequence of the first one, so we only have to prove the first. Use induction on $m$, for $m=1$, we have $s_2=\frac{s_1}{2}=0=\frac{1}{2}-\frac{1}{2^1}$. Now suppose $s_{2m}=\frac{1}{2}-\frac{1}{2^m}$ for some integer $m\ge 1$, then
+\begin{align*}
+s_{2(m+1)}
+&=s_{2m+2} \\
+&=\frac{s_{2m+1}}{2} \\
+&=\frac{1}{2}\left(\frac{1}{2}+s_{2m}\right) \\
+&=\frac{1}{2}\left(1-\frac{1}{2^m}\right) \\
+&=\frac{1}{2}-\frac{1}{2^{m+1}}
+\end{align*}
+Hence $s_{2m}=\frac{1}{2}-\frac{1}{2^m}$ for all $m$. The above argument gives the following results
+\begin{align*}
+\limsup_{n\to\infty}s_n=1\quad\mbox{and}\quad\liminf_{n\to\infty}s_n=\frac{1}{2}
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+For any two real sequences $\{a_n\}$, $\{b_n\}$, prove that
+\begin{align*}
+\limsup_{n\to\infty}\left(a_n+b_n\right)\le\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n
+\end{align*}
+provided the sum on the right is not of the form $\infty-\infty$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+W.l.o.g., we may consider the following three cases, where the first two follow by the assumption that $\infty-\infty$ (and $-\infty+\infty$) is exceptional.
+Case 1: If $\limsup_{n\to\infty} a_n=+\infty$ or $\limsup_{n\to\infty} b_n=+\infty$, then the r.h.s. of the inequality must be either of the form $\infty+\infty$ or $\infty+r$, for some real number $r$. Hence the result is trivial.
+Case 2: If $\limsup_{n\to\infty} a_n=-\infty$ and $\{b_n\}$ has an upper bound $M$. Then for each real number $x$, there exists $N$ such that $n\ge N$ implies $a_n<x$, and so
+\begin{align*}
+a_n+b_n\le a_n+M<x+M
+\end{align*}
+Since $x$ is arbitrary, we have $\lim_{n\to\infty}\left(a_n+b_n\right)=-\infty$, i.e., $\limsup_{n\to\infty}\left(a_n+b_n\right)=-\infty$. Hence the result follows.
+Case 3: If $\limsup_{n\to\infty}a_n=a$ and $\limsup_{n\to\infty}b_n=b$, where $a,b\in R$. Suppose $\limsup_{n\to\infty}\left(a_n+b_n\right)>a+b$, then we can choose a subsequence $\{n_k\}$ of increasing positive integers such that $\lim_{k\to\infty}\left(a_{n_k}+b_{n_k}\right)>a+b$. Choose a number $x_0$ such that $\lim_{k\to\infty}\left(a_{n_k}+b_{n_k}\right)>x_0>a+b$, then there exists $K$ such that $k\ge K$ implies $a_{n_k}+b_{n_k}>x_0$. On the other hand, since $\frac{x_0}{2}+\frac{a-b}{2}>a$ and $\frac{x_0}{2}+\frac{b-a}{2}>b$, by Theorem 3.17(b), there exist $K_1$ and $K_2$ such that $k\ge K_1$ implies $a_{n_k}<\frac{x_0}{2}+\frac{a-b}{2}$, and $k\ge K_2$ implies $b_{n_k}<\frac{x_0}{2}+\frac{b-a}{2}$. Put $K'=\max\{K_1,K_2\}$, then $k\ge K'$ implies
+\begin{align*}
+a_{n_k}+b_{n_k}<\left(\frac{x_0}{2}+\frac{a-b}{2}\right)+\left(\frac{x_0}{2}+\frac{b-a}{2}\right)=x_0
+\end{align*}
+Put $M=\max\{K,K'\}$, then $k\ge M$ implies both $a_{n_k}+b_{n_k}>x_0$ and $a_{n_k}+b_{n_k}<x_0$. This gives a contradiction.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Investigate the behavior (convergence or divergence) of $\sum a_n$ if
+(a) $a_n=\sqrt{n+1}-\sqrt{n}$;
+(b) $a_n=\frac{\sqrt{n+1}-\sqrt{n}}{n}$;
+(c) $a_n=\left(\sqrt[n]{n}-1\right)^n$;
+(d) $a_n=\frac{1}{z^n}$, for complex values of $z$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Since 
+\begin{align*}
+\sum_{n=1}^ma_n
+&=\left(\sqrt{2}-\sqrt{1}\right)+\left(\sqrt{3}-\sqrt{2}\right)+\cdots+\left(\sqrt{m+1}-\sqrt{m}\right) \\
+&=\sqrt{m+1}-1
+\end{align*}
+we have $\sum a_n=\lim_{m\to\infty}\left(\sqrt{m+1}-1\right)=\infty$, i.e., $\sum a_n$ diverges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Since
+\begin{align*}
+\frac{\sqrt{n+1}-\sqrt{n}}{n}
+=\frac{1}{n\left(\sqrt{n+1}+\sqrt{n}\right)}
+\le \frac{1}{2n\sqrt{n}}
+=\frac{1}{2n^{\frac{3}{2}}}
+\end{align*}
+The series $\sum a_n$ converges by the comparison test with the $p$-series $\sum\frac{1}{2n^{\frac{3}{2}}}$, where $p=\frac{3}{2}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Since
+\begin{align*}
+\lim_{n\to\infty}\sqrt[n]{a_n}
+=\lim_{n\to\infty}\left(\sqrt[n]{n}-1\right)
+=1-1
+=0
+\end{align*}
+where the third equality follows by Theorem 3.20(c). By the root rest, $\sum a_n$ converges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) We skip this question.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that the convergence of $\sum a_n$ implies the convergence of
+\begin{align*}
+\sum \frac{\sqrt{a_n}}{n}
+\end{align*}
+if $a_n\ge 0$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+If $a_n\ge 0$ for $n=1,2,\ldots$, then by arithmetic-geometry inequality, we have
+\begin{align*}
+\frac{\sqrt{a_n}}{n}
+\le\frac{1}{2}\left(a_n+\frac{1}{n^2}\right)
+\end{align*}
+So if $\sum a_n$ converges, then adding the convergence of $\sum\frac{1}{n^2}$, and by Theorem 3.47, that
+\begin{align*}
+\sum\frac{1}{2}\left(a_n+\frac{1}{n^2}\right)
+=\frac{1}{2}\left(\sum a_n+\sum\frac{1}{n^2}\right)
+\end{align*}
+the series $\sum\frac{1}{2}\left(a_n+\frac{1}{n^2}\right)$ also converges. Hence $\sum\frac{\sqrt{a_n}}{n}$ converges by the comparison test.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $\sum a_n$ converges, and if $b_n$ is monotonic and bounded, prove that $\sum a_nb_n$ converges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Since $\{b_n\}$ is monotonic and bounded, we may only consider the following two cases.
+Case 1: If $b_n\searrow b$, put $c_n=b_n-b$. Then $c_n\searrow 0$, which follows by Theorem 3.42 that $\sum a_nc_n$ converges. Also, by Theorem 3.47, $\sum ba_n$ converges. Finally since we can write
+\begin{align*}
+\sum a_nb_n=\sum a_n\left(c_n+b\right)=\sum\left(a_nc_n+ba_n\right)
+\end{align*}
+By Theorem 3.47 again, $\sum a_nb_n$ converges.
+Case 2: If $b_n\nearrow b$, put $d_n=b-b_n$. Then the argument is similar to that in Case 1.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Exercise 3.9 is skipped.
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose that the coefficient of the power series $\sum a_nz^n$ are integers, infinitely many of which are distinct from zero. Prove that the radius of convergence is at most $1$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Since the sequence $\{a_n\}$ contains infinitely many nonzero numbers, we may let $\{n_k\}$ be a subsequence of positive integers such that $a_{n_k}\ne 0$ for each $k$. Moreover, since $a_n$ is an integer for each $n$, we have $\left\vert a_{n_k}\right\vert\ge 1$ for each $k$, and thus $\sqrt[n_k]{\left\vert a_{n_k}\right\vert}\ge 1$. Hence $\limsup_{n\to\infty}\sqrt[n]{\left\vert a_n\right\vert}\ge 1$ or
+\begin{align*}
+R=\frac{1}{\displaystyle \limsup_{n\to\infty}\sqrt[n]{\left\vert a_n\right\vert}}\le 1
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $a_n>0$, $s_n=a_1+\cdots+a_n$, and $\sum a_n$ diverges.
+(a) Prove that $\sum\frac{a_n}{1+a_n}$ diverges.
+(b) Prove that
+\begin{align*}
+\frac{a_{N+1}}{s_{N+1}}+\cdots+\frac{a_{N+k}}{s_{N+k}}\ge 1-\frac{s_N}{s_{N+k}}
+\end{align*}
+and deduce that $\frac{a_n}{s_n}$ diverges.
+(c) Prove that
+\begin{align*}
+\frac{a_n}{s_n^2}\le\frac{1}{s_{n-1}}-\frac{1}{s_n}
+\end{align*}
+and deduce that $\frac{a_n}{s_n^2}$ converges.
+(d) What can be said about
+\begin{align*}
+\sum\frac{a_n}{1+na_n}\quad\mbox{and}\quad \sum\frac{a_n}{1+n^2a_n}?
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) To show this, we only have to consider the following two cases.
+Case 1: If $\{a_n\}$ is not bounded above, then $\lim_{n\to\infty}\frac{a_n}{1+a_n}\ne 0$. Hence $\sum\frac{a_n}{1+a_n}$ diverges.
+Case 2: If $\{a_n\}$ is bounded above, choose a fixed number $M>0$ such that $a_n\le M$ for all $n$. Then $\frac{a_n}{1+a_n}\ge\frac{a_n}{1+M}$ for all $n$. Since $\sum\frac{a_n}{1+M}$ apparently diverges, the divergence of $\sum\frac{a_n}{1+a_n}$ follows by the comparison test.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Since $a_n>0$ for each $n$, the sequence $\{s_n\}$ is monotonically increasing. Thus
+\begin{align*}
+\frac{a_{N+1}}{s_{N+1}}+\frac{a_{N+2}}{s_{N+2}}+\cdots+\frac{a_{N+k}}{s_{N+k}}
+&\ge\frac{a_{N+1}+a_{N+2}+\cdots+a_{N+k}}{s_{N+k}} \\
+&=\frac{s_{N+k}-s_N}{s_{N+k}} \\
+&=1-\frac{s_N}{s_{N+k}}
+\end{align*}
+Now, to show that $\sum\frac{a_n}{s_n}$ diverges, let $t_n=\frac{a_1}{s_1}+\frac{a_2}{s_2}+\cdots+\frac{a_n}{s_n}$. Since $\{s_n\}$ is monotonically increasing, and since $\sum a_n$ diverges, $\{s_n\}$ is not bounded above. So given a positive integer $N$, there is an another positive integer $M$ with $M>N$, such that $n\ge M$ implies $s_n>2s_N$, or $\frac{s_N}{s_n}<\frac{1}{2}$. It follows that
+\begin{align*}
+t_M-t_N
+=\frac{a_{N+1}}{s_{N+1}}+\frac{a_{N+2}}{s_{N+2}}+\cdots+\frac{a_{M}}{s_{M}}
+\ge1-\frac{s_N}{s_{M}}
+>1-\frac{1}{2}
+=\frac{1}{2}
+\end{align*}
+and then the sequence $\{t_n\}$ is not Cauchy. So $\{t_n\}$ diverges, i.e., $\sum\frac{a_n}{s_n}$ diverges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) First, the inequality follows by writing
+\begin{align*}
+\frac{a_n}{s_n^2}
+=\frac{s_n-s_{n-1}}{s_n^2}
+\le\frac{s_n-s_{n-1}}{s_{n-1}s_n}
+=\frac{1}{s_{n-1}}-\frac{1}{s_n}
+\end{align*}
+Now, to show that $\sum\frac{a_n}{s_n^2}$ converges, observe that
+\begin{align*}
+\sum_{k=1}^n\frac{a_k}{s_k^2}
+=\frac{a_1}{a_1^2}+\sum_{k=2}^n\frac{a_k}{s_k^2}
+\le\frac{1}{a_1}+\sum_{k=2}^n\left(\frac{1}{s_{k-1}}-\frac{1}{s_k}\right)
+=\frac{2}{a_1}-\frac{1}{s_n}
+\end{align*}
+Since $s_n\nearrow\infty$, the r.h.s. of the above inequality converges to $\frac{2}{a_1}$ as $n\to\infty$ (this is a \textit{telescoping series}). So we conclude that $\sum\frac{a_n}{s_n^2}$ converges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) (i) The series $\sum\frac{a_n}{1+na_n}$ may be either convergent or divergent, we shall give two examples for them. 
+Example 1: Let $a_n=\frac{1}{n}$ for $n=1,2,\ldots$. Then $\sum a_n$ diverges, and $\sum\frac{a_n}{1+na_n}=\sum\frac{1}{2n}$ also diverges.
+Example 2: Let
+\begin{align*}
+a_n
+=\left\{\begin{array}{ll}
+\dfrac{1}{\sqrt{n}} & \mbox{if $n$ is a perfect square;}\vspace{0.1in} \\
+\dfrac{1}{n^2} & \mbox{if otherwise}
+\end{array}\right.
+\end{align*}
+Note that $\sum a_n$ still diverges. However,
+\begin{align*}
+\frac{a_n}{1+na_n}\le
+\left\{\begin{array}{ll}
+\dfrac{1}{n} & \mbox{if $n=1,4,9,16,25,\ldots$;}\vspace{0.1in} \\
+\dfrac{1}{n^2} & \mbox{if otherwise}
+\end{array}\right.
+\end{align*}
+which follows that $\sum\frac{a_n}{1+na_n}$ converges.
+(ii) The series $\sum\frac{a_n}{1+n^2a_n}$ apparently converges, since $\frac{a_n}{1+n^2a_n}\le\frac{a_n}{n^2a_n}=\frac{1}{n^2}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $a_n>0$ and $\sum a_n$ converges. Put
+\begin{align*}
+r_n=\sum_{m=n}^\infty a_m
+\end{align*}
+(a) Prove that
+\begin{align*}
+\frac{a_m}{r_m}+\cdots+\frac{a_n}{r_n}\ge 1-\frac{r_n}{r_m}
+\end{align*}
+if $m<n$, and deduce that $\sum\frac{a_n}{r_n}$ diverges.
+(b) Prove that
+\begin{align*}
+\frac{a_n}{\sqrt{r_n}}<2\left(\sqrt{r_n}-\sqrt{r_{n+1}}\right)
+\end{align*}
+and deduce that $\sum\frac{a_n}{\sqrt{r_n}}$ converges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) First, the inequality follows by writing, for $m<n$,
+\begin{align*}
+\frac{a_m}{r_m}+\frac{a_{m+1}}{r_{m+1}}+\cdots+\frac{a_n}{r_n}
+&\ge\frac{a_m+a_{m+1}+\cdots+a_n}{r_m} \\
+&>\frac{a_m+a_{m+1}+\cdots+a_{n-1}}{r_m} \\
+&=\frac{r_m-r_n}{r_m} \\
+&=1-\frac{r_n}{r_m}
+\end{align*}
+Now, to show that $\sum \frac{a_n}{r_n}$ diverges, let $s_n=\frac{a_1}{r_1}+\frac{a_2}{r_2}+\cdots+\frac{a_n}{r_n}$. Since $r_n\searrow 0$ (if we let $t_n=\sum_{m=1}^na_m$ and $\sum a_n=t$, then $t_n\nearrow t$ and $t_{n-1}+r_n=t$, so $r_n=t-t_{n-1}\searrow 0$), given a positive integer $M$, there exists an another positive integer $N$ with $N>M+1$, such that $n\ge N$ implies $r_n<\frac{r_{M+1}}{2}$, or $\frac{r_n}{r_{M+1}}<\frac{1}{2}$. It follows that
+\begin{align*}
+s_N-s_M
+=\frac{a_{M+1}}{r_{M+1}}+\frac{a_{M+2}}{r_{M+2}}+\cdots+\frac{a_N}{r_N}
+>1-\frac{r_N}{r_{M+1}}
+>\frac{1}{2}
+\end{align*}
+and then the sequence $\{s_n\}$ is not Cauchy. So $\{s_n\}$ diverges, i.e., $\sum\frac{a_n}{r_n}$ diverges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) First, the inequality follows by writing
+\begin{align*}
+\frac{a_n}{\sqrt{r_n}}
+&=\frac{r_{n}-r_{n+1}}{\sqrt{r_n}} \\
+&=\frac{\sqrt{r_n}+\sqrt{r_{n+1}}}{\sqrt{r_n}}\left(\sqrt{r_n}-\sqrt{r_{n+1}}\right) \\
+&<\frac{\sqrt{r_n}+\sqrt{r_n}}{\sqrt{r_n}}\left(\sqrt{r_n}-\sqrt{r_{n+1}}\right) \\
+&=2\left(\sqrt{r_n}-\sqrt{r_{n+1}}\right)
+\end{align*}
+Now, to show that $\sum \frac{a_n}{\sqrt{r_n}}$ converges, observe that
+\begin{align*}
+\sum_{k=1}^n\frac{a_k}{\sqrt{r_k}}
+<2\sum_{k=1}^n\left(\sqrt{r_k}-\sqrt{r_{k+1}}\right)
+=2\left(\sqrt{r_1}-\sqrt{r_{n+1}}\right)
+\end{align*}
+Since $r_n\searrow 0$, the r.h.s. of the above inequality converges to $2\sqrt{r_1}$ as $n\to\infty$. So we conclude that $\sum\frac{a_n}{\sqrt{r_n}}$ converges.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that the Cauchy product of two absolutely convergent series converges absolutely.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $\sum a_n$ and $\sum b_n$ be two absolutely convergent series, and $\sum c_n$ be the Cauchy product of the two given series. Note that
+\begin{align*}
+\left\vert c_n\right\vert
+=\left\vert\sum_{k=0}^na_kb_{n-k}\right\vert
+\le\sum_{k=0}^n\left\vert a_k\right\vert\left\vert b_{n-k}\right\vert
+\end{align*}
+Since both $\sum a_n$ and $\sum b_n$ converge absolutely, if we let $d_n=\sum_{k=0}^n\left\vert a_k\right\vert\left\vert b_{n-k}\right\vert$, then by Theorem 3.50, $\sum d_n$ converges. Since $\left\vert c_n\right\vert\le d_n$, by the comparison test, $\sum\left\vert c_n\right\vert$ converges.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $\{s_n\}$ is a complex sequence, define its arithmetic means $\sigma_n$ by
+\begin{align*}
+\sigma_n=\frac{s_0+s_1+\cdots+s_n}{n+1}\quad (n=0,1,2,\ldots)
+\end{align*}
+(a) If $\lim s_n=s$, prove that $\lim\sigma_n=s$.
+(b) Construct a sequence $\{s_n\}$ which does not converges, although $\lim\sigma_n=0$.
+(c) Can it happen that $s_n>0$ for all $n$ and that $\limsup s_n=\infty,$ although $\lim\sigma_n=0$?
+(d) Put $a_n=s_n-s_{n-1}$, for $n\ge 1$. Show that
+\begin{align*}
+s_n-\sigma_n=\frac{1}{n+1}\sum_{k=1}^nka_k
+\end{align*}
+Assume that $\lim(na_n)=0$ and that $\{\sigma_n\}$ converges. Prove that $\{s_n\}$ converges. [This gives a converse of (a), but under the additional assumption that $na_n\to 0$.]
+(e) Derive the last conclusion from a weaker hypothesis: Assume $M<\infty$, $\left\vert na_n\right\vert\le M$ for all $n$, and $\lim\sigma_n=\sigma$. Prove that $\lim s_n=\sigma$, by completing the following outline:
+If $m<n$, then
+\begin{align*}
+s_n-\sigma_n=\frac{m+1}{n-m}\left(\sigma_n-\sigma_m\right)+\frac{1}{n-m}\sum_{i=m+1}^n\left(s_n-s_i\right)
+\end{align*}
+For these $i$,
+\begin{align*}
+\left\vert s_n-s_i\right\vert\le\frac{(n-i)M}{i+1}\le\frac{(n-m-1)M}{m+2}
+\end{align*}
+Fix $\varepsilon>0$ and associate with each $n$ the integer $m$ that satisfies
+\begin{align*}
+m\le\frac{n-\varepsilon}{1+\varepsilon}<m+1
+\end{align*}
+Then $(m+1)/(n-m)\le1/\varepsilon$ and $\left\vert s_n-s_i\right\vert<M\varepsilon$. Hence
+\begin{align*}
+\limsup_{n\to\infty}\left\vert s_n-\sigma\right\vert\le M\varepsilon
+\end{align*}
+Since $\varepsilon$ was arbitrary, $\lim s_n=\sigma$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Given $\varepsilon>0$, there exists a positive integer $N$ such that $n\ge N$ implies $\left\vert s_n-s\right\vert<\varepsilon$. Also, there exists a positive integer $N'$ such that $n\ge N'$ implies
+\begin{align*}
+\left\vert\frac{s_0+s_1+\cdots+s_{N-1}-Ns}{n+1}\right\vert<\varepsilon
+\end{align*}
+So $n\ge\max\{N,N'\}$ implies
+\begin{align*}
+\left\vert\sigma_n-s\right\vert
+&=\left\vert\frac{s_0+s_1+\cdots+s_n}{n+1}-s\right\vert \\
+&\le\left\vert\frac{s_0+s_1+\cdots+s_{N-1}-Ns}{n+1}\right\vert
++\left\vert\frac{(s_N-s)+(s_{N+1}-s)+\cdots+(s_n-s)}{n+1}\right\vert \\
+&<\varepsilon
++\frac{1}{n+1}\left(\left\vert s_{N+1}-s\right\vert+\left\vert s_{N+2}-s\right\vert+\cdots+\left\vert s_n-s\right\vert\right) \\
+&<\varepsilon+\frac{n-N+1}{n+1}\cdot\varepsilon \\
+&<2\varepsilon
+\end{align*}
+Hence $\lim_{n\to\infty}\sigma_n=s$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) For example, let $s_n=(-1)^n$ for $n=0,1,2,\ldots$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) For example, let
+\begin{align*}
+s_n
+=\left\{\begin{array}{ll}
+\sqrt[3]{n}&\mbox{if $n$ is a perfect cube;}\vspace{0.1in}\\
+\dfrac{1}{2^n}&\mbox{if otherwise}
+\end{array}\right.
+\end{align*}
+Then clearly $\limsup_{n\to\infty}s_n=\infty$. However, given $n$, if we let $k^3$ be the largest perfect cube satisfying $k^3\le n$, then
+\begin{align*}
+\sigma_n
+\le\frac{2+(1+2+\cdots+k)}{k^3+1}
+=\frac{2+\frac{k^2+k}{2}}{k^3+1}
+<\frac{k^2+k+4}{2k^3}
+\to 0
+\end{align*}
+as $k\to\infty$. Hence $\lim_{n\to\infty}\sigma_n=0$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) Observe that for $m<n$,
+\begin{align*}
+s_n-s_m
+&=\left(s_n-s_{n-1}\right)+\left(s_{n-1}-s_{n-2}\right)+\cdots+\left(s_{m+1}-s_m\right) \\
+&=a_n+a_{n-1}+\cdots+a_{m+1} \\
+&=\sum_{k=m+1}^na_k
+\end{align*}
+Thus
+\begin{align*}
+s_n-\sigma_n
+&=s_n-\frac{s_0+s_1+\cdots+s_n}{n+1} \\
+&=\frac{1}{n+1}\left[\left(s_n-s_0\right)+\left(s_n-s_1\right)+\cdots+\left(s_n-s_{n-1}\right)\right] \\
+&=\frac{1}{n+1}\left(\sum_{k=1}^na_k+\sum_{k=2}^na_k+\cdots+\sum_{k=n}^na_k\right) \\
+&=\frac{1}{n+1}\sum_{k=1}^nka_k
+\end{align*}
+Now, assume that $\lim_{n\to\infty}(na_n)=0$ and that $\{\sigma_n\}$ converges, we want to show $\{s_n\}$ also converges. By the previous result,
+\begin{align*}
+s_n
+=\sigma_n+\frac{1}{n+1}\sum_{k=1}^nka_k
+\end{align*}
+Also, if we let $s'_0=0$ and $s'_n=na_n$ for $n=1,2,\ldots$, and let $\sigma_n'=\frac{s'_0+s'_1+\cdots+s'_n}{n+1}$. Then $\lim_{n\to\infty}s'_n=0$, and then apply part (a), $\lim_{n\to\infty}\sigma_n'=0$. So
+\begin{align*}
+\lim_{n\to\infty}s_n
+=\lim_{n\to\infty}\left(\sigma_n+\sigma_n'\right)
+=\lim_{n\to\infty}\sigma_n+\lim_{n\to\infty}\sigma_n'
+=\lim_{n\to\infty}\sigma_n
+\end{align*}
+and we conclude that $\{s_n\}$ converges.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(e) To complete the details of the outline, we prove the following three facts.
+(i) We show that
+\begin{align*}
+s_n-\sigma_n=\frac{m+1}{n-m}(\sigma_n-\sigma_m)+\frac{1}{n-m}\sum_{i=m+1}^n(s_n-s_i)
+\end{align*}
+Since
+\begin{align*}
+\frac{1}{n-m}\sum_{i=m+1}^n(s_n-s_i)
+&=s_n-\frac{1}{n-m}\sum_{i=m+1}^ns_i\\
+&=s_n-\frac{(n+1)\sigma_n-(m+1)\sigma_m}{n-m}\\
+&=s_n-\frac{(n-m)\sigma_n-(m+1)\sigma_m+(m+1)\sigma_n}{n-m}\\
+&=s_n-\frac{m+1}{n-m}(\sigma_n-\sigma_m)-\sigma_n
+\end{align*}
+the result follows.
+(ii) We show that, for these $i$,
+\begin{align*}
+\left\vert s_n-s_i\right\vert\le\frac{(n-i)M}{i+1}\le\frac{(n-m-1)M}{m+2}
+\end{align*}
+We can directly write
+\begin{align*}
+\left\vert s_n-s_i\right\vert
+&=\left\vert (s_n-s_{n-1})+(s_{n-1}-s_{n-2})+\cdots+(s_{i+1}-s_{i})\right\vert \\
+&=\left\vert a_n+a_{n-1}+\cdots+a_{i+1}\right\vert\\
+&\le\left\vert a_n\right\vert+\left\vert a_{n-1}\right\vert+\cdots+\left\vert a_{i+1}\right\vert\\
+&\le\frac{M}{n}+\frac{M}{n-1}+\cdots+\frac{M}{i+1}\\
+&\le\frac{(n-i)M}{i+1}
+\end{align*}
+and the result follows by taking $i=m+1$.
+(iii) To show that $\dfrac{m+1}{n-m}\le\dfrac{1}{\varepsilon}$, observe that $m\le\dfrac{n-\varepsilon}{1+\varepsilon}$ implies
+\begin{align*}
+m+1
+\le \frac{(n-\varepsilon)+(1+\varepsilon)}{1+\varepsilon}
+=\frac{n+1}{1+\varepsilon}
+\end{align*}
+and 
+\begin{align*}
+n-m
+\ge n-\dfrac{n-\varepsilon}{1+\varepsilon}
+=\frac{n+\varepsilon n-n+\varepsilon}{1+\varepsilon}
+=\frac{\varepsilon (n+1)}{1+\varepsilon}
+\end{align*}
+Thus the result follows. Next, to show that $\left\vert s_n-s_i\right\vert<M\varepsilon$, observe that $\dfrac{n-\varepsilon}{1+\varepsilon}<m+1$ implies
+\begin{align*}
+n-m-1
+<n-\dfrac{n-\varepsilon}{1+\varepsilon}
+=\dfrac{n+\varepsilon n-n+\varepsilon}{1+\varepsilon}
+=\dfrac{\varepsilon (n+1)}{1+\varepsilon}
+\end{align*}
+and
+\begin{align*}
+m+2=(m+1)+1
+>\frac{n-\varepsilon}{1+\varepsilon}+1
+=\frac{n+1}{1+\varepsilon}
+\end{align*}
+Thus by (ii), the result follows.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Exercise 3.15 is skipped.
+
+
+\bigskip\noindent\hrule\bigskip
+
+Fix a positive number $\alpha$. Choose $x_1>\sqrt{\alpha}$, and define $x_2,x_3,x_4,\ldots$, by the recursion formula
+\begin{align*}
+x_{n+1}=\frac{1}{2}\left(x_n+\frac{\alpha}{x_n}\right)
+\end{align*}
+(a) Prove that $\{x_n\}$ decreases monotonically and that $\lim x_n=\sqrt{\alpha}$.
+(b) Put $\varepsilon_n=x_n-\sqrt{\alpha}$, and show that
+\begin{align*}
+\varepsilon_{n+1}=\frac{\varepsilon_n^2}{2x_n}<\frac{\varepsilon_n^2}{2\sqrt{\alpha}}
+\end{align*}
+so that, setting $\beta=2\sqrt{\alpha}$,
+\begin{align*}
+\varepsilon_{n+1}<\beta\left(\frac{\varepsilon_1}{\beta}\right)^{2^n}\quad(n=1,2,3,\ldots)
+\end{align*}
+(c) This is a good algorithm for computing square roots, since the recursion formula is simple and the convergence is extremely rapid. For example, if $\alpha=3$ and $x_1=2$, show that $\varepsilon_1/\beta<\frac{1}{10}$ and that therefore
+\begin{align*}
+\varepsilon_5<4\cdot 10^{-16},\quad \varepsilon_6<4\cdot 10^{-32}
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) First, we show that $\{x_n\}$ is decreasing, and that $x_n>\sqrt{\alpha}$ for $n=1,2,\ldots$. Starting $x_1>\sqrt{\alpha}$, and suppose $x_n>\sqrt{\alpha}$ holds for some $n\ge 1$. Then since $\frac{1}{x_n}<\frac{1}{\sqrt{\alpha}}$, we have $\frac{\alpha}{x_n}<\sqrt{\alpha}<x_n$, and
+\begin{align*}
+x_{n+1}
+=\frac{1}{2}\left(x_n+\frac{\alpha}{x_n}\right)
+<\frac{1}{2}\left(x_n+x_n\right)
+=x_n
+\end{align*}
+On the other hand, by the arithmetic-geometric inequality, $x_{n+1}>\sqrt{x_n\left(\frac{\alpha}{x_n}\right)}=\sqrt{\alpha}$, where the strict inequality symbol "$>$" follows by the fact $\frac{\alpha}{x_n}\ne x_n$ (since $\frac{\alpha}{x_n}<x_n$). Next, we show that $\lim_{n\to\infty}x_n=\sqrt{\alpha}$. By the above result, $\{x_n\}$ is monotonically decreasing with lower bound $\sqrt{\alpha}$. This means that $\lim_{n\to\infty}x_n=L$ for some real $L$, and then $L=\frac{1}{2}\left(L+\frac{\alpha}{L}\right)$ or $L=\sqrt{\alpha}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Expand the following two values
+\begin{align*}
+\varepsilon_{n+1}
+=x_{n+1}-\sqrt{\alpha}
+=\frac{1}{2}\left(x_n+\frac{\alpha}{x_n}\right)-\sqrt{\alpha}
+=\frac{x_n}{2}+\frac{\alpha}{2x_n}-\sqrt{\alpha}
+\end{align*}
+and
+\begin{align*}
+\frac{\varepsilon_n^2}{2x_n}
+=\frac{\left(x_n-\sqrt{\alpha}\right)^2}{2x_n}
+=\frac{x_n^2+\alpha-2x_n\sqrt{\alpha}}{2x_n}
+=\frac{x_n}{2}+\frac{\alpha}{2x_n}-\sqrt{\alpha}
+\end{align*}
+we obtain $\varepsilon_{n+1}=\frac{\varepsilon_n^2}{2x_n}<\frac{\varepsilon_n^2}{2\sqrt{\alpha}}$. Setting $\beta=2\sqrt{\alpha}$, then recursively
+\begin{align*}
+\varepsilon_{n+1}
+&<\frac{1}{\beta}\cdot\varepsilon_n^2 \\
+&<\frac{1}{\beta\cdot\beta^2}\cdot\varepsilon_{n-1}^4 \\
+&<\frac{1}{\beta\cdot\beta^2\cdot\beta^4}\cdot\varepsilon_{n-2}^8 \\
+&\,\,\vdots \\
+&<\frac{1}{\beta\cdot\beta^2\cdot\beta^4\cdots\beta^{2^{n-1}}}\cdot\varepsilon_{1}^{2^n} \\
+&=\beta\left(\frac{\varepsilon_1}{\beta}\right)^{2^n}
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Note that $\beta=2\sqrt{3}$ and $\varepsilon_1=2-\sqrt{3}$, compute
+\begin{align*}
+\frac{\varepsilon_1}{\beta}
+=\frac{2-\sqrt{3}}{2\sqrt{3}}
+=\frac{1}{\sqrt{3}}-\frac{1}{2}
+\end{align*}
+Since $\frac{1}{\sqrt{3}}+\frac{1}{2}>\frac{1}{2}+\frac{1}{2}=1$, and
+\begin{align*}
+\frac{\varepsilon_1}{\beta}\left(\frac{1}{\sqrt{3}}+\frac{1}{2}\right)
+=\left(\frac{1}{\sqrt{3}}-\frac{1}{2}\right)\left(\frac{1}{\sqrt{3}}+\frac{1}{2}\right)
+=\frac{1}{12}
+<\frac{1}{10}
+\end{align*}
+we conclude that $\frac{\varepsilon_1}{\beta}<\frac{1}{10}$. Therefore by part (b),
+\begin{align*}
+\varepsilon_5
+<\beta\left(\frac{\varepsilon_1}{\beta}\right)^{2^4}
+<2\sqrt{3}\cdot 10^{-16}
+<4\cdot 10^{-16}
+\end{align*}
+and similarly $\varepsilon_6<4\cdot 10^{-32}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Fix $\alpha>1$. Take $x_1>\sqrt{\alpha}$, and define
+\begin{align*}
+x_{n+1}=\frac{\alpha+x_n}{1+x_n}=x_n+\frac{\alpha-x_n^2}{1+x_n}
+\end{align*}
+(a) Prove that $x_1>x_3>x_5>\cdots$.
+(b) Prove that $x_2<x_4<x_6<\cdots$.
+(c) Prove that $\lim x_n=\sqrt{\alpha}$.
+(d) Compare the rapidity of convergence of this process with the one described in Exercise 16.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Observe that
+\begin{align*}
+x_{n+2}
+&=\frac{\alpha+x_{n+1}}{1+x_{n+1}} \\
+&=\frac{\alpha+\dfrac{\alpha+x_n}{1+x_n}}{1+\dfrac{\alpha+x_n}{1+x_n}} \\
+&=\frac{2\alpha+(\alpha+1) x_n}{\alpha+1+2x_n} \\
+&=x_n+2\left(\frac{\alpha-x_n^2}{\alpha+1+2x_n}\right)
+\end{align*}
+Note that $x_1>\sqrt{\alpha}$. Now suppose $x_n>\sqrt{\alpha}$ for some odd number $n$, then clearly $x_{n+2}<x_n$. On the other hand, since $\sqrt{\alpha}>1$, we have $\alpha+1>2\sqrt{\alpha}$. It follows that
+\begin{align*}
+x_{n+2}
+&=x_n+2\left(\frac{\alpha-x_n^2}{\alpha+1+2x_n}\right) \\
+&>x_n+2\left(\frac{\alpha-x_n^2}{2\sqrt{\alpha}+2x_n}\right) \\
+&=x_n+\frac{\left(\sqrt{\alpha}+x_n\right)\left(\sqrt{\alpha}-x_n\right)}{\sqrt{\alpha}+x_n} \\
+&=\sqrt{\alpha}
+\end{align*}
+So we conclude that $x_1>x_3>x_5>\cdots$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) First, since $\alpha-x_1^2<0$ and $\sqrt{\alpha}>1$, we have
+\begin{align*}
+x_2
+=x_1+\frac{\alpha-x_1^2}{1+x_1}
+<x_1+\frac{\alpha-x_1^2}{\sqrt{\alpha}+x_1}
+=\sqrt{\alpha}
+\end{align*}
+Now suppose $x_n<\sqrt{\alpha}$ for some even number $n\ge 2$, then clearly $x_{n+2}>x_n$ [by the first equality in part (a)]. On the other hand, use a similar argument to that in part (a), $x_{n+2}<\sqrt{\alpha}$. So we conclude that $x_2<x_4<x_6<\cdots$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) By part (a) and (b), the sequences $\{x_{2k-1}\}$ and $\{x_{2k}\}$ ($k=1,2,\ldots$) are monotonically decreasing and increasing, respectively. Also, $\sqrt{\alpha}$ serves as a lower and upper bound of $\{x_{2k-1}\}$ and $\{x_{2k}\}$, respectively. So we let $\lim_{k\to\infty} x_{2k-1}=L_1$ and $\lim_{k\to\infty} x_{2k}=L_2$. Note that we may assume
+\begin{align*}
+L_1=L_1+2\left(\frac{\alpha-L_1^2}{\alpha+1+2L_1}\right)\quad\mbox{or}\quad
+L_1=\sqrt{\alpha}
+\end{align*}
+and similarly $L_2=\sqrt{\alpha}$. It is easy to conclude that $\lim_{n\to\infty}x_n=\sqrt{\alpha}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) We imitate an analysis in Exercise 16(b). Put $\varepsilon_n=\left\vert x_n-\sqrt{\alpha}\right\vert$ and $\beta=\frac{\sqrt{\alpha}-1}{1+x_2}$, then observe that $1<1+x_2$ (since $x_2=\frac{\alpha+x_1}{1+x_1}>0$) and $1+x_2\le 1+x_n$ for all $n$ [by part (a) and (b)]. It follows that
+\begin{align*}
+\varepsilon_{n+1}
+&=\left\vert x_{n+1}-\sqrt{\alpha}\right\vert \\
+&=\left\vert \frac{\alpha+x_n}{1+x_n}-\sqrt{\alpha}\right\vert \\
+&=\left\vert \frac{x_n-\sqrt{\alpha}-\sqrt{\alpha}\left(x_n-\sqrt{\alpha}\right)}{1+x_n}\right\vert \\
+&=\left\vert \frac{1-\sqrt{\alpha}}{1+x_n}\right\vert\varepsilon_n \\
+&\le\beta\varepsilon_n
+\end{align*}
+and therefore
+\begin{align*}
+\varepsilon_n
+\le\beta\varepsilon_{n-1}
+\le\beta^2\varepsilon_{n-2}
+\le\cdots
+\le\beta^{n-1}\varepsilon_1
+\end{align*}
+So roughly the speed of convergence of the process is not more rapid than the one in Exercise 16.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Replace the recursion formula of Exercise 16 by
+\begin{align*}
+x_{n+1}=\frac{p-1}{p}\,x_n+\frac{\alpha}{p}\,x_n^{-p+1}
+\end{align*}
+where $p$ is a fixed positive integer, and describe the behavior of the resulting sequence $\{x_n\}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Observe that if the limit of $\{x_n\}$ exists, saying $L$, then
+\begin{align*}
+L=\frac{p-1}{p}\,L+\frac{\alpha}{p}\,L^{-p+1}\quad\mbox{or}\quad
+L=\alpha^{\frac{1}{p}}
+\end{align*}
+Now, we take $x_1>\alpha^{\frac{1}{p}}$, and suppose $x_n>\alpha^{\frac{1}{p}}$ for some positive integer $n$, then $x_n^{-p}<\alpha^{-1}$ and
+\begin{align*}
+x_{n+1}
+<\frac{p-1}{p}\,x_n+\frac{\alpha}{p}\,\alpha^{-1}x_n
+=x_n
+\end{align*}
+On the other hand, by the arithmetic-geometric inequality,
+\begin{align*}
+x_{n+1}
+>\sqrt[p]{x_n^{p-1}\alpha x_n^{-p+1}}
+=\alpha^{\frac{1}{p}}
+\end{align*}
+where the strict inequality symbol "$>$" follows by the fact $x_n\ne\alpha x_n^{-p+1}$ (since $x_n^{-p}<\alpha^{-1}$ or $\alpha x_n^{-p}<1$). So we conclude that $\{x_n\}$ decreases monotonically with lower bound $\alpha^{\frac{1}{p}}$, and hence $\{x_n\}$ converges to $L=\alpha^{\frac{1}{p}}$, i.e., $\lim_{n\to\infty}x_n=\alpha^{\frac{1}{p}}$.
+\textbf{Remark.} Exercise 16 is a special case that $p=2$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Associate to each sequence $a=\{a_n\}$, in which $a_n$ is $0$ or $2$, the real number
+\begin{align*}
+x(a)=\sum_{n=1}^\infty\frac{\alpha_n}{3^n}
+\end{align*}
+Prove that the set of all $x(a)$ is precisely the Cantor set described in Sec. 2.44.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+We will use the notations $E_1,E_2,E_3,\ldots$ and $P$ that can be found in Sec. 2.44 (p.41). Let $x(a)=\sum_{n=1}^\infty\frac{a_n}{3^n}$, where $a_n$ is $0$ or $2$. Consider the first term of $x(a)$, i.e., $\frac{a_1}{3}$, then either $\frac{a_1}{3}=0$ or $\frac{a_1}{3}=\frac{2}{3}$. It is clear that the first term of $x(a)$ is located at the lower endpoint of one of the two intervals in $E_1$, i.e., $\frac{a_1}{3}\in P$. Now, suppose that the partial sum $\sum_{n=1}^m\frac{a_n}{3^n}$ of $x(a)$ is located at the lower endpoint of one of the $2^m$ intervals in $E_m$, saying $I_m$. Then $\sum_{n=1}^m\frac{a_n}{3^n}\in P$, and the partial sum $\sum_{n=1}^{m+1}\frac{a_n}{3^n}$ must be located at the lower endpoint of one of the two intervals in $I_m\cap E_{m+1}$, i.e., $\sum_{n=1}^{m+1}\frac{a_n}{3^n}\in P$. Continue this process, we see that either $x(a)\in P$ or $x(a)$ is a limit point of $P$, and hence $x(a)\in P$ (since $P$ is closed). To show the converse, use the fact that (as also shown in the text) every point of $P$ can be written as a limit of a sequence $\{x_m\}$ of lower endpoints of some interval $I_m\subset E_m$ (actually we can write $x_m=\sum_{n=1}^m\frac{a_n}{3^n}$, where $a_n$ is $0$ or $2$), for $m=1,2,\ldots$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $\{p_n\}$ is a Cauchy sequence in a metric space $X$, and some subsequence $\{p_{n_i}\}$ converges to a point $p\in X$. Prove that the full sequence $\{p_n\}$ converges to $p$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Given $\varepsilon>0$. Since $\{p_{n_i}\}$ converges to $p$, there is a positive integer $N_1$ such that $i\ge N_1$ implies $d(p_{n_i},p)<\varepsilon$. Since $\{p_n\}$ is Cauchy, there is a positive integer $N_2$ such that $d(p_m,p_n)<\varepsilon$ for all $m\ge N_2$ and $n\ge N_2$. Choose $N\ge N_2$ such that $N=n_i$ for some $i\ge N_1$, then for all $n\ge N_2$,
+\begin{align*}
+d(p_n,p)
+\le d(p_n,p_N)+d(p_N,p)
+<\varepsilon+\varepsilon
+=2\varepsilon
+\end{align*}
+Hence $\{p_n\}$ converges to $p$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove the following analogue of Theorem 3.10(b): If $\{E_n\}$ is a sequence of closed nonempty and bounded sets in a \textit{complete} metric space $X$, if $E_n\supset E_{n+1}$, and if
+\begin{align*}
+\lim_{n\to\infty}\operatorname{diam}E_n=0
+\end{align*}
+then $\bigcap_{1}^\infty E_n$ consists of exactly one point.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Denote $E=\bigcap_{n=1}^\infty E_n$. Suppose $E$ consists of at least two points, then $\operatorname{diam}E>0$. But since $E\subset E_n$ for all $n$, we have $\operatorname{diam}E\le\operatorname{diam}E_n$ for all $n$, which contradicts the assumption that $\lim_{n\to\infty}\operatorname{diam}E_n=0$. Next, we show that $E\ne\varnothing$. Since $E_n\ne\varnothing$ for all $n$, we can choose a point $x_n\in E_n$ for each $n$, and form the sequence $\{x_n\}$. We claim that $\{x_n\}$ is Cauchy.
+\textit{Proof of the claim.} Given $\varepsilon>0$, then since $\lim_{n\to\infty}\operatorname{diam}E_n=0$, there exists a positive integer $N$ such that $n\ge N$ implies $\operatorname{diam}E_n<\varepsilon$. For any $m\ge N$ and $n\ge N$, by assumption, $x_m\in E_m\subset E_N$ and $x_n\in E_n\subset E_N$,. So $d(x_m,x_n)\le\operatorname{diam}E_N<\varepsilon$. $\Box$
+Now, since $X$ is complete and $\{x_n\}$ is Cauchy, we have $\lim_{n\to\infty}x_n=x$ for some $x\in X$. To show that such $x\in E$, suppose not, then $x\notin E_M$ or $x\in E_M^c$ for some positive integer $M$. Since $E_M$ is closed, $E_M^c$ is open, and there exists a $\delta>0$ such that $N_\delta(x)\subset E_M^c$, or $N_\delta(x)\cap E_M=\varnothing$. Also, note that $x_n\in E_n\subset E_M$ for all $n\ge M$. It follows that $d(x,x_n)\ge\delta$ for all $n\ge M$, contradicting the assumption $\lim_{n\to\infty}x_n=x$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $X$ is a nonempty complete metric space, and $\{G_n\}$ is a sequence of dense open subsets of $X$. Prove Baire's theorem, namely, that $\bigcap_{1}^\infty G_n$ is not empty. (In fact, it is dense in $X$.) \textit{Hint:} Find a shrinking sequence of neighborhoods $E_n$ such that $\bar{E}_n\subset G_n$, and apply Exercise 21.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Since $X\ne\varnothing$, we begin with some point $x_0\in X$ and given $r>0$. Since $G_1$ is dense and open, the set $N_r(x_0)\cap G_1$ is nonempty and open. Choose $x_1\in N_1(x_0)\cap G_1$ and there exists a neighborhood $E_1$ of $x_1$ such that
+\begin{align*}
+\bar{E}_1\subset N_r(x_0)\cap G_1\quad\mbox{and}\quad
+\operatorname{diam}E_1\le r
+\end{align*}
+Having chosen nonempty neighborhoods $E_1,E_2,\ldots,E_{n-1}$, such that $\bar{E}_i\subset G_i$, $E_{i+1}\subset E_i$, and $\operatorname{diam}E_i\le 2^{1-i}r$. Since $G_n$ is dense and open, the set $E_{n-1}\cap G_n$ is nonempty and open. Choose $x_n\in E_{n-1}\cap G_n$ and there exists a neighborhood $E_n$ of $x_n$ such that
+\begin{align*}
+\bar{E}_n\subset E_{n-1}\cap G_n\quad\mbox{and}\quad
+\operatorname{diam}E_n\le 2^{1-n}r
+\end{align*}
+Continue this process, we may construct the desired shrinking sequence $\{\bar{E}_n\}$ such that $\bar{E}_n\subset G_n$ for all $n$, and $\lim_{n\to\infty}\operatorname{diam}E_n=0$. Then by Exercise 21, $\bigcap_{n=1}^\infty\bar{E}_n$ consists of one point, saying $x$. Observe that $\bigcap_{n=1}^\infty\bar{E}_n\subset\bigcap_{n=1}^\infty G_n$, we have $x\in\bigcap_{n=1}^\infty G_n$ and hence $\bigcap_{n=1}^\infty G_n\ne\varnothing$. In fact, $\bigcap_{n=1}^\infty G_n$ is dense in $X$, because $x\in\bar{E}_1\subset N_r(x_0)$, where $x_0\in X$ and $r>0$ are arbitrarily given.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $\{p_n\}$ and $\{q_n\}$ are Cauchy sequences in a metric space $X$. Show that the sequence $\{d(p_n,q_n)\}$ converges. \textit{Hint:} For any $m$, $n$,
+\begin{align*}
+d(p_n,q_n)
+\le d(p_n,q_m)+d(p_m,q_m)+d(p_m,q_n)
+\end{align*}
+it follows that
+\begin{align*}
+\left\vert d(p_n,q_n)-d(p_m,q_m)\right\vert
+\end{align*}
+is small if $m$ and $n$ are large.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Given $\varepsilon>0$, then since $\{p_n\}$ and $\{q_n\}$ are Cauchy, there exist positive integers $N_1$ and $N_2$ such that $m,n\ge N_1$ implies $d(p_m,p_n)<\varepsilon$, and $m,n\ge N_2$ implies $d(q_m,q_n)<\varepsilon$. Put $N=\max\{N_1,N_2\}$, then by the hint, for $m,n\ge N$,
+\begin{align*}
+d(p_n,q_n)
+\le d(p_n,q_m)+d(p_m,q_m)+d(p_m,q_n)
+<d(p_m,q_m)+2\varepsilon
+\end{align*}
+which follows that $\left\vert d(p_n,q_n)-d(p_m,q_m)\right\vert<2\varepsilon$. Thus $\{d(p_n,q_n)\}$ is Cauchy in $\mathbb{R}$, and hence $\{d(p_n,q_n)\}$ converges by Theorem 3.11(c).
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $X$ be a metric space.
+(a) Call two Cauchy sequences $\{p_n\}$, $\{q_n\}$ in $X$ \textit{equivalent} if
+\begin{align*}
+\lim_{n\to\infty}d(p_n,q_n)=0
+\end{align*}
+Prove that this is a equivalence relation.
+(b) Let $X^\ast$ be the set of all equivalence classes so obtained. If $P\in X^\ast$, $Q\in X^\ast$, $\{p_n\}\in P$, $\{q_n\}\in Q$, define
+\begin{align*}
+\Delta(P,Q)=\lim_{n\to\infty}d(p_n,q_n)
+\end{align*}
+by Exercise 23, this limit exists. Show that the number $\Delta(P,Q)$ is unchanged if $\{p_n\}$ and $\{q_n\}$ are replaced by equivalent sequences, and hence that $\Delta$ is a distance function in $X^\ast$.
+(c) Prove that the resulting metric space $X^\ast$ is complete.
+(d) For each $p\in X$, there is a Cauchy sequence all of whose terms are $p$; let $P_p$ be the element of $X^\ast$ which contains this sequence. Prove that
+\begin{align*}
+\Delta(P_p,P_q)=d(p,q)
+\end{align*}
+for all $p,q\in X$. In other words, the mapping $\varphi$ defined by $\varphi(p)=P_p$ is an isometry (i.e., a distance-preserving mapping) of $X$ into $X^\ast$.
+(e) Prove that $\varphi(X)$ is dense in $X^\ast$, and that $\varphi(X)=X^\ast$ if $X$ is complete. By (d), we may identify $X$ and $\varphi(X)$ and thus regard $X$ as embedded in the complete metric space $X^\ast$. We call $X^\ast$ the \textit{completion} of $X$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Let $\{p_n\}$, $\{q_n\}$, and $\{r_n\}$ be Cauchy sequences in $X$.
+\textit{(Reflexivity)} Since $d(p_n,p_n)=0$ for all $n$, we have $\lim_{n\to\infty}d(p_n,p_n)=0$. So $\{p_n\}$ is equivalent to itself.
+\textit{(Symmetry)} If $\{p_n\}$ is equivalent to $\{q_n\}$, then since $d(p_n,q_n)=d(q_n,p_n)$ for all $n$, we have
+\begin{align*}
+\lim_{n\to\infty}d(q_n,p_n)=\lim_{n\to\infty}d(p_n,q_n)=0
+\end{align*}
+i.e., $\{q_n\}$ is equivalent to $\{p_n\}$.
+\textit{(Transitivity)} If $\{p_n\}$ is equivalent to $\{q_n\}$, and if $\{q_n\}$ is equivalent to $\{r_n\}$. Then we have $\lim_{n\to\infty}d(p_n,q_n)=0$ and $\lim_{n\to\infty}d(q_n,r_n)=0$. Also, by the triangular inequality, $d(p_n,r_n)\le d(p_n,q_n)+d(q_n,r_n)$ for all $n$. It follows by the comparison test that
+\begin{align*}
+\lim_{n\to\infty}d(p_n,r_n)
+&\le\lim_{n\to\infty}\left[d(p_n,q_n)+d(q_n,r_n)\right] \\
+&=\lim_{n\to\infty}d(p_n,q_n)+\lim_{n\to\infty}d(q_n,r_n) \\
+&=0+0 \\
+&=0
+\end{align*}
+or $\lim_{n\to\infty}d(p_n,r_n)=0$. So $\{p_n\}$ is equivalent to $\{r_n\}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Let $\{p_n\},\{p_n'\}\in P$ and $\{q_n\},\{q_n'\}\in Q$, where $P,Q\in X^\ast$. Then by definition,
+\begin{align*}
+\lim_{n\to\infty}d(p_n,p_n')=\lim_{n\to\infty}d(q_n,q_n')=0
+\end{align*}
+Also, by the triangular inwquality,
+\begin{align*}
+d(p_n',q_n')\le d(p_n',p_n)+d(p_n,q_n)+d(q_n,q_n')
+\end{align*}
+which follows that
+\begin{align*}
+\lim_{n\to\infty}d(p_n',q_n')
+&\le\lim_{n\to\infty}\left[d(p_n',p_n)+d(p_n,q_n)+d(q_n,q_n')\right] \\
+&=\lim_{n\to\infty}d(p_n',p_n)+\lim_{n\to\infty}d(p_n,q_n)+\lim_{n\to\infty}d(q_n,q_n') \\
+&=\lim_{n\to\infty}d(p_n,q_n)
+\end{align*}
+and by symmetry $\lim_{n\to\infty}d(p_n,q_n)\le\lim_{n\to\infty}d(p_n',q_n')$. So $\lim_{n\to\infty}d(p_n,q_n)=\lim_{n\to\infty}d(p_n',q_n')$. Now, we show that $\Delta$ is a distance function in $X^\ast$. 
+(1) By definition, it is clear that $\Delta(P,Q)\ge 0$ for all $P,Q\in X^\ast$. Also, $\Delta(P,Q)=0$ if and only if $\lim_{n\to\infty}d(p_n,q_n)=0$ for all $\{p_n\}\in P$ and $\{q_n\}\in Q$, if and only if $\{p_n\}$ is equivalent to $\{q_n\}$ for all $\{p_n\}\in P$ and $\{q_n\}\in Q$, if and only if $P=Q$.
+(2) The equality $\Delta(P,Q)=\Delta(Q,P)$ holds simply by definition.
+(3) Given $P,Q,R\in X^\ast$, choose $\{p_n\}\in P$, $\{q_n\}\in Q$, and $\{r_n\}\in R$. Then by definition and by the triangular inequality (w.r.t. $d$),
+\begin{align*}
+\Delta(P,Q)
+&=\lim_{n\to\infty}d(p_n,q_n) \\
+&\le\lim_{n\to\infty}\left[d(p_n,r_n)+d(r_n,q_n)\right] \\
+&=\lim_{n\to\infty}d(p_n,r_n)+\lim_{n\to\infty}d(r_n,q_n) \\
+&=\Delta(P,R)+\Delta(R,Q)
+\end{align*}
+i.e., the triangular inequality (w.r.t. $\Delta$) holds.
+By checking (1)~(3), we conclude that $\Delta$ is a distance function in $X^\ast$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Let $\{P_n\}$ be a Cauchy sequence in $X^\ast$, and choose $\{p_k^n\}\in P_n$ for $n=1,2,\ldots$. For each $n$, there exists a positive integer $K_n$ such that $k,l\ge K_n$ implies $d(p_k^n,p_l^n)<2^{-n}$. Define $p_n=p_{K_n}^n$ for $n=1,2,\ldots$, we show that $\{p_n\}$ is Cauchy in $X$. Given $\varepsilon>0$, then since $\{P_n\}$ is Cauchy in $X^\ast$, there exists a positive integer $N$ such that $m,n\ge N$ implies $\Delta(P_m,P_n)<\varepsilon$, or $\lim_{k\to\infty}d(p_k^m,p_k^n)<\varepsilon$. Let $N'$ be a positive integer such that $2^{-N'}<\varepsilon$, then $m,n\ge\max\{N,N'\}$ implies
+\begin{align*}
+d(p_m,p_n)
+&=d(p_{K_m}^m,p_{K_n}^n) \\
+&\le d(p_{K_m}^m,p_k^m)+d(p_k^m,p_k^n)+d(p_k^n,p_{K_n}^n) \\
+&<2^{-m}+\varepsilon+2^{-n} \\
+&<3\varepsilon
+\end{align*}
+where the integer $k$ can be chosen sufficiently large such that $k\ge\max\{K_m,K_n\}$ and $d(p_k^m,p_k^n)<\varepsilon$. Hence $\{p_n\}$ is Cauchy in $X$. Let $P\in X^\ast$ be such that $\{p_n\}\in P$, it suffices to show that $P_n\to P$, which completes the proof. Given $\varepsilon>0$, put $n\ge\max\{N,N'\}$, $k\ge\max\{N,N',K_n\}$, and $m\ge\max\{K_n,K_k\}$ sufficiently large such that $d(p_m^n,p_m^k)<\varepsilon$. We have
+\begin{align*}
+d(p_k^n,p_k)
+&=d(p_k^n,p_{K_k}^k) \\
+&\le d(p_k^n,p_m^n)+d(p_m^n,p_m^k)+d(p_m^k,p_{K_k}^k) \\
+&<2^{-n}+\varepsilon+2^{-k} \\
+&<3\varepsilon
+\end{align*}
+which follows that $\lim_{k\to\infty}d(p_k^n,p_k)\le 3\varepsilon$, or $\Delta(P_n,P)\le 3\varepsilon$. Hence $P_n\to P$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) The result is trivial [by part (b)].
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(e) (i) Let $P\in X^\ast$ and $\{p_n\}\in P$, and given $\varepsilon>0$. Since $\{p_n\}$ is Cauchy, there exists a positive integer $N$ such that $m,n\ge N$ implies $d(p_m,p_n)<\varepsilon$. It follows that
+\begin{align*}
+\Delta(P,\varphi(p_N))
+=\Delta(P,P_{p_N})
+=\lim_{n\to\infty}d(p_n,p_N)
+\le\varepsilon
+<2\varepsilon
+\end{align*}
+i.e., the neighborhood of $P$ with radius $2\varepsilon$ contains an element $\varphi(p_N)\in\varphi(X)$. So we conclude that $\varphi(X)$ is dense in $X^\ast$.
+(ii) If $X$ is complete, let $P\in X^\ast$ and $\{p_n\}\in P$. Since $\{p_n\}$ is Cauchy, $p_n\to p$ for some $p\in X$, i.e., we have
+\begin{align*}
+\Delta(P,P_p)
+=\lim_{n\to\infty}d(p_n,p)
+=0
+\end{align*}
+So $P=P_p$, and hence $X^\ast=\varphi(X)$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $X$ be the metric space whose points are the rational numbers, with the metric $d(x,y)=\left\vert x-y\right\vert$. What is the completion of this space? (Compare Exercise 24.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+By Theorem 3.11(c), every rational Cauchy sequence converges to a real number. On the other hand, for every $x\in \mathbb{R}$, there exists a rational Cauchy sequence $\{p_n\}$ such that $\lim_{n\to\infty}p_n=x$. So the completion of $X$ should be $\varphi(\mathbb{R})$.
+
+
+\end{document}
