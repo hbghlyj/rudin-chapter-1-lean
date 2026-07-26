@@ -24,7 +24,10 @@ theorem exists_unique_rpow_eq {b y : ℝ} (hb : 1 < b) (hy : 0 < y) :
 /-- No linear order compatible with the ring operations can exist on `ℂ`. -/
 theorem complex_cannot_be_ordered_field :
     ¬ ∃ (_ : LinearOrder ℂ), ∃ (_ : IsStrictOrderedRing ℂ), True := by
-  sorry
+  intro ⟨_lo, ho, _⟩
+  have hi_pos : (0 : ℂ) < Complex.I ^ 2 := sq_pos_of_ne_zero Complex.I_ne_zero
+  simp [Complex.I_sq] at hi_pos
+  linarith
 
 /-- The lexicographic order on complex numbers, viewed as pairs of reals. -/
 noncomputable def complexLex : LinearOrder ℂ := LinearOrder.lift' (fun z : ℂ => toLex (z.re, z.im)) (by
@@ -111,7 +114,44 @@ theorem complex_square_root_formula_nonneg_im (w : ℂ) (hv : 0 ≤ w.im) :
     let a := Real.sqrt ((norm w + w.re) / 2)
     let b := Real.sqrt ((norm w - w.re) / 2)
     (a + b * Complex.I) ^ 2 = w := by
-  sorry
+  intro a b
+  -- Compute (a + b*I)^2 = a^2 - b^2 + 2ab*I
+  have hsq : (a + b * Complex.I) ^ 2 = ⟨a^2 - b^2, 2 * a * b⟩ := by
+    simp [sq, Complex.ext_iff]
+    ring
+  rw [hsq]
+  -- Prepare helper lemmas
+  have hle : -‖w‖ ≤ w.re := (abs_le.mp (Complex.abs_re_le_norm w)).1
+  have hle' : w.re ≤ ‖w‖ := (abs_le.mp (Complex.abs_re_le_norm w)).2
+  have ha_sq : a ^ 2 = (norm w + w.re) / 2 := by
+    apply Real.sq_sqrt; linarith [norm_nonneg w]
+  have hb_sq : b ^ 2 = (norm w - w.re) / 2 := by
+    apply Real.sq_sqrt; linarith [norm_nonneg w]
+  have ha_nonneg : 0 ≤ a := Real.sqrt_nonneg _
+  have hb_nonneg : 0 ≤ b := Real.sqrt_nonneg _
+  have hnorm_sq : norm w ^ 2 = w.re ^ 2 + w.im ^ 2 := by
+    rw [← Complex.normSq_eq_norm_sq w]
+    simp [Complex.normSq_apply]
+    ring
+  -- Need to show a^2 - b^2 = w.re and 2*a*b = w.im
+  apply Complex.ext
+  · -- Real part: a^2 - b^2 = w.re
+    linarith
+  · -- Imaginary part: 2*a*b = w.im
+    have hab_sq : (a * b) ^ 2 = w.im ^ 2 / 4 := by
+      have h1 : (a * b) ^ 2 = a ^ 2 * b ^ 2 := by ring
+      rw [h1, ha_sq, hb_sq]
+      linarith [hnorm_sq]
+    have hab_nonneg : 0 ≤ a * b := mul_nonneg ha_nonneg hb_nonneg
+    have hab_eq : a * b = |w.im| / 2 := by
+      have h_sq_eq : (a * b) ^ 2 = (|w.im| / 2) ^ 2 := by
+        rw [hab_sq]
+        have : w.im ^ 2 = |w.im| ^ 2 := (sq_abs w.im).symm
+        rw [this]
+        ring
+      exact sq_eq_sq₀ hab_nonneg (by positivity) |>.mp h_sq_eq
+    rw [abs_of_nonneg hv] at hab_eq
+    linarith
 
 /-- Rudin's explicit square-root formula in the lower half-plane. -/
 theorem complex_square_root_formula_nonpos_im (w : ℂ) (hv : w.im ≤ 0) :
