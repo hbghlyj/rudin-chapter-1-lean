@@ -64,6 +64,11 @@ theorem rpow_step_down_above {b y w : ℝ} (hb : 1 < b) (hy : 0 < y)
 /-- Exercises 7(f,g): existence and uniqueness of a real logarithm. -/
 theorem logarithm_exists_unique {b y : ℝ} (hb : 1 < b) (hy : 0 < y) :
     ∃! x : ℝ, b ^ x = y := by
-  sorry
+  have hbpos : 0 < b := lt_trans (by norm_num) hb
+  have hbne : b ≠ 1 := ne_of_gt hb
+  refine ⟨Real.logb b y, Real.rpow_logb hbpos hbne hy, ?_⟩
+  intro z hz
+  exact (Real.strictMono_rpow_of_base_gt_one hb).injective
+    (hz.trans (Real.rpow_logb hbpos hbne hy).symm)
 
 end Rudin.Chapter1

@@ -5,14 +5,21 @@ open scoped BigOperators ComplexConjugate
 namespace Rudin.Chapter1
 
 /-- Negation interchanges infimum and supremum for a nonempty, lower-bounded real set. -/
-theorem inf_eq_neg_sup_neg {A : Set ℝ} (hne : A.Nonempty) (hbelow : BddBelow A) :
+theorem inf_eq_neg_sup_neg {A : Set ℝ} (_hne : A.Nonempty) (_hbelow : BddBelow A) :
     sInf A = -sSup ((fun x : ℝ => -x) '' A) := by
-  sorry
+  have hi : (fun x : ℝ => -x) '' A = -A := by ext x; simp
+  rw [hi, ← Real.sInf_neg]
+  simp
 
 /-- Every positive real has a unique logarithm to a base greater than one. -/
 theorem exists_unique_rpow_eq {b y : ℝ} (hb : 1 < b) (hy : 0 < y) :
     ∃! x : ℝ, b ^ x = y := by
-  sorry
+  have hbpos : 0 < b := lt_trans (by norm_num) hb
+  have hbne : b ≠ 1 := ne_of_gt hb
+  refine ⟨Real.logb b y, Real.rpow_logb hbpos hbne hy, ?_⟩
+  intro z hz
+  exact (Real.strictMono_rpow_of_base_gt_one hb).injective
+    (hz.trans (Real.rpow_logb hbpos hbne hy).symm)
 
 /-- No linear order compatible with the ring operations can exist on `ℂ`. -/
 theorem complex_cannot_be_ordered_field :
