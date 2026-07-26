@@ -134,7 +134,42 @@ theorem complex_square_root_formula_nonpos_im (w : ℂ) (hv : w.im ≤ 0) :
 /-- Every nonzero complex number has exactly two square roots. -/
 theorem complex_two_square_roots {z : ℂ} (hz : z ≠ 0) :
     ∃ w : ℂ, w ^ 2 = z ∧ {u : ℂ | u ^ 2 = z} = {w, -w} := by
-  sorry
+  -- Choose w based on whether z.im is nonneg or nonpos
+  by_cases h : 0 ≤ z.im
+  · -- Case: z.im ≥ 0, use the upper half-plane formula
+    let a := Real.sqrt ((norm z + z.re) / 2)
+    let b := Real.sqrt ((norm z - z.re) / 2)
+    use a + b * Complex.I
+    refine ⟨complex_square_root_formula_nonneg_im z h, ?_⟩
+    ext u
+    simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
+    constructor
+    · intro hu
+      have hw : (a + b * Complex.I) ^ 2 = z := complex_square_root_formula_nonneg_im z h
+      have hsq : u ^ 2 = (a + b * Complex.I) ^ 2 := hu.trans hw.symm
+      rcases eq_or_eq_neg_of_sq_eq_sq u (a + b * Complex.I) hsq with h | h <;> [left; right] <;> exact h
+    · intro hu
+      rcases hu with rfl | rfl
+      · exact complex_square_root_formula_nonneg_im z h
+      · rw [neg_pow, complex_square_root_formula_nonneg_im z h]; norm_num
+  · -- Case: z.im < 0, use the lower half-plane formula
+    push_neg at h
+    let a := Real.sqrt ((norm z + z.re) / 2)
+    let b := Real.sqrt ((norm z - z.re) / 2)
+    use star (a + b * Complex.I)
+    have hstar_formula := complex_square_root_formula_nonpos_im z (le_of_lt h)
+    refine ⟨hstar_formula, ?_⟩
+    ext u
+    simp only [Set.mem_setOf_eq, Set.mem_insert_iff, Set.mem_singleton_iff]
+    constructor
+    · intro hu
+      have hw : (star (a + b * Complex.I)) ^ 2 = z := hstar_formula
+      have hsq : u ^ 2 = (star (a + b * Complex.I)) ^ 2 := hu.trans hw.symm
+      rcases eq_or_eq_neg_of_sq_eq_sq u (star (a + b * Complex.I)) hsq with h | h <;> [left; right] <;> exact h
+    · intro hu
+      rcases hu with rfl | rfl
+      · exact hstar_formula
+      · rw [neg_pow, hstar_formula]; norm_num
 
 /-- Polar decomposition, including uniqueness away from zero. -/
 theorem complex_polar_decomposition (z : ℂ) :
