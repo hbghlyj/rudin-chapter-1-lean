@@ -25,7 +25,14 @@ theorem rational_rpow_add {b : ℝ} (hb : 0 < b) (r s : ℚ) :
 /-- At a rational argument, Rudin's supremum construction gives the rational power. -/
 theorem rational_power_is_sup {b : ℝ} (hb : 1 < b) (r : ℚ) :
     IsLUB (rationalPowerSet b (r : ℝ)) (b ^ (r : ℝ)) := by
-  sorry
+  constructor
+  · -- Show b ^ r is an upper bound
+    intro y hy
+    obtain ⟨t, ht, rfl⟩ := hy
+    exact Real.rpow_le_rpow_of_exponent_le hb.le ht
+  · -- Show b ^ r is the least upper bound
+    intro M hM
+    exact hM ⟨r, le_refl _, rfl⟩
 
 /-- Rudin's supremum definition agrees with real exponentiation. -/
 theorem rpow_eq_sup_rationalPowerSet {b x : ℝ} (hb : 1 < b) :
