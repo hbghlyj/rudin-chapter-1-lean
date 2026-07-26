@@ -118,7 +118,13 @@ theorem pow_sub_one_ge {b : ℝ} (hb : 1 < b) {n : ℕ} (hn : 0 < n) :
 /-- Exercise 7(b), the corresponding bound for positive `n`th roots. -/
 theorem root_sub_one_bound {b : ℝ} (hb : 1 < b) {n : ℕ} (hn : 0 < n) :
     n * (b ^ ((n : ℝ)⁻¹) - 1) ≤ b - 1 := by
-  sorry
+  set a := b ^ ((n : ℝ)⁻¹) with ha_def
+  have ha_pos : 1 < a := Real.one_lt_rpow hb (by positivity : (n : ℝ)⁻¹ > 0)
+  have bernoulli := pow_sub_one_ge ha_pos hn
+  have haken : a ^ n = b := by
+    rw [ha_def, ← Real.rpow_natCast, ← Real.rpow_mul (le_of_lt (lt_trans zero_lt_one hb))]
+    simp [hn.ne']
+  linarith
 
 /-- Exercise 7(c): sufficiently high roots of `b` lie below every `t > 1`. -/
 theorem root_lt_of_large_n {b t : ℝ} (hb : 1 < b) (ht : 1 < t) {n : ℕ}
