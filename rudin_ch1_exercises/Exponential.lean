@@ -152,7 +152,23 @@ theorem rpow_step_up_below {b y w : ℝ} (hb : 1 < b) (hy : 0 < y)
 /-- Exercise 7(e). -/
 theorem rpow_step_down_above {b y w : ℝ} (hb : 1 < b) (hy : 0 < y)
     (hw : y < b ^ w) : ∃ n : ℕ, 0 < n ∧ y < b ^ (w - (n : ℝ)⁻¹) := by
-  sorry
+  have hbpos : 0 < b := lt_trans zero_lt_one hb
+  have hbwpow : 0 < b ^ w := Real.rpow_pos_of_pos hbpos w
+  have ht : 1 < b ^ w / y := one_lt_div hy |>.mpr hw
+  have hpos : 0 < b ^ w / y - 1 := by linarith
+  set n : ℕ := ⌊(b - 1) / (b ^ w / y - 1)⌋₊ + 1 with hn_def
+  have hn_pos : 0 < n := Nat.succ_pos _
+  have hdiff : (b - 1) / (b ^ w / y - 1) < (n : ℝ) := by
+    simp [hn_def]
+    exact Nat.lt_floor_add_one _
+  have hroot := root_lt_of_large_n hb ht hdiff
+  refine ⟨n, hn_pos, ?_⟩
+  rw [Real.rpow_sub hbpos]
+  have hb_pow_pos : (0 : ℝ) < b ^ (↑n : ℝ)⁻¹ := Real.rpow_pos_of_pos hbpos _
+  rw [lt_div_iff₀ hb_pow_pos]
+  calc y * b ^ (↑n : ℝ)⁻¹ < y * (b ^ w / y) := by
+        apply mul_lt_mul_of_pos_left hroot hy
+    _ = b ^ w := by field_simp
 
 /-- Exercises 7(f,g): existence and uniqueness of a real logarithm. -/
 theorem logarithm_exists_unique {b y : ℝ} (hb : 1 < b) (hy : 0 < y) :
