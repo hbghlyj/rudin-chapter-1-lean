@@ -20,4 +20,6 @@ jobs:
         echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
     - name: Build Project
-      run: lake build RequestProject
+      run: |
+        lake update
+        lake build RequestProject
