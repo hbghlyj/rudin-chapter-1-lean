@@ -52,7 +52,59 @@ theorem imaginaryAxis_bddAbove_lex :
 theorem imaginaryAxis_no_sup_lex :
     letI := complexLex
     ¬ ∃ s : ℂ, IsLUB {z : ℂ | z.re = 0} s := by
-  sorry
+  letI := complexLex
+  intro ⟨s, hs⟩
+  have hub := hs.1
+  have hlu := hs.2
+  by_cases hre : s.re > 0
+  · -- s.re > 0: construct a smaller upper bound t = (s.re/2, s.im)
+    exfalso
+    set t : ℂ := ⟨s.re / 2, s.im⟩
+    -- t is an upper bound since t.re = s.re/2 > 0
+    have ht_upper : t ∈ upperBounds {z : ℂ | z.re = 0} := fun z hz => by
+      simp only [Set.mem_setOf_eq] at hz
+      change toLex (z.re, z.im) ≤ toLex (t.re, t.im)
+      simp [hz, t]
+      rw [Prod.Lex.toLex_le_toLex]
+      left
+      linarith
+    -- t < s since s.re/2 < s.re
+    have ht_lt_s : t < s := by
+      change toLex (t.re, t.im) < toLex (s.re, s.im)
+      simp [t]
+      rw [Prod.Lex.toLex_lt_toLex]
+      left
+      linarith
+    exact ht_lt_s.not_ge (hlu ht_upper)
+  · -- s.re ≤ 0, so s is not an upper bound
+    exfalso
+    rcases lt_trichotomy s.re 0 with hlt | heq | hgt
+    · -- s.re < 0: 0 is in imaginary axis and 0 > s
+      have : (0 : ℂ) ∈ {z : ℂ | z.re = 0} := by simp
+      have h0_gt_s : (0 : ℂ) > s := by
+        rw [show (0 : ℂ) > s ↔ s < (0 : ℂ) from gt_iff_lt]
+        change toLex (s.re, s.im) < toLex ((0 : ℂ).re, (0 : ℂ).im)
+        simp only [Complex.zero_re, Complex.zero_im]
+        left
+        exact hlt
+      exact not_le_of_gt h0_gt_s (hub this)
+    · -- s.re = 0: take z = (0, s.im + 1) which is in imaginary axis and > s
+      exfalso
+      set z : ℂ := ⟨0, s.im + 1⟩
+      have hz : z ∈ {z : ℂ | z.re = 0} := by simp [z]
+      have hz_gt_s : z > s := by
+        rw [show z > s ↔ s < z from gt_iff_lt]
+        change toLex (s.re, s.im) < toLex (z.re, z.im)
+        simp [z]
+        rw [heq]
+        refine Prod.Lex.toLex_lt_toLex.mpr ?_
+        right
+        constructor
+        · rfl
+        · linarith
+      exact not_le_of_gt hz_gt_s (hub hz)
+    · -- s.re > 0 contradicts hre
+      exact absurd hgt hre
 
 /-- Rudin's explicit square-root formula in the upper half-plane. -/
 theorem complex_square_root_formula_nonneg_im (w : ℂ) (hv : 0 ≤ w.im) :
