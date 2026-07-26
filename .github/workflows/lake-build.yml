@@ -14,5 +14,3 @@ jobs:
 
       - name: Build Lean Project
         uses: leanprover/lean-action@v1
-        with:
-          test-target: 'RequestProject'
