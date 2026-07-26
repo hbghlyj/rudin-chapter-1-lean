@@ -7,7 +7,13 @@ namespace Rudin.Chapter1
 private lemma equal_radius_spheres_empty {k : ℕ} (x y : EuclideanSpace ℝ (Fin k))
     (r : ℝ) (hfar : 2 * r < dist x y) :
     {z | dist z x = r ∧ dist z y = r} = ∅ := by
-  sorry
+  ext z
+  simp
+  intro hzx hzy
+  have : dist x y ≤ dist x z + dist z y := dist_triangle x z y
+  rw [dist_comm x z] at this
+  rw [hzx, hzy] at this
+  linarith
 
 private lemma equal_radius_spheres_singleton {k : ℕ} (x y : EuclideanSpace ℝ (Fin k))
     (r : ℝ) (hr : 0 < r) (htangent : 2 * r = dist x y) :
