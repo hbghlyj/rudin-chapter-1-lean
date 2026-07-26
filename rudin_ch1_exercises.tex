@@ -1,0 +1,283 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\title{Chapter 1 Selected Exercises (Rudin)}
+\date{}
+\begin{document}
+\maketitle
+
+\section{Rational and irrational numbers}
+\begin{exercise}
+If $r\in\Q$, $r\ne0$, and $x\notin\Q$, then $r+x$ and $rx$ are irrational.
+\end{exercise}
+\begin{proof}
+If $r+x\in\Q$, closure of $\Q$ under subtraction gives
+$x=(r+x)-r\in\Q$, a contradiction.  If $rx\in\Q$, closure under division by
+$r\ne0$ gives $x=(rx)/r\in\Q$, again a contradiction.
+\end{proof}
+
+\begin{exercise}
+There is no rational number whose square is $12$.
+\end{exercise}
+\begin{proof}
+Suppose $(p/q)^2=12$, where $p,q\in\mathbb Z$, $q\ne0$, and
+$\gcd(p,q)=1$.  Then $p^2=12q^2$, so $3\mid p^2$, hence $3\mid p$.
+Writing $p=3k$ gives $3k^2=4q^2$, whence $3\mid q^2$ and therefore
+$3\mid q$.  This contradicts $\gcd(p,q)=1$.
+\end{proof}
+
+\section{Elementary field and order properties}
+\begin{exercise}[Proposition 1.15]
+In a field, if $x\ne0$, then (a) $xy=xz\Rightarrow y=z$;
+(b) $xy=x\Rightarrow y=1$; (c) $xy=1\Rightarrow y=x^{-1}$; and
+(d) $(x^{-1})^{-1}=x$.
+\end{exercise}
+\begin{proof}
+Multiplying $xy=xz$ by $x^{-1}$ proves (a).  Parts (b) and (c) follow
+from (a), by comparing respectively with $x\cdot1$ and $x x^{-1}$.
+For (d), $x^{-1}x=1$, so (c), applied to $x^{-1}$, gives
+$(x^{-1})^{-1}=x$.
+\end{proof}
+
+\begin{exercise}
+If $E$ is nonempty, $\alpha$ is a lower bound of $E$, and $\beta$ is an
+upper bound of $E$, then $\alpha\le\beta$.
+\end{exercise}
+\begin{proof}
+Choose $x\in E$.  By the definitions of lower and upper bound,
+$\alpha\le x\le\beta$; transitivity gives $\alpha\le\beta$.
+\end{proof}
+
+\begin{exercise}
+If $A\subseteq\R$ is nonempty and bounded below, then
+$\inf A=-\sup(-A)$.
+\end{exercise}
+\begin{proof}
+Put $\alpha=\inf A$.  For every $a\in A$, $\alpha\le a$, hence
+$-a\le-\alpha$; thus $-\alpha$ is an upper bound of $-A$.  If
+$u<-\alpha$, then $-u>\alpha$.  Since no number larger than $\alpha$ is
+a lower bound of $A$, some $a\in A$ satisfies $a<-u$, and consequently
+$u<-a\in-A$.  Thus $u$ is not an upper bound of $-A$.  Therefore
+$-\alpha=\sup(-A)$.
+\end{proof}
+
+\section{Real exponentiation and logarithms}
+Fix $b>1$.  For $x\in\R$, let
+\[
+ B(x)=\{b^t:t\in\Q,\ t\le x\}.
+\]
+\begin{exercise}
+The rational power $b^{m/n}$ is independent of the representation of the
+rational exponent; $b^{r+s}=b^rb^s$ for $r,s\in\Q$;
+$b^r=\sup B(r)$ for $r\in\Q$; and $b^{x+y}=b^xb^y$ for $x,y\in\R$.
+\end{exercise}
+\begin{proof}
+If $m/n=p/q$ with $n,q>0$, then $mq=np$.  The positive numbers
+$(b^m)^{1/n}$ and $(b^p)^{1/q}$ have equal $(nq)$-th powers, namely
+$b^{mq}=b^{np}$, and uniqueness of positive roots makes them equal.
+Taking a common denominator proves the rational addition law.
+
+For rational exponents, $t<r$ implies $r-t>0$, hence
+$b^r=b^t b^{r-t}>b^t$.  Consequently $b^r$ is an upper bound of $B(r)$,
+and it belongs to $B(r)$, so it is its supremum.
+
+For arbitrary real exponents, the density of $\Q$ and monotonicity of
+rational powers show that products $b^r b^s=b^{r+s}$, with rational
+$r\le x$ and $s\le y$, approach the relevant suprema from below.  Thus
+\[
+ \sup B(x)\sup B(y)=\sup B(x+y).
+\]
+Defining $b^x=\sup B(x)$ therefore yields $b^{x+y}=b^xb^y$.
+\end{proof}
+
+\begin{exercise}
+For $b>1$ and $y>0$, there is a unique $x\in\R$ such that $b^x=y$.
+\end{exercise}
+\begin{proof}
+Bernoulli's inequality gives, for $n\ge1$,
+\[
+ b^n-1\ge n(b-1),\qquad
+ b-1\ge n\bigl(b^{1/n}-1\bigr).
+\]
+Hence, for each $t>1$, $b^{1/n}<t$ for all sufficiently large $n$.
+It follows that if $b^w<y$ then $b^{w+1/n}<y$ for large $n$, while if
+$b^w>y$ then $b^{w-1/n}>y$ for large $n$.
+
+Let $A=\{w:b^w<y\}$ and $x=\sup A$.  The preceding two observations
+rule out both $b^x<y$ (which would put a point larger than $x$ in $A$)
+and $b^x>y$ (which would produce an upper bound of $A$ smaller than
+$x$).  Thus $b^x=y$.  Since $b^u$ is strictly increasing in $u$, this
+$x$ is unique.
+\end{proof}
+
+\section{Complex numbers}
+\begin{exercise}
+No order turns $\C$ into an ordered field.
+\end{exercise}
+\begin{proof}
+In every ordered field every nonzero square is positive.  Thus
+$i^2=-1>0$, while also $1=(-1)^2>0$, contradicting the fact that exactly
+one of $1$ and $-1$ can be positive.
+\end{proof}
+
+\begin{exercise}
+The lexicographic relation on $\C\cong\R^2$ is a linear order, but it
+does not have the least-upper-bound property.
+\end{exercise}
+\begin{proof}
+The usual trichotomy and transitivity on the first coordinates, followed
+when equal by those on the second coordinates, prove the order axioms.
+The imaginary axis $S=\{(0,t):t\in\R\}$ is bounded above, for example by
+$(1,0)$.  Every upper bound $(a,c)$ must have $a>0$; then
+$(a/2,c)$ is a strictly smaller upper bound.  Hence $S$ has no least
+upper bound.
+\end{proof}
+
+\begin{exercise}
+For $w=u+iv$, put
+\[
+a=\sqrt{\frac{|w|+u}{2}},\qquad b=\sqrt{\frac{|w|-u}{2}}.
+\]
+If $v\ge0$, then $(a+ib)^2=w$; if $v\le0$, then $(a-ib)^2=w$.
+Every nonzero complex number has exactly two square roots.
+\end{exercise}
+\begin{proof}
+Since $|w|\ge|u|$, both radicals are defined.  Moreover
+$a^2-b^2=u$ and
+\[
+ (2ab)^2=(|w|+u)(|w|-u)=|w|^2-u^2=v^2,
+\]
+so $2ab=|v|$.  Expanding the two squares proves the asserted formulas.
+If $z^2=w\ne0$, the displayed construction gives one root $z$, and
+$-z$ is another, distinct root.  Any root $q$ satisfies
+$(q-z)(q+z)=q^2-z^2=0$, so $q=z$ or $q=-z$.  The exceptional number is
+$0$, whose two signs coincide.
+\end{proof}
+
+\begin{exercise}[Polar decomposition]
+For every $z\in\C$ there are $r\ge0$ and $w\in\C$ with $|w|=1$ and
+$z=rw$.  They are unique exactly when $z\ne0$.
+\end{exercise}
+\begin{proof}
+For $z\ne0$, take $r=|z|$ and $w=z/|z|$.  Then $|w|=1$ and $z=rw$.
+Taking absolute values in any other such decomposition gives $r=|z|$,
+and division gives $w=z/r$.  For $z=0$, necessarily $r=0$, but any unit
+complex number may be chosen for $w$.
+\end{proof}
+
+\begin{exercise}
+For complex $z_1,\ldots,z_n$,
+$|\sum_{j=1}^n z_j|\le\sum_{j=1}^n|z_j|$.
+\end{exercise}
+\begin{proof}
+Induct on $n$, using the two-term triangle inequality at the induction
+step.
+\end{proof}
+
+\begin{exercise}[Reverse triangle inequality]
+For $x,y\in\C$, $\bigl||x|-|y|\bigr|\le|x-y|$.
+\end{exercise}
+\begin{proof}
+The triangle inequality gives $|x|-|y|\le|x-y|$ and, after interchanging
+$x,y$, $|y|-|x|\le|x-y|$.  Together these are the claim.
+\end{proof}
+
+\begin{exercise}
+If $|z|=1$, then $|1+z|^2+|1-z|^2=4$.
+\end{exercise}
+\begin{proof}
+Using $z\bar z=1$,
+$|1+z|^2=2+z+\bar z$ and $|1-z|^2=2-z-\bar z$.  Add them.
+\end{proof}
+
+\begin{exercise}[Equality in Cauchy--Schwarz]
+Equality holds in
+\[
+ \left|\sum_j a_j\overline{b_j}\right|^2
+ \le \left(\sum_j|a_j|^2\right)\left(\sum_j|b_j|^2\right)
+\]
+if and only if the two vectors are linearly dependent.
+\end{exercise}
+\begin{proof}
+If $b=0$, equality is immediate.  Otherwise put
+$c=(\sum_j a_j\overline{b_j})/(\sum_j|b_j|^2)$.  Expanding
+$\sum_j|a_j-cb_j|^2$ shows that the Cauchy--Schwarz deficit is zero
+exactly when this sum is zero, equivalently when $a_j=cb_j$ for every
+$j$.  Conversely, substitution of $a=cb$ gives equality.
+\end{proof}
+
+\section{Euclidean space}
+\begin{exercise}[Two equal spheres]
+Let $x\ne y$ in $\R^k$, $d=\norm{x-y}$, and $r>0$.  If $k\ge3$, the
+set of $z$ satisfying $\norm{z-x}=\norm{z-y}=r$ is infinite when
+$d<2r$, a singleton when $d=2r$, and empty when $d>2r$.
+For $k=2$, ``infinite'' is replaced by ``two points''; for $k=1$, the
+intersection is empty in the strict case $d<2r$.
+\end{exercise}
+\begin{proof}
+Every common point lies in the perpendicular-bisector hyperplane of
+$x,y$.  Writing $m=(x+y)/2$ and $z=m+u$, with
+$u\perp(x-y)$, the distance equations reduce to
+\[
+ \norm u^2=r^2-\frac{d^2}{4}.
+\]
+The right side is negative, zero, or positive according as $d>2r$,
+$d=2r$, or $d<2r$.  In the first case there is no solution; in the
+second $u=0$, giving only $m$; in the third the solutions form a sphere
+of radius $\sqrt{r^2-d^2/4}$ in a $(k-1)$-dimensional space.  This sphere
+is infinite for $k\ge3$, consists of two points for $k=2$, and is empty
+for $k=1$ (with distinct centers).
+\end{proof}
+
+\begin{exercise}[Parallelogram identity]
+For $x,y\in\R^k$,
+\[
+ \norm{x+y}^2+\norm{x-y}^2=2\norm x^2+2\norm y^2.
+\]
+\end{exercise}
+\begin{proof}
+Expand both squared norms using the inner product; the cross terms
+$2x\cdot y$ and $-2x\cdot y$ cancel.  Geometrically, the sum of the
+squares of a parallelogram's diagonals equals the sum of the squares of
+its four sides.
+\end{proof}
+
+\begin{exercise}
+If $k\ge2$ and $x\in\R^k$, there is a nonzero $y$ with $x\cdot y=0$.
+This need not hold for $k=1$.
+\end{exercise}
+\begin{proof}
+If $(x_1,x_2)\ne(0,0)$, take
+$y=(-x_2,x_1,0,\ldots,0)$.  If both coordinates vanish, take the first
+standard basis vector.  In dimension one, nonzero $x,y$ have $xy\ne0$.
+\end{proof}
+
+\begin{exercise}[Apollonius sphere]
+For distinct $a,b\in\R^k$, define
+\[
+ c=\frac{4b-a}{3},\qquad r=\frac23\norm{b-a}.
+\]
+Then $r>0$ and
+$\norm{x-a}=2\norm{x-b}$ if and only if $\norm{x-c}=r$.
+\end{exercise}
+\begin{proof}
+Squaring (both sides are nonnegative) and expanding inner products gives
+\[
+ \norm{x-a}^2=4\norm{x-b}^2
+ \iff 9\norm{x-c}^2=4\norm{b-a}^2
+ \iff \norm{x-c}=r.
+\]
+Since $a\ne b$, $r>0$.
+\end{proof}
+
+\bigskip\noindent\hrule\bigskip
+Exercise 1.20 is omitted.
+\end{document}

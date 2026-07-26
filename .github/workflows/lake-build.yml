@@ -1,0 +1,16 @@
+name: Lean 4 Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Lean Project
+        uses: leanprover/lean-action@v1
