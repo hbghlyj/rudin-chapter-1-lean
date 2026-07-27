@@ -249,6 +249,25 @@ private lemma exists_orthonormal_pair_perpendicular {k : ℕ} (hk : 3 ≤ k)
         ring
       exact ⟨u, v, hu_norm, hv_norm, hu_ortho_d, hv_ortho_d, hv_ortho_u⟩
 
+private noncomputable def circleParam {k : ℕ} (u v : EuclideanSpace ℝ (Fin k)) (t : ℝ) :
+    EuclideanSpace ℝ (Fin k) :=
+  ((1 - t ^ 2) / (1 + t ^ 2)) • u + ((2 * t) / (1 + t ^ 2)) • v
+
+private lemma circleParam_norm {k : ℕ} {u v : EuclideanSpace ℝ (Fin k)}
+    (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (huv : inner ℝ u v = 0) (t : ℝ) :
+    ‖circleParam u v t‖ = 1 := by
+  sorry
+
+private lemma circleParam_orthogonal {k : ℕ} {d u v : EuclideanSpace ℝ (Fin k)}
+    (hdu : inner ℝ d u = 0) (hdv : inner ℝ d v = 0) (t : ℝ) :
+    inner ℝ d (circleParam u v t) = 0 := by
+  sorry
+
+private lemma circleParam_injective {k : ℕ} {u v : EuclideanSpace ℝ (Fin k)}
+    (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (huv : inner ℝ u v = 0) :
+    Function.Injective (circleParam u v) := by
+  sorry
+
 private lemma equal_radius_spheres_infinite {k : ℕ} (hk : 3 ≤ k)
     (x y : EuclideanSpace ℝ (Fin k)) (r : ℝ) (hr : 0 < r) (hxy : x ≠ y)
     (hclose : dist x y < 2 * r) :
