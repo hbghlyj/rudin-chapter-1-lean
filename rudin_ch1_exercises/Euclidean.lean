@@ -523,7 +523,9 @@ private noncomputable def rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
 
 private lemma inner_rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     inner ℝ v (rotate90 v) = 0 := by
-  sorry
+  unfold rotate90
+  simp [inner_add_right, inner_smul_right, EuclideanSpace.inner_single_right]
+  ring
 
 private lemma norm_rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     ‖rotate90 v‖ = ‖v‖ := by
