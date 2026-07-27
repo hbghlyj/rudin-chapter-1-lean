@@ -1,5 +1,5 @@
 name = "RequestProject"
-defaultTargets = ["RequestProject", "RudinChapter2"]
+defaultTargets = ["RequestProject", "RudinChapter2", "RudinChapter3"]
 
 [[require]]
 name = "mathlib"
@@ -13,3 +13,7 @@ globs = ["rudin_ch1_exercises.+"]
 [[lean_lib]]
 name = "RudinChapter2"
 globs = ["RudinChapter2.+"]
+
+[[lean_lib]]
+name = "RudinChapter3"
+globs = ["RudinChapter3.+"]
