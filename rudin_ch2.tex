@@ -1,0 +1,720 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\title{Principles of Mathematical Analysis: Chapter 2 Exercises}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent The following solutions emphasize the main argument while retaining the details needed to justify each conclusion.
+
+Prove that the empty set is a subset of every set.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Denote $\varnothing$ by the empty set. Suppose $\varnothing\not\subset E$ for some set $E$, then there exists an element $x\in\varnothing$ such that $x\notin E$. But this violates the definition that $\varnothing$ contains nothing, which is a contradiction.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+A complex number $z$ is said to be \textit{algebraic} if there are integers $a_0,\ldots,a_n$, not all zero, such that
+\begin{align*}
+a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0
+\end{align*}
+Prove that the set of all algebraic numbers is countable. \textit{Hint:} For every positive integer $N$ there are only finitely many equations with
+\begin{align*}
+n+\left\vert a_0\right\vert+\left\vert a_1\right\vert+\cdots+\left\vert a_n\right\vert=N
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+By using the hint, for each $N\in J$, consider the finite set
+\begin{align*}
+S_N=\left\{(n,a_0,a_1,\ldots,a_n):
+\begin{array}{l}
+a_0,a_1,\ldots,a_n\mbox{ not all zero, and}\\
+n+\left\vert a_0\right\vert+\left\vert a_1\right\vert+\cdots+\left\vert a_n\right\vert=N
+\end{array}\right\}
+\end{align*}
+Moreover, for each $(n,a_0,a_1,\ldots,a_n)\in S_N$, we have the equation
+\begin{align*}
+a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0
+\end{align*}
+Since $a_0,a_1,\ldots,a_n$ not all zero, there are at most $n$ algebraic numbers satisfying the above equation. Let
+\begin{align*}
+T_N=\bigcup_{(n,a_0,a_1,\ldots,a_n)\in S_N}\{z:a_0z^n+a_1z^{n-1}+\cdots+a_{n-1}z+a_n=0\}
+\end{align*}
+By the above argument, $T_N$ is a finite set. By the corollary to Theorem 2.12, the set of all algebraic numbers, $\bigcup_{N\in J}T_N$, is at most countable. On the other hand, since every rational number is algebraic, for given $\frac{p}{q}\in Q$, where $p$ and $q$ are integers and $q>0$, we have $q\left(\frac{p}{q}\right)-p=0$. Hence the set of all algebraic numbers is countable.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that there exist real numbers which are not algebraic.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+By the remark of Theorem 2.14, the set of all real numbers is uncountable. So if every real number is algebraic, then by Exercise 2, it is also countable. Hence a contradiction occurs.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Is the set of all irrational real numbers countable?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+No. If the set of all irrational real numbers $R-Q$ is countable, then by Theorem 2.13, the set of all real numbers $R=Q\cup(R-Q)$ is countable. This gives a contradiction.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Construct a bounded set of real numbers with exactly three limit points.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For example, let $E=\left\{1+\frac{1}{n}:n\in J\right\}\cup\left\{3+\frac{1}{n}:n\in J\right\}\cup\left\{5+\frac{1}{n}:n\in J\right\}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $E'$ be the set of all limit points of a set $E$. Prove that $E'$ is closed. Prove that $E$ and $\bar{E}$ have the same limit points. (Recall that $\bar{E}=E\cup E'$.) Do $E$ and $E'$ always have the same limit points?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Let $p$ be a limit point of $E'$. Then given $r>0$, there exists a point $q\ne p$ with $d(p,q)<r$, such that $q\in E'$. Let $d(p,q)=r-h$, and $m=\min\{h,r-h\}>0$. Then there exists a point $s\ne q$ with $d(q,s)<m$, such that $s\in E$. It follows that
+\begin{align*}
+d(p,s)
+\le d(p,q)+d(q,s)
+<r-h+m
+\le r-h+h
+=r
+\end{align*}
+On the other hand,
+\begin{align*}
+d(p,s)
+\ge d(p,q)-d(q,s)
+> r-h-m
+\ge 0
+\end{align*}
+i.e., $s\ne p$. Hence $p\in E'$ and then $E'$ is closed.
+(ii) Let $\bar{E}'$ be the set of all limit points of $\bar{E}$. If $p\in E'$, then $p$ is a limit point of $E\subset\bar{E}$, which is clear that $p\in\bar{E}'$. Conversely, if $p\in\bar{E}'$, then for any $r>0$ there exists a point $q\ne p$ with $d(p,q)<r$, such that $q\in\bar{E}=E\cup E'$. If $q\in E$, then the claim follows. If $q\in E'$, then by the previous result, we can find a point $s\ne p$ with $d(p,s)<r$ such that $s\in E$. Thus $p\in E'$.
+(iii) The answer is no. For example, as we proposed in Exercise 5, the set
+\begin{align*}
+E=\left\{1+\frac{1}{n}:n\in J\right\}\cup\left\{3+\frac{1}{n}:n\in J\right\}\cup\left\{5+\frac{1}{n}:n\in J\right\}
+\end{align*}
+has only three limit points, whereas $E'=\{1,3,5\}$ has none.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $A_1,A_2,A_3,\ldots$ be subsets of a metric space.
+(a) If $B_n=\bigcup_{i=1}^nA_i$, prove that $\bar{B}_n=\bigcup_{i=1}^n\bar{A}_i$, for $n=1,2,3,\ldots$.
+(b) If $B=\bigcup_{i=1}^\infty A_i$, prove that $\bar{B}\supset\bigcup_{i=1}^\infty\bar{A}_i$.
+Show, by an example, that this inclusion can be proper.
+------
+
+(a) By Theorem 2.24(d) and 2.27(a), $\bigcup_{i=1}^n\bar{A}_i$ is closed. Also, it is clear that $B_n\subset\bigcup_{i=1}^n\bar{A}_i$. So by Theorem 2.27(c), $\bar{B}_n\subset\bigcup_{i=1}^n\bar{A}_i$. Conversely, since $A_i\subset B_n$ for $i=1,2,\ldots,n$, we have $\bar{A}_i\subset\bar{B}_n$ for $i=1,2,\ldots,n$. Thus $\bigcup_{i=1}^n\bar{A}_i\subset\bar{B}_n$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) To show this problem, use the same technique as in (a).
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+Finally, we give an example. Let $A_i=\left[\tfrac{1}{i+1},1\right]$ for $i=1,2,\ldots$. Then
+\begin{align*}
+\bigcup_{i=1}^\infty\bar{A}_i=\bigcup_{i=1}^\infty A_i=(0,1]
+\end{align*}
+On the other hand,
+\begin{align*}
+\bar{B}=\overline{\bigcup_{i=1}^\infty A_i}=\overline{(0,1]}=[0,1]
+\end{align*}
+Thus $\bigcup_{i=1}^\infty\bar{A}_i$ is a proper subset of $\bar{B}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Is every point of every open set $E\subset \mathbb{R}^2$ a limit point of a set $E$? Answer the same question for closed sets in $\mathbb{R}^2$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Yes. To show this, let $E\subset \mathbb{R}^2$ be open, and $\mathbf{x}\in E$. Then by definition, there exists $r>0$ such that $\mathbf{y}\in E$ whenever $\left\vert\mathbf{x}-\mathbf{y}\right\vert<r$. Now, given $\varepsilon>0$, and write $\mathbf{x}=(x_1,x_2)$. Choose $\mathbf{z}=\left(x_1+\tfrac{1}{2}\min\{r,\varepsilon\},x_2\right)$, then clearly $\mathbf{z}\ne\mathbf{x}$ because $\frac{1}{2}\min\{r,\varepsilon\}>0$. Moreover, since
+\begin{align*}
+\left\vert\mathbf{z}-\mathbf{x}\right\vert=\frac{1}{2}\min\{r,\varepsilon\}\le\frac{r}{2}<r
+\end{align*}
+we see that $\mathbf{z}\in E$. Similarly, $\left\vert\mathbf{z}-\mathbf{x}\right\vert<\varepsilon$. Since $\varepsilon$ is arbitrarily chosen, we conclude that $\mathbf{x}$ is a limit point of $E$.
+(ii) No. For example, consider any finite subset in $\mathbb{R}^2$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $E^\circ$ denote the set of all interior points of a set $E$. [See Definition 2.18(e); $E^\circ$ is called the interior of $E$.]
+(a) Prove that $E^\circ$ is always open.
+(b) Prove that $E$ is open if and only if $E^\circ=E$.
+(c) If $G\subset E$ and $G$ is open, prove that $G\subset E^\circ$.
+(d) Prove that the complement of $E^\circ$ is the closure of the complement of $E$.
+(e) Do $E$ and $\bar{E}$ always have the same interiors?
+(f) Do $E$ and $E^\circ$ always have the same closures?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Let $x\in E^\circ$, i.e., $x$ is an interior point of $E$. Then there exists a neighborhood $N$ of $x$ such that $N\subset E$. It suffices to show that $N\subset E^\circ$. Since $N$ is open (by Theorem 2.19), every point of $N$ is an interior point of $N$, and so is an interior point of $E$, since $N\subset E$. This completes the proof.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) If $E$ is open, then by definition, every point of $E$ is an interior point of $E$. Thus $E\subset E^\circ$. Also, the inclusion $E^\circ\subset E$ is immediate [see Definition 2.18(e), the definition of interior points]. Hence $E^\circ=E$. Conversely, if $E^\circ=E$, then by part (a), $E$ is open.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) If $G\subset E$ and $G$ is open, then given $x\in G$, we see that $x$ is an interior point of $G$, and so is an interior point of $E$, since $G\subset E$. Hence $G\subset E^\circ$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) Since $E^\circ\subset E$, we have $E^c\subset(E^\circ)^c$. Also, by part (a) and Theorem 2.23, $(E^\circ)^c$ is closed. Thus by Theorem 2.27(c), $\overline{E^c}\subset(E^\circ)^c$. Conversely, let $x\in(E^\circ)^c$, then we only have to consider the following two cases.
+Case 1: $x\in E^c$. Then clearly $x\in\overline{E^c}$, and the claim follows.
+Case 2. $x\in E$. Since $x$ is not an interior point of $E$, for every neighborhood $N$ of $x$, there always exists a point $y\in E^c$ such that $y\in N$. Since $x\in E$, we ensure that $x\ne y$. It follows that $x$ is a limit point of $E^c$, and then $x\in\overline{E^c}$.
+Hence $\overline{E^c}=(E^\circ)^c$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(e) No. For example, let $E=(0,1)\cup(1,2)$ in $\mathbb{R}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(f) No. For example, consider any finite set in $\mathbb{R}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $X$ be an infinite set. For $p\in X$ and $q\in X$, define
+\begin{align*}
+d(p,q)=\left\{
+\begin{array}{ll}
+1&(\mbox{if $p\ne q$})\vspace{0.08in}\\
+0&(\mbox{if $p=q$})
+\end{array}\right.
+\end{align*}
+Prove that this is a metric. Which subsets of the resulting metric space are open? Which are closed? Which are compact?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For the first question, we check Definition 2.15 as below.
+(a) Clearly $d(p,q)=1>0$ if $p\ne q$; and $d(p,p)=0$.
+(b) If $p\ne q$, then $d(p,q)=1=d(q,p)$. If $p=q$, then $d(p,q)=0=d(q,p)$.
+(c) Given $r\in X$. If $p\ne q$, then either $r\ne p$ or $r\ne q$, i.e., either $d(p,r)=1$ or $d(r,q)=1$. So
+\begin{align*}
+d(p,q)=1\le d(p,r)+d(r,q)
+\end{align*}
+If $p=q$, then
+\begin{align*}
+d(p,q)=0\le d(p,r)+d(r,q)
+\end{align*}
+is immediate.
+Hence such $d$ is a metric.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Exercise 2.11 is skipped.
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $K\subset \mathbb{R}$ consist of $0$ and the numbers $1/n$, for $n=1,2,3,\ldots$. Prove that $K$ is compact directly from the definition (without using the Heine-Borel theorem).
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $\{G_\alpha\}$ be an open cover of $K$. For $n=1,2,\ldots$, choose an index $\alpha_n$ such that $\frac{1}{n}\in G_{\alpha_n}$, and an index $\alpha_0$ such that $0\in G_{\alpha_0}$. By the definition of open sets, there exists $r>0$ such that $y\in G_{\alpha_0}$ whenever $\left\vert y\right\vert=\left\vert y-0\right\vert<r$. Also, by archimedean, there exists a positive number $N$ such that $\frac{1}{N}<r$. So we have $\frac{1}{n}\in G_{\alpha_0}$ for all $n\ge N$, and hence there is a finitely many subcollection
+\begin{align*}
+\{G_{\alpha_0},G_{\alpha_1},G_{\alpha_2},\ldots,G_{\alpha_{N-1}}\}
+\end{align*}
+of $\{G_\alpha\}$ that covers $K$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Construct a compact set of real numbers whose limit points form a countable set.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let
+\begin{align*}
+K=\{0\}\cup\bigcup_{n=1}^\infty\left(\left\{2^{-n}\right\}\cup\left\{2^{-n}+2^{-m}:m=n+1,n+2,\ldots\right\}\right)
+\end{align*}
+Then clearly $0$ and $2^{-n}$ ($n=1,2,\ldots$) are all the limit points of $K$. So it suffices to show that $K$ is compact. Let $\{G_\alpha\}$ be an open cover of $K$. For $n=1,2,\ldots,$ choose an index $\alpha_n$ such that $2^{-n}\in G_{\alpha_n}$, and an index $\alpha_0$ such that $0\in G_{\alpha_0}$. Then there exist $r_0>0$ and $r_n>0$ ($n=1,2,\ldots$), such that $y\in G_{\alpha_0}$ and $z\in G_{\alpha_n}$, whenever $\left\vert y\right\vert=\left\vert y-0\right\vert<r_0$ and $\left\vert z-2^{-n}\right\vert<r_n$. Also, there exists a positive integers $N_0$ and $N_n$ such that $2^{-N_0}<r_0$ and $2^{-n-N_n}<r_n$. It follows that for $j\ge N_0$ and $k\ge N_n$ ($n=1,2,\ldots$),
+\begin{align*}
+2^{-j}\in G_{\alpha_0},\quad 2^{-n}+2^{-n-k}\in G_{\alpha_n}
+\end{align*}
+Finally, for $n=1,2,\ldots,N_0$, denote the indices $\alpha_{n,1},\alpha_{n,2},\ldots,\alpha_{n,N_n-1}$ such that
+\begin{align*}
+2^{-n}+2^{-n-i}\in G_{\alpha_{n,i}}\quad\mbox{for }i=1,2,\ldots,N_n-1
+\end{align*}
+Then we conclude that
+\begin{align*}
+\{G_{\alpha_0}\}\cup\bigcup_{n=1}^{N_0}\left(\{G_{\alpha_n}\}\cup\{G_{\alpha_{n,i}}:i=1,2,\ldots,N_n-1\}\right)
+\end{align*}
+is a finite subcollection of $\{G_\alpha\}$ that covers $K$. Hence $K$ is compact.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Give an example of an open cover of the segment $(0,1)$ which has no finite subcover.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $\left\{\left(\tfrac{1}{n+1},1\right)\right\}_{n=1}^\infty$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Show that Theorem 2.36 and its Corollary becomes false (in $\mathbb{R}$, for example) if the word "compact" is replaced by "closed" or by "bounded."
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) If only the assumption "closed" holds, let $C_n=[n,\infty)$ for $n=1,2,\ldots$. Then each $C_n$ is closed, and the intersection of every finite subcollection of $\{C_n\}$ is nonempty, and also $C_1\supset C_2\supset C_3\supset\cdots$. But $\bigcap_{n=1}^\infty C_n=\varnothing$.
+(ii) If only the assumption "bounded" holds, let $B_n=\left(0,n^{-1}\right)$ for $n=1,2,\ldots$. Then each $B_n$ is bounded, and the intersection of every finite subcollection of $\{B_n\}$ is nonempty, and also $B_1\supset B_2\supset B_3\supset \cdots$. But $\bigcap_{n=1}^\infty B_n=\varnothing$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Regard $Q$, the set of all rational numbers, as a metric space, with $d(p,q)=\left\vert p-q\right\vert$. Let $E$ be the set of all $p\in Q$ such that $2<p^2<3$. Show that $E$ is closed and bounded in $Q$, but that $E$ is not compact. Is $E$ open in $Q$?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) To show that $E$ is closed in $Q$, it suffices to show that $Q-E$ is open in $Q$. Let $p\in Q-E$, then $p\in Q$ and
+\begin{align*}
+p\in\left(-\infty,-\sqrt{3}\right]\cup\left[-\sqrt{2},\sqrt{2}\right]\cup\left[\sqrt{3},\infty\right)
+\end{align*}
+Since $\pm\sqrt{2}\ne Q$ and $\pm\sqrt{3}\ne Q$, we have
+\begin{align*}
+p\in\left(-\infty,-\sqrt{3}\right)\cup\left(-\sqrt{2},\sqrt{2}\right)\cup\left(\sqrt{3},\infty\right)
+\end{align*}
+Let $r=\min\left\{\left\vert p\pm\sqrt{2}\right\vert,\left\vert p\pm\sqrt{3}\right\vert\right\}$, then for all $q\in Q$ with $\left\vert p-q\right\vert<r$,
+\begin{align*}
+q\in\left(-\infty,-\sqrt{3}\right)\cup\left(-\sqrt{2},\sqrt{2}\right)\cup\left(\sqrt{3},\infty\right)
+\end{align*}
+i.e., $q\in Q-E$, and hence $Q-E$ is open.
+(ii) Since for every $p\in E$, we have $p^2<3$ or $-\sqrt{3}<p<\sqrt{3}$. Hence $E\subset\left(-\sqrt{3},\sqrt{3}\right)$, or $E$ is bounded.
+(iii) To show that $E$ is not compact, let $G_n=\left\{p\in Q:2<p^2<3-\tfrac{1}{n}\right\}$ for $n=2,3,\ldots$. Then the argument that each $G_n$ is open will be shown in the next part. It follows that $\{G_n\}$ is an open cover of $E$, but it has no finite subcover.
+(iv) The set $E$ is open in $Q$. To show this, let $p\in E$, put $r=\min\left\{\left\vert p\pm\sqrt{2}\right\vert,\left\vert p\pm\sqrt{3}\right\vert\right\}$. Then for all $q\in Q$ with $\left\vert q-p\right\vert<r$,
+\begin{align*}
+\left\vert q\right\vert
+=\left\vert (q-p)+p\right\vert
+\le\left\vert q-p\right\vert+\left\vert p\right\vert
+<r+\left\vert p\right\vert
+\end{align*}
+If $p\ge 0$, then since $p-\sqrt{3}<0$ always holds,
+\begin{align*}
+r+\left\vert p\right\vert
+=r+p
+\le\left\vert p-\sqrt{3}\right\vert+p
+=\sqrt{3}-p+p
+=\sqrt{3}
+\end{align*}
+i.e., $q^2<3$. If $p<0$, then since $p+\sqrt{3}>0$ always holds,
+\begin{align*}
+r+\left\vert p\right\vert
+=r-p
+\le\left\vert p+\sqrt{3}\right\vert-p
+=p+\sqrt{3}-p
+=\sqrt{3}
+\end{align*}
+i.e., $q^2<3$ again. On the other hand,
+\begin{align*}
+\left\vert q\right\vert
+=\left\vert p+(q-p)\right\vert
+\ge\left\vert p\right\vert-\left\vert q-p\right\vert
+>\left\vert p\right\vert-r
+\end{align*}
+If $p\ge 0$, then since $p-\sqrt{2}>0$ always holds,
+\begin{align*}
+\left\vert p\right\vert-r
+=p-r
+\ge p-\left\vert p-\sqrt{2}\right\vert
+=p-\left(p-\sqrt{2}\right)
+=\sqrt{2}
+\end{align*}
+i.e., $q^2>2$. If $p<0$, then since $p+\sqrt{2}<0$ always holds,
+\begin{align*}
+\left\vert p\right\vert-r
+=-p-r
+\ge-p-\left\vert p+\sqrt{2}\right\vert
+=-p+\left(p+\sqrt{2}\right)
+=\sqrt{2}
+\end{align*}
+i.e., $q^2>2$ again. Hence we conclude that $q\in E$, i.e., $E$ is open in $Q$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $E$ be the set of all $x\in[0,1]$ whose decimal expansion contains only the digits $4$ and $7$. Is $E$ countable? Is $E$ dense in $[0,1]$? Is $E$ compact? Is $E$ perfect?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) The set $E$ is uncountable. To show this, suppose $A\subset E$ is a countable subset, let $A=\{a_1,a_2,\ldots\}$. We construct a number $a\in[0,1]$ whose $n$th digit is $4$ if the $n$th digit of $a_n$ is $7$, and is $7$ if the $n$th digit of $a_n$ is $4$. Then clearly $a\in E$ but $a\notin A$. It follows that every countable subset of $E$ is a proper subset, and hence $E$ is uncountable.
+(ii) The set $E$ is not dense in $[0,1]$, since $E\subset\left[\tfrac{4}{9},\tfrac{7}{9}\right]$.
+(iii) The set $E$ is compact. To show this, since $E$ is bounded, by the Heine-Borel theorem, it remains to show that $E$ is closed. Let $x\in E^c$ and $x\in[0,1]$, then the decimal expression of $x$ contains at least one digit different from $4$ and $7$. Write $x=0.x_1x_2x_3\ldots$, where $x_n\in \{0,1,2,\ldots,9\}$ for $n=1,2,\ldots$. Let $N$ be the first digit such that $x_N\notin \{4,7\}$. Given $a\in E$, write $a=0.a_1a_2a_3\ldots$, where $a_n\in\{4,7\}$ for $n=1,2,\ldots$. Suppose $M$ is the first digit such that $x$ and $a$ differ at the $M$th digit. Then $M\le N$ and
+\begin{align*}
+\left\vert x-a\right\vert
+&=\left\vert \sum_{n=M}^\infty(x_n-a_n)\cdot 10^{-n}\right\vert \\
+&\ge\left\vert x_M-a_M\right\vert10^{-M}-\sum_{n=M+1}^\infty\left\vert x_n-a_n\right\vert 10^{-n} \\
+&\ge 10^{-M}-7\sum_{n=M+1}^\infty 10^{-n} \\
+&=\frac{2\cdot 10^{-M}}{9} \\
+&\ge\frac{2\cdot 10^{-N}}{9}
+\end{align*}
+where the third line of the above inequality follows by $\left\vert x_M-a_M\right\vert\ge 1$ and $\left\vert x_n-a_n\right\vert\le 7$ for all $n\ge M+1$. Since $N$ is fixed (depends only on $x$), we see that $x$ is an interior point of $E^c$. Hence $E^c$ is open, or $E$ is closed.
+(iv) The set $E$ is perfect. To show this, let $x\in E$. Since for $r>0$, there exists a positive integer $n$ such that $10^{-n}<r$. So if we construct the number $y$ by changing the $(n+1)$th digit of $x$ from $4$ to $7$, or from $7$ to $4$, then $y\in E$, $y\ne x$, and
+\begin{align*}
+\left\vert x-y\right\vert=(7-4)\cdot 10^{-(n+1)}
+<10^{-n}
+<r
+\end{align*}
+Thus $x\in E'$. Finally, note that $E$ is closed [by part (iii)], so $E$ is perfect.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Is there a nonempty perfect set in $\mathbb{R}$ which contains no rational number?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Yes. Let $\{r_1,r_2,\ldots\}$ be the set of all rational numbers in $E_0=[\pi,\pi+1]$, construct a subset of $E_0$ as below. Having chosen $E_n$ ($n\ge 0$) the subsets of $E_0$ such that $E_n$ is a disjoint union of at most $2^{n+1}-1$ intervals with irrational endpoints, each of positive length at most $3^{-n}$ and $E_n$ does not contain $r_j$ for $1\le j\le n$. Define the set $F_{n+1}$ obtained from $E_n$ by removing the middle thirds of all intervals of $E_n$. Thus $F_{n+1}$ is a disjoint union of at most $2^{n+2}-2$ intervals with irrational endpoints, each of positive length at most $3^{-(n+1)}$. If $r_{n+1}\notin F_{n+1}$, take $E_{n+1}=F_{n+1}$. If $r_{n+1}\in F_{n+1}$, then $r_{n+1}\in [a,b]$ for some interval $[a,b]\subset F_{n+1}$. Since $a$ and $b$ are irrational, we have $r_{n+1}\in(a,b)$. Let $\delta>0$ be an irrational number such that $\delta<\min\{r_{n+1}-a,b-r_{n+1}\}$, and put
+\begin{align*}
+E_{n+1}=F_{n+1}-(r_{n+1}-\delta,r_{n+1}+\delta)
+\end{align*}
+By doing this, we see that $E_{n+1}$ is a disjoint union of at most $2^{n+2}-1$ intervals with irrational endpoints, each of positive length at most $3^{-(n+1)}$ and $E_{n+1}$ does not contain $r_j$ for $1\le j\le n+1$. Hence the resulting set $P=\bigcap_{n=0}^\infty E_n$ contains no rational number.
+Since $E_n$ is closed for each $n\ge 0$, by Theorem 2.24(b), $P$ is closed. Moreover, since $E_0\supset E_1\supset E_2\supset \cdots$, each $E_n$ is bounded (by $E_0$), i.e., each $E_n$ is actually a (nonempty) compact set. By Theorem 2.36, $P\ne\varnothing$. Finally, to show that $P$ is perfect, let $x\in P$, then $x\in E_n$ for each positive integer $n$. Let $x\in[a,b]$ for some interval $[a,b]\subset E_n$, note that $b-a\le 3^{-n}$. If $x\ne a$, then put $y=a$; If $x=a$, then put $y=b$. In both cases, we see that $y\in P$, $y\ne x$, and
+\begin{align*}
+\left\vert y-x\right\vert\le b-a\le 3^{-n}<2\cdot 3^{-n}
+\end{align*}
+It follows that $x$ is a limit point of $P$, and hence $P$ is perfect.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+(a) If $A$ and $B$ are disjoint closed sets in some metric space, prove that they are separated.
+(b) Prove the same for disjoint open sets.
+(c) Fix $p\in X$, $\delta>0$, define $A$ to be the set of all $q\in X$ for which $d(p,q)<\delta$, define $B$ similarly, with $>$ in place of $<$. Prove that $A$ and $B$ are separated.
+(d) Prove that every connected metric space with at least two points is uncountable. \textit{Hint:} Use (c).
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Since $A$ and $B$ are closed sets, we have $\bar{A}=A$ and $\bar{B}=B$. Thus $A\cap B=\varnothing$ implies
+\begin{align*}
+\bar{A}\cap B=A\cap B=\varnothing,\quad
+A\cap \bar{B}=A\cap B=\varnothing
+\end{align*}
+i.e., $A$ and $B$ are separated.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Let $A$ and $B$ be two disjoint open sets, and let $a\in A$. By definition, there exists a neighborhood $N$ of $x$ such that $N\subset A$. It follows that $N\cap B=\varnothing$, and thus $x\notin B'$. So $A\cap\bar{B}=\varnothing$. Similarly, we also have $\bar{A}\cap B=\varnothing$. Hence $A$ and $B$ are separated.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Note that $A$ is open (by Theorem 2.19), thus by part (b), it suffices to show that $B=\{q\in X:d(p,q)>\delta\}$ is open. Let $q\in B$, and denote $h=d(p,q)-\delta>0$. Then for every $r\in X$ with $d(q,r)<h$,
+\begin{align*}
+d(p,r)
+\ge d(p,q)-d(q,r)
+>d(p,q)-h
+=\delta
+\end{align*}
+It follows that $r\in B$, and hence $B$ is open.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) Let $E\subset X$ be a connected set, and $p,q\in E$ be two distinct points. Denote $d=d(p,q)>0$, we claim that, for each $\delta\in(0,d)$, there exists $r\in E$ such that $d(p,r)=\delta$.
+\textit{Proof of the claim.} If otherwise, there exists $\delta_0\in(0,d)$ such that, for all $r\in E$, either $d(p,r)<\delta_0$ or $d(p,r)>\delta_0$. If we let $A=E\cap\{r\in X:d(p,r)<\delta_0\}$ and $B=E\cap\{r\in X:d(p,r)>\delta_0\}$, then $E=A\cup B$ whereas $A$ and $B$ are separated [by part (c)]. This contradicts the assumption that $E$ is connected. $\Box$
+Hence $E$ can be mapped onto the segment $(0,d)$, and so $E$ is uncountable.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Are closures and interiors of connected sets always connected? (Look at subsets of $\mathbb{R}^2$.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) The closure of a connected set is connected. To show this, let $E\subset X$ be a set. Suppose $\bar{E}$ is not connected, then we can write $\bar{E}=A\cup B$ for some separated sets $A$ and $B$. Since $E\subset\bar{E}$, we have $E\subset A\cup B$, and then
+\begin{align*}
+E=E\cap(A\cup B)=(E\cap A)\cup(E\cap B)
+\end{align*}
+Since $A$ and $B$ are separated, we have
+\begin{align*}
+\overline{(E\cap A)}\cap(E\cap B)&\subset\bar{A}\cap B=\varnothing \\
+(E\cap A)\cap\overline{(E\cap B)}&\subset A\cap\bar{B}=\varnothing
+\end{align*}
+i.e., $\overline{(E\cap A)}\cap(E\cap B)=(E\cap A)\cap\overline{(E\cap B)}=\varnothing$. So we conclude that $E\cap A$ and $E\cap B$ are separated, and hence $E$ is not connected.
+(ii) The interior of a connected set is not always connected. For example, in $\mathbb{R}^2$, consider $D_1\cup D_2$, where $D_1=\{(x,y):x^2+y^2\le 1\}$ and $D_2=\{(x,y):(x-2)^2+y^2\le 1\}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $A$ and $B$ be separated subsets of some $\mathbb{R}^k$, suppose $\mathbf{a}\in A$, $\mathbf{b}\in B$, and define
+\begin{align*}
+\mathbf{p}(t)
+=(1-t)\mathbf{a}
++t\mathbf{b}
+\end{align*}
+for $t\in \mathbb{R}$. Put $A_0=\mathbf{p}^{-1}(A)$, $B_0=\mathbf{p}^{-1}(B)$. [Thus $t\in A_0$ if and only if $\mathbf{p}(t)\in A$.]
+(a) Prove that $A_0$ and $B_0$ are separated subsets of $\mathbb{R}$.
+(b) Prove that there exists $t_0\in(0,1)$ such that $\mathbf{p}(t_0)\notin A\cup B$.
+(c) Prove that  every convex subset of $\mathbb{R}^k$ is connected.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) It suffices to show that $\bar{A}_0\cap B_0=\varnothing$ (the same argument as $A_0\cap\bar{B}_0=\varnothing$, by symmetry). Suppose $t\in\bar{A}_0\cap B_0$, then either $t\in A_0\cap B_0$ or $t\in A_0'\cap B_0$, since 
+\begin{align*}
+\bar{A}_0\cap B_0
+=(A_0\cup A_0')\cap B_0
+=(A_0\cap B_0)\cup(A_0'\cap B_0)
+\end{align*}
+So we consider the following two cases.
+Case 1: If $t\in A_0\cap B_0$, then $\mathbf{p}(t)\in A\cap B$. But since $A$ and $B$ are separated, we must have $A\cap B=\varnothing$. Then such $\mathbf{p}(t)$ does not exist, and so does $t$.
+Case 2: If $t\in A_0'\cap B_0$, then $t\in B_0$ and given $\varepsilon>0$, there exists $s\in A_0$ such that $\left\vert t-s\right\vert<\varepsilon$. So we have
+\begin{align*}
+\left\vert\mathbf{p}(t)-\mathbf{p}(s)\right\vert
+\le\left\vert t-s\right\vert\left(\left\vert\mathbf{a}\right\vert+\left\vert\mathbf{b}\right\vert\right)
+<\varepsilon\left(\left\vert\mathbf{a}\right\vert+\left\vert\mathbf{b}\right\vert\right)
+\end{align*}
+Since $\mathbf{p}(s)\in A$ and $\varepsilon$ can be arbitrarily small, we see that $\mathbf{p}(t)\in A'$. Thus
+\begin{align*}
+\mathbf{p}(t)
+\in A'\cap B
+\subset\bar{A}\cap B
+\end{align*}
+Since $A$ and $B$ are separated, we have $\bar{A}\cap B=\varnothing$. Then such $\mathbf{p}(t)$ does not exist, and so does $t$.
+In both cases, we conclude that $\bar{A}_0\cap B_0=\varnothing$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) By part (a), the sets $A_0$ and $B_0$ are separated. Also, it is clear that $0\in A_0$ and $1\in B_0$. So by the proof of Theorem 2.47, there exists $t_0$ with $0<t_0<1$, such that $t_0\notin A_0\cup B_0$, or $\mathbf{p}(t_0)\notin A\cup B$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Let $C\subset \mathbb{R}^k$ be a convex subset, then for all $\mathbf{a},\mathbf{b}\in C$ and for all $t\in[0,1]$, we have $\mathbf{p}(t)\in C$. So, even if we write $C=A\cup B$, and put $\mathbf{a}\in A$ and $\mathbf{b}\in B$, the statement of part (b) does not hold. It follows that such $A$ and $B$ are not separated, and hence $C$ is connected.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+A metric space is called \textit{separated} if it contains a countable dense subset. Show that $\mathbb{R}^k$ is separable. \textit{Hint:} Consider the set of points which have only rational coordinates.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let
+\begin{align*}
+E=\{(r_1,r_2,\ldots,r_k): r_1,r_2,\ldots,r_k\mbox{ are rationals}\}
+\end{align*}
+then clearly $E\subset \mathbb{R}^k$ is countable. Now, let $(x_1,x_2,\ldots,x_k)\in \mathbb{R}^k$ and given $\varepsilon>0$, then for $j=1,2\ldots,k$, there exists $r_j^\ast\in Q$ such that $r_j^\ast\in\left(x_j-\tfrac{\varepsilon}{\sqrt{k}},x_j+\tfrac{\varepsilon}{\sqrt{k}}\right)$. It follows that
+\begin{align*}
+\sum_{j=1}^k\left(x_j-r_j^\ast\right)^2
+<k\cdot\left(\frac{\varepsilon}{\sqrt{k}}\right)^2
+=\varepsilon^2
+\end{align*}
+and so we obtain a point $(r_1^\ast,r_2^\ast,\ldots,r_k^\ast)\in E$ satisfying $(r_1^\ast,r_2^\ast,\ldots,r_k^\ast)\in N_\varepsilon(x_1,x_2,\ldots,x_k)$. Hence $E$ is dense in $\mathbb{R}^k$, or $\mathbb{R}^k$ is separable.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+A collection $\{V_\alpha\}$ of open subsets of $X$ is said to be a \textit{base} for $X$ if the following is true: For every $x\in X$ and every open set $G\subset X$ such that $x\in G$, we have $x\in V_\alpha\subset G$ for some $\alpha$. In other words, every open set in $X$ is the union of a subcollection of $\{V_\alpha\}$.
+Prove that every separable metric space has a \textit{countable} base. \textit{Hint:} Take all neighborhoods with rational radius and center in some countable dense subset of $X$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $X$ be a separable metric space, then by definition, we may let $E$ be a countable dense subset of $X$, and write $E=\{e_1,e_2,\ldots\}$. For each positive integer $m$, define $V_n^m=N_{\tfrac{1}{n}}(e_m)$ for $n=1,2,\ldots$. Then it is clear that the collection $\{V_n^m\}_{m,n}$ is countable. Now, we show that $\{V_n^m\}_{m,n}$ is a base for $X$. Let $x\in X$, and $G\subset X$ be an open set such that $x\in G$, then by the definition of open sets, there exists $r>0$ such that $N_r(x)\subset G$. Also, by archimedean, there exists a positive integer $N$ such that $\frac{1}{N}<r$. So $N_{\tfrac{1}{N}}(x)\subset G$ holds. By the definition of dense sets, there exists $e_M\in E$, for some integer $M$, such that $e_M\in N_{\tfrac{1}{2N}}(x)$. So does $x\in N_{\tfrac{1}{2N}}(e_M)=V_{2N}^M$. Finally, given $y\in V_{2N}^M$, we have
+\begin{align*}
+d(x,y)
+\le d(x,e_M)+d(e_M,y)
+<\frac{1}{2N}+\frac{1}{2N}
+=\frac{1}{N}
+\end{align*}
+or $y\in N_{\tfrac{1}{N}}(x)$. It follows that $V_{2N}^M\subset N_{\tfrac{1}{N}}(x)$, and thus $x\in V_{2N}^M\subset G$. Hence $\{V_n^m\}_{m,n}$ is a base for $X$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $X$ be a metric space in which every infinite subset has a limit point. Prove that $X$ is separable. \textit{Hint:} Fix $\delta>0$, and pick $x_1\in X$. Having chosen $x_1,\ldots,x_j\in X$, choose $x_{j+1}\in X$, if possible, so that $d(x_i,x_{j+1})\ge\delta$ for $i=1,\ldots,j$. Show that this process must stop after a finite number of steps, and that $X$ can therefore be covered by finitely many neighborhood of radius $\delta$. Take $\delta=1/n$ ($n=1,2,3,\ldots$), and consider the centers of the corresponding neighborhoods.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $(X,d)$ be an infinite metric space satisfying for each infinite subset $E\subset X$, $E$ has a limit point. Following the hint, let $x_1\in X$ and given $\delta>0$. Having chosen $x_1,x_2,\ldots,x_j\in X$, choose $x_{j+1}\in X$ if possible, so that $d(x_i,x_{j+1})\ge\delta$ for $i=1,2,\ldots,j$. We claim that this process will stop at a finite step.
+\textit{Proof of the claim.} Since if not, we may create an infinite subset $E=\{x_1,x_2,\ldots\}$ of $X$, so that $d(x_i,x_j)\ge\delta$ for all integers $i,j$ with $i\ne j$. Then for every $x\in X$ with $d(x_i,x)<\frac{\delta}{2}$ for some $i$, we have
+\begin{align*}
+d(x_j,x)\ge d(x_j,x_i)-d(x_i,x)\ge\delta-\frac{\delta}{2}=\frac{\delta}{2}
+\end{align*}
+for all $j$ with $j\ne i$. It follows that the neighborhood $N_{\tfrac{\delta}{2}}(x)$ contains a finite number of points of $E$, and thus $E$ has no limit point, a contradiction. $\Box$
+Now, take $\delta=\frac{1}{n}$ for $n=1,2,\ldots$. There is a corresponding finite subset $E_n$ satisfying the above condition. We show that $D=\bigcup_{n=1}^\infty E_n$ is a countable dense subset of $X$. First, $D$ is clearly countable. Next, to show that $D$ is dense in $X$, let $x\in X$ and given $\varepsilon>0$. If $x\in D$, then we are done. If $x\notin D$, by archimedean, there exists a positive integer $N$ so that $\frac{1}{N}<\varepsilon$. Also, there exists $y\in E_N$ with $y\ne x$, such that $d(x,y)<\frac{1}{N}<\varepsilon$. For otherwise, by the construction of $E_N$, we may regard $x$ as a member of $E_N$ (continue the process of the construction of $E_N$), and then $x\in D$, contradicting the assumption $x\notin D$. So in this case, $x$ is a limit point of $D$. Hence $D$ is dense in $X$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that every compact metric space $K$ has a countable base, and that $K$ is therefore separable. \textit{Hint:} For every positive integer $n$, there are finitely many neighborhoods of radius $1/n$ whose union covers $K$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) For $n=1,2,\ldots$, the collection $\left\{N_{\tfrac{1}{n}}(x)\right\}_{x\in K}$ is clearly an open cover of $K$. Since $K$ is compact, there are finitely many points $x_{n,1},x_{n,2},\ldots,x_{n,k_n}\in K$ such that the finite subcollection $\mathcal{B}_n=\left\{N_{\tfrac{1}{n}}(x_{n,j})\right\}_{j=1}^{k_n}$ also covers $K$. Let 
+\begin{align*}
+\mathcal{B}
+=\bigcup_{n=1}^\infty\mathcal{B}_n
+\end{align*}
+We show that $\mathcal{B}$ is a countable base for $K$. First, $\mathcal{B}$ is clearly countable. Next, given $x\in K$ and an open subset $G\subset K$ with $x\in G$. By the definition of open sets, there exists $r>0$ such that $N_r(x)\subset G$. Also, by archimedean, there exists a positive integer $N$ such that $\frac{1}{N}<r$. Since $\mathcal{B}_{2N}$ covers $K$, we have $x\in N_{\tfrac{1}{2N}}(x_{2N,j})$ for some $1\le j\le k_{2N}$. Note that $N_{\tfrac{1}{2N}}(x_{2N,j})\subset N_{\tfrac{1}{N}}(x)$, since for $y\in N_{\tfrac{1}{2N}}(x_{2N,j})$, we have
+\begin{align*}
+d(x,y)\le d(x,x_{2N,j})+d(x_{2N,j},y)<\frac{1}{2N}+\frac{1}{2N}=\frac{1}{N}
+\end{align*}
+or $y\in N_{\tfrac{1}{N}}(x)$. Thus we conclude that $x\in N_{\tfrac{1}{2N}}(x_{2N,j})\subset N_r(x)\subset G$, and hence $\mathcal{B}$ is a base for $K$.
+(ii) Let $x\in K$ and given $\varepsilon>0$, choose a positive $N$ such that $\frac{1}{N}<\varepsilon$. Since $\mathcal{B}_{N}$ covers $K$, we have $x\in N_{\tfrac{1}{N}}(x_{N,j})$ for some $1\le j\le k_{N}$, and thus 
+\begin{align*}
+x_{N,j}\in  N_{\tfrac{1}{N}}(x)\subset N_\varepsilon(x)
+\end{align*}
+It follows that $\bigcup_{n=1}^\infty\{x_{n,j}\}_{j=1}^{k_n}$ forms a countable dense subset of $K$, and hence $K$ is separable.
+\textit{Alternative Solution of part (ii).} Since $K$ is compact, by Theorem 2.37, every infinite subset of $K$ has a limit point. Thus by Exercise 24, $K$ is separable.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $X$ be a metric space in which every infinite subset has a limit point. Prove that $X$ is compact. \textit{Hint:} By Exercise 23 and 24, $X$ has a countable base. It follows that every open cover of $X$ has a \textit{countable} subcover $\{G_n\}$, $n=1,2,3,\ldots$. If no finite subcollection of $G_n$ covers $X$, then the complement $F_n$ of $G_1\cup\cdots\cup G_n$ is nonempty for each $n$, but $\bigcap F_n$ is empty. If $E$ is a set which contains a point from each $F_n$, consider a limit point of $E$, and obtain a contradiction.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Following the hint, let $E=\{x_n\}\subset X$, where $x_n\in F_n$ for each $n$. Then $E$ must be an infinite set. To show this, let $\{x_{i_1},x_{i_2},\ldots,x_{i_m}\}$ be a finite subset of $E$. Since $\{G_n\}$ covers $X$, we can choose $G_{j_1},G_{j_2},\ldots,G_{j_m}$ such that $x_{i_k}\in G_{j_k}$ for $1\le k\le m$. Put $M=\max\{j_1,j_2,\ldots,j_m\}$, then the point $x_M$ satisfies
+\begin{align*}
+x_M\in F_M=(G_1\cup G_2\cup\cdots\cup G_M)^c\subset(G_{j_1}\cup G_{j_2}\cup\cdots\cup G_{j_m})^c
+\end{align*}
+Thus $x_M\neq x_{i_k}$ for $1\le k\le m$. So every finite subset of $E$ is a proper subset, and hence $E$ is infinite. Now, by hypothesis, let $x$ be a limit point of $E$. Since $F_1\supset F_2\supset F_3\supset\cdots$, the set $\{x_{n+1},x_{n+2},\ldots\}\subset F_n$ for each $n$. Also, since $x$ is a limit point of $E$, $x$ is also a limit of $\{x_{n+1},x_{n+2},\ldots\}$, and so $x$ is a limit point of $F_n$, for each $n$. Since each $F_n$ is closed, we see that $x\in F_n$ for each $n$, i.e., $x\in\bigcap_{n=1}^\infty F_n$. This contradicts $\bigcap_{n=1}^\infty F_n=\varnothing$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Define a point $p$ in a metric space $X$ to be a \textit{condensation point} of a set $E\subset X$ if every neighborhood of $p$ contains uncountably many points of $E$.
+Suppose $E\subset \mathbb{R}^k$, $E$ is uncountable, and let $P$ be the set of all condensation points of $E$. Prove that $P$ is perfect and that at most countably many points of $E$ are not in $P$. In other words, show that $P^c\cap E$ is at most countable. \textit{Hint:} Let $\{V_n\}$ be a countable base of $\mathbb{R}^k$, let $W$ be the union of those $V_n$ for which $E\cap V_n$ is at most countable, and show that $P=W^c$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) By Exercise 23 and 24, we may let $\{V_n\}$ be a countable base for $\mathbb{R}^k$. Let $W$ be the union of those $V_n$ for which $E\cap V_n$ is at most countable, then we show that $P=W^c$. If $\mathbf{x}\in P$, and given a member of the base $V_n$, such that $\mathbf{x}\in V_n$. Since $V_n$ is open, there exists a neighborhood $N$ of $\mathbf{x}$ such that $\mathbf{x}\in N\subset V_n$. Since $\mathbf{x}\in P$, the set $E\cap N$ is uncountable, and so is $E\cap V_n$. It follows that $\mathbf{x}\notin V_n$ for all $n$ that satisfies $E\cap V_n$ is at most countable, and hence $\mathbf{x}\in W^c$. Conversely, if $\mathbf{x}\in W^c$, and given a neighborhood $N$ of $\mathbf{x}$. Then by the definition of bases, there exists some positive integer $N$ such that $\mathbf{x}\in V_N\subset N$. Since $\mathbf{x}\in W^c$, the set $E\cap V_N$ is uncountable, and so is $E\cap N$. Hence $\mathbf{x}\in P$.
+Now, we show that $P$ is perfect. First, $P$ is closed since $P=W^c$, where $W$ is open. Next, to show that $P\subset P'$, suppose $\mathbf{p}\notin P'$. Then there exists a neighborhood $N$ of $\mathbf{p}$ such that for every $\mathbf{q}\in N$ with $\mathbf{q}\ne \mathbf{p}$, we have $\mathbf{q}\notin P$ or $\mathbf{q}\in W$. It follows that
+\begin{align*}
+N-\{\mathbf{p}\}\subset W\quad\mbox{or}\quad N\subset W\cup\{\mathbf{p}\}
+\end{align*}
+Since $E\cap W$ is at most countable, so is $E\cap\left(W\cup\{\mathbf{p}\}\right)$, and $E\cap N$ is also at most countable. Thus $\mathbf{p}\notin P$, and we conclude that $P$ is perfect.
+(ii) Since $P=W^c$ and $E\cap W$ is at most countable, it is clear that $P^c\cap E$ is at most countable.
+\textbf{Remark.} The statement is true for any separable metric space, see Exercise 28.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that every closed set in a separable metric space is the union of a (possibly empty) perfect set and a set which is at most countable. (\textit{Corollary:} Every countable closed set in $\mathbb{R}^k$ has isolated points.) \textit{Hint:} Use Exercise 27.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Let $X$ be a separable metric space with countable base $\{V_n\}$, and let $F\subset X$ be a closed subset. If $F$ is at most countable, then we can write $F=\varnothing\cup F$ and this case is finished. If $F$ is uncountable, let $P$ be the set of all condensation points of $F$. Then clearly $P\subset F'$, and then $P\subset F$ because $F$ is closed. So we can write $F=P\cup(F-P)$. Also, by Exercise 27, $P$ is perfect. It therefore suffices to show that $F-P$ is at most countable. But this result is immediate because
+\begin{align*}
+F-P
+=F\cap P^c
+=F\cap W
+\end{align*}
+where $W$ is the union of those $V_n$ for which $F\cap V_n$ is at most countable (see Exercise 27).
+(ii) To show the corollary, since every nonempty perfect set in $\mathbb{R}^k$ is uncountable (by Theorem 2.43), so every countable closed set $F$ in $\mathbb{R}^k$ must not be perfect. i.e., $F$ has isolated points.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that every open set in $\mathbb{R}$ is the union of an at most countable collection of disjoint segments. \textit{Hint:} Use Exercise 22.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $G\subset \mathbb{R}$ be an open set. For $x\in G$, define $A_x=\{z:[z,x]\subset G\}$, $B_x=\{z:[x,z]\subset G\}$, $a_x=\inf A_x$, $b_x=\sup B_x$, and $S_x=(a_x,b_x)$. Note that if $B_x$ is bounded above, then $b_x\in \mathbb{R}$ exists (by the least-upper-bound property). If otherwise, then $b_x=\infty$. A similar argument for $a_x$. Now, we claim that if $(a,b)\in \mathbb{R}$ is a segment so that $x\in(a,b)\subset G$, then $(a,b)\subset S_x$. i.e., $a_x\le a$ and $b\le b_x$.
+\textit{Proof of the claim.} If not, consider the case $a_x>a$ (the other case $b>b_x$ is similar). Then there exists $a'$ so that $a_x>a'>a$. Moreover, since $(a,x]\subset G$, we have $[a',x]\subset G$, which implies $a'\in A_x$. This contradicts the fact that $a_x=\inf A_x$. $\Box$
+By the definition of open sets, we can choose a $\delta>0$ such that $(x-\delta,x+\delta)\subset G$. Since $a_x\le x-\delta$ and $x+\delta\le b_x$ (by the above claim), we have $a_x<b_x$ and $x\in S_x$. To show that $S_x\subset G$, given $z\in S_x$, there exists $z_1\in A_x$ and $z_2\in B_x$ so that $z_1<z<z_2$. Thus
+\begin{align*}
+z\in[z_1,z_2]=[z_1,x]\cup[x,z_2]\subset G
+\end{align*} 
+Next, we claim that for $x,y\in G$ and $x\ne y$, either $S_x=S_y$ or $S_x\cap S_y=\varnothing$.
+\textit{Proof of the claim.} If $S_x\cap S_y\ne\varnothing$, then $S_x\cup S_y$ is an open interval containing $x$ and $y$, such that $S_x\cup S_y\subset G$. By the above claim, $S_x\cup S_y\subset S_x$ and $S_x\cup S_y\subset S_y$, and hence $S_x=S_x\cup S_y=S_y$. $\Box$
+Now, since $G=\bigcup_{x\in G}S_x$ and each $S_x$ contains a rational number, the number of distinct $S_x$ must be at most countable. This completes the proof.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Imitate the proof of Theorem 2.43 to obtain the following result:
+If $\mathbb{R}^k=\bigcup_{1}^\infty F_n$, where each $F_n$ is a closed subset of $\mathbb{R}^k$, then at least one $F_n$ has a nonempty interior.
+\textit{Equivalent statement:} If $G_n$ is a dense open subset of $\mathbb{R}^k$, for $n=1,2,3,\ldots$, then $\bigcap_{1}^\infty G_n$ is not empty (in fact, it is dense in $\mathbb{R}^k$).
+(This is a special case of Baire's theorem; see Exercise 22, Chap. 3, for the general case.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+First, we prove the second statement. Let $x\in \mathbb{R}^k$ and given $\varepsilon>0$, then since $G_n$ is a dense open subsets of $\mathbb{R}^k$ for $n=1,2,\ldots$, we can choose a $g_1\in G_1$ such that $g_1\in N_{\varepsilon}(x)$. Moreover, there exists $\delta_1>0$ such that $\overline{N_{\delta_1}(g_1)}\subset N_{\varepsilon}(x)\cap G_1$. Next, choose $g_2\in G_2$ such that $g_2\in N_{\delta_1}(g_1)$, and choose $\delta_2>0$ such that $\overline{N_{\delta_2}(g_2)}\subset N_{\delta_1}(g_1)\cap G_2$. Continue this process, the resulting set $\bigcap_{n=1}^\infty\overline{N_{\delta_n}(g_n)}$ contains a point $g\in \mathbb{R}^k$ (by the corollary to Theorem 2.36). Obviously $g\in G_n$ for $n=1,2,\ldots$, and then $g\in\bigcap_{n=1}^\infty G_n$. Also, $g\in\overline{N_{\delta_1}(g_1)}\subset N_\varepsilon(x)$. Thus $\bigcap_{n=1}^\infty G_n$ is dense in $\mathbb{R}^k$.
+Next, we prove the equivalence of the two statements. Suppose the first statement holds, let $G_n$ be a dense open subset of $\mathbb{R}^k$, for $n=1,2,\ldots$. Denote the closed set $F_n=(G_n)^c$ for each $n$, then since $G_n$ is dense in $\mathbb{R}^k$, for $x\in F_n$ and for $\varepsilon>0$, we have $N_r(x)\cap G_n\ne\varnothing$. This means $F_n$ has an empty interior for each $n$. By the first statement and the De Morgan law,
+\begin{align*}
+\left(\bigcap_{n=1}^\infty G_n\right)^c=\bigcup_{n=1}^\infty F_n\ne \mathbb{R}^k
+\end{align*}
+i.e., $\bigcap_{n=1}^\infty G_n\ne\varnothing$. Conversely, suppose the second statement holds, let $F_n$ be a closed set for $n=1,2,\ldots$, such that $\mathbb{R}^k=\bigcup_{n=1}^\infty F_n$. Denote the open set $G_n=(F_n)^c$ for each $n$, then by the De Morgan law again,
+\begin{align*}
+\varnothing
+=\left(\bigcup_{n=1}^\infty F_n\right)^c
+=\bigcap_{n=1}^\infty G_n
+\end{align*}
+It follows by the second statement that there is an integer $N$ such that $G_N$ is not dense in $\mathbb{R}^k$, i.e., there exists $x\in \mathbb{R}^k$ and $r>0$, such that $N_r(x)\cap G_N=\varnothing$, or $N_r(x)\subset (G_N)^c=F_N$ for some $N$.
+
+
+\end{document}
