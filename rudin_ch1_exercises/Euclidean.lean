@@ -556,7 +556,34 @@ private lemma inner_normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
 private lemma eq_smul_normalizedRotate90_of_inner_eq_zero
     {v w : EuclideanSpace ℝ (Fin 2)} (hv : v ≠ 0) (hw : inner ℝ w v = 0) :
     ∃ t : ℝ, w = t • normalizedRotate90 v := by
-  sorry
+  have hnorm : ‖v‖ ≠ 0 := norm_ne_zero_iff.mpr hv
+  have hcoord : w 0 * v 0 + w 1 * v 1 = 0 := by
+    simpa [inner, Fin.sum_univ_two, RCLike.inner_apply, mul_comm] using hw
+  by_cases hv0 : v 0 = 0
+  · have hv1 : v 1 ≠ 0 := by
+      intro h
+      apply hv
+      ext i
+      fin_cases i <;> assumption
+    have hw1 : w 1 = 0 := by
+      rw [hv0, mul_zero, zero_add] at hcoord
+      exact (mul_eq_zero.mp hcoord).resolve_right hv1
+    refine ⟨-‖v‖ * w 0 / v 1, ?_⟩
+    ext i
+    fin_cases i
+    · simp [normalizedRotate90, rotate90, hnorm, hv1]
+      field_simp
+    · simp [normalizedRotate90, rotate90, hv0, hw1]
+  · have hw0 : w 0 = -(w 1 * v 1) / v 0 := by
+      field_simp
+      linarith
+    refine ⟨‖v‖ * w 1 / v 0, ?_⟩
+    ext i
+    fin_cases i
+    · simp [normalizedRotate90, rotate90, hnorm, hv0, hw0]
+      field_simp
+    · simp [normalizedRotate90, rotate90, hnorm, hv0]
+      field_simp
 
 /-- In the plane, two equal circles have two intersection points when their
 centers are closer than twice the radius. -/
