@@ -131,7 +131,7 @@ d(g(x),g(p))
 &\le 2\varepsilon
 \end{align*}
 Hence $g$ is continuous on $x\in E$, and so $g$ is continuous on $E$. $\Box$
-Thus by the claim and by Theorem 4.14, $g(E)$ is compact, i.e., $G(f)$ is compact (since $G(f)=g(E)$). Conversely, suppose $f$ is not continuous at some point $x\in E$, then there is a sequence $\{p_n\}$ in $E$ such that $\lim_{n\to\infty}p_n=x$ but $\lim_{n\to\infty}f(p_n)\ne f(x)$. If no subsequence of $\{f(p_n)\}$ converges, then no subsequence of $\{(p_n,f(p_n))\}$ in $G(f)$ converges, and then $G(f)$ is not compact [by Theorem 3.6(a)]. If there is a subsequence $\{(p_{n_k},f(p_{n_k}))\}$ in $G(f)$ that converges to $(x,y)$ for some $y\in Y$ with $y\ne f(x)$. Then $(x,y)$ is a limit point of $G(f)$, but $(x,y)\notin G(f)$. So $G(f)$ is not closed, and then $G(f)$ is not compact.
+Thus by the claim and by Theorem 4.14, $g(E)$ is compact, i.e., $G(f)$ is compact (since $G(f)=g(E)$). Conversely, suppose that $G(f)$ is compact and $p_n\to x$ in $E$.  If $f(p_n)$ did not converge to $f(x)$, some $\varepsilon>0$ and a subsequence $p_{n_k}$ would satisfy $d_Y(f(p_{n_k}),f(x))\ge\varepsilon$ for every $k$.  Compactness of $G(f)$ gives a further subsequence of $(p_{n_k},f(p_{n_k}))$ converging to a point $(u,v)\in G(f)$.  Its first coordinates converge both to $x$ and to $u$, so $u=x$; membership in the graph then gives $v=f(x)$.  The second coordinates therefore converge to $f(x)$, contradicting their uniform separation by $\varepsilon$.  Hence $f(p_n)\to f(x)$, and the sequential criterion proves continuity.
 
 
 
@@ -284,7 +284,7 @@ Case 2: If $x\in E$ and $y\notin E$, then by the definition of $g$ and since $E$
 <3\varepsilon
 \end{align*}
 Case 3: If $x\notin E$ and $y\in E$, the result is similar to Case 2.
-Case 4: If $x,y\notin E$, then by the definition of $g$ and since $E$ is dense in $X$, we can choose points $z_1,z_2\in E$ such that $d(x,z_1)<\frac{\delta}{3}$, $d(x,z_2)<\frac{\delta}{3}$, and $\left\vert f(z_1)-g(x)\right\vert<\varepsilon$, $\left\vert f(z_2)-g(y)\right\vert<\varepsilon$. Then
+Case 4: If $x,y\notin E$, then by the definition of $g$ and since $E$ is dense in $X$, we can choose points $z_1,z_2\in E$ such that $d(x,z_1)<\frac{\delta}{3}$, $d(y,z_2)<\frac{\delta}{3}$, and $\left\vert f(z_1)-g(x)\right\vert<\varepsilon$, $\left\vert f(z_2)-g(y)\right\vert<\varepsilon$. Then
 \begin{align*}
 d(z_1,z_2)
 \le d(z_1,x)+d(x,y)+d(y,z_2)
@@ -343,7 +343,7 @@ for all $p\in X$. So $\left\vert g(p_0)-y\right\vert<\varepsilon$ for all $y\in 
 <\varepsilon
 <2\varepsilon
 \end{align*}
-If $q\notin E$, then since $E$ is dense in $X$, the set $V_{2N}(q)\ne\varnothing$, and there exists a point $p\in V_{2N}(q)\subset V_N(p)$. It follows that $g(q)\in\overline{f( V_{N}(p))}$, and that $\left\vert f(p)-g(q)\right\vert<\varepsilon$. On the other hand, since $d(p_0,q)<\frac{1}{2N}$, we have
+If $q\notin E$, then since $E$ is dense in $X$, the set $V_{2N}(q)\ne\varnothing$, and there exists a point $p\in V_{2N}(q)$. Since $V_{2N}(q)\subset V_N(q)$, both $f(p)$ and $g(q)$ lie in (respectively, the set and the closure of) $f(V_N(q))$, whose diameter is less than $\varepsilon$. Hence $\left\vert f(p)-g(q)\right\vert<\varepsilon$. On the other hand, since $d(p_0,q)<\frac{1}{2N}$, we have
 \begin{align*}
 d(p_0,p)\le d(p_0,q)+d(q,p)<\frac{1}{2N}+\frac{1}{2N}=\frac{1}{N}
 \end{align*}
@@ -579,7 +579,7 @@ f(x+)
 &=\lim_{t\in(x,b),t\to x}f(t) \\
 &=f(x)+\lim_{t\in(x,b),t\to x}\left[\frac{f(t)-f(x)}{t-x}\cdot(t-x)\right] \\
 &=f(x)+\lim_{t\in(x,b),t\to x}\left[g_2(t)\cdot(t-x)\right] \\
-&=f(x)+\sup E_2\cdot\lim_{t\in(x,b),t\to x}(t-x) \\
+&=f(x)+\inf E_2\cdot\lim_{t\in(x,b),t\to x}(t-x) \\
 &=f(x)
 \end{align*}
 which follows that $f$ is continuous at $x$. Since $x\in(a,b)$ is arbitrary given, we conclude that $f$ is continuous on $(a,b)$.
@@ -639,7 +639,7 @@ holds for all $x,y\in(a,b)$.
 &\qquad\le\frac{1}{2}f\left(sx+\left(1-s\right)y\right)
 +\frac{1}{2}f\left(\frac{t}{2^n}x+\left(1-\frac{t}{2^n}\right)y\right) \\
 &\qquad\le\frac{1}{2}\left[sf(x)+(1-s)f(y)\right]
-+\frac{1}{2}\left[\frac{t}{2^n}f(x)+\left(1-\frac{t}{2^n}f(y)\right)\right] \\
++\frac{1}{2}\left[\frac{t}{2^n}f(x)+\left(1-\frac{t}{2^n}\right)f(y)\right] \\
 &\qquad=\frac{1}{2}\left(s+\frac{t}{2^n}\right)f(x)
 +\frac{1}{2}\left(2-s-\frac{t}{2^n}\right)f(y) \\
 &\qquad=\frac{k_{n+1}}{2^{n+1}}f(x)+\left(1-\frac{k_{n+1}}{2^{n+1}}\right)f(y) \\
