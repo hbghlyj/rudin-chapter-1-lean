@@ -511,7 +511,11 @@ private lemma circle_intersection_radicand_pos
     (x y : EuclideanSpace ℝ (Fin 2)) (r : ℝ) (hr : 0 < r)
     (hclose : dist x y < 2 * r) :
     0 < r ^ 2 - (dist x y) ^ 2 / 4 := by
-  sorry
+  have hd : dist x y ≥ 0 := dist_nonneg
+  have h1 : (dist x y - 2 * r) * (dist x y + 2 * r) < 0 := by nlinarith
+  have h2 : (dist x y) ^ 2 - (2 * r) ^ 2 < 0 := by
+    linarith [mul_self_nonneg (dist x y), mul_self_nonneg (2 * r)]
+  linarith
 
 private noncomputable def rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     EuclideanSpace ℝ (Fin 2) :=
