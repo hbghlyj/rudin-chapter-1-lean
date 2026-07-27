@@ -1,1 +1,2 @@
 import IntroSmoothManifoldsChapter11.Basic
+import IntroSmoothManifoldsChapter11.DualBasis
