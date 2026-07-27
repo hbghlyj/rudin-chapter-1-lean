@@ -1,0 +1,742 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\title{Principles of Mathematical Analysis: Chapter 4 Exercises}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent The solutions below give concise proofs, with hypotheses and limiting arguments made explicit.
+
+Suppose $f$ is a real function defined on $\mathbb{R}$ which satisfies
+\begin{align*}
+\lim_{h\to 0}\left[f(x+h)-f(x-h)\right]=0
+\end{align*}
+for every $x\in \mathbb{R}$. Does this imply that $f$ is continuous?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+No. For example, consider the non-continuous real function
+\begin{align*}
+f(x)=\left\{\begin{array}{ll}
+1&x=0 \vspace{0.05in}\\
+0&x\ne 0
+\end{array}\right.
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $f$ is a continuous mapping of a metric space $X$ into a metric space $Y$, prove that
+\begin{align*}
+f(\bar{E})\subset\overline{f(E)}
+\end{align*}
+for every set $E\subset X$. ($\bar{E}$ denotes the closure of $E$.) Show, by example, that $f(\bar{E})$ can be a proper subset of $\overline{f(E)}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Let $y\in f(\bar{E})$, then $y=f(p)$ for some $p\in\bar{E}=E\cup E'$. If $p\in E$, then $y\in f(E)\subset\overline{f(E)}$ and we are done. If $p\in E'$. Since $f$ is continuous on $X$, given $\varepsilon>0$ there exists a $\delta>0$ such that $d_Y(f(x),y)<\varepsilon$ for all $x\in X$ for which $d_X(x,p)<\delta$. Since $p\in E'$, there exists a point $x_0\in E$ such that $x_0\ne p$ and $d_X(x_0,p)<\delta$. It follows that $f(x_0)\in f(E)$ and $d_Y(f(x_0),y)<\varepsilon$, and we conclude that $y$ is a limit point of $f(E)$. Hence $y\in\overline{f(E)}$.
+(ii) Let $X=Y=\mathbb{R}$ and $E=(-\infty,0]$, define $f:\mathbb{R}\to \mathbb{R}$ by $f(x)=e^x$. Then clearly $\bar{E}=E$, and
+\begin{align*}
+f(\bar{E})=f(E)=(0,1]
+\end{align*}
+However,
+\begin{align*}
+\overline{f(E)}=\overline{(0,1]}=[0,1]
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $f$ be a continuous real function on a metric space $X$. Let $Z(f)$ (the \textit{zero set} of $f$) be the set of all $p\in X$ at which $f(p)=0$. Prove that $Z(f)$ is closed.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $x\in X$ be a limit point of $Z(f)$. Since $f$ is continuous on $X$, given $\varepsilon>0$ there exists a $\delta>0$ such that $\left\vert f(x)-f(p)\right\vert<\varepsilon$ for all $p\in X$ with $d(x,p)<\delta$. Since $x$ be a limit point of $Z(f)$, there exists a point $p_0\in Z(f)$ such that $x\ne p_0$ and $d(x,p_0)<\delta$. It follows that
+\begin{align*}
+\left\vert f(x)\right\vert
+=\left\vert f(x)-f(p_0)\right\vert
+<\varepsilon
+\end{align*}
+and then $f(x)=0$, since $\varepsilon$ is arbitrary. Hence $x\in Z(f)$ and we conclude that $Z(f)$ is closed.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $f$ and $g$ be continuous mappings of a metric space $X$ into a metric space $Y$, and let $E$ be a dense subset of $X$. Prove that $f(E)$ is dense in $f(X)$. If $g(p)=f(p)$ for all $p\in E$, prove that $g(p)=f(p)$ for all $p\in X$. (In other words, a continuous mapping is determined by its values on a dense subset of its domain.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Let $f(x)\in f(X)$ and given $\varepsilon>0$. Since $f$ is continuous, there is a $\delta>0$ such that $d_Y(f(x),f(p))<\varepsilon$ for all $p\in X$ with $d_X(x,p)<\delta$. Since $E$ is dense in $X$, there is a point $p_0\in E$ such that $d_X(x,p_0)<\delta$. It follows that $d_Y(f(x),f(p_0))<\varepsilon$, and we conclude that either $f(x)=f(p_0)$ or $f(x)$ is a limit point of $f(E)$ (since $\varepsilon$ is arbitrary). Hence $f(E)$ is dense in $f(X)$.
+(ii) Let $p\in X$. If $p\in E$, then we are done. If $p\notin E$, then clearly $p$ is a limit point of $E$. Since $f$ and $g$ are continuous, given $\varepsilon>0$ there are $\delta_1>0$ and $\delta_2>0$, such that $d_Y(f(p),f(q))<\varepsilon$ for all $q\in X$ with $d_X(p,q)<\delta_1$, and $d_Y(g(p),g(q))<\varepsilon$ for all $q\in X$ with $d_X(p,q)<\delta_2$. Since $p$ is a limit point of $E$, put $\delta=\min\{\delta_1,\delta_2\}$, there is a point $q_0\in E$ such that $p\ne q_0$ and $d_X(p,q_0)<\delta$. It follows that
+\begin{align*}
+d_Y(g(p),f(p))
+&\le d_Y(g(p),g(q_0))+d_Y(g(q_0),f(q_0))+d_Y(f(q_0),f(p)) \\
+&= d_Y(g(p),g(q_0))+d_Y(f(q_0),f(p)) \\
+&<2\varepsilon
+\end{align*}
+where the second line of the above inequality follows by the fact $g(q_0)=f(q_0)$ (since $q_0\in E$). So we conclude that $g(p)=f(p)$, and the proof is complete.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $f$ is a real continuous function defined on a closed set $E\subset \mathbb{R}$, prove that there exist continuous real functions $g$ on $\mathbb{R}$ such that $g(x)=f(x)$ for all $x\in E$. (Such functions $g$ are called \textit{continuous extensions} of $f$ from $E$ to $\mathbb{R}$.) Show that the result becomes false if the word "closed" is omitted. Extend the result to vector-valued functions. \textit{Hint:} Let the graph of $g$ be a straight line on each of the segments which constitute the complement of $E$ (compare Exercise 29, Chap. 2). The result remains true if $\mathbb{R}$ is replaced by any metric space, but the proof is not so simple.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Suppose $E=\varnothing$, the result is trivial. Suppose $E\ne\varnothing$, then since $E^c$ is open, by Exercise 2.29, there are at most 3 types of open intervals whose union is $E^c$: $(-\infty,a)$, $(b,c)$, and $(d,\infty)$. So we only have to consider the following three cases.
+Case 1: If $(-\infty,a)\subset E^c$, where $a\in E$. Then $g$ needs to be defined and continuous on $(-\infty,a)$, and $\lim_{x\to a^-}g(x)=f(a)$. Define $g(x)=f(a)\cdot e^{-(x-a)^2}$ on $(-\infty,a)$, then such $g$ is of desired.
+Case 2: If $(b,c)\subset E^c$, where $b,c\in E$. Since $f$ is defined on $E$, both $f(b)$ and $f(c)$ are defined and finite. So $g$ needs to be defined and continuous on $(b,c)$, and $\lim_{x\to b^+}g(x)=f(b)$ and $\lim_{x\to c^-}g(x)=f(c)$. Define $g(x)=\frac{x-b}{c-b}\left[f(c)-f(b)\right]+f(b)$ on $(b,c)$, then such $g$ is of desired.
+Case 3: If $(d,\infty)\subset E^c$, where $d\in E$. This is similar to Case 1.
+(ii) Suppose the word "closed" is omitted, for example, let $E=(0,\infty)$ and define $f:E\to \mathbb{R}$ by $f(x)=\frac{1}{x}$.
+(iii) Let $\mathbf{f}:E\to \mathbb{R}^k$ be continuous, defined by $\mathbf{f}(x)=(f_1(x),f_2(x),\ldots,f_k(x))$. Note that each $f_i$ is real continuous on $E$, so by part (i), there exist continuous real functions $g_i$ on $\mathbb{R}$ so that $g_i(x)=f_i(x)$ for all $x\in E$. Define $\mathbf{g}:\mathbb{R}\to \mathbb{R}^k$ by $\mathbf{g}(x)=(g_1(x),g_2(x),\ldots,g_k(x))$, then $\mathbf{g}$ is also continuous and $\mathbf{g}(x)=\mathbf{f}(x)$ for all $x\in E$, which is of desired.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $f$ is defined on $E$, the \textit{graph} of $f$ is the set of points $(x,f(x))$, for $x\in E$. In particular, if $E$ is the set of real numbers, and $f$ is real-valued, the graph of $f$ is a subset of the plane.
+Suppose $E$ is compact, and prove that $f$ is continuous on $E$ if and only if its graph is compact.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $f:E\to Y$ be a mapping, where $E$ is compact in some metric space $X$, and $Y$ is an another metric space. Define $X\times Y$ to be the set of points $(x,y)$, where $x\in X$ and $y\in Y$, with the metric (which can be easily checked)
+\begin{align*}
+d((x_1,y_1),(x_2,y_2))=d_X(x_1,x_2)+d_Y(y_1,y_2)
+\end{align*}
+Denote $G(f)\subset X\times Y$ by the graph of $f$. If $f$ is continuous on $E$, define the function $g:E\to X\times Y$ by $g(x)=(x,f(x))$. We claim that $g$ is continuous on $E$.
+\textit{Proof of the claim.} Given $\varepsilon>0$ and $x\in E$. Since $f$ is continuous on $E$, there exists $\delta>0$ with $\delta\le\varepsilon$, such that $d_Y(f(x),f(p))<\varepsilon$ for all $p\in E$ with $d_X(x,p)<\delta$. It follows that $p\in E$ with $d_X(x,p)<\delta$ implies
+\begin{align*}
+d(g(x),g(p))
+&=d((x,f(x)),(p,f(p))) \\
+&=d_X(x,p)+d_Y(f(x),f(p)) \\
+&<\delta+\varepsilon \\
+&\le 2\varepsilon
+\end{align*}
+Hence $g$ is continuous on $x\in E$, and so $g$ is continuous on $E$. $\Box$
+Thus by the claim and by Theorem 4.14, $g(E)$ is compact, i.e., $G(f)$ is compact (since $G(f)=g(E)$). Conversely, suppose $f$ is not continuous at some point $x\in E$, then there is a sequence $\{p_n\}$ in $E$ such that $\lim_{n\to\infty}p_n=x$ but $\lim_{n\to\infty}f(p_n)\ne f(x)$. If no subsequence of $\{f(p_n)\}$ converges, then no subsequence of $\{(p_n,f(p_n))\}$ in $G(f)$ converges, and then $G(f)$ is not compact [by Theorem 3.6(a)]. If there is a subsequence $\{(p_{n_k},f(p_{n_k}))\}$ in $G(f)$ that converges to $(x,y)$ for some $y\in Y$ with $y\ne f(x)$. Then $(x,y)$ is a limit point of $G(f)$, but $(x,y)\notin G(f)$. So $G(f)$ is not closed, and then $G(f)$ is not compact.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $E\subset X$ and if $f$ is a function defined on $X$, the \textit{restriction} of $f$ to $E$ is the function $g$ whose domain of definition is $E$, such that $g(p)=f(p)$ for all $p\in E$. Define $f$ and $g$ on $\mathbb{R}^2$ by: $f(0,0)=g(0,0)=0$, $f(x,y)=xy^2/(x^2+y^4)$, $g(x,y)=xy^2/(x^2+y^6)$ if $(x,y)\ne(0,0)$. Prove that $f$ is bounded on $\mathbb{R}^2$, that $g$ is unbounded in every neighborhood of $(0,0)$, and that $f$ is not continuous at $(0,0)$; nevertheless, the restriction of both $f$ and $g$ to every straight line in $\mathbb{R}^2$ are continuous!
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Since
+\begin{align*}
+0\le(x-y^2)^2=x^2-2xy^2+y^4
+\end{align*}
+or $x^2+y^4\ge 2xy^2$ or $\frac{xy^2}{x^2+y^4}\le\frac{1}{2}$, we have $\left\vert f(x,y)\right\vert\le\frac{1}{2}$ for all $(x,y)\in \mathbb{R}^2$. Hence $f$ is bounded on $\mathbb{R}^2$.
+(ii) Take $x=y^3$, we see that
+\begin{align*}
+\lim_{y\to 0}g(y^3,y)=\lim_{y\to 0}\frac{y^3y^2}{y^6+y^6}=\lim_{y\to 0}\frac{1}{2y}=\infty
+\end{align*}
+Hence $g$ is unbounded in every neighborhood of $(0,0)$.
+(iii) Take $x=y^2$, we see that
+\begin{align*}
+\lim_{y\to 0}f(y^2,y)=\lim_{y\to 0}\frac{y^2y^2}{y^4+y^4}=\lim_{y\to 0}\frac{1}{2}=\frac{1}{2}\ne 0=f(0,0)
+\end{align*}
+Hence $f$ is not continuous at $(0,0)$.
+(iv) Since $f$ and $g$ are continuous at any point $(x,y)\ne(0,0)$, we only have to consider straight lines that pass through $(0,0)$, as the following two cases.
+Case 1: $x=0$. Then $f(0,0)=g(0,0)=0$, and for all $(x,y)\ne(0,0)$,
+\begin{align*}
+f(x,y)&=f(0,y)=\frac{0}{y^4}=0 \\
+g(x,y)&=g(0,y)=\frac{0}{y^6}=0
+\end{align*}
+So $f=g=0$, which are continuous obviously.
+Case 2: $y=ax$ for some coefficient $a\in \mathbb{R}$. Then
+\begin{align*}
+f(x,y)&=f(x,ax)=\frac{a^2x^3}{x^2+a^4x^4}=\frac{a^2x}{1+a^4x^2} \\
+g(x,y)&=g(x,ax)=\frac{a^2x^3}{x^2+a^6x^6}=\frac{a^2x}{1+a^6x^4}
+\end{align*}
+and it is clear that both $f$ and $g$ are continuous.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $f$ be a real uniformly continuous function on the bounded set $E$ in $\mathbb{R}$. Prove that $f$ is bounded on $E$.
+Show that the conclusion is false if boundedness of $E$ is omitted from the hypothesis.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Suppose $f$ is not bounded on $E$, first we can choose $x_1\in E$ such that $\left\vert f(x_1)\right\vert>1$. Having chosen $x_1,x_2,\ldots,x_{n-1}\in E$, there is $x_n\in E$ such that $\left\vert f(x_n)\right\vert>\left\vert f(x_{n-1})\right\vert+1$, and continue this procrss. Since every bounded sequence has a convergent subsequence [by Theorem 3.6(b)], and since $E$ is bounded, there is a subsequence $\{x_{n_j}\}$ that is convergent. Now, since every convergent sequence is Cauchy, given $\delta>0$, there exists an integer $N$ such that $\left\vert x_{n_i}-x_{n_j}\right\vert<\delta$ for all $i,j\ge N$. But if we let $n_i>n_j$,
+\begin{align*}
+\left\vert f(x_{n_i})-f(x_{n_j})\right\vert
+&\ge \left\vert f(x_{n_i})\right\vert-\left\vert f(x_{n_j})\right\vert \\
+&>\left\vert f(x_{n_i-1})\right\vert+1-\left\vert f(x_{n_j})\right\vert \\
+&>\left\vert f(x_{n_i-2})\right\vert+2-\left\vert f(x_{n_j})\right\vert \\
+&\,\,\vdots \\
+&>\left\vert f(x_{n_j})\right\vert+(n_i-n_j)-\left\vert f(x_{n_j})\right\vert \\
+&=n_i-n_j \\
+&\ge 1
+\end{align*}
+Thus $f$ fails to be uniformly continuous, a contradiction.
+(ii) For example, consider $E=[0,\infty)$ and $f(x)=x$, for $x\in E$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Show that the requirement in the definition of uniform continuity can be rephrased as follows, in terms of diameters of sets: To every $\varepsilon>0$ there exists a $\delta>0$ such that $\operatorname{diam}f(E)<\varepsilon$ for all $E\subset X$ with $\operatorname{diam}E<\delta$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $f:X\to Y$ be a mapping, where $X$ and $Y$ are metric spaces. If $f$ is uniformly continuous on $X$, then by definition, for every $\varepsilon>0$ there exists $\delta>0$ such that $d_Y(f(p),f(q))<\frac{\varepsilon}{2}$ for all $p,q\in X$ for which $d_X(p,q)<\delta$. Thus, given a subset $E\subset X$ with $\operatorname{diam}E<\delta$. Let $y,z\in f(E)$, then $y=f(p)$ and $z=f(q)$ for some $p,q\in E$. Moreover, we have $d_X(p,q)<\delta$, which implies $d_Y(y,z)=d_Y(f(p),f(q))<\frac{\varepsilon}{2}$. Since $y,z\in f(E)$ are arbitrarily chosen, we conclude that
+\begin{align*}
+\operatorname{diam}f(E)\le\frac{\varepsilon}{2}<\varepsilon
+\end{align*}
+Conversely, if the statement holds, let $\varepsilon>0$ and $\delta>0$ have the same meaning as the statement says. Given $p,q\in X$ with $d_X(p,q)<\delta$, and put $E=\{p,q\}$. Then clearly $\operatorname{diam}E=d_X(p,q)<\delta$ and $f(E)=\{f(p),f(q)\}$, which follows by assumption that
+\begin{align*}
+d_Y(f(p),f(q))=\operatorname{diam}f(E)<\varepsilon
+\end{align*}
+Hence $f$ is uniformly continuous on $X$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Complete the details of the following alternative proof of 
+\textit{Let $f$ be a continuous mapping of a compact metric space $X$ into a metric space $Y$. Then $f$ is uniformly continuous on $X$.}
+: If $f$ is not uniformly continuous, then for some $\varepsilon>0$ there are sequences $\{p_n\}$, $\{q_n\}$ in $X$ such that $d_X(p_n,q_n)\to 0$ but $d_Y(f(p_n),f(q_n))>\varepsilon$. Use Theorem 2.37 to obtain a contradiction.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Following the outline, we see that there exists a subsequence $\{p_{n_j}\}$ such that $\lim_{j\to\infty}p_{n_j}=p$ for some point $p\in X$ [by Theorem 3.6(a)]. We claim that $\lim_{j\to\infty}q_{n_j}=p$.
+\textit{Proof of the claim.} Given $\delta>0$, there exists a positive integer $J_1$ such that $j\ge J_1$ implies $d_X(p_{n_j},p)<\frac{\delta}{2}$. Also, we have $d_X(p_{n_j},q_{n_j})\to 0$, so there exists a positive integer $J_2$ such that $j\ge J_2$ implies $d_X(p_{n_j},q_{n_j})<\frac{\delta}{2}$. Put $J=\max\{J_1,J_2\}$, then $j\ge J$ implies
+\begin{align*}
+d_X(q_{n_j},p)
+\le d_X(q_{n_j},p_{n_j})+d_X(p_{n_j},p)
+<\frac{\delta}{2}+\frac{\delta}{2}
+=\delta
+\end{align*}
+Hence $\lim_{j\to\infty}q_{n_j}=p$. $\Box$
+Now, since $f$ is continuous on $X$, we have
+\begin{align*}
+\lim_{j\to\infty}d_Y(f(p_{n_j}),f(p))
+=\lim_{j\to\infty}d_Y(f(q_{n_j}),f(p))
+=0
+\end{align*}
+But the inequality
+\begin{align*}
+d_Y(f(p_{n_j}),f(q_{n_j}))
+\le d_Y(f(p_{n_j}),f(p))+d_Y(f(q_{n_j}),f(p))
+\end{align*}
+implies $\lim_{j\to\infty}d_Y(f(p_{n_j}),f(q_{n_j}))=0$ as well, contradicting the assumption that $d_Y(f(p_n),f(q_n))>\varepsilon$ for each $n$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f$ is a uniformly continuous mapping of a metric space $X$ into a metric space $Y$ and prove that $\{f(x_n)\}$ is a Cauchy sequence in $Y$ for every Cauchy sequence $\{x_n\}$ in $X$. Use this result to give an alternative proof of the theorem stated in Exercise 13.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Given $\varepsilon>0$, then since $f$ is uniformly continuous, there exists $\delta>0$ such that $d_Y(f(p),f(q))<\varepsilon$ for all $p,q\in X$ with $d_X(p,q)<\delta$. Thus, for every Cauchy sequence $\{x_n\}$ in $X$, there exists a positive integer $N$ such that $m\ge N$ and $n\ge N$ implies $d_X(x_m,x_n)<\delta$. It follows that $m\ge N$ and $n\ge N$ implies
+\begin{align*}
+d_Y(f(x_m),f(x_n))<\varepsilon
+\end{align*}
+and hence $\{f(x_n)\}$ is a Cauchy sequence in $Y$.
+(ii) Let $E$ be a dense subset of a metric space $X$, and let $f$ be a uniformly continuous real function defined on $E$. We show that there is an unique continuous real function $g$ defined on $X$, such that $g(x)=f(x)$ for all $x\in E$. Given $x\in X$. If $x\in E$, then define $g(x)=f(x)$. If $x\notin E$, then since $E$ is dense in $X$, there is a sequence $\{x_n\}$ in $E$ that converges to $x$. By the previous result, $\{f(x_n)\}$ is Cauchy in $\mathbb{R}$, and then $f(x_n)\to y$ for some point $y\in \mathbb{R}$. Define $g(x)=y$, then we check that such definition makes sense. Let $\{w_n\}$ be an another sequence in $E$ that converges to $x$. Given $\varepsilon>0$, then since $f$ is uniformly continuous on $E$, there exists $\delta>0$ such that $\left\vert f(p)-f(q)\right\vert<\varepsilon$ for all $p,q\in E$ with $d(p,q)<\delta$. Since $x_n\to x$ and $w_n\to x$, there exist positive integers $N_1$ and $N_2$, such that $n\ge N_1$ implies $d(x_n,x)<\frac{\delta}{2}$, and $n\ge N_2$ implies $d(w_n,x)<\frac{\delta}{2}$. Then $n\ge \max\{N_1,N_2\}$ implies
+\begin{align*}
+d(x_n,w_n)
+\le d(x_n,x)+d(w_n,x)
+<\delta
+\end{align*}
+and then $\left\vert f(x_n)-f(w_n)\right\vert<\varepsilon$. Also, since $f(x_n)\to y$, there exists a positive integer $N_3$ such that $n\ge N_3$ implies $\left\vert f(x_n)-y\right\vert<\varepsilon$. Put $N=\max\{N_1,N_2,N_3\}$, then $n\ge N$ implies
+\begin{align*}
+\left\vert f(w_n)-y\right\vert
+\le \left\vert f(w_n)-f(x_n)\right\vert+\left\vert f(x_n)-y\right\vert
+<2\varepsilon
+\end{align*}
+It follows that $f(w_n)\to y$ as well, and hence the definition makes sense. To show that $g$ is continuous on $X$, given $x\in X$ and $\varepsilon>0$. Since $f$ is uniformly continuous on $E$, there exists $\delta>0$ such that $\left\vert f(x)-f(y)\right\vert<\varepsilon$ for all $x,y\in E$ with $d(x,y)<\delta$. Now, for every $y\in X$ with $d(x,y)<\frac{\delta}{3}$, we consider the following four cases.
+Case 1: If $x,y\in E$, then clearly $d(x,y)<\frac{\delta}{3}<\delta$ and then $\left\vert g(x)-g(y)\right\vert=\left\vert f(x)-f(y)\right\vert<\varepsilon<3\varepsilon$.
+Case 2: If $x\in E$ and $y\notin E$, then by the definition of $g$ and since $E$ is dense in $X$, we can choose a point $z\in E$ such that $d(y,z)<\frac{2\delta}{3}$ and $\left\vert f(z)-g(y)\right\vert<\varepsilon$. Since $x,z\in E$ and $d(x,z)\le d(x,y)+d(y,z)<\delta$, we have $\left\vert f(x)-f(z)\right\vert<\varepsilon$. So
+\begin{align*}
+\left\vert g(x)-g(y)\right\vert
+=\left\vert f(x)-g(y)\right\vert
+\le\left\vert f(x)-f(z)\right\vert+\left\vert f(z)-g(y)\right\vert
+<2\varepsilon
+<3\varepsilon
+\end{align*}
+Case 3: If $x\notin E$ and $y\in E$, the result is similar to Case 2.
+Case 4: If $x,y\notin E$, then by the definition of $g$ and since $E$ is dense in $X$, we can choose points $z_1,z_2\in E$ such that $d(x,z_1)<\frac{\delta}{3}$, $d(x,z_2)<\frac{\delta}{3}$, and $\left\vert f(z_1)-g(x)\right\vert<\varepsilon$, $\left\vert f(z_2)-g(y)\right\vert<\varepsilon$. Then
+\begin{align*}
+d(z_1,z_2)
+\le d(z_1,x)+d(x,y)+d(y,z_2)
+<\delta
+\end{align*}
+implies $\left\vert f(z_1)-f(z_2)\right\vert<\varepsilon$. It follows that
+\begin{align*}
+\left\vert g(x)-g(y)\right\vert
+\le \left\vert g(x)-f(z_1)\right\vert+\left\vert f(z_1)-f(z_2)\right\vert+\left\vert f(z_2)-g(y)\right\vert
+<3\varepsilon
+\end{align*}
+Hence $g$ is continuous at $x$ for all $x\in X$, i.e., $g$ is continuous on $X$. At the end, the uniqueness of $g$ follows by Exercise 4.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+A uniformly continuous function of a uniformly continuous function is uniformly continuous.
+State this more precisely and prove it.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $f:X\to Y$ and $g:Y\to Z$ be uniformly continuous functions, where $X$, $Y$, and $Z$ are metric spaces. Then the function $g\circ f:X\to Z$ defined by $(g\circ f)(x)=g(f(x))$ for $x\in X$, is also uniformly continuous. To show this, let $\varepsilon>0$, then since $g$ is uniformly continuous, there exists $\delta>0$ such that $d_Z(g(y_1),g(y_2))<\varepsilon$, for all $y_1,y_2\in Y$ with $d_Y(y_1,y_2)<\delta$. Also, since $f$ is uniformly continuous, there exists $\eta>0$ such that $d_Y(f(x_1),f(x_2))<\delta$ for all $x_1,x_2\in X$ with $d_X(x_1,x_2)<\eta$. It follows that
+\begin{align*}
+d_Z((g\circ f)(x_1),(g\circ f)(x_2))
+=d_Z(g(f(x_1)),g(f(x_2)))
+<\varepsilon
+\end{align*}
+for all $x_1,x_2\in X$ with $d_X(x_1,x_2)<\eta$. Hence $g\circ f$ is uniformly continuous on $X$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $E$ be a dense subset of a metric space $X$, and let $f$ be a uniformly continuous \textit{real} function defined on $E$. Prove that $f$ has a continuous extension from $E$ to $X$ (see Exercise 5 for terminology). (Uniqueness follows from Exercise 4.) \textit{Hint:} For each $p\in X$ and each positive integer $n$, let $V_n(p)$ be the set of all $q\in E$ with $d(p,q)<1/n$. Use Exercise 9 to show that the intersection of the closures of the sets $f(V_1(p)),f(V_2(p)),\ldots$, consists of a single point, say $g(p)$, of $\mathbb{R}$. Prove that the function $g$ so define on $X$ is the desired extension of $f$.
+Could the range space $\mathbb{R}$ be replaced by $\mathbb{R}^k$? By any compact metric space? By any complete metric space? By any metric space?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Following the hint, given $\varepsilon>0$, then by Exercise 9 with a little bit of archimedean, there is a positive integer $N$ such that $n\ge N$ implies
+\begin{align*}
+\operatorname{diam}\overline{f(V_n(p))}=\operatorname{diam}f(V_n(p))<\varepsilon
+\end{align*}
+where the equality above follows by Theorem 3.10. So we have $\lim_{n\to\infty}\operatorname{diam}\overline{f(V_n(p))}=0$. Since $\overline{f(V_n(p))}$ is closed and bounded in $\mathbb{R}$ for each $n$, we have each $\overline{f(V_n(p))}$ is compact. Since $\overline{f(V_n(p))}\supset\overline{f(V_{n+1}(p))}$ clearly, and since $f(V_n(p))\ne\varnothing$ ($E$ is dense in $X$), for each $n$, we conclude that $\bigcap_{n=1}^\infty\overline{f(V_n(p))}$ consists of exactly one point [by Theorem 3.10(b)], and then defining $g(p)=\bigcap_{n=1}^\infty\overline{f(V_n(p))}$. Now, we show such $g$ is the desired continuous extension of $f$. If $p\in E$, then since $f(p)\in f(V_n(p))\subset\overline{f(V_n(p))}$ for all $n$, we have $f(p)\in\bigcap_{n=1}^\infty\overline{f(V_n(p))}$ and then $f(p)=g(p)$. It remains to show that $g$ is continuous on $X$. Fix any point $p_0\in X$ and $\varepsilon>0$. Note that $f$ is uniformly continuous on $E$, by Exercise 9 we can choose a positive integer $N$ such that 
+\begin{align*}
+\operatorname{diam}\overline{f(V_{N}(p))}
+=\operatorname{diam}f(V_{N}(p))
+<\varepsilon
+\end{align*}
+for all $p\in X$. So $\left\vert g(p_0)-y\right\vert<\varepsilon$ for all $y\in f(V_{N}(p_0))$. For every point $q\in X$ with $d(p_0,q)<\frac{1}{2N}$. If $q\in E$, then $f(q)\in f(V_{2N}(p_0))\subset f(V_{N}(p_0))$ and
+\begin{align*}
+\left\vert g(p_0)-g(q)\right\vert
+=\left\vert g(p_0)-f(q)\right\vert
+<\varepsilon
+<2\varepsilon
+\end{align*}
+If $q\notin E$, then since $E$ is dense in $X$, the set $V_{2N}(q)\ne\varnothing$, and there exists a point $p\in V_{2N}(q)\subset V_N(p)$. It follows that $g(q)\in\overline{f( V_{N}(p))}$, and that $\left\vert f(p)-g(q)\right\vert<\varepsilon$. On the other hand, since $d(p_0,q)<\frac{1}{2N}$, we have
+\begin{align*}
+d(p_0,p)\le d(p_0,q)+d(q,p)<\frac{1}{2N}+\frac{1}{2N}=\frac{1}{N}
+\end{align*}
+i.e., $p\in V_N(p_0)$ or $f(p)\in f(V_{N}(p_0))$. Thus
+\begin{align*}
+\left\vert g(p_0)-g(q)\right\vert
+\le \left\vert g(p_0)-f(p)\right\vert+\left\vert f(p)-g(q)\right\vert
+<2\varepsilon
+\end{align*}
+Combine both cases, we conclude that such $g$ is continuous on $X$.
+(ii) If the range space is replaced by either $\mathbb{R}^k$, any compact metric space, or any complete metric space, the result still holds. The first two types of spaces are obvious. To show the complete case, since $V_n(p)\neq\varnothing$ for all $n$ ($E$ is dense in $X$), we can choose $p_n\in V_n(p)$ such that $\{f(p_n)\}$ forms a Cauchy sequence in $Y$. Since $Y$ is assumed to be complete, $f(p_n)\to y$ for some $y\in Y$, and then defining $g(p)=y$. To show that the definition of $g$ makes sense, choose another points $q_n\in V_n(p)$ for each $n$, such that $f(q_n)\to z$ for some $z\in Y$. Since $f$ is uniformly continuous on $E$, for every $\varepsilon>0$ there exists $\delta>0$ such that $d_Y(f(p),f(q))<\varepsilon$ for all $p,q\in E$ with $d_X(p,q)<\delta$. By the construction of $\{p_n\}$ and $\{q_n\}$, there exists a positive integer $N_1$ such that $n\ge N_1$ implies $d_X(p_n,q_n)<\delta$, and so $n\ge N_1$ implies $d_Y(f(p_n),f(q_n))<\varepsilon$. Also, since $f(p_n)\to y$ and $f(q_n)\to z$, there exist positive integers $N_2$ and $N_3$, such that $n\ge N_2$ implies $d_Y(f(p_n),y)<\varepsilon$, and $n\ge N_3$ implies $d_Y(f(q_n),z)<\varepsilon$. It follows that $n\ge\max\{N_1,N_2,N_3\}$ implies
+\begin{align*}
+d_Y(y,z)
+\le d_Y(y,f(p_n))+d_Y(f(p_n),f(q_n))+d_Y(f(q_n),z)
+<3\varepsilon
+\end{align*}
+and hence $y=z$. So the definition makes sense. Now, we show that such $g$ is the desired continuous extension of $f$. If $p\in E$, then since $p_n\to p$ and $f$ is continuous on $E$, we have $f(p_n)\to f(p)$, and $g(p)=f(p)$. It remains to show that $g$ is continuous on $X$. Fix any point $p\in X$ (c.f. $p_0\in X$ in the case of $\mathbb{R}$) and for every positive integer $n$, we have $f(p_m)\in f(V_n(p))$ for all $m\ge n$. So either $g(p)\in f(V_n(p))$ or $g(p)$ is a limit point of $f(V_n(p))$, i.e., $g(p)\in\overline{f(V_n(p))}$. It follows that $g(p)\in\bigcap_{n=1}^\infty\overline{f(V_n(p))}$, and the rest of the proof is similar to that in the case of $\mathbb{R}$.
+In general, the result does not hold if the range is any metric space. For example, let $X$ be a set of real numbers, $E\subset X$ and $Y$ be two sets of rational numbers, and define $f:E\to Y$ by $f(r)=r$. Then $f$ has no continuous extension. The reason is that, given any function $g:X\to Y$, and consider a real (irrational) number $\pi=3.14159\ldots$. There is a sequence of rational numbers $\{r_n\}$ such that $r_n\to\pi$, then $f(r_n)\to\pi$. But $g(\pi)$ is still a rational number (since $g$ maps to $Y$), so we have $f(r_n)\not\to g(\pi)$, and such function $g$ is not a continuous extension of $f$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $I=[0,1]$ be the closed unit interval. Suppose $f$ is a continuous mapping of $I$ into $I$. Prove that $f(x)=x$ for at least one $x\in I$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+If $f(0)=0$ or $f(1)=1$, then we are done. If otherwise, consider $f(0)>0$ and $f(1)<1$. Let $g(t)=t-f(t)$ for $t\in[0,1]$, then $g(0)<0<g(1)$. Since $g$ is continuous on $[0,1]$, by Theorem 4.23, there exists a point $x\in(0,1)$ such that $g(x)=0$. This completes the proof.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Call a mapping of $X$ into $Y$ \textit{open} if $f(V)$ is an open set in $Y$ whenever $V$ is an open set in $X$.
+Prove that every continuous open mapping of $\mathbb{R}$ into $\mathbb{R}$ is monotonic.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Suppose $f$ is a real continuous function on $\mathbb{R}$ but not monotonic, then there are three numbers $a,b,c$ with $a<b<c$, such that either
+\begin{align*}
+f(a)<f(b),\quad f(c)<f(b)
+\end{align*}
+or
+\begin{align*}
+f(a)>f(b),\quad f(c)>f(b)
+\end{align*}
+By symmetry, we may only have to consider the first case. Since $f([a,c])$ is closed and bounded (by Theorem 4.14), the number $y=\sup f([a,c])$ exists (the least-upper-bound property), and by Theorem 2.28, $y\in f([a,c])$. Also, since $f(a)<f(b)$ and $f(c)<f(b)$, we have $y\ne f(a)$ and $y\ne f(c)$. It follows that $y\in f(a,c)$, and that $f(a,c)$ is not open (since $y$ is not an interior point of $f(a,c)$). Hence $f$ is not open.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $[x]$ denote the largest integer contained in $x$, that is, $[x]$ is the integer such that $x-1<[x]\le x$; and let $(x)=x-[x]$ denote the fractional part of $x$. What discontinuities do the functions $[x]$ and $(x)$ have?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+The discontinuities of the functions $[x]$ and $(x)$ are the set of integers.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $f$ be a real function defined in $(a,b)$. Prove that the set of points at which $f$ has a simple discontinuity is at most countable. \textit{Hint:} Let $E$ be the set on which $f(x-)<f(x+)$. With each point $x$ of $E$, associate a triple $(p,q,r)$ of rational numbers such that
+(a) $f(x-)<p<f(x+)$,
+(b) $a<q<t<x$ implies $f(t)<p$,
+(c) $x<t<r<b$ implies $f(t)>p$.
+The set of all such triples is countable. Show that each triple is associated with at most one point of $E$. Deal similarly with the other possible type of simple discontinuity.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Following the hint, we show that each triple is associated with at most one point of $E$. Suppose there is a triple $(p,q,r)$ of rational numbers, associating with two points $x,y\in E$ with $x\ne y$. i.e.,
+(a') $f(x-)<p<f(x+)$ and $f(y-)<p<f(y+)$;
+(b') $a<q<t<x$ implies $f(t)<p$, and $a<q<t<y$ implies $f(t)<p$;
+(c') $x<t<r<b$ implies $f(t)>p$, and $y<t<r<b$ implies $f(t)>p$.
+W.l.o.g., let $x<y$, then $a<q<x<t<y<r<b$ implies both $f(t)<p$ and $f(t)>p$, a contradiction.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Every rational $x$ can be written in the form $x=m/n$, where $n>0$, and $m$ and $n$ are integers without any common divisors. When $x=0$, we take $n=1$. Consider the function $f$ defined on $\mathbb{R}$ by
+\begin{align*}
+f(x)=\left\{\begin{array}{ll}
+0&\mbox{($x$ irrational)} \vspace{0.1in}\\
+\dfrac{1}{n}&\mbox{$\left(x=\dfrac{m}{n}\right)$}
+\end{array}\right.
+\end{align*}
+Prove that $f$ is continuous at every irrational point, and that $f$ has a simple discontinuity at every rational point.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+We show that $\lim_{t\to x}f(t)=0$ for every $x\in \mathbb{R}$. If we do so, both assertions follow. Given $\varepsilon>0$ and $x\in \mathbb{R}$, choose the smallest positive integer $N$ such that $N>\frac{1}{\varepsilon}$. Then for $n=1,2,\ldots,N$, there exists an integer $j_n$ such that $x\in\left(\tfrac{j_n}{n},\tfrac{j_n+1}{n}\right]$. If $x\in\left(\tfrac{j_n}{n},\tfrac{j_n+1}{n}\right)$, denote $E_n=\left(\tfrac{j_n}{n},\tfrac{j_n+1}{n}\right)$; If $x=\frac{j_n+1}{n}$, denote $E_n=\left(\tfrac{j_n}{n},\tfrac{j_n+2}{n}\right)$. Next, let $a=\sup_{1\le n\le N}\left(\inf E_n\right)$ and $b=\inf_{1\le n\le N}\left(\sup E_n\right)$, and put $\delta=\min\{x-a,b-x\}$. Then for any rational number $\frac{p}{q}$ with $\frac{p}{q}\ne x$ and $\left\vert x-\frac{p}{q}\right\vert<\delta$, we have $q>N>\frac{1}{\varepsilon}$ or $\frac{1}{q}<\varepsilon$. This completes the proof.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f$ is a real function with domain $\mathbb{R}$ which has the intermediate value property: If $f(a)<c<f(b)$, then $f(x)=c$ for some $x$ between $a$ and $b$.
+Suppose also, for every rational $r$, that the set of all $x$ with $f(x)=r$ is closed. Prove that $f$ is continuous.
+\textit{Hint:} If $x_n\to x_0$ but $f(x_n)>r>f(x_0)$ for some $r$ and all $n$, then $f(t_n)=r$ for some $t_n$ between $x_0$ and $x_n$; thus $t_n\to x_0$. Find a contradiction. (N. J. Fine, \textit{Amer. Math. Monthly}, vol. 73, 1966, p. 782.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $E=\{x\in \mathbb{R}:f(x)=r\}$. Following the hint, $f(x_0)<r$ implies $x_0\notin E$, and then $t_n\ne x_0$ for all $n$. By the assumption that $E$ is closed, $x_0$ is not a limit point of $E$. This contradicts the fact that $t_n\to x_0$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $E$ is a nonempty subset of a metric space $X$, define the distance from $x\in X$ to $E$ by
+\begin{align*}
+\rho_E(x)=\inf_{z\in E}d(x,z)
+\end{align*}
+(a) Prove that $\rho_E(x)=0$ if and only if $x\in\bar{E}$.
+(b) Prove that $\rho_E$ is a uniformly continuous function on $X$, by showing that
+\begin{align*}
+\left\vert\rho_E(x)-\rho_E(y)\right\vert\le d(x,y)
+\end{align*}
+for all $x\in X$, $y\in X$.
+\textit{Hint:} $\rho_E(x)\le d(x,z)\le d(x,y)+d(y,z)$, so that
+\begin{align*}
+\rho_E(x)\le d(x,y)+\rho_E(y)
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) If $\rho_E(x)=0$ and if $x\notin E$, then for every $\varepsilon>0$ there exists $y\in E$ such that $d(x,y)<\varepsilon$. Since $x\notin E$, we have $x\ne y$ and therefore $x$ is a limit point of $E$. Hence $x\in\bar{E}$. Conversely, let $x\in\bar{E}$. If $x\in E$, then $d(x,z)=0$ (by taking $z=x$), and then $\inf_{z\in E}d(x,z)\le 0$. On the other hand, since $d(x,z)\ge 0$ for all $x,z\in X$, we have $\inf_{z\in E}d(x,z)\ge 0$. Hence $\inf_{z\in E}d(x,z)=0$, or $\rho_E(x)=0$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Given $x,y\in X$, then by the hint, $\rho_E(x)\le d(x,z)\le d(x,y)+d(y,z)$ for every $z\in E$. It follows that
+\begin{align*}
+\rho_E(x)\le d(x,y)+\rho_E(y)\quad\mbox{or}\quad \rho_E(x)-\rho_E(y)\le d(x,y)
+\end{align*}
+The other inequality $\rho_E(y)-\rho_E(x)\le d(y,x)=d(x,y)$ is similar. Hence
+\begin{align*}
+\left\vert\rho_E(x)-\rho_E(y)\right\vert\le d(x,y)
+\end{align*}
+and the uniformly continuity of $\rho_E$ on $X$ will easily follow.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $K$ and $F$ are disjoint sets in a metric space $X$, $K$ is compact, $F$ is closed. Prove that there exists $\delta>0$ such that $d(p,q)>\delta$ if $p\in K$, $q\in F$. \textit{Hint:} $\rho_F$ is a continuous positive function on $K$.
+Show that the conclusion may fail for two disjoint closed sets if neither is compact.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) Following the hint, $\rho_F$ is a continuous positive function on $K$ (by Exercise 20). Since $K$ is compact, so is $\rho_F(K)$ (by Theorem 4.14). Thus there is a point $p_0\in K$ such that $\rho_F(p_0)\le\rho_F(p)$ for all $p\in K$ (by Theorem 4.16). Since $\rho_F$ is a positive function, $\rho_F(p_0)>\delta$ for some $\delta>0$. It follows that
+\begin{align*}
+d(p,q)\ge\rho_F(p)\ge\rho_F(p_0)>\delta
+\end{align*}
+for all $p\in K$ and $q\in F$.
+(ii) For example, in $\mathbb{R}^2$, let $F_1=\{(x,y):y\le 0\}$ and $F_2=\{(x,y):y\ge e^x\}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $A$ and $B$ be disjoint nonempty closed sets in a metric space $X$, and define
+\begin{align*}
+f(p)=\frac{\rho_A(p)}{\rho_A(p)+\rho_B(p)}\quad(p\in X)
+\end{align*}
+Show that $f$ is a continuous function on $X$ whose range lies in $[0,1]$, that $f(p)=0$ precisely on $A$ and $f(p)=1$ precisely on $B$. This establishes a converse of Exercise 3: Every closed set $A\subset X$ is $Z(f)$ for some continuous real $f$ on $X$. Setting
+\begin{align*}
+V=f^{-1}\left(\left[0,\tfrac{1}{2}\right)\right),\quad
+W=f^{-1}\left(\left(\tfrac{1}{2},1\right]\right)
+\end{align*}
+show that $V$ and $W$ are open and disjoint, and that $A\subset V$, $B\subset W$. (Thus pairs of disjoint closed sets in a metric space can be covered by pairs of disjoint open sets. This property of metric spaces is called \textit{normality}.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) First, the continuity of $f$ on $X$ follows by Exercise 20 and by Theorem 4.9 (the fact that $\rho_A+\rho_B>0$ will be shown). To show the rest result, we consider the following three cases.
+Case 1: $p\in A$. Then clearly $\rho_A(p)=0$. Also, note that $p\in B^c$. Since $B$ is closed, $B^c$ is open, and there exists $\delta_1>0$ such that $q\in X$ with $d(p,q)<\delta_1$ implies $q\in B^c$. It follows that $q\in B$ implies $d(p,q)\ge\delta_1$, so that $\rho_B(p)\ge\delta_1>0$. Hence
+\begin{align*}
+f(p)=\frac{0}{0+\rho_B(p)}=0
+\end{align*}
+Case 2: $p\in B$. By using the same argument, $\rho_B(p)=0$, and there exists $\delta_2>0$ such that $\rho_A(p)\ge\delta_2>0$. Hence
+\begin{align*}
+f(p)=\frac{\rho_A(p)}{\rho_A(p)+0}=1
+\end{align*}
+Case 3: $p\in A^c$ and $p\in B^c$. By using the same argument, there exists $\delta_3>0$ and $\delta_4>0$ such that $\rho_A(p)\ge\delta_3>0$ and $\rho_B(p)\ge\delta_4>0$. Hence
+\begin{align*}
+0<\frac{\rho_A(p)}{\rho_A(p)+\rho_B(p)}<1\quad\mbox{or}\quad 0<f(p)<1
+\end{align*}
+The above three cases reveals that the range of $f$ lies in $[0,1]$.
+(ii) The facts that $V\cap W=\varnothing$, $A\subset V$, and $B\subset W$ are immediate. To show that $V$ is open ($W$ is open is similar), let $p\in V$, then $0\le f(p)<\frac{1}{2}$. Choose $\varepsilon>0$ such that $\varepsilon<\frac{1}{2}-f(p)$, then since $f$ is continuous [by part (i)], there exists $\delta>0$ such that $q\in X$ with $d(p,q)<\delta$ implies $\left\vert f(q)-f(p)\right\vert<\varepsilon$. So $f(q)<f(p)+\varepsilon<\frac{1}{2}$ or $0\le f(q)<\frac{1}{2}$ (since $f(q)\ge 0$ is trivial). Hence $q\in V$ and we conclude that $V$ is open.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+A real-valued function $f$ defined in $(a,b)$ is said to be \textit{convex} if
+\begin{align*}
+f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)
+\end{align*}
+whenever $a<x<b$, $a<y<b$, $0<\lambda<1$. Prove that every convex function is continuous. Prove that every increasing convex function of a convex function is convex. (For example, if $f$ is convex, so is $e^f$.)
+If $f$ is convex in $(a,b)$ and if $a<s<t<u<b$, show that
+\begin{align*}
+\frac{f(t)-f(s)}{t-s}\le\frac{f(u)-f(s)}{u-s}\le\frac{f(u)-f(t)}{u-t}
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) To show this, we previously apply the last result [see part (iii)]. Given $x\in(a,b)$, define $g_1:(a,x)\to \mathbb{R}$ and $g_2:(x,b)\to \mathbb{R}$ by
+\begin{align*}
+g_1(t)=\frac{f(x)-f(t)}{x-t},\quad g_2(t)=\frac{f(t)-f(x)}{t-x}
+\end{align*}
+Then by the first inequality of the last result, $g_2(t)\le g_2(u)$ for all $x<t<u<b$, i.e., $g_2$ monotonically increases. Similarly, by the second inequality of the last result, $g_1(s)\le g_1(t)$ for all $a<s<t<x$, i.e., $g_1$ monotonically increases. Moreover, if we let $E_1$ and $E_2$ be images of $g_1$ and $g_2$, respectively, then combine the two inequalities of the last result, $E_1$ has an upper bound ($g_2(u_0)$ for any $u_0\in(x,b)$), and $E_2$ has a lower bound ($g_1(t_0)$ for any $t_0\in(a,x)$). So the $\sup E_1$ and $\inf E_2$ both exist. Now we show that
+\begin{align*}
+\lim_{t\to x}g_1(t)=\sup E_1,\quad \lim_{t\to x}g_2(t)=\inf E_2
+\end{align*}
+Since $g_1(t)\le\sup E_1$ for all $t\in(a,x)$, we have $\lim_{t\to x}g_1(t)\le\sup E_1$. Conversely, given $\varepsilon>0$ there exists a $t_0\in(a,x)$ such that $\sup E_1-\varepsilon<g_1(t_0)$. Since $g_1$ monotonically increases, $\sup E_1-\varepsilon<\lim_{t\to x}g_1(t)$, and hence $\sup E_1\le\lim_{t\to x}g_1(t)$. The proof of the second equality is similar. Finally,
+\begin{align*}
+f(x-)
+&=\lim_{t\in(a,x),t\to x}f(t) \\
+&=f(x)+\lim_{t\in(a,x),t\to x}\left[\frac{f(x)-f(t)}{x-t}\cdot(t-x)\right] \\
+&=f(x)+\lim_{t\in(a,x),t\to x}\left[g_1(t)\cdot(t-x)\right] \\
+&=f(x)+\sup E_1\cdot\lim_{t\in(a,x),t\to x}(t-x) \\
+&=f(x) \\
+f(x+)
+&=\lim_{t\in(x,b),t\to x}f(t) \\
+&=f(x)+\lim_{t\in(x,b),t\to x}\left[\frac{f(t)-f(x)}{t-x}\cdot(t-x)\right] \\
+&=f(x)+\lim_{t\in(x,b),t\to x}\left[g_2(t)\cdot(t-x)\right] \\
+&=f(x)+\sup E_2\cdot\lim_{t\in(x,b),t\to x}(t-x) \\
+&=f(x)
+\end{align*}
+which follows that $f$ is continuous at $x$. Since $x\in(a,b)$ is arbitrary given, we conclude that $f$ is continuous on $(a,b)$.
+(ii) Let $f$ and $g$ be two convex functions on $(a,b)$, and let $g$ be increasing. Then for $x,y\in(a,b)$ and for $\lambda\in(0,1)$,
+\begin{align*}
+f(\lambda x+(1-\lambda)y)\le\lambda f(x)+(1-\lambda)f(y)
+\end{align*}
+Since $g$ is increasing and convex, we have, respectively,
+\begin{align*}
+(g\circ f)(\lambda x+(1-\lambda)y)
+&=g(f(\lambda x+(1-\lambda)y)) \\
+&\le g(\lambda f(x)+(1-\lambda)f(y)) \\
+&\le\lambda g(f(x))+(1-\lambda)g(f(y)) \\
+&=\lambda (g\circ f)(x)+(1-\lambda)(g\circ f)(y)
+\end{align*}
+Hence $g\circ f$ is also a convex function on $(a,b)$.
+(iii) We only have to show the first inequality (the second one is similar). Consider $s<t<u$, and let $\lambda=\frac{u-t}{u-s}$. Then $0<\lambda<1$ and $t=\lambda s+(1-\lambda)u$. It follows that
+\begin{align*}
+f(t)
+&=f(\lambda s+(1-\lambda)u) \\
+&\le\lambda f(s)+(1-\lambda)f(u) \\
+&=\frac{u-t}{u-s}f(s)+\frac{t-s}{u-s}f(u) \\
+&=f(s)+\frac{s-t}{u-s}f(s)+\frac{t-s}{u-s}f(u) \\
+&=f(s)+\frac{t-s}{u-s}\left[f(u)-f(s)\right]
+\end{align*}
+and hence
+\begin{align*}
+\frac{f(t)-f(s)}{t-s}\le\frac{f(u)-f(s)}{u-s}
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Assume that $f$ is a continuous real function defined in $(a,b)$ such that
+\begin{align*}
+f\left(\frac{x+y}{2}\right)\le\frac{f(x)+f(y)}{2}
+\end{align*}
+for all $x,y\in(a,b)$. Prove that $f$ is convex.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+We first claim that, for $n=1,2,\ldots$, if $\lambda_n=\frac{k_n}{2^n}$ where $k_n\in\{0,1,2,\ldots,2^n\}$. Then
+\begin{align*}
+f(\lambda_nx+(1-\lambda_n)y)
+\le\lambda_nf(x)+(1-\lambda_n)f(y)
+\end{align*}
+holds for all $x,y\in(a,b)$.
+\textit{Proof of the claim.} By induction on $n$. For $n=1$, the result is trivial. Suppose the statement holds for some $n\ge 1$. Consider $n+1$, write $k_{n+1}=2^ns+t$, where $s\in\{0,1\}$ and $t\in\{0,1,2,\ldots,2^n\}$. Then for $x,y\in(a,b)$,
+\begin{align*}
+&f\left(\lambda_{n+1}x+\left(1-\lambda_{n+1}\right)y\right) \\
+&\qquad=f\left(\frac{1}{2}\left[\left(s+\frac{t}{2^n}\right)x\right]
++\frac{1}{2}\left[\left(2-s-\frac{t}{2^n}\right)y\right]\right) \\
+&\qquad=f\left(\frac{1}{2}\left[sx+\left(1-s\right)y\right]
++\frac{1}{2}\left[\frac{t}{2^n}x+\left(1-\frac{t}{2^n}\right)y\right]\right) \\
+&\qquad\le\frac{1}{2}f\left(sx+\left(1-s\right)y\right)
++\frac{1}{2}f\left(\frac{t}{2^n}x+\left(1-\frac{t}{2^n}\right)y\right) \\
+&\qquad\le\frac{1}{2}\left[sf(x)+(1-s)f(y)\right]
++\frac{1}{2}\left[\frac{t}{2^n}f(x)+\left(1-\frac{t}{2^n}f(y)\right)\right] \\
+&\qquad=\frac{1}{2}\left(s+\frac{t}{2^n}\right)f(x)
++\frac{1}{2}\left(2-s-\frac{t}{2^n}\right)f(y) \\
+&\qquad=\frac{k_{n+1}}{2^{n+1}}f(x)+\left(1-\frac{k_{n+1}}{2^{n+1}}\right)f(y) \\
+&\qquad=\lambda_{n+1}f(x)+\left(1-\lambda_{n+1}\right)f(y)
+\end{align*}
+This completes the proof. $\Box$
+Now, for every real number $\lambda\in(0,1)$, choose a sequence $\{\lambda_n\}$, where each $\lambda_n$ is defined above, that converges to $\lambda$. Since $f$ is continuous on $(a,b)$, we have
+\begin{align*}
+f(\lambda x+(1-\lambda)y)
+&=\lim_{n\to\infty}f\left(\lambda_nx+\left(1-\lambda_n\right)y\right) \\
+&\le\lim_{n\to\infty}\left[\lambda_nf(x)+\left(1-\lambda_n\right)f(y)\right] \\
+&=\lambda f(x)+(1-\lambda)f(y)
+\end{align*}
+for all $x,y\in(a,b)$. Hence $f$ is convex.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $A\subset \mathbb{R}^k$ and $B\in \mathbb{R}^k$, define $A+B$ to be the set of all sums $\mathbf{x}+\mathbf{y}$ with $\mathbf{x}\in A$, $\mathbf{y}\in B$.
+(a) If $K$ us compact and $C$ is closed in $\mathbb{R}^k$, prove that $K+C$ is closed.
+\textit{Hint:} Take $\mathbf{z}\notin K+C$, put $F=\mathbf{z}-C$, the set of all $\mathbf{z}-\mathbf{y}$ with $\mathbf{y}\in C$. Then $K$ and $F$ are disjoint. Choose $\delta$ as in Exercise 21. Show that the open ball with center $\mathbf{z}$ and radius $\delta$ does not intersect $K+C$.
+(b) Let $\alpha$ be an irrational real number. Let $C_1$ be the set of all integers, let $C_2$ be the set of all $n\alpha$ with $n\in C_1$. Show that $C_1$ and $C_2$ are closed subsets of $\mathbb{R}$ whose sum $C_1+C_2$ is \textit{not} closed, by showing that $C_1+C_2$ is a countable dense subset of $\mathbb{R}$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Following the hint, take $\mathbf{z}\in(K+C)^c$, then $\mathbf{z}-\mathbf{y}\notin K$ for any $\mathbf{y}\in C$ (otherwise if $\mathbf{z}-\mathbf{y}_0\in K$ for some $\mathbf{y}_0\in C$, then $\mathbf{z}=(\mathbf{z}-\mathbf{y}_0)+\mathbf{y}_0\in K+C$, a contradiction). Put $F=\mathbf{z}-C$, then by the previous argument, $K\cap F=\varnothing$. Now we claim that $F$ is closed.
+\textit{Proof of the claim.} If $\mathbf{x}$ is a limit point of $F$, then there exists a sequence $\{\mathbf{z}-\mathbf{y}_n\}$ in $F$, where each $\mathbf{y}_n\in C$, such that $\mathbf{z}-\mathbf{y}_n\ne\mathbf{x}$ for all $n$, and $\mathbf{z}-\mathbf{y}_n\to\mathbf{x}$. It follows that $\mathbf{y}_n\ne\mathbf{z}-\mathbf{x}$ for all $n$, $\mathbf{y}_n\to\mathbf{z}-\mathbf{x}$. Since each $\mathbf{y}_n\in C$ and $C$ is closed, we have $\mathbf{z}-\mathbf{x}\in C$. Hence $\mathbf{x}=\mathbf{z}-(\mathbf{z}-\mathbf{x})\in F$, and that $F$ is closed. $\Box$
+Since $K$ is compact, $F$ is closed, and $K\cap F=\varnothing$, by Exercise 21 there exists $\delta>0$ such that $\left\vert\mathbf{x}-\mathbf{y}\right\vert>\delta$ for all $\mathbf{x}\in K$ and $\mathbf{y}\in F$. Thus, for every $\mathbf{x}\in K+C$, write $\mathbf{x}=\mathbf{k}+\mathbf{c}$ for some $\mathbf{k}\in K$ and $\mathbf{c}\in C$, then
+\begin{align*}
+\left\vert\mathbf{x}-\mathbf{z}\right\vert
+=\left\vert\left(\mathbf{k}+\mathbf{c}\right)-\mathbf{z}\right\vert
+=\left\vert\mathbf{k}-\left(\mathbf{z}-\mathbf{c}\right)\right\vert
+>\delta
+\end{align*}
+where the inequality follows by the fact that $\mathbf{k}\in K$ and $\mathbf{z}-\mathbf{c}\in F$, and by the above argument. So we conclude that $(K+C)^c$ is open, or $K+C$ is closed.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) It is clear that $C_1$ and $C_2$ are closed, since each point of $C_1$ (and $C_2$) is not a limit point. Now we show that $C_1+C_2$ is dense in $\mathbb{R}$. Given $\varepsilon>0$, choose a positive integer $N$ such that $\frac{1}{N}<\varepsilon$. Let $(n\alpha)=n\alpha-[n\alpha]$ where $n\in\{1,2,\ldots,N+1\}$ (see Exercise 16 for the notations $(\cdot)$ and $[\cdot]$), then clearly 
+(1) $(n\alpha)$ is irrational;
+(2) $(n\alpha)\in[0,1)$;
+(3) $(n\alpha)\in C_1+C_2$,
+for each $n$. It follows by the \textit{pigeonhole principle}, that at least two members of these $(n\alpha)$, saying $(n_1\alpha)$ and $(n_2\alpha)$ (where $n_1\ne n_2$, and $1\le n_1,n_2\le N+1$), contained in a segment $\left(\tfrac{K-1}{N},\tfrac{K}{N}\right)$  for some $K\in\{1,2,\ldots,N\}$. Put
+\begin{align*}
+y_0=\left\vert(n_1\alpha)-(n_2\alpha)\right\vert
+\end{align*}
+then $y_0\in C_1+C_2$ [by (3)] and $0<y_0<\frac{1}{N}<\varepsilon$. Next, we claim that, for every $k\in\{1,2,\ldots,N\}$ there exists $x_0\in C_1+C_2$ such that $x_0\in\left[\tfrac{k-1}{N},\tfrac{k}{N}\right]$.
+\textit{Proof of the claim.} Choose an integer $q$ such that $q\le\frac{k}{N}<q+1$, or $k-N<qN\le k$. If $k-1\le qN\le k$, take $x_0=q$ then we are done. If $k-N<qN<k-1$, put $x=Ny_0$ and $b=k-1-qN$, then
+(4) $0<x<1$ (since $0<y_0<\frac{1}{N}$);
+(5) $b$ is an integer, and $0<b<N$.
+So there exists a positive integer $p$ such that $b\le px<b+1$, which implies
+\begin{align*}
+b+qN\le px+qN<b+1+qN
+\end{align*}
+or $k-1\le N\left(py_0+q\right)<k$. Take $x_0=py_0+q$ then we are done. $\Box$
+Now, given $x\in \mathbb{R}$. Since $(x)\in[0,1)$, we have $(x)\in\left[\tfrac{k-1}{N},\tfrac{k}{N}\right)$ for some $k\in\{1,2,\ldots,N\}$, and by the above claim, there exists $x_0\in C_1+C_2$ such that $\left\vert x_0-(x)\right\vert\le\frac{1}{N}<\varepsilon$. Put $z=x_0+[x]$, then $z\in C_1+C_2$ and
+\begin{align*}
+\left\vert z-x\right\vert
+=\left\vert x_0+[x]-\left([x]+(x)\right)\right\vert
+=\left\vert x_0-(x)\right\vert
+<\varepsilon
+\end{align*}
+Since $\varepsilon$ is arbitrarily small, we conclude that $C_1+C_2$ is dense in $\mathbb{R}$. Finally, observe that $\frac{1}{2}\notin C_1+C_2$ (for if $\frac{1}{2}=p+q\alpha$ for some integers $p$ and $q$, we need $q\ne 0$, but then $p+q\alpha$ must be irrational, a contradiction), so $C_1+C_2$ is a proper subset of $\mathbb{R}$. Hence $C_1+C_2$ is not closed.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $X$, $Y$, $Z$ are metric spaces, and $Y$ is compact. Let $f$ map $X$ into $Y$, let $g$ be a continuous one-to-one mapping of $Y$ into $Z$, and put $h(x)=g(f(x))$ for $x\in X$.
+Prove that $f$ is uniformly continuous if $h$ is uniformly continuous.
+\textit{Hint:} $g^{-1}$ has compact domain $g(Y)$, and $f(x)=g^{-1}(h(x))$.
+Prove also that $f$ is continuous if $h$ is continuous.
+Show (by modifying Example 4.21, or by finding a different example) that the compactness of $Y$ cannot be omitted from the hypothesis, even when $X$ and $Z$ are compact.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) If we focus on $g(Y)$ instead of $Z$, then $g:Y\to g(Y)$ is a continuous one-to-one and onto mapping. Since $Y$ is compact, the inverse function $g^{-1}:g(Y)\to Y$ is continuous (by Theorem 4.17). Since $g(Y)$ is also compact (by Theorem 4.14), $g^{-1}$ is uniformly continuous on $g(Y)$ (by Theorem 4.19). Also, since $g^{-1}(g(y))=y$ for all $y\in Y$, we have
+\begin{align*}
+g^{-1}(h(x))=g^{-1}(g(f(x)))=f(x)
+\end{align*}
+for all $x\in X$, i.e., $g^{-1}\circ h=f$. Hence $f$ is uniformly continuous if $h$ is (by Exercise 12).
+(ii) It is trivial that $f$ is continuous if $h$ is, by comparing part (i).
+(iii) For example, let $X=Z=[0,1]$, $Y=\{0\}\cup[1,\infty)$, and let $f:X\to Y$, $g:Y\to Z$, and $h:X\to Z$ be defined by
+\begin{align*}
+f(x)&=\left\{\begin{array}{ll}
+\dfrac{1}{x}&x\in(0,1]\vspace{0.1in}\\
+0&x=0
+\end{array}\right. \\
+g(y)&=\left\{\begin{array}{ll}
+\dfrac{1}{y}&y\in[1,\infty)\vspace{0.1in}\\
+0&y=0
+\end{array}\right.
+\end{align*}
+and $h(x)=g(f(x))=x$ for all $x\in X$.
+
+
+\end{document}
