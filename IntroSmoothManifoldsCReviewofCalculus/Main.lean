@@ -1,1 +1,2 @@
 import IntroSmoothManifoldsCReviewofCalculus.Basic
+import IntroSmoothManifoldsCReviewofCalculus.Derivatives
