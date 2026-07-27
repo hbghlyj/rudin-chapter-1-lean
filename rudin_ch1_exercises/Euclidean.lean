@@ -261,7 +261,9 @@ private lemma circleParam_norm {k : ℕ} {u v : EuclideanSpace ℝ (Fin k)}
 private lemma circleParam_orthogonal {k : ℕ} {d u v : EuclideanSpace ℝ (Fin k)}
     (hdu : inner ℝ d u = 0) (hdv : inner ℝ d v = 0) (t : ℝ) :
     inner ℝ d (circleParam u v t) = 0 := by
-  sorry
+  simp only [circleParam]
+  rw [inner_add_right]
+  simp [inner_smul_right, hdu, hdv]
 
 private lemma circleParam_injective {k : ℕ} {u v : EuclideanSpace ℝ (Fin k)}
     (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (huv : inner ℝ u v = 0) :
