@@ -540,7 +540,9 @@ private noncomputable def normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
 
 private lemma normalizedRotate90_norm {v : EuclideanSpace ℝ (Fin 2)} (hv : v ≠ 0) :
     ‖normalizedRotate90 v‖ = 1 := by
-  sorry
+  rw [normalizedRotate90, norm_smul,
+    Real.norm_of_nonneg (inv_nonneg.mpr (norm_nonneg v))]
+  rw [norm_rotate90, inv_mul_cancel₀ (norm_ne_zero_iff.mpr hv)]
 
 private lemma inner_normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     inner ℝ v (normalizedRotate90 v) = 0 := by
