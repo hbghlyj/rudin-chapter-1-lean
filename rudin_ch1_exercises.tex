@@ -240,9 +240,29 @@ rational parametrization
 \[
  \frac{1-t^2}{1+t^2}u+\frac{2t}{1+t^2}v\qquad(t\in\R)
 \]
-is injective and supplies infinitely many points on that sphere.  For
-$k=2$ the sphere consists of two points, and for $k=1$ it is empty
-(with distinct centers).
+is injective and supplies infinitely many points on that sphere.
+
+For $k=2$, put $v=y-x$ and let
+\[
+ e=\frac{(-v_2,v_1)}{\norm v},\qquad
+ \rho=\sqrt{r^2-\frac{d^2}{4}}.
+\]
+Since $x\ne y$, the vector $e$ is defined, has norm one, and is
+perpendicular to $v$.  The two points
+\[
+ p=m+\rho e,\qquad q=m-\rho e
+\]
+therefore satisfy both distance equations by the Pythagorean theorem.
+Conversely, if $z$ satisfies them, subtracting the two squared equations
+shows $(z-m)\cdot v=0$.  The perpendicular complement of a nonzero vector
+in the plane is the line spanned by $e$, so $z-m=te$ for some real $t$.
+Either distance equation then gives $t^2=\rho^2$, hence $t=\rho$ or
+$t=-\rho$, and consequently $z=p$ or $z=q$.  In the strict case
+$d<2r$ one has $\rho>0$, so $p\ne q$.  Thus the planar intersection is
+exactly the two-element set $\{p,q\}$.
+
+For $k=1$ the perpendicular complement of $x-y\ne0$ is zero, so in the
+strict case the intersection is empty.
 \end{proof}
 
 \begin{exercise}[Parallelogram identity]

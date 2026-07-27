@@ -590,7 +590,126 @@ centers are closer than twice the radius. -/
 theorem equal_radius_circles_two_points (x y : EuclideanSpace ℝ (Fin 2))
     (r : ℝ) (hr : 0 < r) (hxy : x ≠ y) (hclose : dist x y < 2 * r) :
     ({z | dist z x = r ∧ dist z y = r} : Set (EuclideanSpace ℝ (Fin 2))).ncard = 2 := by
-  sorry
+  let v := y - x
+  let u := normalizedRotate90 v
+  let m := (2 : ℝ)⁻¹ • (x + y)
+  let rho := Real.sqrt (r ^ 2 - (dist x y) ^ 2 / 4)
+  let p := m + rho • u
+  let q := m - rho • u
+  have hv : v ≠ 0 := sub_ne_zero.mpr (Ne.symm hxy)
+  have hu_norm : ‖u‖ = 1 := normalizedRotate90_norm hv
+  have hvu : inner ℝ v u = 0 := inner_normalizedRotate90 v
+  have hrho_pos : 0 < rho := Real.sqrt_pos.2 (circle_intersection_radicand_pos x y r hr hclose)
+  have hrho_sq : rho ^ 2 = r ^ 2 - (dist x y) ^ 2 / 4 := by
+    exact Real.sq_sqrt (le_of_lt (circle_intersection_radicand_pos x y r hr hclose))
+  have hm_x : m - x = (2 : ℝ)⁻¹ • v := by
+    simp only [m, v]
+    module
+  have hm_y : m - y = -(2 : ℝ)⁻¹ • v := by
+    simp only [m, v]
+    module
+  have hmem (s : ℝ) (hs : s = rho ∨ s = -rho) :
+      dist (m + s • u) x = r ∧ dist (m + s • u) y = r := by
+    have hs_sq : s ^ 2 = rho ^ 2 := by rcases hs with rfl | rfl <;> ring
+    have hnorm (a : ℝ) : ‖a • v + s • u‖ ^ 2 = a ^ 2 * ‖v‖ ^ 2 + s ^ 2 := by
+      rw [← real_inner_self_eq_norm_sq, inner_add_add_self]
+      rw [inner_smul_left, inner_smul_right, inner_smul_left, inner_smul_right,
+        inner_smul_left, inner_smul_right, inner_smul_left, inner_smul_right]
+      simp [hvu, real_inner_comm, real_inner_self_eq_norm_sq, hu_norm]
+      ring
+    have hvnorm : ‖v‖ = dist x y := by simp [v, dist_eq_norm, norm_sub_rev]
+    constructor
+    · rw [dist_eq_norm]
+      have heq : m + s • u - x = (2 : ℝ)⁻¹ • v + s • u := by rw [← hm_x]; abel
+      rw [heq]
+      have hsquare := hnorm (2 : ℝ)⁻¹
+      rw [hvnorm, hs_sq, hrho_sq] at hsquare
+      have hn := norm_nonneg ((2 : ℝ)⁻¹ • v + s • u)
+      nlinarith
+    · rw [dist_eq_norm]
+      have heq : m + s • u - y = -(2 : ℝ)⁻¹ • v + s • u := by rw [← hm_y]; abel
+      rw [heq]
+      have hsquare := hnorm (-(2 : ℝ)⁻¹)
+      rw [hvnorm, hs_sq, hrho_sq] at hsquare
+      have hn := norm_nonneg (-(2 : ℝ)⁻¹ • v + s • u)
+      nlinarith
+  have hp_mem : p ∈ {z | dist z x = r ∧ dist z y = r} := by
+    exact hmem rho (Or.inl rfl)
+  have hq_mem : q ∈ {z | dist z x = r ∧ dist z y = r} := by
+    change dist (m - rho • u) x = r ∧ dist (m - rho • u) y = r
+    have hh := hmem (-rho) (Or.inr rfl)
+    simpa only [neg_smul, sub_eq_add_neg] using hh
+  have hall (z : EuclideanSpace ℝ (Fin 2))
+      (hz : z ∈ {z | dist z x = r ∧ dist z y = r}) : z = p ∨ z = q := by
+    rcases hz with ⟨hzx, hzy⟩
+    have hsquares : ‖z - x‖ ^ 2 = ‖z - y‖ ^ 2 := by rw [← dist_eq_norm, ← dist_eq_norm, hzx, hzy]
+    have hortho : inner ℝ (z - m) v = 0 := by
+      rw [← real_inner_self_eq_norm_sq, ← real_inner_self_eq_norm_sq] at hsquares
+      simp only [m, v] at *
+      simp only [inner_sub_left, inner_sub_right, inner_add_left, inner_add_right,
+        inner_smul_left, inner_smul_right] at hsquares ⊢
+      simp at hsquares ⊢
+      nlinarith [real_inner_comm x z, real_inner_comm y z,
+        real_inner_comm x y]
+    obtain ⟨t, ht⟩ := eq_smul_normalizedRotate90_of_inner_eq_zero hv hortho
+    change z - m = t • u at ht
+    have ht_sq : t ^ 2 = rho ^ 2 := by
+      have hz_norm : ‖z - x‖ = r := by simpa [dist_eq_norm] using hzx
+      have heq : z - x = (2 : ℝ)⁻¹ • v + t • u := by
+        calc
+          z - x = (z - m) + (m - x) := by abel
+          _ = (2 : ℝ)⁻¹ • v + t • u := by rw [ht, hm_x]; abel
+      have hsq : ‖(2 : ℝ)⁻¹ • v + t • u‖ ^ 2 =
+          ((2 : ℝ)⁻¹) ^ 2 * ‖v‖ ^ 2 + t ^ 2 := by
+        rw [← real_inner_self_eq_norm_sq, inner_add_add_self]
+        rw [inner_smul_left, inner_smul_right, inner_smul_left, inner_smul_right,
+          inner_smul_left, inner_smul_right, inner_smul_left, inner_smul_right]
+        simp [hvu, real_inner_comm, real_inner_self_eq_norm_sq, hu_norm]
+        ring
+      rw [← heq, hz_norm] at hsq
+      have hvnorm : ‖v‖ = dist x y := by simp [v, dist_eq_norm, norm_sub_rev]
+      rw [hvnorm] at hsq
+      rw [hrho_sq]
+      nlinarith
+    have ht_cases : t = rho ∨ t = -rho := (sq_eq_sq_iff_eq_or_eq_neg).mp ht_sq
+    rcases ht_cases with rfl | rfl
+    · left
+      simp only [p]
+      rw [← ht]
+      abel
+    · right
+      simp only [q]
+      have ht' : z - m = -(rho • u) := by simpa only [neg_smul] using ht
+      calc
+        z = m + (z - m) := by abel
+        _ = m - rho • u := by rw [ht']; abel
+  have hpq : p ≠ q := by
+    intro heq
+    have heq' := congr_arg (fun z => z - m) heq
+    have hneg : rho • u = -(rho • u) := by
+      simpa only [p, q, add_sub_cancel_left, sub_sub_cancel_left] using heq'
+    have hadd : rho • u + rho • u = 0 := add_eq_zero_iff_eq_neg.mpr hneg
+    have htwo : (2 : ℝ) • (rho • u) = 0 := by simpa [two_smul ℝ] using hadd
+    have hzero : rho • u = 0 := by
+      have htwo' : (2 : ℝ) • (rho • u) = (2 : ℝ) • (0 : EuclideanSpace ℝ (Fin 2)) := by
+        simpa using htwo
+      exact smul_right_injective (EuclideanSpace ℝ (Fin 2))
+        (by norm_num : (2 : ℝ) ≠ 0) htwo'
+    rcases smul_eq_zero.mp hzero with hrho_zero | hu_zero
+    · exact (ne_of_gt hrho_pos) hrho_zero
+    · have hnormzero : ‖u‖ = 0 := norm_eq_zero.mpr hu_zero
+      rw [hu_norm] at hnormzero
+      norm_num at hnormzero
+  have hset : {z | dist z x = r ∧ dist z y = r} = ({p, q} : Set (EuclideanSpace ℝ (Fin 2))) := by
+    ext z
+    constructor
+    · intro hz
+      rcases hall z hz with rfl | rfl <;> simp
+    · intro hz
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz
+      rcases hz with rfl | rfl <;> assumption
+  rw [hset]
+  exact Set.ncard_pair hpq
 
 /-- On the real line, equal-radius spheres have no common point when their
 distinct centers are closer than twice the radius. -/
