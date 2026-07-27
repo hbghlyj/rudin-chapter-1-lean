@@ -1,5 +1,5 @@
 name = "RudinExercises"
-defaultTargets = ["RudinChapter1", "RudinChapter2", "RudinChapter3", "RudinChapter4", "RudinChapter5", "RudinChapter6", "WheedenChapter1", "WheedenChapter2", "IntroSmoothManifoldsChapter1", "IntroSmoothManifoldsChapter2", "IntroSmoothManifoldsChapter3", "IntroSmoothManifoldsChapter4", "IntroSmoothManifoldsChapter5", "IntroSmoothManifoldsChapter6", "IntroSmoothManifoldsChapter7", "IntroSmoothManifoldsChapter8", "IntroSmoothManifoldsChapter9", "IntroSmoothManifoldsChapter10", "IntroSmoothManifoldsChapter11", "IntroSmoothManifoldsChapter12", "IntroSmoothManifoldsChapter13", "IntroSmoothManifoldsChapter14", "IntroSmoothManifoldsChapter15", "IntroSmoothManifoldsChapter16", "IntroSmoothManifoldsChapter17", "IntroSmoothManifoldsChapter18"]
+defaultTargets = ["RudinChapter1", "RudinChapter2", "RudinChapter3", "RudinChapter4", "RudinChapter5", "RudinChapter6", "WheedenChapter1", "WheedenChapter2", "IntroSmoothManifoldsChapter1", "IntroSmoothManifoldsChapter2", "IntroSmoothManifoldsChapter3", "IntroSmoothManifoldsChapter4", "IntroSmoothManifoldsChapter5", "IntroSmoothManifoldsChapter6", "IntroSmoothManifoldsChapter7", "IntroSmoothManifoldsChapter8", "IntroSmoothManifoldsChapter9", "IntroSmoothManifoldsChapter10", "IntroSmoothManifoldsChapter11", "IntroSmoothManifoldsChapter12", "IntroSmoothManifoldsChapter13", "IntroSmoothManifoldsChapter14", "IntroSmoothManifoldsChapter15", "IntroSmoothManifoldsChapter16", "IntroSmoothManifoldsChapter17", "IntroSmoothManifoldsChapter18", "IntroSmoothManifoldsChapter19"]
 
 [[require]]
 name = "mathlib"
@@ -109,3 +109,7 @@ globs = ["IntroSmoothManifoldsChapter17.+"]
 [[lean_lib]]
 name = "IntroSmoothManifoldsChapter18"
 globs = ["IntroSmoothManifoldsChapter18.+"]
+
+[[lean_lib]]
+name = "IntroSmoothManifoldsChapter19"
+globs = ["IntroSmoothManifoldsChapter19.+"]
