@@ -707,24 +707,23 @@ and similarly $L_2=\sqrt{\alpha}$. It is easy to conclude that $\lim_{n\to\infty
 
 \smallskip
 \noindent\textbf{Solution.}\quad
-(d) We imitate an analysis in Exercise 16(b). Put $\varepsilon_n=\left\vert x_n-\sqrt{\alpha}\right\vert$ and $\beta=\frac{\sqrt{\alpha}-1}{1+x_2}$, then observe that $1<1+x_2$ (since $x_2=\frac{\alpha+x_1}{1+x_1}>0$) and $1+x_2\le 1+x_n$ for all $n$ [by part (a) and (b)]. It follows that
+(d) Put $s=\sqrt{\alpha}$ and $\varepsilon_n=|x_n-s|$.  The exact error identity is
 \begin{align*}
 \varepsilon_{n+1}
 &=\left\vert x_{n+1}-\sqrt{\alpha}\right\vert \\
 &=\left\vert \frac{\alpha+x_n}{1+x_n}-\sqrt{\alpha}\right\vert \\
 &=\left\vert \frac{x_n-\sqrt{\alpha}-\sqrt{\alpha}\left(x_n-\sqrt{\alpha}\right)}{1+x_n}\right\vert \\
 &=\left\vert \frac{1-\sqrt{\alpha}}{1+x_n}\right\vert\varepsilon_n \\
-&\le\beta\varepsilon_n
+&=\frac{s-1}{1+x_n}\varepsilon_n.
 \end{align*}
-and therefore
-\begin{align*}
-\varepsilon_n
-\le\beta\varepsilon_{n-1}
-\le\beta^2\varepsilon_{n-2}
-\le\cdots
-\le\beta^{n-1}\varepsilon_1
-\end{align*}
-So roughly the speed of convergence of the process is not more rapid than the one in Exercise 16.
+Since $x_n\to s$, the ratio $\varepsilon_{n+1}/\varepsilon_n$ tends to
+\[
+ \frac{s-1}{s+1}<1.
+\]
+Thus this iteration converges linearly with asymptotic factor
+$(\sqrt\alpha-1)/(\sqrt\alpha+1)$.  By contrast, the Newton iteration
+in Exercise 16 has an error bounded by a constant times the square of
+the preceding error, and hence converges quadratically.
 
 
 
@@ -818,7 +817,7 @@ Suppose $X$ is a nonempty complete metric space, and $\{G_n\}$ is a sequence of 
 \smallskip
 \noindent\textbf{Solution.}\quad
 
-Since $X\ne\varnothing$, we begin with some point $x_0\in X$ and given $r>0$. Since $G_1$ is dense and open, the set $N_r(x_0)\cap G_1$ is nonempty and open. Choose $x_1\in N_1(x_0)\cap G_1$ and there exists a neighborhood $E_1$ of $x_1$ such that
+Since $X\ne\varnothing$, we begin with some point $x_0\in X$ and given $r>0$. Since $G_1$ is dense and open, the set $N_r(x_0)\cap G_1$ is nonempty and open. Choose $x_1\in N_r(x_0)\cap G_1$ and there exists a neighborhood $E_1$ of $x_1$ such that
 \begin{align*}
 \bar{E}_1\subset N_r(x_0)\cap G_1\quad\mbox{and}\quad
 \operatorname{diam}E_1\le r
@@ -982,7 +981,18 @@ Let $X$ be the metric space whose points are the rational numbers, with the metr
 \smallskip
 \noindent\textbf{Solution.}\quad
 
-By Theorem 3.11(c), every rational Cauchy sequence converges to a real number. On the other hand, for every $x\in \mathbb{R}$, there exists a rational Cauchy sequence $\{p_n\}$ such that $\lim_{n\to\infty}p_n=x$. So the completion of $X$ should be $\varphi(\mathbb{R})$.
+The completion is isometric to $\mathbb{R}$.  Indeed, send the
+equivalence class of a rational Cauchy sequence $(p_n)$ to its real
+limit.  Equivalent sequences have mutual distance tending to zero and
+therefore have the same real limit, so this map is well defined.  For
+classes represented by $(p_n)$ and $(q_n)$, continuity of absolute value
+gives
+\[
+ \lim_n |p_n-q_n|=\left|\lim_n p_n-\lim_n q_n\right|,
+\]
+so the map is an isometry.  Finally every real number is the limit of a
+rational Cauchy sequence, by density of $\mathbb{Q}$ in $\mathbb{R}$;
+thus the isometry is onto.
 
 
 \end{document}
