@@ -546,7 +546,12 @@ private lemma normalizedRotate90_norm {v : EuclideanSpace ℝ (Fin 2)} (hv : v �
 
 private lemma inner_normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     inner ℝ v (normalizedRotate90 v) = 0 := by
-  sorry
+  unfold normalizedRotate90 rotate90
+  simp only [inner_add_right, inner_smul_right]
+  rw [EuclideanSpace.inner_single_right, EuclideanSpace.inner_single_right]
+  simp
+  ring_nf
+  simp
 
 private lemma eq_smul_normalizedRotate90_of_inner_eq_zero
     {v w : EuclideanSpace ℝ (Fin 2)} (hv : v ≠ 0) (hw : inner ℝ w v = 0) :
