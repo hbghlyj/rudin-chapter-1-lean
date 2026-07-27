@@ -2,21 +2,16 @@
 
 This repository contains Lean formalizations and accompanying LaTeX solutions for selected exercises from Rudin and Wheeden.
 
-The configured Lean libraries are:
-
-- `RudinChapter1`
-- `RudinChapter2`
-- `RudinChapter3`
-- `RudinChapter4`
-- `RudinChapter5`
-- `RudinChapter6`
-- `WheedenChapter1`
-- `WheedenChapter2`
+The configured Lean libraries comprise `RudinChapter1` through
+`RudinChapter6`, `WheedenChapter1` and `WheedenChapter2`,
+`IntroSmoothManifoldsChapter1` through `IntroSmoothManifoldsChapter22`, and
+the three review libraries `IntroSmoothManifoldsAReviewofTopology`,
+`IntroSmoothManifoldsBReviewofLinearAlgebra`, and
+`IntroSmoothManifoldsCReviewofCalculus`.
 
 Build all configured libraries and default targets with:
 
 ```sh
-lake build RudinChapter1 RudinChapter2 RudinChapter3 RudinChapter4 RudinChapter5 RudinChapter6 WheedenChapter1 WheedenChapter2
 lake build
 ```
 
