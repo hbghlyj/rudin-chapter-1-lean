@@ -1,1 +1,2 @@
 import IntroSmoothManifoldsChapter10.Basic
+import IntroSmoothManifoldsChapter10.VectorBundleProjection

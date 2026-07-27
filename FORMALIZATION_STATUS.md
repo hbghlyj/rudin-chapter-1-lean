@@ -21,7 +21,7 @@ Each LaTeX source has a configured Lean library, a matching default target, and 
 | `IntroSmoothManifolds_ch7.tex` | `IntroSmoothManifoldsChapter7/` | Partial |
 | `IntroSmoothManifolds_ch8.tex` | `IntroSmoothManifoldsChapter8/` | Partial |
 | `IntroSmoothManifolds_ch9.tex` | `IntroSmoothManifoldsChapter9/` | Partial |
-| `IntroSmoothManifolds_ch10.tex` | `IntroSmoothManifoldsChapter10/` | Partial |
+| `IntroSmoothManifolds_ch10.tex` | `IntroSmoothManifoldsChapter10/` | Exercise 10.1's local differential/surjectivity step formalized |
 | `IntroSmoothManifolds_ch11.tex` | `IntroSmoothManifoldsChapter11/` | Exercise 11.2 formalized |
 | `IntroSmoothManifolds_ch12.tex` | `IntroSmoothManifoldsChapter12/` | Partial |
 | `IntroSmoothManifolds_ch13.tex` | `IntroSmoothManifoldsChapter13/` | Partial |
