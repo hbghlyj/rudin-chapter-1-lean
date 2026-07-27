@@ -266,7 +266,49 @@ private lemma circleParam_orthogonal {k : ℕ} {d u v : EuclideanSpace ℝ (Fin 
 private lemma circleParam_injective {k : ℕ} {u v : EuclideanSpace ℝ (Fin k)}
     (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (huv : inner ℝ u v = 0) :
     Function.Injective (circleParam u v) := by
-  sorry
+  intro t₁ t₂ h_eq
+  have hu_norm_sq : inner ℝ u u = 1 := by rw [real_inner_self_eq_norm_sq, hu, one_pow]
+  have hv_norm_sq : inner ℝ v v = 1 := by rw [real_inner_self_eq_norm_sq, hv, one_pow]
+  have huv' : inner ℝ v u = 0 := by rw [real_inner_comm]; exact huv
+  -- Inner product with u gives coefficient of u
+  have eq_u : inner ℝ u (circleParam u v t₁) = inner ℝ u (circleParam u v t₂) := by rw [h_eq]
+  -- Inner product with v gives coefficient of v
+  have eq_v : inner ℝ v (circleParam u v t₁) = inner ℝ v (circleParam u v t₂) := by rw [h_eq]
+  -- Compute inner products
+  simp only [circleParam] at eq_u eq_v
+  have coeff_u_t : ∀ t, inner ℝ u (((1 - t ^ 2) / (1 + t ^ 2)) • u + ((2 * t) / (1 + t ^ 2)) • v) =
+      (1 - t ^ 2) / (1 + t ^ 2) := by
+    intro t
+    rw [inner_add_right, inner_smul_right, inner_smul_right, hu_norm_sq, huv, mul_one, mul_zero, add_zero]
+  have coeff_v_t : ∀ t, inner ℝ v (((1 - t ^ 2) / (1 + t ^ 2)) • u + ((2 * t) / (1 + t ^ 2)) • v) =
+      (2 * t) / (1 + t ^ 2) := by
+    intro t
+    rw [inner_add_right, inner_smul_right, inner_smul_right, huv', hv_norm_sq, mul_one, mul_zero, zero_add]
+  rw [coeff_u_t t₁, coeff_u_t t₂] at eq_u
+  rw [coeff_v_t t₁, coeff_v_t t₂] at eq_v
+  -- From eq_u, we can derive t₁^2 = t₂^2
+  have h1 : (1 - t₁^2) * (1 + t₂^2) = (1 - t₂^2) * (1 + t₁^2) := by
+    have hden1 : 1 + t₁^2 ≠ 0 := by positivity
+    have hden2 : 1 + t₂^2 ≠ 0 := by positivity
+    rw [div_eq_div_iff hden1 hden2] at eq_u
+    linarith
+  have h2 : t₁^2 = t₂^2 := by linarith
+  -- From eq_v and h2, we get t₁ = t₂
+  have hden1 : 1 + t₁^2 > 0 := by positivity
+  have hden2 : 1 + t₂^2 > 0 := by positivity
+  have hden1' : 1 + t₁^2 ≠ 0 := ne_of_gt hden1
+  have hden2' : 1 + t₂^2 ≠ 0 := ne_of_gt hden2
+  -- From eq_v: 2 * t₁ / (1 + t₁^2) = 2 * t₂ / (1 + t₂^2)
+  -- Multiply both sides by (1 + t₁^2)(1 + t₂^2)
+  have eq_v' : 2 * t₁ * (1 + t₂^2) = 2 * t₂ * (1 + t₁^2) := by
+    rw [div_eq_div_iff hden1' hden2'] at eq_v
+    linarith
+  -- Using h2: t₁^2 = t₂^2, so 1 + t₁^2 = 1 + t₂^2
+  have h3 : 1 + t₁^2 = 1 + t₂^2 := by linarith
+  -- From eq_v': 2 * t₁ * (1 + t₂^2) = 2 * t₂ * (1 + t₂^2), so t₁ = t₂
+  have eq_v'' : 2 * t₁ * (1 + t₁^2) = 2 * t₂ * (1 + t₁^2) := by rw [← h3] at eq_v'; exact eq_v'
+  have eq_v''' : 2 * t₁ = 2 * t₂ := by nlinarith
+  linarith
 
 private lemma equal_radius_spheres_infinite {k : ℕ} (hk : 3 ≤ k)
     (x y : EuclideanSpace ℝ (Fin k)) (r : ℝ) (hr : 0 < r) (hxy : x ≠ y)
