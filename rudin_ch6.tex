@@ -1,0 +1,646 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\title{Principles of Mathematical Analysis: Chapter 6 Exercises}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent These solutions develop the principal estimates and convergence arguments for the selected exercises.
+
+Suppose $\alpha$ increases on $[a,b]$, $a\le x_0\le b$, $\alpha$ is continuous at $x_0$, $f(x_0)=1$, and $f(x)=0$ if $x\ne x_0$. Prove that $f\in\mathcal{R}(\alpha)$ and that $\int f\,d\alpha=0$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Note that $f\in\mathcal{R}(\alpha)$ follows by Theorem 6.10 directly. However, it suffices to show that $\int_a^b f\,d\alpha=0$. Since $\alpha$ is continuous at $x_0$, given $\varepsilon>0$ there exists $\delta>0$ such that $\left\vert x-x_0\right\vert<\delta$ implies $\left\vert\alpha(x)-\alpha(x_0)\right\vert<\varepsilon$. Let $P=\{x_1,x_2,\ldots,x_n\}$ be a partition of $[a,b]$, and let $i\in\{1,2,\ldots,n-1\}$ be an index such that $x_0\in[x_i,x_{i+1}]$. Then we consider the following four cases.
+Case 1: $x_0\in(x_i,x_{i+1})$. We can choose $P$ such that $\left\vert x_{i+1}-x_i\right\vert<\delta$, so
+\begin{align*}
+U(P,f,\alpha)
+&=\left\vert\alpha(x_{i+1})-\alpha(x_i)\right\vert \\
+&\le\left\vert\alpha(x_{i+1})-\alpha(x_0)\right\vert+\left\vert\alpha(x_0)-\alpha(x_i)\right\vert \\
+&<2\varepsilon
+\end{align*}
+Since $\varepsilon$ can be arbitrarily small, $\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int_a^bf\,d\alpha\le 0$. On the other hand, it is clearly that $L(P,f,\alpha)=0$. Hence $\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int_a^bf\,d\alpha=\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int_a^b f\,d\alpha=0$, or $\int_a^bf\,d\alpha=0$.
+Case 2: $x_0=x_1$. Similar to Case 1.
+Case 3: $x_0=x_i$ where $i\in\{2,3,\ldots,n-1\}$. We can choose $P$ such that $\left\vert x_{i+1}-x_i\right\vert<\delta$ and $\left\vert x_i-x_{i-1}\right\vert<\delta$, so
+\begin{align*}
+U(P,f,\alpha)
+&=\left\vert\alpha(x_{i+1})-\alpha(x_i)\right\vert
++\left\vert\alpha(x_i)-\alpha(x_{i-1})\right\vert \\
+&=\left\vert\alpha(x_{i+1})-\alpha(x_0)\right\vert
++\left\vert\alpha(x_0)-\alpha(x_{i-1})\right\vert \\
+&<2\varepsilon
+\end{align*}
+Since $\varepsilon$ can be arbitrarily small, $\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int_a^bf\,d\alpha\le 0$. On the other hand, it is clearly that $L(P,f,\alpha)=0$. Hence $\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int_a^bf\,d\alpha=\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int_a^b f\,d\alpha=0$, or $\int_a^bf\,d\alpha=0$.
+Case 4: $x_0=x_n$. Similar to Case 1.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f\ge 0$, $f$ is continuous on $[a,b]$, and $\int_a^bf(x)\,dx=0$. Prove that $f(x)=0$ for all $x\in[a,b]$. (Compare this with Exercise 1.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Suppose there exists $x_0\in[a,b]$ such that $f(x_0)>0$, then since $f$ is continuous on $[a,b]$, there exists $\delta>0$ such that $x\in[a,b]$ and $\left\vert x-x_0\right\vert\le\delta$ implies $f(x)>\frac{f(x_0)}{2}$. Consider the interval $I=[a,b]\cap[x_0-\delta,x_0+\delta]$, it is easy to see that $I=[c,d]$, where $a\le c<d\le b$. So if we let $P$ be a partition in such a way that $c,d\in P$,
+\begin{align*}
+L(P,f)\ge\left[\inf_{x\in[c,d]}f(x)\right](d-c)\ge\frac{f(x_0)}{2}\,(d-c)>0
+\end{align*}
+where the first inequality shown above follows by the fact $f\ge 0$ on $[a,b]$. It follows that
+\begin{align*}
+0=\int_a^bf(x)\,dx=\sup L(P,f)>0
+\end{align*}
+a contradiction.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Define three functions $\beta_1$, $\beta_2$, $\beta_3$ as follows: $\beta_j(x)=0$ if $x<0$, $\beta_j(x)=1$ if $x>0$ for $j=1,2,3$; and $\beta_1(0)=0$, $\beta_2(0)=1$, $\beta_3(0)=\tfrac{1}{2}$. Let $f$ be a bounded function on $[-1,1]$.
+(a) Prove that $f\in\mathcal{R}(\beta_1)$ if and only if $f(0+)=f(0)$ and that then
+\begin{align*}
+\int f\,d\beta_1=f(0)
+\end{align*}
+(b) State and prove a similar result for $\beta_2$.
+(c) Prove that $f\in\mathcal{R}(\beta_3)$ if and only if $f$ is continuous at $0$.
+(d) If $f$ is continuous at $0$ prove that
+\begin{align*}
+\int f\,d\beta_1=\int f\,d\beta_2=\int f\,d\beta_3=f(0)
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Let $P=\{x_0,x_1,x_2,\ldots,x_n\}$ be a partition of $[-1,1]$, then by a simple observation,
+\begin{align*}
+\Delta\beta_{1,i}
+=\beta_1(x_i)-\beta_1(x_{i-1})
+=\left\{\begin{array}{ll}
+1& \mbox{if }x_{i-1}\le 0<x_i\vspace{0.08in}\\
+0& \mbox{if otherwise}
+\end{array}\right.
+\end{align*}
+Now, if $f\in\mathcal{R}(\beta_1)$. Given $\varepsilon>0$, choose $P$ such that $U(P,f,\beta_1)-L(P,f,\beta_1)<\varepsilon$. Let $P^\ast$ be a refinement of $P$ containing $0$, and let $x^\ast_{i-1}=0$ and $x^\ast_i=\delta>0$, then $0\le x\le \delta$ implies
+\begin{align*}
+\left\vert f(x)-f(0)\right\vert
+&\le\sup_{x\in[0,\delta]} f(x)-\inf_{x\in[0,\delta]} f(x)\\
+&=\left[\sup_{x\in[x_{i-1}^\ast,x_i^\ast]} f(x)-\inf_{x\in[x_{i-1}^\ast,x_i^\ast]} f(x)\right]\Delta\beta_{1,i}\\
+&=U(P^\ast,f,\beta_1)-L(P^\ast,f,\beta_1)\\
+&\le U(P,f,\beta_1)-L(P,f,\beta_1)\\
+&<\varepsilon
+\end{align*}
+Thus $f(0+)=f(0)$. It also follows that
+\begin{align*}
+\left\vert \int f\,d\beta_1-f(0)\right\vert
+&\le\left\vert \int f\,d\beta_1-U(P^\ast,f,\beta_1)\right\vert+\left\vert U(P^\ast,f,\beta_1)-f(0)\right\vert \\
+&<\varepsilon+\sup_{x\in[0,\delta]} f(x)-f(0) \\
+&\le2\varepsilon
+\end{align*}
+and hence $\int f\,d\beta_1=f(0)$. Conversely, if $f(0+)=f(0)$. Given $\varepsilon>0$, choose $\delta>0$ less than $1$, such that $x\in[0,\delta]$ implies $\left\vert f(x)-f(0)\right\vert<\varepsilon$. Put $P$ be such that $x_i=\delta$ and $x_{i-1}=0$ for some $i$, then
+\begin{align*}
+U(P,f,\beta_1)-L(P,f,\beta_1)
+&=\left[\sup_{x\in[x_{i-1},x_i]} f(x)-\inf_{x\in[x_{i-1},x_i]} f(x)\right]\Delta\beta_{1,i}\\
+&=\sup_{x\in[0,\delta]} f(x)-\inf_{x\in[0,\delta]} f(x)\\
+&\le \left[f(0)+\varepsilon\right]-\left[f(0)-\varepsilon\right]\\
+&=2\varepsilon
+\end{align*}
+Thus $f\in\mathcal{R}(\beta_1)$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Statement: $f\in\mathcal{R}(\beta_2)$ if and only if $f(0-)=f(0)$ and that then
+\begin{align*}
+\int f\,d\beta_2=f(0)
+\end{align*}
+Indeed, the only nonzero increment of $\beta_2$ occurs on the interval immediately to the left of $0$ in a partition containing $0$.  Thus the upper-minus-lower sum is exactly the oscillation of $f$ on that interval.  It can be made arbitrarily small precisely when $f(0-)=f(0)$, and the upper and lower sums then both tend to $f(0)$.
+
+(c) For a partition containing $0$, the two intervals adjacent to $0$ each carry a $\beta_3$-increment of $1/2$.  Hence the upper-minus-lower sum can tend to zero if and only if the oscillations of $f$ on both one-sided intervals tend to zero.  This is equivalent to
+\[
+ f(0-)=f(0)=f(0+),
+\]
+that is, to continuity at $0$.  In that case each of the two contributions to the integral tends to $f(0)/2$, so $\int f\,d\beta_3=f(0)$.
+
+(d) If $f$ is continuous at $0$, both one-sided conditions in (a) and (b) hold, as does the condition in (c).  The value formulas just proved therefore give
+\[
+\int f\,d\beta_1=\int f\,d\beta_2=\int f\,d\beta_3=f(0).
+\]
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $f(x)=0$ for all irrational $x$, $f(x)=1$ for all rational $x$, prove that $f\notin\mathcal{R}$ on $[a,b]$ for any $a<b$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $P=\{x_0,x_1,x_2,\ldots,x_n\}$ be a partition of $[a,b]$. Since $[x_{i-1},x_i]$ contains a rational number and a irrational number, for $i=1,2,\ldots,n$, we have
+\begin{align*}
+U(f,P)=b-a\quad\mbox{and}\quad L(f,P)=0
+\end{align*}
+It follows that
+\begin{align*}
+\inf U(f,P)=b-a\quad\mbox{and}\quad \sup L(f,P)=0
+\end{align*}
+i.e., $\inf U(f,P)\ne\sup L(f,P)$. So $f\notin\mathcal{R}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f$ is a bounded real function on $[a,b]$, and $f^2\in\mathcal{R}$ on $[a,b]$. Does it follow that $f\in\mathcal{R}$? Does the answer change if we assume $f^3\in\mathcal{R}$?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(i) No. For example, let $f:[a,b]\to \mathbb{R}$ be defined by
+\begin{align*}
+f(x)=\left\{\begin{array}{ll}
+1&\mbox{$x$ is rational} \vspace{0.08in}\\
+-1&\mbox{$x$ is irrational}
+\end{array}\right.
+\end{align*}
+Then $f\notin\mathcal{R}$ on $[a,b]$ (see Exercise 4). However, $f^2=1$ on $[a,b]$, which implies $f^2\in\mathcal{R}$ on $[a,b]$.
+(ii) Yes. $f^3\in\mathcal{R}$ on $[a,b]$ implies $f\in\mathcal{R}$ on $[a,b]$, by using Theorem 6.11 with $\phi(x)=\sqrt[3]{x}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $P$ be the Cantor set constructed in Sec. 2.44. Let $f$ be a bounded real function on $[0,1]$ which is continuous at every point outside $P$. Prove that $f\in\mathcal{R}$ on $[0,1]$. \textit{Hint:} $P$ can be covered by finitely many segments whose total length can be made as small as desired. Proceed as in Theorem 6.10.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+Let $|f|\le M$.  Given $\varepsilon>0$, cover $P$ by finitely many open intervals whose total length is less than $\varepsilon/(4M)$ (with the assertion immediate if $M=0$).  Their endpoints, together with $0$ and $1$, determine a partition.  On the compact set left after slightly shrinking these intervals, $f$ is continuous and hence uniformly continuous.  Refine the partition there until the sum of oscillation times interval length is less than $\varepsilon/2$.  The intervals meeting $P$ contribute at most
+\[
+ 2M\sum |I|<\varepsilon/2.
+\]
+Thus the refined partition $Q$ satisfies $U(f,Q)-L(f,Q)<\varepsilon$.  The Riemann criterion gives $f\in\mathcal R[0,1]$.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f$ is a real function on $(0,1]$ and $f\in\mathcal{R}$ on $[c,1]$ for every $c>0$. Define
+\begin{align*}
+\int_0^1f(x)\,dx=\lim_{c\to 0}\int_c^1f(x)\,dx
+\end{align*}
+if the limit exists (and is finite).
+(a) $f\in\mathcal{R}$ on $[0,1]$, show that this definition of the integral agrees with the old one.
+(b) Construct a function $f$ such that the above limit exists, although it fails to exists with $\left\vert f\right\vert$ in place of $f$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+(a) If $f\in\mathcal R[0,1]$, then it is bounded, say by $M$.  Additivity gives
+\[
+ \int_0^1f-\int_c^1f=\int_0^c f,
+ \qquad \left|\int_0^c f\right|\le Mc\longrightarrow0.
+\]
+Hence the improper definition has the ordinary value.
+
+(b) Put $f(x)=(-1)^n n$ on $(1/(n+1),1/n]$.  This function is Riemann integrable on every $[c,1]$.  Its integral over the $n$th interval is
+\[
+ (-1)^n n\left(\frac1n-\frac1{n+1}\right)=\frac{(-1)^n}{n+1}.
+\]
+Consequently $\int_0^1f$ converges by the alternating-series test.  Replacing $f$ by $|f|$ gives the divergent series $\sum_{n\ge1}1/(n+1)$, so absolute convergence fails.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f\in\mathcal{R}$ on $[a,b]$ for every $b>a$ where $a$ is fixed. Define
+\begin{align*}
+\int_a^\infty f(x)\,dx=\lim_{b\to\infty}\int_a^bf(x)\,dx
+\end{align*}
+if this limit exists (and is finite). In that case, we say that the integral on the left \textit{converges}. If it also converges after $f$ has been replaced by $\left\vert f\right\vert$, it is said to converge \textit{absolutely}.
+Assume that $f(x)\ge 0$ and that $f$ decreases monotonically on $[1,\infty)$. Prove that
+\begin{align*}
+\int_1^\infty f(x)\,dx
+\end{align*}
+converges if and only if
+\begin{align*}
+\sum_{n=1}^\infty f(n)
+\end{align*}
+converges. (This is the so-called "integral test" for convergence of series.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+For each integer $n\ge1$, monotonicity gives
+\[
+ f(n+1)\le \int_n^{n+1}f(x)\,dx\le f(n).
+\]
+Summing from $1$ to $N$ yields
+\[
+ \sum_{n=2}^{N+1}f(n)\le\int_1^{N+1}f(x)\,dx
+ \le\sum_{n=1}^{N}f(n).
+\]
+All quantities are nonnegative and increase with $N$.  If the series converges, the right inequality bounds the integrals; if the improper integral converges, the left inequality bounds the partial sums after omission of their first term.  A nonnegative increasing sequence converges exactly when it is bounded, proving both implications.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Show that integration by parts can sometimes be applied to the "improper" integrals defined in Exercise 7 and 8. (State appropriate hypothesis, formulate a theorem, and prove it.) For instance show that
+\begin{align*}
+\int_0^\infty\frac{\cos x}{1+x}\,dx=\int_0^\infty\frac{\sin x}{(1+x)^2}\,dx
+\end{align*}
+Show that one of these integral converges absolutely, but that the other does not.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+A useful form is the following.  Suppose $u,v$ are continuously differentiable on every compact subinterval of $[a,\infty)$, the limit $\lim_{R\to\infty}u(R)v(R)$ exists, and one of the two integrals $\int_a^\infty u'v$ and $\int_a^\infty uv'$ converges.  Then the other converges and
+\[
+ \int_a^\infty u'v=[uv]_a^\infty-\int_a^\infty uv'.
+\]
+Indeed, apply ordinary integration by parts on $[a,R]$ and pass to the limit.  The analogous assertion at a finite improper endpoint is proved identically.
+
+Take $u(x)=1/(1+x)$ and $v(x)=\sin x$.  Since $u(x)v(x)\to0$, integration by parts on $[0,R]$ gives, on letting $R\to\infty$,
+\[
+ \int_0^\infty\frac{\cos x}{1+x}\,dx
+ =\int_0^\infty\frac{\sin x}{(1+x)^2}\,dx.
+\]
+The integral on the right converges absolutely because it is dominated by $(1+x)^{-2}$.  The one on the left is not absolutely convergent: on intervals where $|\cos x|\ge1/2$, its absolute integral dominates a fixed positive multiple of the harmonic series over successive periods.  Its conditional convergence also follows from the displayed identity.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $p$ and $q$ be positive real numbers such that
+\begin{align*}
+\frac{1}{p}+\frac{1}{q}=1
+\end{align*}
+Prove the following statements.
+(a) If $u\ge 0$ and $v\ge 0$, then
+\begin{align*}
+uv\le\frac{u^p}{p}+\frac{v^q}{q}
+\end{align*}
+Equality holds if and only if $u^p=v^q$.
+(b) If $f\in\mathcal{R}(\alpha)$, $g\in\mathcal{R}(\alpha)$, $f\ge 0$, $g\ge 0$, and
+\begin{align*}
+\int_a^bf^p\,d\alpha=1=\int_a^bg^q\,d\alpha
+\end{align*}
+then
+\begin{align*}
+\int_a^bfg\,d\alpha\le 1
+\end{align*}
+(c) If $f$ and $g$ are complex functions in $\mathcal{R}(\alpha)$, then
+\begin{align*}
+\left\vert\int_a^bfg\,d\alpha\right\vert
+\le\left\{\int_a^b\left\vert f\right\vert^pd\alpha\right\}^{1/p}
+\left\{\int_a^b\left\vert g\right\vert^qd\alpha\right\}^{1/q}
+\end{align*}
+This is \textit{Hölder's inequality}. When $p=q=2$ it is usually called the Schwarz inequality. (Note that Theorem 1.25 is a very special case of this.)
+(d) Show that Hölder's inequality is also true for the "improper" integrals described in Exercise 7 and 8.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+Since $1/p+1/q=1$, necessarily $p,q>1$.
+
+(a) For $v>0$, minimize $u^p/p-uv+v^q/q$ as a function of $u\ge0$.  Its derivative is $u^{p-1}-v$, so the unique minimum occurs at $u^{p-1}=v$, equivalently $u^p=v^q$, and the minimum is zero.  The cases where one variable is zero are immediate.  This proves Young's inequality and its equality condition.
+
+(b) Apply (a) pointwise and integrate:
+\[
+ \int_a^bfg\,d\alpha\le {1\over p}\int_a^bf^p\,d\alpha
+       +{1\over q}\int_a^bg^q\,d\alpha={1\over p}+{1\over q}=1.
+\]
+
+(c) Set $F=(\int|f|^p\,d\alpha)^{1/p}$ and $G=(\int|g|^q\,d\alpha)^{1/q}$.  If either is zero, the assertion follows because the corresponding function vanishes except possibly where $\alpha$ assigns no increment.  Otherwise apply (b) to $|f|/F$ and $|g|/G$, then use $|\int fg|\le\int|fg|$.  Multiplication by $FG$ gives Hölder's inequality.
+
+(d) Apply the finite-interval inequality on each truncation.  If the right-hand improper integrals are finite, their truncated values are bounded by their limiting values.  Passing to the limit proves the same inequality for improper integrals (first for absolute values, and then for the integral itself).
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $\alpha$ be a fixed increasing function on $[a,b]$. For $u\in\mathcal{R}(\alpha)$, define
+\begin{align*}
+\left\Vert u\right\Vert_2
+=\left\{\int_a^b\left\vert u\right\vert^2d\alpha\right\}^{1/2}
+\end{align*}
+Suppose $f,g,h\in\mathcal{R}(\alpha)$, and prove the triangle inequality
+\begin{align*}
+\left\Vert f-h\right\Vert_2
+\le\left\Vert f-g\right\Vert_2+\left\Vert g-h\right\Vert_2
+\end{align*}
+as a consequence of the Schwarz inequality, as in the proof of Theorem 1.37.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+Put $u=f-g$ and $v=g-h$.  Then $f-h=u+v$.  Expanding and using the Schwarz inequality,
+\begin{align*}
+ \|u+v\|_2^2
+ &=\|u\|_2^2+2\operatorname{Re}\int_a^bu\overline v\,d\alpha+\|v\|_2^2\\
+ &\le\|u\|_2^2+2\|u\|_2\|v\|_2+\|v\|_2^2
+  =(\|u\|_2+\|v\|_2)^2.
+\end{align*}
+Taking nonnegative square roots gives the required triangle inequality.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+With the notations of Exercise 11, suppose $f\in\mathcal{R}(\alpha)$ and $\varepsilon>0$. Prove that there exists a continuous function $g$ on $[a,b]$ such that $\left\Vert f-g\right\Vert_2<\varepsilon$.
+\textit{Hint:} Let $P=\{x_0,\ldots,x_n\}$ be a suitable partition of $[a,b]$, define
+\begin{align*}
+g(t)=\frac{x_i-t}{\Delta x_i}f(x_{i-1})+\frac{t-x_{i-1}}{\Delta x_i}f(x_i)
+\end{align*}
+if $x_{i-1}\le t\le x_i$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+Choose a partition $P=\{x_0,\ldots,x_n\}$ for which
+\[
+ U(P,f,\alpha)-L(P,f,\alpha)<\eta,
+\]
+where $\eta>0$ will be chosen below.  Define $g$ by linear interpolation between the values $f(x_i)$.  Then $g$ is continuous.  On $[x_{i-1},x_i]$, both $f(t)$ and $g(t)$ lie between the infimum and supremum of $f$ on that interval, so $|f-g|$ is at most its oscillation $\omega_i$.  If $|f|\le M$, then $\omega_i\le2M$ and hence
+\[
+ \|f-g\|_2^2\le\sum_i\omega_i^2\Delta\alpha_i
+ \le 2M\sum_i\omega_i\Delta\alpha_i<2M\eta.
+\]
+(When $M=0$ take $g=0$.)  Choosing $\eta<\varepsilon^2/(2M)$ proves the assertion.  For complex $f$, apply the construction to real and imaginary parts, with correspondingly smaller error bounds.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Define
+\begin{align*}
+f(x)=\int_x^{x+1}\sin\left(t^2\right)dt
+\end{align*}
+(a) Prove that $\left\vert f(x)\right\vert<1/x$ if $x>0$.
+\textit{Hint:} Put $t^2=u$ and integrate by parts, to show that $f(x)$ is equal to
+\begin{align*}
+\frac{\cos\left(x^2\right)}{2x}-\frac{\cos\left[(x+1)^2\right]}{2(x+1)}-\int_{x^2}^{(x+1)^2}\frac{\cos u}{4u^{3/2}}\,du
+\end{align*}
+Replace $\cos u$ by $-1$.
+(b) Prove that
+\begin{align*}
+2xf(x)=\cos\left(x^2\right)-\cos\left[(x+1)^2\right]+r(x)
+\end{align*}
+where $\left\vert r(x)\right\vert<c/x$ and $c$ is a constant.
+(c) Find the upper and lower limits of $xf(x)$, as $x\to\infty$.
+(d) Does $\int_0^\infty\sin\left(t^2\right)dt$ converges?
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+With $u=t^2$, integration by parts gives the formula in the hint.  Therefore
+Using $-1\le\cos u\le1$ directly in that formula gives
+\[
+ f(x)\le {1\over2x}+{1\over2(x+1)}
+ +\int_{x^2}^{(x+1)^2}{du\over4u^{3/2}}={1\over x}.
+\]
+The inequality is strict because equality would require incompatible constant values of the cosine on a nondegenerate interval.  Applying the other bound for the cosine similarly gives $f(x)>-1/x$.  Hence $|f(x)|<1/x$.
+
+Multiplying the formula by $2x$ yields
+\[
+ 2xf(x)=\cos(x^2)-\cos((x+1)^2)+r(x),
+\]
+where
+\[
+ |r(x)|\le {1\over x+1}+2x\int_{x^2}^{(x+1)^2}{du\over4u^{3/2}}\le {C\over x}.
+\]
+The two cosine phases can be chosen along sequences so that their difference tends to $2$ and to $-2$ (use the density modulo $2\pi$ of the quadratic phases after first fixing $x+1/2$ modulo $\pi$).  Hence
+\[
+ \limsup_{x\to\infty}xf(x)=1,\qquad \liminf_{x\to\infty}xf(x)=-1.
+\]
+Finally, the Cauchy criterion follows from $|\int_x^{x+1}\sin(t^2)dt|<1/x$ together with the same integration-by-parts estimate on arbitrary tails.  Thus $\int_0^\infty\sin(t^2)dt$ converges (not absolutely).
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Define similarly with
+\begin{align*}
+f(x)=\int_x^{x+1}\sin\left(e^t\right)dt
+\end{align*}
+Show that
+\begin{align*}
+e^x\left\vert f(x)\right\vert<2
+\end{align*}
+and that
+\begin{align*}
+e^xf(x)=\cos\left(e^x\right)-e^{-1}\cos\left(e^{x+1}\right)+r(x)
+\end{align*}
+where $\left\vert r(x)\right\vert<Ce^{-x}$, for some constant $C$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+Substitute $u=e^t$.  Then
+\[
+ f(x)=\int_{e^x}^{e^{x+1}}{\sin u\over u}\,du.
+\]
+Integration by parts gives
+\[
+ f(x)={\cos(e^x)\over e^x}-{\cos(e^{x+1})\over e^{x+1}}
+       -\int_{e^x}^{e^{x+1}}{\cos u\over u^2}\,du.
+\]
+Consequently
+\[
+ e^xf(x)=\cos(e^x)-e^{-1}\cos(e^{x+1})+r(x),
+\quad |r(x)|\le e^x\int_{e^x}^{e^{x+1}}u^{-2}du<e^{-x}.
+\]
+The same formula gives
+\[
+ e^x|f(x)|\le1+e^{-1}+e^{-x}<2
+\]
+for $x>0$; at $x=0$ the sharper exact integral bound obtained from the first displayed integral gives the same strict inequality.  Thus the assertions hold, with $C=1$.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $f$ is a real, continuously differentiable function on $[a,b]$, $f(a)=f(b)=0$, and
+\begin{align*}
+\int_a^bf^2(x)\,dx=1
+\end{align*}
+Prove that
+\begin{align*}
+\int_a^bxf(x)f'(x)\,dx=-\frac{1}{2}
+\end{align*}
+and that
+\begin{align*}
+\int_a^b\left[f'(x)\right]^2dx\cdot\int_a^bx^2f^2(x)\,dx>\frac{1}{4}
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+Integration by parts and the endpoint conditions give
+\[
+ \int_a^bxf(x)f'(x)\,dx
+ ={1\over2}\int_a^bx(f^2)'dx
+ ={1\over2}[xf(x)^2]_a^b-{1\over2}\int_a^bf(x)^2dx=-\frac12.
+\]
+By Schwarz,
+\[
+ {1\over4}=\left|\int_a^bxf f'\,dx\right|^2
+ \le\left(\int_a^bx^2f^2dx\right)\left(\int_a^b(f')^2dx\right).
+\]
+Equality would force $f'=cxf$ throughout $[a,b]$.  Solving this first-order equation gives $f(x)=C e^{cx^2/2}$, and an endpoint value zero forces $C=0$, contradicting $\int f^2=1$.  The inequality is therefore strict.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+For $1<s<\infty$, define
+\begin{align*}
+\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s}
+\end{align*}
+(This is Riemann's zeta function, of great importance in the study of the distribution of prime numbers.) Prove that
+(a) $\zeta(s)=s\int_1^\infty\frac{[x]}{x^{s+1}}\,dx$
+and that
+(b) $\zeta(s)=\frac{s}{s-1}-s\int_1^\infty\frac{x-[x]}{x^{s+1}}\,dx$,
+where $[x]$ denotes the greatest integer $\le x$.
+Prove that the integral in (b) converges for all $s>0$.
+\textit{Hint:} To prove (a), compute the difference between the integral over $[1,N]$ and the $N$th partial sum of the series that defines $\zeta(s)$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+For an integer $N\ge2$, split the integral into unit intervals.  Since $[x]=n$ on $[n,n+1)$,
+\begin{align*}
+ s\int_1^N{[x]\over x^{s+1}}dx
+ &=\sum_{n=1}^{N-1}n(n^{-s}-(n+1)^{-s})\\
+ &=\sum_{n=1}^{N-1}n^{-s}-(N-1)N^{-s}.
+\end{align*}
+As $N\to\infty$, the final term tends to zero for $s>1$, proving (a).
+
+Since $[x]=x-(x-[x])$, (a) and $s\int_1^\infty x^{-s}dx=s/(s-1)$ give
+\[
+ \zeta(s)={s\over s-1}-s\int_1^\infty{x-[x]\over x^{s+1}}dx.
+\]
+Finally $0\le x-[x]<1$, so the last integral is dominated by $\int_1^\infty x^{-s-1}dx=1/s$, which is finite for every $s>0$.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Suppose $\alpha$ increases monotonically on $[a,b]$, $g$ is continuous, and $g(x)=G'(x)$ for $a\le x\le b$. Prove that
+\begin{align*}
+\int_a^b\alpha(x)g(x)\,dx=G(b)\alpha(b)-G(a)\alpha(a)-\int_a^bG\,d\alpha
+\end{align*}
+\textit{Hint:} Take $g$ real, without loss of generality. Given $P=\{x_0,x_1,\ldots,x_n\}$, choose $t_i=(x_{i-1},x_i)$ so that $g(t_i)\,\Delta x_i=G(x_i)-G(x_{i-1})$. Show that
+\begin{align*}
+\sum_{i=1}^n\alpha(x_i)g(x_i)\,\Delta x_i=G(b)\alpha(b)-G(a)\alpha(a)-\sum_{i=1}^nG(x_{i-1})\,\Delta\alpha_i
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+It is enough to treat real $g$; real and imaginary parts then give the complex case.  For a partition $P$, choose $t_i\in(x_{i-1},x_i)$ by the mean-value theorem so that
+\[
+ G(x_i)-G(x_{i-1})=g(t_i)\Delta x_i.
+\]
+Summation by parts gives the exact identity
+\[
+ \sum_i\alpha(x_i)[G(x_i)-G(x_{i-1})]
+ =G(b)\alpha(b)-G(a)\alpha(a)-\sum_iG(x_{i-1})\Delta\alpha_i.
+\]
+As the mesh tends to zero, uniform continuity of $g$ shows that replacing $g(t_i)$ by $g(x_i)$ changes the left side by a quantity tending to zero.  The left and right sums therefore tend respectively to $\int_a^b\alpha g\,dx$ and $\int_a^bG\,d\alpha$.  Passing to the limit proves the formula.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $\gamma_1$, $\gamma_2$, $\gamma_3$ be curves in the complex plane, defined on $[0,2\pi]$ by
+\begin{align*}
+\gamma_1(t)=e^{it},\quad \gamma_2(t)=e^{2it},\quad \gamma_3(t)=e^{2\pi it\sin\left(1/t\right)}
+\end{align*}
+Show that these three curves have the same range, that $\gamma_1$ and $\gamma_2$ are rectifiable, that the length of $\gamma_1$ is $2\pi$, that the length of $\gamma_2$ is $4\pi$, and that $\gamma_3$ is not rectifiable.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+The first two ranges are the unit circle.  For $\gamma_3$, the phase $2\pi t\sin(1/t)$ is continuous for $t>0$ and takes every value in an interval of length at least $2\pi$ (already on a suitable compact subinterval), so its exponential also has the whole unit circle as range; define its value at $0$ by the limiting convention relevant to the curve.
+
+For a continuously differentiable curve, length is the integral of the speed.  Thus
+\[
+ L(\gamma_1)=\int_0^{2\pi}|ie^{it}|dt=2\pi,
+ \qquad L(\gamma_2)=\int_0^{2\pi}|2ie^{2it}|dt=4\pi.
+\]
+For the third curve, the real phase $\theta(t)=2\pi t\sin(1/t)$ has derivative
+$2\pi(\sin(1/t)-t^{-1}\cos(1/t))$, whose absolute integral diverges near zero.  Choose a partition through successive extrema on intervals where the phase increments are small enough that chord length is comparable to phase increment.  The corresponding polygonal sums dominate a constant multiple of the divergent variation of $\theta$.  Hence $\gamma_3$ is not rectifiable.
+
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $\gamma_1$ be a curve in $\mathbb{R}^k$, defined on $[a,b]$; let $\phi$ be a continuous 1-1 mapping of $[c,d]$ onto $[a,b]$, such that $\phi(c)=a$; and define $\gamma_2(s)=\gamma_1(\phi(s))$. Prove that $\gamma_2$ is an arc, a closed curve, or a rectifiable curve if and only if the same is true of $\gamma_1$. Prove that $\gamma_2$ and $\gamma_1$ have the same length.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+
+A continuous one-to-one map from the compact interval $[c,d]$ onto $[a,b]$ is a homeomorphism and is strictly monotone.  The condition $\phi(c)=a$ makes it increasing and gives $\phi(d)=b$.  Composition with this homeomorphism preserves injectivity and equality of endpoint values, so it preserves the properties of being an arc and of being closed.
+
+If $c=s_0<\cdots<s_n=d$ is a partition, then
+\[
+ a=\phi(s_0)<\cdots<\phi(s_n)=b
+\]
+is a partition and the polygonal sums for $\gamma_2$ at the first partition and for $\gamma_1$ at the second are identical.  Conversely, every partition of $[a,b]$ is obtained from one of $[c,d]$ by applying $\phi^{-1}$.  Taking suprema over all partitions shows that the two lengths are equal.  In particular, one curve is rectifiable if and only if the other is.
+
+\end{document}
