@@ -646,8 +646,8 @@ theorem equal_radius_circles_two_points (x y : EuclideanSpace ℝ (Fin 2))
     have hortho : inner ℝ (z - m) v = 0 := by
       rw [← real_inner_self_eq_norm_sq, ← real_inner_self_eq_norm_sq] at hsquares
       simp only [m, v] at *
-      simp only [inner_sub_left, inner_sub_right, inner_add_left, inner_add_right,
-        inner_smul_left, inner_smul_right] at hsquares ⊢
+      simp only [inner_sub_left, inner_sub_right, inner_add_left,
+        inner_smul_left] at hsquares ⊢
       simp at hsquares ⊢
       nlinarith [real_inner_comm x z, real_inner_comm y z,
         real_inner_comm x y]
@@ -664,7 +664,7 @@ theorem equal_radius_circles_two_points (x y : EuclideanSpace ℝ (Fin 2))
         rw [← real_inner_self_eq_norm_sq, inner_add_add_self]
         rw [inner_smul_left, inner_smul_right, inner_smul_left, inner_smul_right,
           inner_smul_left, inner_smul_right, inner_smul_left, inner_smul_right]
-        simp [hvu, real_inner_comm, real_inner_self_eq_norm_sq, hu_norm]
+        simp [hvu, real_inner_comm, hu_norm]
         ring
       rw [← heq, hz_norm] at hsq
       have hvnorm : ‖v‖ = dist x y := by simp [v, dist_eq_norm, norm_sub_rev]
@@ -723,7 +723,7 @@ theorem equal_radius_line_close_empty (x y : ℝ) (r : ℝ) (hr : 0 < r)
   rw [abs_eq (le_of_lt hr)] at hzx hzy
   rw [abs_lt] at hclose
   rcases hzx with hzx | hzx <;> rcases hzy with hzy | hzy
-  all_goals first | exact hxy (by linarith) | linarith
+  all_goals exact hxy (by linarith)
 
 /-- The parallelogram identity in real Euclidean space. -/
 theorem euclidean_parallelogram {k : ℕ} (x y : EuclideanSpace ℝ (Fin k)) :

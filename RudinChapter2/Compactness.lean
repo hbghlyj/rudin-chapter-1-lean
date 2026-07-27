@@ -20,13 +20,12 @@ theorem reciprocalCompactSet_bounded : Bornology.IsBounded reciprocalCompactSet 
     norm_num
   · constructor
     · positivity
-    · have h : (1 : ℝ) ≤ n + 1 := by norm_num
-      exact (div_le_iff₀' (by positivity)).mpr (by simpa using h)
+    · exact (div_le_iff₀' (by positivity)).mpr (by norm_num)
 
 /-- The reciprocal set is compact. -/
 theorem reciprocalCompactSet_compact : IsCompact reciprocalCompactSet := by
   have h := tendsto_reciprocal_sequence.isCompact_insert_range
-  simpa [reciprocalCompactSet] using h
+  simpa only [reciprocalCompactSet] using h
 
 /-- The reciprocal set is closed. -/
 theorem reciprocalCompactSet_closed : IsClosed reciprocalCompactSet := by

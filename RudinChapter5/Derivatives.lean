@@ -15,11 +15,11 @@ theorem injective_of_positive_deriv {f : ℝ → ℝ}
 /-- The derivative of the identity is one. -/
 theorem deriv_id : deriv (fun x : ℝ => x) = fun _ => 1 := by
   funext x
-  simpa using (hasDerivAt_id x).deriv
+  simp
 
 /-- The derivative of a constant function vanishes. -/
 theorem deriv_const (c : ℝ) : deriv (fun _ : ℝ => c) = 0 := by
   funext x
-  simpa using (hasDerivAt_const x c).deriv
+  simp
 
 end RudinChapter5
