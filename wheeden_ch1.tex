@@ -1,0 +1,788 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\title{Measure and Integral: Chapter 1 Exercises}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent The following solutions collect the principal set-theoretic, topological, and Riemann-integral arguments used in the chapter.
+
+Prove the following facts, which were left as exercise above.
+(a) For a sequence of sets $\{E_k\}$, $\limsup E_k$ consists of those points which belong to infinitely many $E_k$, and $\liminf E_k$ consists of those points which belong to all $E_k$ from some $k$ on.
+(b) 
+$$
+\mathrm{C}\left(\bigcup_{E\in\mathcal{F}}E\right)=\bigcap_{E\in\mathcal{F}}\mathrm{C}E,\quad
+\mathrm{C}\left(\bigcap_{E\in\mathcal{F}}E\right)=\bigcup_{E\in\mathcal{F}}\mathrm{C}E
+$$
+
+(c) Every Cauchy sequence in $\mathbf{R}^n$ converges to a point of $\mathbf{R}^n$. (This can be deduced from its analogue in $\mathbf{R}^1$ by noting that the entries in a given coordinate position of the points in a Cauchy sequence in $\mathbf{R}^n$ form a Cauchy sequence in $\mathbf{R}^1$.)
+(d) 
+(a) \textit{$L=\limsup_{k\to\infty}a_k$ if and only if} (i) \textit{there is a subsequence $\{a_{k_j}\}$ of $\{a_k\}$ which converges to $L$, and} (ii) \textit{if $L'>L$, there is an integer $K$ such that $a_k<L'$ for $k\ge K$.}
+(b) \textit{$l=\liminf_{k\to\infty}a_k$ if and only if} (i) \textit{there is a subsequence $\{a_{k_j}\}$ of $\{a_k\}$ which converges to $l$, and} (ii) \textit{if $l'<l$, there is an integer $K$ such that $a_k>l'$ for $k\ge K$.}
+
+(e) A sequence $\{a_k\}$ converges to $a$, $-\infty\le a\le\infty$, if and only if $\limsup_{k\to\infty}a_k=\liminf_{k\to\infty}a_k=a$.
+(f)  $B(\mathbf{x};\delta)$ is open.
+(g) 
+(i) \textit{$\overline{B(\mathbf{x},\delta)}=\{\mathbf{y}:\left\vert\mathbf{x}-\mathbf{y}\right\vert\le\delta\}$.}
+(ii) \textit{$E$ is closed if and only if $E=\overline{E}$; that is, $E$ is closed if and only if it contains all its limit points.}
+(iii) \textit{$\overline{E}$ is closed, and $\overline{E}$ is the smallest closed set containing $E$; that is, if $F$ is a closed and $E\subset F$, then $\overline{E}\subset F$.}
+
+(h) 
+\textbf{Theorem 1.6.}
+(i) \textit{The union of any number of open sets is open.}
+(ii) \textit{The intersection of a finite number of open sets is open.}
+
+\textbf{Theorem 1.7.}
+(i) \textit{The intersection of any number of closed sets is closed.}
+(ii) \textit{The union of a finite number of closed sets is closed.}
+
+(i) 
+\textit{A set $E_1\subset E$ is relatively closed with respect to $E$ if and only if $E_1=E\cap\overline{E}_1$, that is, if and only if every limit point of $E_1$ which lies in $E$ is in $E_1$.}
+
+(j) Any closed (open) set in $\mathbf{R}^n$ is of type $G_\delta$ ($F_\sigma$). [If $F$ is closed, consider the sets $\{\mathbf{x};\operatorname{dist}(\mathbf{x},F)<(1/k)\}$, $k=1,2,\ldots$]
+(k) 
+(i) \textit{(The Heine-Borel theorem) A set $E\subset\mathbf{R}^n$ is compact if and only if it is closed and bounded.}
+(ii) \textit{A set $E\subset\mathbf{R}^n$ is compact if and only if every sequence of points of $E$ has a subsequence which converges to a point of $E$.}
+
+----------------------------------------------------
+
+(a) For the first part, suppose $\mathbf{x}$ belongs to only finitely many $E_k$, say $\mathbf{x}\in E_{k_i}$ for $i=1,2,\ldots,m$. W.l.o.g., let $k_1<k_2<\cdots<k_m$. Then $\mathbf{x}\notin E_k$ for all $k>k_m$, implying $\mathbf{x}\notin\bigcup_{k=k_m+1}^\infty E_k$. Thus by definition, $\mathbf{x}\notin\limsup E_k$. Conversely, if $\mathbf{x}$ belongs to infinitely many $E_k$. Then for all $j$, we always have $\mathbf{x}\in E_k$ for some $k\ge j$ (otherwise $\mathbf{x}$ belongs to at most the sets $E_1,E_2,\ldots,E_{j-1}$, contradicting to the assumption). It follows that $\mathbf{x}\in\bigcup_{k=j}^\infty E_k$ for all $j$, and hence by definition, $\mathbf{x}\in\limsup E_k$. For the second part, let $\mathbf{y}\in \liminf E_k$. Then by definition, $\mathbf{y}\in\bigcap_{k=k_0}^\infty E_k$ for some $k_0$, i.e., we have $\mathbf{y}\in E_k$ for all $k\ge k_0$. The converse is immediate.
+\textbf{Remark.} By the above two results, we conclude that $\liminf E_k\subset\limsup E_k$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) For the first part, we have $\mathbf{x}\in\mathrm{C}\left(\bigcup_{E\in\mathcal{F}}E\right)$ if and only if $\mathbf{x}\notin\bigcup_{E\in\mathcal{F}}E$, if and only if $\mathbf{x}\notin E$ for all $E\in\mathcal{F}$, if and only if $\mathbf{x}\in \mathrm{C}E$ for all $E\in\mathcal{F}$, if and only if $\mathbf{x}\in\bigcap_{E\in\mathcal{F}}\mathrm{C}E$. The proof of the second part is based on a similar technique.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Let $\{\mathbf{x}_i\}$ be a Cauchy sequence in $\mathbf{R}^n$. For $k=1,2,\ldots$, let $E_k=\{\mathbf{x}_{k},\mathbf{x}_{k+1},\mathbf{x}_{k+2},\ldots\}$. We claim that $\{\mathbf{x}_i\}$ is bounded.
+\textit{Proof of the claim.} Since $\{\mathbf{x}_i\}$ is Cauchy, we can choose an integer $k_0$ so that $\left\vert\mathbf{x}_i-\mathbf{x}_{k_0}\right\vert<1$ for all $i\ge k_0$. So if we let $\left\vert\mathbf{x}_{k_0}\right\vert=M$, then for all $i\ge k_0$,
+$$
+\left\vert\mathbf{x}_i\right\vert
+\le \left\vert\mathbf{x}_i-\mathbf{x}_{k_0}\right\vert+\left\vert\mathbf{x}_{k_0}\right\vert
+<1+M
+$$
+i.e., $E_{k_0}$ is bounded. Together with the first $k_0-1$ points $\mathbf{x}_1,\mathbf{x}_2,\ldots,\mathbf{x}_{k_0-1}$, we conclude that $\{\mathbf{x}_i\}$ is bounded. $\Box$
+By the claim, it is clear that $E_k$ is bounded for each $k$. We also claim $\overline{E}_k$ is bounded for each $k$.
+\textit{Proof of the claim.} Given $\mathbf{x}\in\overline{E}_k$. If $\mathbf{x}\in E_k$, then the result is clear. If $\mathbf{x}$ is a limit point of $E_k$, then by definition, there exists $\mathbf{y}\in E_k$ so that $\left\vert\mathbf{x}-\mathbf{y}\right\vert<1$. Thus
+$$
+\left\vert\mathbf{x}\right\vert
+\le\left\vert\mathbf{x}-\mathbf{y}\right\vert+\left\vert\mathbf{y}\right\vert
+<1+\left\vert\mathbf{y}\right\vert
+$$
+and hence the boundness of $\overline{E}_k$ follows from the boundness of $E_k$. $\Box$
+Now, using the Heine-Borel theorem, each $\overline{E}_k$ is compact. Also, $\overline{E}_k$ is decreasing clearly. So $\bigcap_{k} \overline{E}_k\ne\varnothing$. However, suppose $\bigcap_{k} \overline{E}_k$ contains more than one points, saying $\mathbf{x},\mathbf{y}$. Denote $\varepsilon_0=\left\vert\mathbf{x}-\mathbf{y}\right\vert>0$, then for all $k$, we have $\mathbf{x},\mathbf{y}\in\overline{E}_k$. Thus by the definition of closure again, there exist $\mathbf{x}',\mathbf{y}'\in E_k$ so that $\left\vert\mathbf{x}-\mathbf{x}'\right\vert<\frac{\varepsilon_0}{4}$ and $\left\vert\mathbf{y}-\mathbf{y}'\right\vert<\frac{\varepsilon_0}{4}$. Thus
+\begin{align*}
+\left\vert\mathbf{x}'-\mathbf{y}'\right\vert
+&\ge \left\vert\mathbf{x}'-\mathbf{y}\right\vert
+-\left\vert\mathbf{y}-\mathbf{y}'\right\vert\\
+&\ge\left\vert\mathbf{x}-\mathbf{y}\right\vert
+-\left\vert\mathbf{x}-\mathbf{x}'\right\vert
+-\left\vert\mathbf{y}-\mathbf{y}'\right\vert\\
+&>\varepsilon_0-\frac{\varepsilon_0}{4}-\frac{\varepsilon_0}{4}\\
+&=\frac{\varepsilon_0}{2}
+\end{align*}
+which contradicts to the assumption that $\{\mathbf{x}_i\}$ is Cauchy. Hence $\bigcap_{k} \overline{E}_k$ contains exactly one point, saying $\mathbf{x}$. Finally, given $\varepsilon>0$, choose an $N$ so that $\left\vert\mathbf{x}_i-\mathbf{x}_j\right\vert<\varepsilon$ for all $i,j\ge N$. Also, since $\mathbf{x}\in\overline{E}_N$, either $\mathbf{x}\in E_N$ or $\mathbf{x}$ is a limit point of $E_N$. For the first case, we have $\left\vert\mathbf{x}_i-\mathbf{x}\right\vert<\varepsilon$ for all $i\ge N$. For the second case, there exists $\mathbf{x}'\in E_N$ so that $\left\vert\mathbf{x}-\mathbf{x}'\right\vert<\varepsilon$. It follows that
+$$
+\left\vert\mathbf{x}_i-\mathbf{x}\right\vert
+\le \left\vert\mathbf{x}_i-\mathbf{x}'\right\vert
++\left\vert\mathbf{x}'-\mathbf{x}\right\vert
+<2\varepsilon\quad \mbox{for all $i\ge N$}
+$$
+This completes the proof.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) \textit{Proof of Theorem 1.4 (a).} Let $L=\limsup_{k\to\infty}a_k$, consider the following three cases.
+Case 1: $-\infty<L<\infty$. We construct the subsequence as below. For $j=1,2,\ldots$. Having chosen $i_1,i_2,\ldots,i_{j-1}$ and $k_1,k_2,\ldots,k_{j-1}$, let $i_j$ be the least index so that $i_j>k_{j-1}$ and $\left\vert \sup_{k\ge i_j}a_k-L\right\vert<\frac{1}{j}$. Put some $k_j\ge i_j$ so that $\left\vert a_{k_j}-L\right\vert<\frac{1}{j}$. Then the subsequence $\{a_{k_j}\}$ converges to $L$, and (i) follows. Now, if $L'>L$, then since $\lim_{j\to\infty}\left(\sup_{k\ge j}a_k\right)=L$, there exists $K$ so that $\left\vert\sup_{k\ge j}a_k-L\right\vert<L'-L$ or $\sup_{k\ge j}a_k<L'$ for all $j\ge K$. Thus when $j=K$, we see that $a_k<L'$ for all $k\ge K$, and (ii) follows.
+Case 2: $L=\infty$. Since $\sup_{k\ge j}a_k=\infty$ for all $j$, we construct the subsequence as below. For $j=1,2,\ldots$. Having chosen $k_1,k_2,\ldots,k_{j-1}$, let $k_j$ be the least index so that $k_j>k_{j-1}$ and $a_{k_j}>j$. Then the subsequence $\{a_{k_j}\}$ converges to $L$, and (i) follows. Note that in this case, condition (ii) never happen, so we can skip it.
+Case 3: $L=-\infty$. We construct the subsequence as below. For $j=1,2,\ldots$. Having chosen $k_1,k_2,\ldots,k_{j-1}$, let $k_j$ be the least index so that $k_j>k_{j-1}$ and $\sup_{k\ge k_j}a_{k}<-j$. Then clearly $a_{k_j}<-j$, and so the subsequence $\{a_{k_j}\}$ converges to $L$. Hence (i) follows. Now, if $L'>L$, then since $\lim_{j\to\infty}\left(\sup_{k\ge j}a_k\right)=L$, there exists $K$ so that $\sup_{k\ge j}a_k<L'$ for all $j\ge K$. Thus when $j=K$, we see that $a_k<L'$ for all $k\ge K$, and (ii) follows.
+Conversely, if (i) and (ii) hold, we consider the following three cases again.
+Case 1: $-\infty<L<\infty$. By (i), given $\varepsilon>0$, there exists $N$ so that $a_{k_j}>L-\varepsilon$ for all $j\ge N$. Now, for all integer $i$, there exists $j$ with $j\ge N$, so that $i\le k_j$. So $\sup_{k\ge i}a_k\ge a_{k_j}>L-\varepsilon$ for all $i$, and then $\limsup_{k\to\infty}a_k\ge L-\varepsilon$. Since $\varepsilon$ can be arbitrarily small, $\limsup_{k\to\infty}a_k\ge L$. On the other hand, by (ii), there exists $K$ so that $a_k< L+\varepsilon$ for all $k\ge K$. Thus $\sup_{k\ge j}a_k\le L+\varepsilon$ for all $j\ge K$, and then $\limsup_{k\to\infty}a_k\le L+\varepsilon$. Again, since $\varepsilon$ can be arbitrarily small, $\limsup_{k\to\infty}a_k\le L$. Hence $\limsup_{k\to\infty}a_k=L$.
+Case 2: $L=\infty$. By (i), given $M$, there exists $N$ so that $a_{k_j}>M$ for all $j\ge N$. Now, for all integer $i$, there exists $j$ with $j\ge N$, so that $i\le k_j$. So $\sup_{k\ge i}a_k\ge a_{k_j}>M$ for all $i$, and then $\limsup_{k\to\infty}a_k\ge M$ for all $M$, or $\limsup_{k\to\infty}a_k=\infty=L$.
+Case 3: $L=-\infty$. By (ii), given $M'$, there exists $K$ so that $a_k<M'$ for all $k\ge K$. Thus $\sup_{k\ge j}a_k\le M'$ for all $j\ge K$, and then $\limsup_{k\to\infty}a_k\le M'$ for all $M'$. Hence $\limsup_{k\to\infty}a_k=-\infty=L$.
+The proof of Theorem 1.4(b) is similar.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(e) To prove this, consider the following three cases.
+Case 1: $-\infty<a<\infty$. Let $\lim_{k\to\infty}a_k=a$. Given $\varepsilon>0$, there exists $K$ so that $\left\vert a_k-a\right\vert<\varepsilon$, or $a-\varepsilon<a_k<a+\varepsilon$, for all $k\ge K$. Thus for all $j\ge K$, we have
+$$
+\sup_{k\ge j}a_k<a+\varepsilon\quad\mbox{and}\quad
+\inf_{k\ge j}a_k>a-\varepsilon
+$$ 
+or $\limsup_{k\to\infty} a_k\le a+\varepsilon$ and $\liminf_{k\to\infty} a_k\ge a-\varepsilon$. Since $\varepsilon$ can be arbitrarily small, we conclude that
+$$
+\limsup_{k\to\infty} a_k\le a\le \liminf_{k\to\infty} a_k\le \limsup_{k\to\infty} a_k
+$$
+or $\limsup_{k\to\infty} a_k=\liminf_{k\to\infty} a_k=a$. Conversely, if $\limsup_{k\to\infty} a_k=\liminf_{k\to\infty} a_k=a$, then given $\varepsilon>0$, there exists $K$ so that for all $j\ge K$,
+$$
+\sup_{k\ge j}a_k<a+\varepsilon\quad\mbox{and}\quad
+\inf_{k\ge j}a_k>a-\varepsilon
+$$
+When $j=K$, we get $a-\varepsilon<a_k<a+\varepsilon$ for all $k\ge K$, or $\left\vert a_k-a\right\vert<\varepsilon$. Thus $\lim_{k\to\infty}a_k=a$.
+Case 2: $a=\infty$. Given $M$, there exists $K$ so that $a_k>M$ for all $k\ge K$. Thus $\inf_{k\ge j}a_k\ge M$ for all $j\ge K$, and then $\liminf_{k\to\infty}a_k=\infty=a$. Of course, $\limsup_{k\to\infty}a_k=\infty=a$. Conversely, if $\limsup_{k\to\infty} a_k=\liminf_{k\to\infty} a_k=a$, then given $M'$, there exists $K'$ so that $\inf_{k\ge j}a_k>M'$ for all $j\ge K'$. Thus when $j=K'$, we have $a_k>M'$ for all $k\ge K'$. Hence $\lim_{k\to\infty}a_k=\infty=a$.
+Case 3: $a=-\infty$. Given $M$, there exists $K$ so that $a_k<M$ for all $k\ge K$. Thus $\sup_{k\ge j}a_k\le M$ for all $j\ge K$, and then $\limsup_{k\to\infty}a_k=-\infty=a$. Of course, $\liminf_{k\to\infty}a_k=-\infty=a$. Conversely, if $\limsup_{k\to\infty} a_k=\liminf_{k\to\infty} a_k=a$, then given $M'$, there exists $K'$ so that $\sup_{k\ge j}a_k<M'$ for all $j\ge K'$. Thus when $j=K'$, we have $a_k<M'$ for all $k\ge K'$. Hence $\lim_{k\to\infty}a_k=-\infty=a$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(f) Let $\mathbf{y}\in B(\mathbf{x},\delta)$, then we have $\left\vert\mathbf{y}-\mathbf{x}\right\vert<\delta$, and then denote $\delta'=\delta-\left\vert\mathbf{y}-\mathbf{x}\right\vert>0$. Now, consider the open ball $B(\mathbf{y},\delta')$, it suffices to show that $B(\mathbf{y},\delta')\subset B(\mathbf{x},\delta)$. For every $\mathbf{z}\in B(\mathbf{y},\delta')$, we have $\left\vert\mathbf{z}-\mathbf{y}\right\vert<\delta'$. Then
+$$
+\left\vert\mathbf{z}-\mathbf{x}\right\vert
+\le \left\vert\mathbf{z}-\mathbf{y}\right\vert+\left\vert\mathbf{y}-\mathbf{x}\right\vert
+<\delta'+\left\vert\mathbf{y}-\mathbf{x}\right\vert
+=\delta
+$$
+implying $\mathbf{z}\in B(\mathbf{x},\delta)$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(g) \textit{Proof of Theorem 1.5 (i).} Let $\mathbf{y}\in\overline{B(\mathbf{x},\delta)}$, then either $\mathbf{y}\in B(\mathbf{x},\delta)$ or $\mathbf{y}$ is a limit point of $B(\mathbf{x},\delta)$. But the first case immediately implies $\left\vert\mathbf{x}-\mathbf{y}\right\vert\le\delta$, so it suffices to consider the second case. By the definition of limit point, given $\varepsilon>0$, there exists a point $\mathbf{z}\in B(\mathbf{x},\delta)$ so that $\left\vert\mathbf{z}-\mathbf{y}\right\vert<\varepsilon$. So
+$$
+\left\vert\mathbf{x}-\mathbf{y}\right\vert
+\le \left\vert\mathbf{x}-\mathbf{z}\right\vert+\left\vert\mathbf{z}-\mathbf{y}\right\vert
+<\delta+\varepsilon
+$$
+Since $\varepsilon$ can be arbitrarily small, we conclude that $\left\vert\mathbf{x}-\mathbf{y}\right\vert\le\delta$. Conversely, let $\mathbf{y}\in\mathbf{R}^n$ be such that $\left\vert\mathbf{x}-\mathbf{y}\right\vert\le\delta$. For $k=1,2,\ldots$, consider the points
+$$
+\mathbf{x}_k=\mathbf{y}+\frac{1}{k}(\mathbf{x}-\mathbf{y})
+$$
+Then it is easy to check that $\{\mathbf{x}_k\}$ forms a sequence in $B(\mathbf{x},\delta)$ that converges to $\mathbf{y}$, and hence we get that $\{\mathbf{y}:\left\vert\mathbf{x}-\mathbf{y}\right\vert\le\delta\}\subset\overline{B(\mathbf{x},\delta)}$.
+\textit{Proof of Theorem 1.5 (ii).} If $E$ is closed (i.e., $\mathrm{C}E$ is open), then for all $\mathbf{x}\in\mathrm{C}E$, there exists $\delta>0$ so that $B(\mathbf{x},\delta)\subset\mathrm{C}E$. This means that, for all $\mathbf{x}\notin E$, $\mathbf{x}$ is not a limit point of $E$. So, if $\mathbf{x}$ is a limit point of $E$, then $\mathbf{x}\in E$. Hence $E=\overline{E}$. Conversely, if $E=\overline{E}$ holds. Let $\mathbf{x}\in\mathrm{C}E$, then $\mathbf{x}$ is not a limit point of $E$. So there exists $\delta>0$ so that $\left\vert\mathbf{x}-\mathbf{y}\right\vert\ge\delta$ for all $\mathbf{y}\in E$, and then $B(\mathbf{x},\delta)\subset \mathrm{C}E$. Hence $\mathrm{C}E$ is open, i.e., $E$ is closed.
+\textit{Proof of Theorem 1.5 (iii).} For the first part, let $\mathbf{x}\in\mathrm{C}\overline{E}$, then $\mathbf{x}\notin E$ and $\mathbf{x}$ is not a limit point of $E$. So there exists $\delta>0$ so that $\left\vert\mathbf{x}-\mathbf{y}\right\vert\ge\delta$ for all $\mathbf{y}\in E$, and then $B(\mathbf{x},\delta)\subset \mathrm{C}E$. More precisely, we want to show that $B(\mathbf{x},\delta)\subset \mathrm{C}\overline{E}$. Suppose there exists a limit point of $E$, say $\mathbf{y}'$, so that $\mathbf{y}'\in B(\mathbf{x},\delta)$. Then by the definition of limit point and by the result that $B(\mathbf{x},\delta)$ is open [see part (f)], there exists $\delta'>0$ so that $B(\mathbf{y}',\delta')\subset B(\mathbf{x},\delta)$, and there exists $\mathbf{y}_0\in E$ so that $\mathbf{y}_0\in B(\mathbf{y}',\delta')$. Thus $\mathbf{y}_0\in B(\mathbf{y},\delta)$ and we get a contradiction, as desired. Hence $\mathrm{C}\overline{E}$ is open, or $\overline{E}$ is closed. For the second part, let $F$ be a closed set containing $E$. Then for every limit point of $E$, it is also the limit point of $F$. So we have $\overline{E}\subset \overline{F}=F$, where the last equality follows by Theorem 1.5(ii).
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(h) The proof is so common in many textbooks about analysis that we omit it.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(i) \textit{Proof of Theorem 1.8.} If $E_1\subset E$ is relatively closed with respect to $E$, then by definition, we can write $E_1=E\cap F$ for some closed set $F$. Note that $E_1\subset E\cap\overline{E}_1$ is trivial, so we only have to show $E\cap\overline{E}_1\subset E_1$. By Theorem 1.5(iii), we have $\overline{E}_1\subset F$. So $E\cap\overline{E}_1\subset E\cap F=E_1$, as desired. Conversely, if $E_1=E\cap\overline{E}_1$ holds. Since $\overline{E}_1$ is closed [by Theorem 1.5(iii)], it is easy to see that $E_1$ is relatively closed with respect to $E$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(j) Let $F\subset\mathbf{R}^n$ be closed, then use the hint, consider the sets $G_k=\{\mathbf{x};\operatorname{dist}(\mathbf{x},F)<(1/k)\}$ for $k=1,2,\ldots$. To show that each $G_k$ is open, let $\mathbf{x}\in G_k$, denote $\delta_0=\frac{1}{k}-\operatorname{dist}(\mathbf{x},F)>0$. Then given $\mathbf{y}\in B(\mathbf{x},\delta_0)$, we have
+$$
+\operatorname{dist}(\mathbf{y},F)
+\le \left\vert \mathbf{y}-\mathbf{x}\right\vert+\operatorname{dist}(\mathbf{x},F)
+<\delta_0+\left(\frac{1}{k}-\delta_0\right)
+=\frac{1}{k}
+$$
+i.e., $\mathbf{y}\in G_k$. Thus $B(\mathbf{x},\delta_0)\subset G_k$ and then $G_k$ is open. Now, observe that $G_1\supset G_2\supset G_3\supset\cdots$, and $F\subset G_k$ for all $k$. So $F\subset \bigcap_{k=1}^\infty G_k$. On the other hand, let $\mathbf{x}\in\bigcap_{k=1}^\infty G_k$, then for all $k$, $\operatorname{dist}(\mathbf{x},F)<\frac{1}{k}$. It follows that $\mathbf{x}$ is a limit point of $F$, and then $\mathbf{x}\in F$ because $F$ is closed. So $\bigcap_{k=1}^\infty G_k\subset F$, and hence we conclude that $F=\bigcap_{k=1}^\infty G_k$. So any closed set in $\mathbf{R}^n$ is of type $G_\delta$. To show that any open set in $\mathbf{R}^n$ is of type $F_\sigma$, just apply the above result and the De Morgan laws.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(k) \textit{Proof of Theorem 1.12 (i).} Suppose $E\subset\mathbf{R}^n$ is compact, we first show that $E$ is closed. Given $\mathbf{x}\in\mathrm{C}E$ fixed. For all $\mathbf{y}\in E$, consider the two types of open balls $G_{\mathbf{y}}=B(\mathbf{x},\delta_{\mathbf{y}})$ and $G'_{\mathbf{y}}=B(\mathbf{y},\delta_{\mathbf{y}})$, where $\delta_{\mathbf{y}}=\frac{1}{2}\left\vert\mathbf{x}-\mathbf{y}\right\vert$. Then since $E$ is compact, there exists a finite number of open balls $G'_{\mathbf{y}_1},G'_{\mathbf{y}_2},\ldots,G'_{\mathbf{y}_n}$ that cover $E$. Put $\delta=\min_{1\le k\le n}\{\delta_{\mathbf{y}_k}\}$, then clearly $\delta>0$ and $B(\mathbf{x},\delta)\cap G'_{\mathbf{y}_k}=\varnothing$ for all $k=1,2,\ldots,n$, implying that $B(\mathbf{x},\delta)\cap E=\varnothing$. Hence $\mathrm{C}E$ is open, or $E$ is closed. Next, we show that $E$ is bounded. Let $G_k=B(\mathbf{0},k)$, then clearly each $G_k$ is bounded and  $E\subset\{G_k\}$. Since $E$ is compact, there exists a finite number of open balls $G_{k_1},G_{k_2},\ldots,G_{k_n}$ that cover $E$. W.l.o.g., let $k_n$ be the maximal one, then we have $E\subset G_{k_n}$ and hence $E$ is bounded. Conversely, we first claim that every closed subset of a compact set must be compact.
+\textit{Proof of the claim.} Let $E\subset K$, where $E$ is closed and $K$ is compact. Let $\{G_\alpha\}$ be an open cover of $E$. Since $\mathrm{C}E$ is open, $\{\mathrm{C}E\}\cup\{G_\alpha\}$ is therefore a open cover of $K$. Then since $K$ is compact, there exists a finite number of open sets $G_{\alpha_1},G_{\alpha_2},\ldots, G_{\alpha_n}$ that cover $K$, and hence cover $E$. Note that $\{G_{\alpha_k}\}_{k=1}^n-\{\mathrm{C}E\}$ is a subcollection of $\{G_\alpha\}$ that still cover $E$, so $E$ is compact. $\Box$
+Next, we claim that if $\{I_k\}$ is a sequence of $n$-dimensional intervals such that $I_1\supset I_2\supset I_3\supset \cdots$, then $\bigcap_{k=1}^\infty I_k\ne\varnothing$.
+\textit{Proof of the claim (W. Rudin, PMA, Theorem 2.39).} Let $I_k=\{\mathbf{x}=(x_1,x_2,\ldots,x_n):a_{k,j}\le x_j\le b_{k,j}\mbox{ for }1\le j\le n\}$. For each $j$, let $E_j$ be the set of all $a_{k,j}$. Then $E_j$ is nonempty and bounded above (by $b_{1,j}$). Let $x_j^\ast=\sup E_j$. If $k$ and $m$ are positive integers, then
+$$
+a_{k,j}\le a_{k+m,j}\le b_{k+m,j}\le b_{k,j}
+$$
+so that $x_j^\ast\le b_{k,j}$ for all $k$. Since $a_{k,j}\le x_j^\ast$ clearly, we see that $a_{k,j}\le x_j^\ast\le b_{k,j}$ for all $k$. Setting $\mathbf{x}^\ast=(x_1^\ast,x_2^\ast,\ldots,x_n^\ast)$, then we have $\mathbf{x}^\ast\in I_k$ for all $k$. So $\mathbf{x}^\ast\in\bigcap_{k=1}^\infty I_k$ or $\bigcap_{k=1}^\infty I_k\ne\varnothing$. $\Box$
+Using the above result, we claim that every $n$-dimensional cube is compact.
+\textit{Proof of the claim (W. Rudin, PMA, Theorem 2.40).} Let $I=\{\mathbf{x}=(x_1,x_2,\ldots,x_n):a_k\le x_k\le b_k\mbox{ for }1\le k\le n\}$. Put 
+$$
+\delta=\left[\sum_{k=1}^n(b_k-a_k)^2\right]^{1/2}
+$$
+then $\left\vert\mathbf{x}-\mathbf{y}\right\vert\le\delta$ for $\mathbf{x},\mathbf{y}\in I$. Suppose there exists an open cover $\{G_\alpha\}$ of $I$ which contains no finite subcover of $I$. Put $c_k=\frac{1}{2}(a_k+b_k)$, then the intervals $[a_k,c_k]$ and $[c_k,b_k]$ determine $2^n$ intervals whose union is $I$. At least one of these intervals, say $I_1$, cannot be covered by any finite subcover of $\{G_\alpha\}$. We next subdivide $I_1$ and continue the process, obtaining the sequence $\{I_k\}$ with the following three properties:
+(1) $I\supset I_1\supset I_2\supset I_3\supset\cdots$;
+(2) $I_k$ cannot be covered by any finite subcover of $\{G_\alpha\}$;
+(3) $\left\vert\mathbf{x}-\mathbf{y}\right\vert\le 2^{-k}\delta$ for all $\mathbf{x},\mathbf{y}\in I_k$.
+By (1) and by the second claim, there exists a point $\mathbf{x}^\ast$ which lies in every $I_k$. Suppose $\mathbf{x}^\ast\in G_\alpha$ for some $\alpha$, there exists $r>0$ so that $\left\vert\mathbf{y}-\mathbf{x}^\ast\right\vert<r$ implies $\mathbf{y}\in G_\alpha$. If $k$ is so large that $2^{-k}\delta<r$, then (3) implies $I_k\subset G_k$, which contradicts (2). $\Box$
+Now, suppose $E\subset\mathbf{R}^n$ is closed and bounded. Then the boundness of $E$ implies there exists an $n$-dimensional cube $I$ so that $E\subset I$. Since $E$ is closed and $I$ is compact (by the third claim), the first claim implies $E$ is compact.
+\textit{Proof of Theorem 1.12 (ii).} Suppose $E\subset\mathbf{R}^n$ is compact. Let $\{\mathbf{x}_k\}$ be a sequence of $E$. We consider the following two cases.
+Case 1: If the set of points $\mathbf{x}_k$ is finite, call $X$, then there is a $\mathbf{x}'\in X\subset E$ and a sequence of index $\{k_j\}$ with $k_1<k_2<k_3<\cdots$, such that
+$$
+\mathbf{x}_{k_1}=\mathbf{x}_{k_2}=\cdots=\mathbf{x}'
+$$
+The subsequence $\{\mathbf{x}_{k_j}\}$ converges evidently to $\mathbf{x}'$.
+Case 2: If the set of points $\mathbf{x}_k$ is infinite, call $Y$, then we claim that $Y\subset E$ has a limit point in $E$.
+\textit{Proof of the claim (W. Rudin, PMA, Theorem 2.37)} If no point of $E$ were a limit of $Y$, then each $\mathbf{x}\in E$ has an open ball $B(\mathbf{x},\delta_{\mathbf{x}})$ which contains at most one point in $Y$ (namely, $\mathbf{x}$, if $\mathbf{x}\in Y$). Then clearly no finite subcollection of $\{B(\mathbf{x},\delta_{\mathbf{x}})\}$ can cover $Y$, and the same is true of $E$. This contradicts the assumption that $E$ is compact. $\Box$
+Thus, let $\mathbf{y}'\in E$ be a limit point of $Y$, and choose $k_1$ so that $\left\vert\mathbf{x}_{k_1}-\mathbf{y}'\right\vert<1$. Having chosen $k_1,k_2,\ldots,k_{j-1}$, we see that there exists $k_j>k_{j-1}$ such that $\left\vert\mathbf{x}_{k_j}-\mathbf{y}'\right\vert<\frac{1}{j}$. So the subsequence $\{\mathbf{x}_{k_j}\}$ converges to $\mathbf{y}'$. Conversely, suppose $E\subset\mathbf{R}^n$ is not compact. Using the Heine-Borel theorem, we may consider the following two cases.
+Case 1: If $E$ is not bounded, setting $\mathbf{x}_1\in E$ with $\left\vert\mathbf{x}_1\right\vert>1$. Having chosen $\mathbf{x}_1,\mathbf{x}_2,\ldots,\mathbf{x}_{k-1}\in E$, there exists $\mathbf{x}_{k-1}\in E$ so that $\left\vert\mathbf{x}_k\right\vert>\left\vert\mathbf{x}_{k-1}\right\vert+1$. Then for any two integers $k$ and $m$,
+\begin{align*}
+\left\vert\mathbf{x}_{k+m}-\mathbf{x}_k\right\vert
+&\ge \left\vert\mathbf{x}_{k+m}\right\vert-\left\vert\mathbf{x}_k\right\vert \\
+&> \left\vert\mathbf{x}_{k+m-1}\right\vert+1-\left\vert\mathbf{x}_k\right\vert \\
+&>\left\vert\mathbf{x}_{k+m-2}\right\vert+2-\left\vert\mathbf{x}_k\right\vert \\
+&\,\,\vdots \\
+&>\left\vert\mathbf{x}_{k}\right\vert+m-\left\vert\mathbf{x}_k\right\vert \\
+&=m
+\end{align*}
+It follows that any subsequence of $\{\mathbf{x}_k\}$ has no limit point in $E$, a contradiction.
+Case 2: If $E$ is not closed, then there is a point $\mathbf{x}'\in \mathbf{R}^n$ which is a limit point of $E$ but $\mathbf{x}'\notin E$. Let $\{\mathbf{x}_k\}$ be a sequence of $E$ that converges to $\mathbf{x}'$, then using the fact that every subsequence of $\{\mathbf{x}_k\}$ also converges to $\mathbf{x}'$, we get a contradiction.
+
+
+\bigskip\noindent\hrule\bigskip
+
+(l) The distance between two nonempty, compact, disjoint sets in $\mathbf{R}^n$ is positive.
+(m) The intersection of a countable sequence of decreasing, nonempty, compact sets is nonempty.
+(n) 
+(a) \textit{$M=\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})$ if and only if} (i) \textit{there exists $\{\mathbf{x}_k\}$ in $E$ such that $\mathbf{x}_k\to\mathbf{x}_0$ and $f(\mathbf{x}_k)\to M$, and} (ii) \textit{if $M'>M$, there exists $\delta>0$ such that $f(\mathbf{x})<M'$ for all $\mathbf{x}\in B'(\mathbf{x}_0;\delta)\cap E$.}
+(b) \textit{$m=\liminf_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})$ if and only if} (i) \textit{there exists $\{\mathbf{x}_k\}$ in $E$ such that $\mathbf{x}_k\to\mathbf{x}_0$ and $f(\mathbf{x}_k)\to m$, and} (ii) \textit{if $m'<m$, there exists $\delta>0$ such that $f(\mathbf{x})>m'$ for all $\mathbf{x}\in B'(\mathbf{x}_0;\delta)\cap E$.}
+
+(o) 
+\textit{Let $E$ be a compact set in $\mathbf{R}^n$ and $f$ be continuous in $E$ relative to $E$. Then}
+(i) \textit{$f$ is bounded on $E$; that is, $\sup_{\mathbf{x}\in E}\left\vert f(\mathbf{x})\right\vert<\infty$.}
+(ii) \textit{$f$ attains its supremum and infimum on $E$; i.e., there exist $\mathbf{x}_1,\mathbf{x}_2\in E$ such that $f(\mathbf{x}_1)=\sup_{\mathbf{x}\in E}f(\mathbf{x})$, $f(\mathbf{x}_2)=\inf_{\mathbf{x}\in E}f(\mathbf{x})$.}
+(iii) \textit{$f$ is uniformly continuous on $E$ relative to $E$; i.e., given $\varepsilon>0$, there exists $\delta>0$ such that $\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert<\varepsilon$ if $\left\vert \mathbf{x}-\mathbf{y}\right\vert<\delta$ and $\mathbf{x},\mathbf{y}\in E$.}
+
+(p) 
+\textit{Let $\{f_k\}$ be a sequence of functions defined on $E$ which are continuous in $E$ relative to $E$ and which converge uniformly on $E$ to a finite $f$. Then $f$ is continuous in $E$ relative to $E$.}
+
+(q) 
+\textit{Let $\mathbf{y}=T\mathbf{x}$ be a transformation of $\mathbf{R}^n$ which is continuous in $E$ relative to $E$. If $E$ is compact, then so is its image $TE$.}
+
+(r) The Riemann integral $A=(R)\int_If(\mathbf{x})\,d\mathbf{x}$ of a bounded $f$ over an interval $I$ exists if and only if $\inf_{\Gamma}U_{\Gamma}=\sup_{\Gamma}L_{\Gamma}=A$.
+(s) If $f$ is continuous on an interval $I$, then $(R)\int_If(\mathbf{x})\,d\mathbf{x}$ exists.
+-------------------------------------------
+
+(l) Let $E,E'\subset\mathbf{R}^n$ be two nonempty, compact, disjoint sets. Suppose $\operatorname{dist}(E,E')=0$, then for $k=1,2,\ldots$, there exists $\mathbf{x}_k\in E$ so that $\operatorname{dist}(\mathbf{x}_k,E')<\frac{1}{k}$. Since $E$ is compact, by Exercise 1(k) [Theorem 1.12(ii)], there exists a subsequence $\{\mathbf{x}_{k_j}\}$ that converges to a point $\mathbf{x}'\in E$. Now given $\varepsilon>0$, there exists $N$ so that for all $k_j>N$, $\left\vert\mathbf{x}'-\mathbf{x}_{k_j}\right\vert<\varepsilon$. Then
+$$
+\operatorname{dist}(\mathbf{x}',E')
+\le\left\vert\mathbf{x}'-\mathbf{x}_{k_j}\right\vert+\operatorname{dist}(\mathbf{x}_{k_j},E')
+<\varepsilon+\frac{1}{k_j}
+$$
+Since $\varepsilon$ and $\frac{1}{k_j}$ can be arbitrarily small, we have $\operatorname{dist}(\mathbf{x}',E')=0$. Since  $\mathbf{x}'\in E$ and $E\cap E'=\varnothing$, we see that $\mathbf{x}'\notin E'$ which serves as a limit point of $E'$, and then $E'$ is not closed, and is not compact. This gives a contradiction.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(m) Let $\{E_k\}$ be a sequence of nonempty compact sets with $E_1\supset E_2\supset E_3\supset\cdots$. Suppose $\bigcap_{k=1}^\infty E_k=\varnothing$, i.e., there exists an index $N$ such that no point of $E_N$ lies in every $E_k$. Then the sets $\mathrm{C}E_k$ ($k\ne N$) form an open cover of $E_N$, and since $E_N$ is compact, there are finitely many indices $k_1,k_2,\ldots,k_m$ so that $E_N\subset \mathrm{C}E_{k_1}\cup\mathrm{C}E_{k_2}\cup\cdots\cup\mathrm{C}E_{k_m}$. This means that 
+$$
+E_N\cap E_{k_1}\cap E_{k_2}\cap\cdots\cap E_{k_m}=\varnothing
+$$
+On the other hand, since $E_1\supset E_2\supset E_3\supset\cdots$. So if we let $M=\max\{N,k_1,k_2,\ldots,k_m\}$, then
+$$
+E_N\cap E_{k_1}\cap E_{k_2}\cap\cdots\cap E_{k_m}=E_M\ne\varnothing
+$$
+This gives a contradiction.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(n) \textit{Proof of Theorem 1.14 (a).} We consider the following three cases.
+Case 1: $-\infty<M<\infty$. If $M=\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})$, then by definition, for $k=1,2,\ldots$, there exists $\delta_k>0$ so that $0<\delta\le\delta_k$ implies $\left\vert M(\mathbf{x}_0;\delta)-M\right\vert<\frac{1}{k}$. Put $\delta'_k=\min\left\{\delta_k,\frac{1}{k}\right\}$, then there exists $\mathbf{x}_k\in B'(\mathbf{x}_0;\delta'_k)\cap E$ so that $\left\vert f(\mathbf{x}_k)-M(\mathbf{x}_0;\delta'_k)\right\vert<\frac{1}{k}$. Thus
+$$
+\left\vert  f(\mathbf{x}_k)-M\right\vert
+\le \left\vert f(\mathbf{x}_k)-M(\mathbf{x}_0;\delta'_k)\right\vert+\left\vert M(\mathbf{x}_0;\delta'_k)-M\right\vert
+<\frac{2}{k}
+$$
+and then the sequence $\{\mathbf{x}_k\}$ in $E$ has the property that $\mathbf{x}_k\to\mathbf{x}_0$ and $f(\mathbf{x}_k)\to M$. Hence (i) follows. If $M'>M$, then by the above argument, there exists $\delta>0$ so that $\left\vert M(\mathbf{x}_0;\delta)-M\right\vert<M'-M$, or $M(\mathbf{x}_0;\delta)<M'$. Thus immediately $f(\mathbf{x})<M'$ for all $\mathbf{x}\in B'(\mathbf{x}_0,\delta)\cap E$, and (ii) follows. Conversely, if (i) and (ii) hold. Given $\varepsilon>0$, then by (ii), there exists $\delta>0$ such that $f(\mathbf{x})<M+\varepsilon$ for $\mathbf{x}\in B'(\mathbf{x}_0;\delta)\cap E$. i.e., $M(\mathbf{x}_0;\delta)\le M+\varepsilon$. Since $M(\mathbf{x}_0;\delta)$ decreases as $\delta\to 0$, we get $\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})\le M+\varepsilon$. Since $\varepsilon$ can be arbitrarily small, $\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})\le M$. On the other hand, for $\varepsilon'>0$ fixed and given $\delta'>0$. By (i), there exists some $K$ so that $\left\vert \mathbf{x}_K-\mathbf{x}_0\right\vert<\delta'$ and $\left\vert f(\mathbf{x}_K)-M\right\vert<\varepsilon'$. Thus $f(\mathbf{x}_K)>M-\varepsilon'$ and $\mathbf{x}_K\in B'(\mathbf{x}_0;\delta')\cap E$, which follows that  $M(\mathbf{x}_0;\delta')>M-\varepsilon'$. As $\delta'\to 0$, $\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})\ge M-\varepsilon'$. Again, since $\varepsilon'$ can be arbitrarily small, we have $\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})\ge M$. Hence $M=\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})$.
+Case 2: $M=\infty$. If $M=\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})$, then clearly $M(\mathbf{x}_0;\delta)=\infty$ for all $\delta>0$ (since $M(\mathbf{x}_0;\delta)$ monotonically decreases as $\delta\to 0$). Thus for $k=1,2,\ldots$, there exists $\mathbf{x}_k\in B'\left(\mathbf{x}_0;\frac{1}{k}\right)\cap E$ so that $f(\mathbf{x}_k)>k$. Hence the sequence $\{\mathbf{x}_k\}$ in $E$ has the property that $\mathbf{x}_k\to\mathbf{x}_0$ and $f(\mathbf{x}_k)\to \infty=M$, and (i) follows. Note that in this case, condition (ii) never happen, so we can skip it. Conversely, given $\delta>0$ and $N>0$. Then by (i), there exist two integers $K_1$ and $K_2$, so that $k\ge K_1$ implies $\left\vert\mathbf{x}_k-\mathbf{x}_0\right\vert<\delta$, and $k\ge K_2$ implies $f(\mathbf{x}_k)>N$, respectively. Put $K=\max\{K_1,K_2\}$, then $k\ge K$ implies the above two statements both hold. Thus $M(\mathbf{x}_0;\delta)>N$ for all $N$ and for all $\delta>0$, or $M(\mathbf{x}_0;\delta)=\infty$ for all $\delta>0$, or $\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})=\infty=M$.
+Case 3: $M=-\infty$. If $M=\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})$, then for $k=1,2,\ldots$, there exists $\delta_k>0$ so that $0<\delta\le\delta_k$ implies $M(\mathbf{x}_0;\delta_k)<-k$. Put $\delta_k'=\min\left\{\delta_k,\frac{1}{k}\right\}$, then clearly there exists $\mathbf{x}_k\in B'(\mathbf{x}_0;\delta_k')\cap E$ so that $f(\mathbf{x}_k)<-k$. Thus the sequence $\{\mathbf{x}_k\}$ in $E$ has the property that $\mathbf{x}_k\to\mathbf{x}_0$ and $f(\mathbf{x}_k)\to -\infty=M$, and (i) follows. If $M'>M$, then by the above argument, there exists $\delta>0$ so that $M(\mathbf{x}_0;\delta)<M'$, i.e., $f(\mathbf{x})<M'$ for $\mathbf{x}\in B'(\mathbf{x}_0;\delta)\cap E$. Hence (ii) follows. Conversely, given $N'$. Then by (ii), there exists $\delta'>0$ so that $f(\mathbf{x})<N'$ for $\mathbf{x}\in B'(\mathbf{x}_0;\delta')\cap E$, or $M(\mathbf{x}_0;\delta')\le N'$. Since $M(\mathbf{x}_0;\delta)$ is decreasing as $\delta\to 0$, we have $M(\mathbf{x}_0;\delta)\le N'$ for all $0<\delta\le\delta'$. Hence $\limsup_{\mathbf{x}\to\mathbf{x}_0; \mathbf{x}\in E}f(\mathbf{x})=-\infty=M$.
+The proof of Theorem 1.14(b) is similar.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(o) \textit{Proof of Theorem 1.15 (i).} Let $\mathbf{x}\in E$. Since $f$ is continuous in $E$ relative to $E$, we have  $f(\mathbf{x})<\infty$, and given $\varepsilon>0$, there exists $\delta_{\mathbf{x}}>0$ such that $\left\vert f(\mathbf{y})-f(\mathbf{x})\right\vert<\varepsilon$ for $\mathbf{y}\in B(\mathbf{x},\delta_{\mathbf{x}})$. Note that $\{B(\mathbf{x},\delta_{\mathbf{x}})\}_{\mathbf{x}\in E}$ forms an open cover of $E$, and since $E$ is compact, there exists a finite number of points $\mathbf{x}_k\in E$, where $1\le k\le m$, so that $E\subset \bigcup_{k=1}^mB(\mathbf{x}_k,\delta_{\mathbf{x}_k})$. Put $M=\max\{\left\vert f(\mathbf{x}_k)\right\vert:1\le k\le m\}<\infty$, then for $\mathbf{x}\in E$, we have $\mathbf{x}\in B(\mathbf{x}_k,\delta_{\mathbf{x}_k})$ for some $k$. It follows that
+$$
+\left\vert f(\mathbf{x})\right\vert
+\le \left\vert f(\mathbf{x})-f(\mathbf{x}_k)\right\vert+\left\vert f(\mathbf{x}_k)\right\vert
+<\varepsilon+M
+$$
+which implies $\sup_{\mathbf{x}\in E}\left\vert f(\mathbf{x})\right\vert\le \varepsilon+M<\infty$. Hence $f$ is bounded on $E$.
+\textit{Proof of Theorem 1.15 (ii).} Denote $M=\sup_{\mathbf{x}\in E}f(\mathbf{x})$ and $m=\inf_{\mathbf{x}\in E}f(\mathbf{x})$. Then by Theorem 1.15(i), we see that both $M$ and $m$ are finite. Also, by definition, there are sequences $\{\mathbf{y}_k\}$ and $\{\mathbf{z}_k\}$ in $E$ which satisfy $f(\mathbf{y}_k)\to M$ and $f(\mathbf{z}_k)\to m$. Since $E$ is compact, by Theorem 1.12(ii), there are subsequences $\{\mathbf{y}_{k_j}\}$ and $\{\mathbf{z}_{k_l}\}$ which converge to $\mathbf{x}_1\in E$ and $\mathbf{x}_2\in E$, respectively. It suffices to show that $f(\mathbf{x}_1)=M$ and $f(\mathbf{x}_2)=m$. Given $\varepsilon>0$, then since $f$ is continuous in $E$, there exists $\delta>0$ so that $\left\vert f(\mathbf{y})-f(\mathbf{x}_1)\right\vert<\varepsilon$ for $\mathbf{y}\in B(\mathbf{x}_1,\delta)$. Since $\mathbf{y}_{k_j}\to\mathbf{x}_1$, there exists an integer $K_1$ so that $j\ge K_1$ implies $\left\vert\mathbf{y}_{k_j}-\mathbf{x}_1\right\vert<\delta$, i.e., $\mathbf{y}_{k_j}\in B(\mathbf{x}_1,\delta)$ for all $j\ge K_1$. Also, since $f(\mathbf{y}_k)\to M$, there exists an another integer $K_2$ so that $k\ge K_2$ implies $\left\vert f(\mathbf{y}_{k})-M\right\vert<\varepsilon$. Put $K=k_j$ be such that $j\ge K_1$ and $K\ge K_2$, then
+$$
+\left\vert f(\mathbf{x}_1)-M\right\vert
+\le \left\vert f(\mathbf{x}_1)-f(\mathbf{y}_K)\right\vert+\left\vert f(\mathbf{y}_K)-M\right\vert
+<\varepsilon+\varepsilon
+=2\varepsilon
+$$
+Since the above inequality holds for all $\varepsilon>0$, we have $f(\mathbf{x}_1)=M$. The proof of $f(\mathbf{x}_2)=m$ is similar.
+\textit{Proof of Theorem 1.15 (iii).} Given $\varepsilon>0$, then since $f$ is continuous in $E$ relative to $E$, for each $\mathbf{x}\in E$ there exists $\delta_{\mathbf{x}}>0$ such that $\left\vert f(\mathbf{y})-f(\mathbf{x})\right\vert<\frac{\varepsilon}{2}$ for $\mathbf{y}\in B(\mathbf{x},\delta_{\mathbf{x}})$. Denote $\delta'_{\mathbf{x}}=\frac{1}{2}\delta_{\mathbf{x}}>0$, note that the collection $\{B(\mathbf{x},\delta'_{\mathbf{x}})\}_{\mathbf{x}\in E}$ forms an open cover of $E$. Since $E$ is compact, there is a finite number of points $\mathbf{x}_k$, where $1\le k\le m$, so that $E\subset \bigcup_{k=1}^mB(\mathbf{x}_k,\delta'_{\mathbf{x}_k})$. Put $\delta=\min\{\delta'_{\mathbf{x}_k}:1\le k\le m\}>0$, then for $\mathbf{x},\mathbf{y}\in E$ with $\left\vert\mathbf{x}-\mathbf{y}\right\vert<\delta$, there exists some $K$, where $1\le K\le m$, so that $\mathbf{x}\in B(\mathbf{x}_K,\delta'_{\mathbf{x}_K})\subset B(\mathbf{x}_K,\delta_{\mathbf{x}_K})$. Moreover, we have
+\begin{align*}
+\left\vert\mathbf{y}-\mathbf{x}_K\right\vert
+\le \left\vert\mathbf{y}-\mathbf{x}\right\vert+\left\vert\mathbf{x}-\mathbf{x}_K\right\vert
+<\delta+\delta'_{\mathbf{x}_K}
+\le 2\delta'_{\mathbf{x}_K}
+=\delta_{\mathbf{x}_K}
+\end{align*}
+i.e., $\mathbf{y}\in B(\mathbf{x}_K,\delta_{\mathbf{x}_K})$. It follows that
+\begin{align*}
+\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert
+\le\left\vert f(\mathbf{x})-f(\mathbf{x}_K)\right\vert+\left\vert f(\mathbf{x}_K)-f(\mathbf{y})\right\vert
+<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}
+=\varepsilon
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(p) Let $\mathbf{x},\mathbf{y}\in E$ and given $\varepsilon>0$. Since $f_k\to f$ uniformly on $E$, there exists an integer $K$ such that $\left\vert f(\mathbf{x})-f_K(\mathbf{x})\right\vert<\varepsilon$ and $\left\vert f(\mathbf{y})-f_K(\mathbf{y})\right\vert<\varepsilon$. Now, fix $\mathbf{x}\in E$. Then since $f_k$ is continuous in $E$ relative to $E$ for all $k$, there exists $\delta_k>0$ such that $\left\vert f_k(\mathbf{x})-f_k(\mathbf{y})\right\vert<\varepsilon$ for $\mathbf{y}\in E$ with $\mathbf{y}\in B(\mathbf{x},\delta_k)$. Thus
+\begin{align*}
+\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert
+&\le \left\vert f(\mathbf{x})-f_K(\mathbf{x})\right\vert
++\left\vert f_K(\mathbf{x})-f_K(\mathbf{y})\right\vert
++\left\vert f_K(\mathbf{y})-f(\mathbf{y})\right\vert\\
+&<\varepsilon+\varepsilon+\varepsilon\\
+&=3\varepsilon
+\end{align*}
+for $\mathbf{y}\in E$ with $\mathbf{y}\in B(\mathbf{x},\delta_K)$. This completes the proof.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(q) Let $\{G_\alpha\}$ be an open cover of $TE$, we claim that each $T^{-1}G_\alpha$ is open.
+\textit{Proof of the claim.} Given $\mathbf{x}\in T^{-1}G_\alpha$, i.e., $T\mathbf{x}\in G_\alpha$. Since $G_\alpha$ is open, there exists $\varepsilon>0$ such that $B(T\mathbf{x},\varepsilon)\subset G_\alpha$. Also, since $T$ is continuous in $E$ relative to $E$, there exists $\delta>0$ such that $\left\vert T\mathbf{y}-T\mathbf{x}\right\vert<\varepsilon$ for $\mathbf{y}\in B(\mathbf{x},\delta)$. It follows that $T\mathbf{y}\in B(T\mathbf{x},\varepsilon)\subset G_\alpha$ for $\mathbf{y}\in B(\mathbf{x},\delta)$, or $\mathbf{y}\in T^{-1}G_\alpha$ for $\mathbf{y}\in B(\mathbf{x},\delta)$, or equivalently $B(\mathbf{x},\delta)\subset T^{-1}G_\alpha$. Hence $T^{-1}G_\alpha$ is open. $\Box$
+We also claim the following two facts.
+(i) $TE\subset G$ if and only if $E\subset T^{-1}G$;
+(ii) $T^{-1}\left(\bigcup_{\alpha}G_\alpha\right)=\bigcup_{\alpha}T^{-1}G_\alpha$.
+\textit{Proof of the claim.} For (i), let $\mathbf{x}\in E$. Then $T\mathbf{x}\in TE\subset G$, and then $\mathbf{x}\in T^{-1}G$. Conversely, let $\mathbf{y}\in TE$. Then $\mathbf{y}=T\mathbf{x}$ for some $\mathbf{x}\in E\subset T^{-1}G$, but this means that $\mathbf{y}\in G$ (since $T\mathbf{x}\in G$). For (ii), note that $\mathbf{x}\in T^{-1}\left(\bigcup_{\alpha}G_\alpha\right)$ if and only if $T\mathbf{x}\in\bigcup_{\alpha}G_\alpha$, or $T\mathbf{x}\in G_{\alpha}$ for some $\alpha$, if and only if $\mathbf{x}\in T^{-1}G_\alpha$ for some $\alpha$, or $\mathbf{x}\in\bigcup_{\alpha}T^{-1}G_\alpha$. $\Box$
+By using the above two claims, the collection $\{T^{-1}G_\alpha\}$ forms an open cover of $E$. Since $E$ is compact, there exist a finite number of indices $\alpha_1,\alpha_2,\ldots,\alpha_m$, so that
+$$
+E\subset T^{-1}G_{\alpha_1}\cup T^{-1}G_{\alpha_2}\cup\cdots\cup T^{-1}G_{\alpha_m}
+=T^{-1}\left(\bigcup_{k=1}^mG_{\alpha_k}\right)
+$$
+By (i) of the second claim again, $TE\subset \bigcup_{k=1}^mG_{\alpha_k}$. Hence $TE$ is compact.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(r) Suppose $A=(R)\int_I f(\mathbf{x})\,d\mathbf{x}$ exists, i.e., $\lim_{\left\vert\Gamma\right\vert\to 0}R_\Gamma=A$. Then by definition, given $\varepsilon>0$, there exists $\delta>0$ so that $\left\vert A-R_\Gamma\right\vert<\varepsilon$ for any $\Gamma$ and any chosen $\{\zeta_k\}$, provided only that $\left\vert\Gamma\right\vert<\delta$ (To see more information about these notations, check the textbook). Fix $\Gamma_0$ with $\left\vert\Gamma_0\right\vert<\delta$, then since $\{\zeta_k\}$ can be arbitrarily chosen in $\Gamma_0$, we have
+$$
+U_{\Gamma_0}\le A+\varepsilon, \quad  L_{\Gamma_0}\ge A-\varepsilon
+$$
+and then $\inf_\Gamma U_\Gamma\le A+\varepsilon$ and $\sup_\Gamma L_\Gamma\ge A-\varepsilon$. On the other hand, we claim that $L_{\Gamma_1}\le U_{\Gamma_2}$ for all partitions $\Gamma_1$ and $\Gamma_2$ of $I$.
+\textit{Proof of the claim.} Let $\Gamma^\ast=\Gamma_1\cup\Gamma_2$ be the common partition of $\Gamma_1$ and $\Gamma_2$, then clearly $L_{\Gamma_1}\le L_{\Gamma^\ast}$ and $U_{\Gamma^\ast}\le U_{\Gamma_2}$. Thus
+$$
+L_{\Gamma_1}\le L_{\Gamma^\ast}\le U_{\Gamma^\ast}\le U_{\Gamma_2}
+$$
+and the result follows. $\Box$
+By the claim, we have $L_{\Gamma_0}\le U_{\Gamma}$ and $L_{\Gamma}\le U_{\Gamma_0}$, for all $\Gamma$. It follows that $L_{\Gamma_0}\le \inf_{\Gamma}U_{\Gamma}$ and $\sup_{\Gamma}L_{\Gamma}\le U_{\Gamma_0}$, i.e., $A-\varepsilon\le \inf_{\Gamma}U_{\Gamma}$ and $\sup_{\Gamma}L_{\Gamma}\le A+\varepsilon$. Thus
+$$
+A-\varepsilon\le \inf_{\Gamma}U_{\Gamma}\le A+\varepsilon, \quad
+A-\varepsilon\le \sup_{\Gamma}L_{\Gamma}\le A+\varepsilon
+$$
+and then $\inf_{\Gamma}U_{\Gamma}=\sup_{\Gamma}L_{\Gamma}=A$ when taking $\varepsilon\to 0$. Conversely, suppose $\inf_\Gamma U_\Gamma=\sup_\Gamma L_\Gamma=A$. Then given $\varepsilon>0$, choose $\Gamma_1$ and $\Gamma_2$ so that $L_{\Gamma_1}>A-\varepsilon$ and $U_{\Gamma_2}<A+\varepsilon$. Define $\Gamma^\ast=\Gamma_1\cup\Gamma_2=\{I^\ast_k\}_{k=1}^{N^\ast}$ again, then $\left\vert A-R_{\Gamma^\ast}\right\vert<\varepsilon$. Now, denote $\partial(I^\ast_k)$ by the boundary of $I^\ast_k$, and $\partial(I^\ast_k;\delta^\ast)$ by the boundary of $I^\ast_k$ with thickness $\delta^\ast>0$. Since the total boundary $\bigcup_{k=1}^{N^\ast}\partial(I^\ast_k)$ has zero volume, the value $\delta^\ast>0$ must exist so that $\sum_{k=1}^{N^\ast}v(\partial(I^\ast_k;\delta^\ast))<\varepsilon$. Since $f$ is bounded on $I$, there exists $M>0$ so that $\left\vert f(\mathbf{x})\right\vert<M$ for all $\mathbf{x}\in I$. It follows that 
+\begin{align*}
+\left\vert\sum_{k=1}^{N^\ast}f(\zeta_{k}^\ast)v(\partial(I^\ast_k;\delta^\ast))\right\vert<M\varepsilon\quad
+\mbox{for }\zeta_{k}^\ast\in\partial(I^\ast_k;\delta^\ast),\, k=1,2,\ldots,N^\ast
+\end{align*}
+Now, let $\delta=\min\{\delta^\ast,\delta_0\}$, where $\delta_0=\min_{1\le k\le N^\ast}(\operatorname{diam}\{I^\ast_k\})>0$. Then for $\Gamma=\{I_k\}_{k=1}^N$ with $\left\vert\Gamma\right\vert<\delta$, we can decompose $\Gamma=\{I^{\text{(i)}}_l\}_{l=1}^{N_1}\cup\{I^{\text{(b)}}_m\}_{m=1}^{N_2}$, where $N=N_1+N_2$, and $I^{\text{(b)}}_m\subset\bigcup_{k=1}^{N^\ast}\partial(I^\ast_k;\delta^\ast)$ and $I^{\text{(i)}}_l$ are the rest chosen. Observe that $\{I^{\text{(i)}}_l\}_{l=1}^{N_1}$ is a refinement of $\Gamma^\ast$ except for its boundary $\bigcup_{k=1}^{N^\ast}\partial(I^\ast_k)$, and that $I-\bigcup_{k=1}^{N^\ast}\partial(I^\ast_k;\delta^\ast)\subset\bigcup_{l=1}^{N_1}I^{\text{(i)}}_l$. So we have
+\begin{align*}
+A-(M+1)\varepsilon
+<\sum_{l=1}^{N_1}f(\zeta^{\text{(i)}}_l)v(I^{\text{(i)}}_l)
+<A+(M+1)\varepsilon
+\end{align*}
+Also, of course $-M\varepsilon<\sum_{m=1}^{N_2}f(\zeta^{\text{(b)}}_m)v(I^{\text{(b)}}_m)<M\varepsilon$. Thus
+\begin{align*}
+A-(2M+1)\varepsilon
+<R_\Gamma
+<A+(2M+1)\varepsilon\quad\mbox{or}\quad
+\left\vert A-R_\Gamma\right\vert<(2M+1)\varepsilon
+\end{align*}
+and by taking $\varepsilon\to 0$, the proof is complete.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(s) Suppose $f$ is continuous on $I$. Since $I\subset \mathbf{R}^n$ is compact, by Theorem 1.15(iii), $f$ is uniformly continuous on $I$. i.e., given $\varepsilon>0$, there exists $\delta>0$ such that $\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert<\varepsilon$ whenever $\left\vert\mathbf{x}-\mathbf{y}\right\vert<\delta$. So given $\Gamma=\{I_k\}_{k=1}^N$ with $\left\vert\Gamma\right\vert<\delta$, we have
+\begin{align*}
+U_{\Gamma}-L_{\Gamma}
+=\sum_{k=1}^N\left[\sup_{\mathbf{x}\in I_k} f(\mathbf{x})-\inf_{\mathbf{x}\in I_k} f(\mathbf{x})\right]v(I_k)
+\le\varepsilon\sum_{k=1}^Nv(I_k)
+=\varepsilon\left\vert I\right\vert
+\end{align*}
+and thus $U_{\Gamma}-L_{\Gamma}\to 0$ as $\varepsilon\to 0$. Now we claim that $\sup_{\Gamma}L_\Gamma\le\inf_{\Gamma}U_\Gamma$. 
+\textit{Proof of the claim.} By using the claim in part (r), $L_{\Gamma_1}\le U_{\Gamma_2}$ for all partitions $\Gamma_1$ and $\Gamma_2$. Fix $\Gamma_1$, then we have $L_{\Gamma_1}\le \inf_{\Gamma}U_{\Gamma}$ for all $\Gamma_1$. Hence $\sup_{\Gamma}L_{\Gamma}\le \inf_{\Gamma}U_{\Gamma}$. $\Box$
+It follows that $\inf_{\Gamma}U_\Gamma=\sup_{\Gamma}L_\Gamma$. Also, since $f$ is continuous in $I$ and $I$ is compact, by Theorem 1.15(i), $f$ is bounded on $I$. i.e., there is $M>0$ so that $\left\vert f(\mathbf{x})\right\vert<M$ for all $\mathbf{x}\in I$. So
+$$
+-M\left\vert I\right\vert<\sup_{\Gamma}L_\Gamma=\inf_{\Gamma}U_\Gamma<M\left\vert I\right\vert
+$$
+and then $\sup_{\Gamma}L_\Gamma=\inf_{\Gamma}U_\Gamma=A$ for some finite $A$. Hence the result follows by part (r).
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Find $\limsup E_k$ and $\liminf E_k$ if $E_k=[-(1/k), 1]$ for $k$ odd and $E_k=[-1,(1/k)]$ for $k$ even.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For the first, since $\bigcup_{k=j}^\infty E_k=[-1,1]$ for all $j$, we have
+\begin{align*}
+\limsup E_k
+=\bigcap_{j=1}^\infty\left(\bigcup_{k=j}^\infty E_k\right)
+=[-1,1]
+\end{align*}
+For the second, observe that $\bigcap_{k=j}^\infty E_k=\{0\}$ for all $j$. So
+\begin{align*}
+\liminf E_k
+=\bigcup_{j=1}^\infty\left(\bigcap_{k=j}^\infty E_k\right)
+=\{0\}
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+(a) Show that $\mathrm{C}\left(\limsup E_k\right)=\liminf\mathrm{C}E_k$.
+(b) Show that if $E_k\nearrow E$ or $E_k\searrow E$, then $\limsup E_k=\liminf E_k=E$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) We have $\mathbf{x}\in\mathrm{C}\left(\limsup E_k\right)$ (or $\mathbf{x}\notin\limsup E_k$) if and only if $\mathbf{x}\notin\bigcup_{k=j_0}^\infty E_k$ for some $j_0$, if and only if there is a $j_0$ so that $\mathbf{x}\notin E_k$ for all $k\ge j_0$, if and only if there is a $j_0$ so that $\mathbf{x}\in\mathrm{C}E_k$ for all $k\ge j_0$, if and only if $\mathbf{x}\in\bigcap_{k=j_0}\mathrm{C}E_k$ for some $j_0$, if and only if $\mathbf{x}\in\liminf\mathrm{C}E_k$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Suppose $E_k\nearrow E$, then $\bigcup_{k=j}^\infty E_k=E$ and $\bigcap_{k=j}^\infty E_k=E_j$, for all $j$. Thus
+\begin{align*}
+\limsup E_k
+=\bigcap_{j=1}^\infty E
+=E,\quad
+\liminf E_k
+=\bigcup_{j=1}^\infty E_j
+=E
+\end{align*}
+Next, suppose $E_k\searrow E$, then $\bigcup_{k=j}^\infty E_k=E_j$ and $\bigcap_{k=j}^\infty E_k=E$, for all $j$. Thus
+\begin{align*}
+\limsup E_k
+=\bigcap_{j=1}^\infty E_j
+=E,\quad
+\liminf E_k
+=\bigcup_{j=1}^\infty E
+=E
+\end{align*}
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+(a) Show that $\limsup_{k\to\infty}(-a_k)=-\liminf_{k\to\infty}a_k$.
+(b) Show that $\limsup_{k\to\infty}(a_k+b_k)\le\limsup_{k\to\infty}a_k+\limsup_{k\to\infty}b_k$, provided that the expression on the right does not have the form $\infty+(-\infty)$ or $-\infty+\infty$.
+(c) If $\{a_k\}$ and $\{b_k\}$ are nonnegative, bounded sequences, show that $\limsup_{k\to\infty}(a_kb_k)\le\left(\limsup_{k\to\infty}a_k\right)\left(\limsup_{k\to\infty}b_k\right)$.
+(d) Give examples for which the inequalities in parts (b) and (c) are not equalities. Show that if either $\{a_k\}$ or $\{b_k\}$ converges, equality holds in (b) and (c).
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+(a) Denote $b_j=\sup_{k\ge j}(-a_k)$ and $c_j=-\inf_{k\ge j}a_k$. Then $-a_k\le b_j$ or $a_k\ge -b_j$, for all $k\ge j$. It follows that $-c_j=\inf_{k\ge j}a_k\ge -b_j$ or $c_j\le b_j$, implying $\lim_{j\to\infty}c_j\le\lim_{j\to\infty}b_j$. On the other hand, we have $a_k\ge\inf_{k\ge j}a_k=-c_j$ or $-a_k\le c_j$, for all $k\ge j$. It follows that $b_j=\sup_{k\ge j}(-a_k)\le c_j$, implying $\lim_{j\to\infty}b_j\le\lim_{j\to\infty}c_j$. Hence
+\begin{align*}
+\limsup_{k\to\infty}(-a_k)
+=\lim_{j\to\infty}b_j
+=\lim_{j\to\infty}c_j
+=-\liminf_{k\to\infty}a_k
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(b) Denote $A_j=\sup_{k\ge j}a_k$ and $B_j=\sup_{k\ge j}b_k$. Then $a_k+b_k\le A_j+B_j$ for all $k\ge j$, implying $\sup_{k\ge j}(a_k+b_k)\le A_j+B_j$ for all $k\ge j$. Thus
+\begin{align*}
+\limsup_{k\to\infty}(a_k+b_k)
+&\le\lim_{j\to\infty}(A_j+B_j) \\
+&=\lim_{j\to\infty}A_j+\lim_{j\to\infty}B_j \\
+&=\limsup_{k\to\infty}a_k+\limsup_{k\to\infty}b_k
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(c) Use the notations $A_j$ and $B_j$ as in part (b). Then $0\le a_k\le A_j$ and $0\le b_k\le B_j$ for all $k\ge j$, implying $a_kb_k\le A_jB_j$ for all $k\ge j$. Thus $\sup_{k\ge j}(a_kb_k)\le A_jB_j$, and then
+\begin{align*}
+\limsup_{k\to\infty}(a_kb_k)
+&\le\lim_{j\to\infty}(A_jB_j) \\
+&=\left(\lim_{j\to\infty}A_j\right)\left(\lim_{j\to\infty}B_j\right) \\
+&=\left(\limsup_{k\to\infty}a_k\right)\left(\limsup_{k\to\infty}b_k\right)
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+(d) For the first part, we give some examples. For (b), let $a_k=(-1)^k$ and $b_k=(-1)^{k+1}$. For (c), let $a_k=1+(-1)^k$ and $b_k=1+(-1)^{k+1}$. For the second part, w.l.o.g., we assume that $a_k\to a$. By Exercise 1(e), $\limsup_{k\to\infty}a_k=a$. For (b), given $\varepsilon>0$, there is an integer $J$ such that $a_k>a-\varepsilon$ for all $k\ge J$, and then $a_k+b_k>a+b_k-\varepsilon$ for all $k\ge J$. It follows that for $j\ge J$,
+\begin{align*}
+\sup_{k\ge j}(a_k+b_k)
+\ge\sup_{k\ge j}(a+b_k-\varepsilon)
+=a+\sup_{k\ge j}b_k+\varepsilon
+\end{align*}
+and then 
+\begin{align*}
+\limsup_{k\to\infty}(a_k+b_k)
+&\ge \lim_{j\to\infty}\left(a+\sup_{k\ge j}b_k+\varepsilon\right) \\
+&=a+\lim_{j\to\infty}\left(\sup_{k\ge j}b_k\right)+\varepsilon \\
+&=a+\limsup_{k\to\infty}b_k+\varepsilon \\
+&=\limsup_{k\to\infty}a_k+\limsup_{k\to\infty}b_k+\varepsilon
+\end{align*}
+The result follows by taking $\varepsilon\to 0$. For (c), again, there is an integer $J$ such that $a_k>a-\varepsilon$ for all $k\ge J$, and then $a_kb_k>(a-\varepsilon)b_k$ for all $k\ge J$. It follows that for $j\ge J$,
+\begin{align*}
+\sup_{k\ge j}(a_kb_k)
+\ge\sup_{k\ge j}\left[(a-\varepsilon)b_k\right]
+=(a-\varepsilon)\sup_{k\ge j}b_k
+\end{align*}
+and then
+\begin{align*}
+\limsup_{k\to\infty}(a_kb_k)
+&\ge \lim_{j\to\infty}\left[(a-\varepsilon)\sup_{k\ge j}b_k\right] \\
+&=(a-\varepsilon)\lim_{j\to\infty}\left(\sup_{k\ge j}b_k\right)\ \\
+&=(a-\varepsilon)\limsup_{k\to\infty}b_k
+\end{align*}
+The result follows by taking $\varepsilon\to 0$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Exercise 1.5 is skipped.
+
+
+\bigskip\noindent\hrule\bigskip
+
+Exercise 1.6 is skipped.
+
+
+\bigskip\noindent\hrule\bigskip
+
+Show that $E_1^\circ\cap E_2^\circ=(E_1\cap E_2)^\circ$, and $E_1^\circ\cup E_2^\circ\subset(E_1\cup E_2)^\circ$. Give an example when $E_1^\circ\cup E_2^\circ\ne(E_1\cup E_2)^\circ$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For the first, let $\mathbf{x}\in E_1^\circ\cap E_2^\circ$, i.e., $\mathbf{x}\in E_1^\circ$ and $\mathbf{x}\in E_2^\circ$. Then there are $\delta_1>0$ and $\delta_2>0$, such that $B(\mathbf{x},\delta_1)\subset E_1$ and $B(\mathbf{x},\delta_2)\subset E_2$. Put $\delta=\min\{\delta_1,\delta_2\}$, we see that $B(\mathbf{x},\delta)\subset B(\mathbf{x},\delta_1)\subset E_1$ and $B(\mathbf{x},\delta)\subset B(\mathbf{x},\delta_2)\subset E_2$, i.e., $B(\mathbf{x},\delta)\subset E_1\cap E_2$, and hence $\mathbf{x}\in(E_1\cap E_2)^\circ$. The other direction of inclusion is trivial. For the second, let $\mathbf{y}\in E_1^\circ\cup E_2^\circ$. W.l.o.g., let $\mathbf{y}\in E_1^\circ$. Then there is a $\delta>0$ such that $B(\mathbf{y},\delta)\subset E_1$, implying $B(\mathbf{y},\delta)\subset E_1\cup E_2$, i.e., $\mathbf{y}\in(E_1\cup E_2)^\circ$. Finally, we give an example as below. Let $E_1=[0,1]$ and $E_2=[1,2]$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $E$ be relatively open with respect to an interval $I$. Show that $E$ can be written as a countable union of nonoverlapping intervals.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $E=I\cap G$ for some open set $G\subset\mathbf{R}^n$. Since $G$ can be written as a countable union of nonoverlapping intervals (Theorem 1.11), we can write $G=\bigcup_{k=1}^\infty I_k$, where each $I_k$ is an intervals with $I_j^\circ\cap I_k^\circ=\varnothing$ if $j\ne k$. Now,
+\begin{align*}
+E
+=I\cap G
+=I\cap\left(\bigcup_{k=1}^\infty I_k\right)
+=\bigcup_{k=1}^\infty(I\cap I_k)
+\end{align*}
+and observe that $I\cap I_k$ are also nonoverlapping intervals for all $k$, because if we let $I=\{(x_1,x_2,\ldots,x_n):a_j\le x_j\le b_j,\,1\le j\le n\}$ and $I_k=\{(x_1,x_2,\ldots,x_n):a_j^{(k)}\le x_j\le b_j^{(k)},\,1\le j\le n\}$, then
+\begin{align*}
+I\cap I_k
+=\{(x_1,x_2,\ldots,x_n):A_j^{(k)}\le x_j\le B_j^{(k)},\,1\le j\le n\}
+\end{align*}
+where $A_j^{(k)}=\max\{a_j,a_j^{(k)}\}$ and $B_j^{(k)}=\min\{b_j,b_j^{(k)}\}$. (Note that $I\cap I_k=\varnothing$ if $A_j^{(k)}>B_j^{(k)}$ for some $j$, but it does not alter the result.)
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Prove that any closed subset of a compact set is compact.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Let $F$ be closed and $F\subset K$, where $K$ is compact.  If $\{G_\alpha\}$ is an open cover of $F$, then adjoining the open set $\mathbf{R}^n\setminus F$ produces an open cover of $K$.  A finite subcover of $K$ exists.  Removing $\mathbf{R}^n\setminus F$, if it occurs, leaves a finite subcollection of the original family that covers $F$.  Hence $F$ is compact.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $\{\mathbf{x}_k\}$ be a bounded infinite sequence in $\mathbf{R}^n$. Show that $\{\mathbf{x}_k\}$ has a limit point. (This is the Bolzano-Weierstrass theorem in $\mathbf{R}^n$.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Since $\{\mathbf{x}_k\}$ is bounded, we have $\{\mathbf{x}_k\}\subset I$ for some interval $I\subset\mathbf{R}^n$. Also, since $I$ is compact, the result follows by Theorem 1.12(ii).
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Give an example of a decreasing sequence of nonempty closed sets in $\mathbf{R}^n$ whose intersection is empty.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+In $\mathbf{R}^1$, let $F_k=[k,\infty)$ for $k=1,2,\ldots$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Give an example of two disjoint closed sets $F_1$ and $F_2$ in $\mathbf{R}^n$ for which $\operatorname{dist}(F_1,F_2)=0$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+In $\mathbf{R}^2$, let $F_1=\{(x,y):y\ge e^{-x}\}$ and $F_2=\{(x,y):y\le 0\}$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $f$ is defined and uniformly continuous on $E$, show there is a function $\bar{f}$ defined and continuous on $\overline{E}$ such that $\bar{f}=f$ on $E$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Define 
+\begin{align*}
+\bar{f}(\mathbf{x})
+=\left\{\begin{array}{ll}
+f(\mathbf{x})&\mathbf{x}\in E\vspace{0.05in}\\
+\displaystyle\lim_{\mathbf{y}\to\mathbf{x}}f(\mathbf{y})&\mbox{$\mathbf{x}\notin E$ and $\mathbf{x}$ is a limit point of $E$}
+\end{array}\right.
+\end{align*}
+To show that $\bar{f}(\mathbf{x})$ exists for all $\mathbf{x}\in\overline{E}$ (and then $\bar{f}$ is well-defined), if $\mathbf{x}\in E$, then we are done. If otherwise, i.e., if $\mathbf{x}\notin E$ and $\mathbf{x}$ is a limit point of $E$. Given $\varepsilon>0$, then since $f$ is uniformly continuous on $E$, there exists $\delta_0>0$ such that $\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert<\varepsilon$ for all $\mathbf{x},\mathbf{y}\in E$ with $\left\vert\mathbf{x}-\mathbf{y}\right\vert<\delta_0$. Moreover, choose a sequence $\{\mathbf{y}_k\}$ of $E$ that converges to $\mathbf{x}$, then there is an integer $N$ such that $\left\vert\mathbf{y}_k-\mathbf{x}\right\vert<\frac{\delta_0}{2}$ for $k\ge N$. So by the triangular inequality, for all $j,k\ge N$,
+\begin{align*}
+\left\vert \mathbf{y}_j-\mathbf{y}_k\right\vert
+\le\left\vert \mathbf{y}_j-\mathbf{x}\right\vert+\left\vert \mathbf{x}-\mathbf{y}_k\right\vert
+<\frac{\delta_0}{2}+\frac{\delta_0}{2}
+=\delta_0
+\end{align*}
+So $\left\vert f(\mathbf{y}_j)-f(\mathbf{y}_k)\right\vert<\varepsilon$ for all $j,k\ge N$, and then $\{f(\mathbf{y}_k)\}$ forms a Cauchy sequence in $E\subset\mathbf{R}^n$ which converges to $\lim_{k\to\infty}f(\mathbf{y}_k)$. Now, to show that $\bar{f}(\mathbf{x})=\lim_{\mathbf{y}\to\mathbf{x}}f(\mathbf{y})$ exists, let $\{\mathbf{y}'_k\}$ be an another sequence of $E$ that converges to $\mathbf{x}$. Then there is an integer $N'$ such that $\left\vert\mathbf{y}'_k-\mathbf{x}\right\vert<\frac{\delta_0}{2}$ for $k\ge N'$. Put $N_0=\max\{N,N'\}$, then for all $k\ge N_0$,
+\begin{align*}
+\left\vert\mathbf{y}'_k-\mathbf{y}_k\right\vert
+\le\left\vert \mathbf{y}'_k-\mathbf{x}\right\vert+\left\vert \mathbf{x}-\mathbf{y}_k\right\vert
+<\frac{\delta_0}{2}+\frac{\delta_0}{2}
+=\delta_0
+\end{align*}
+So $\left\vert f(\mathbf{y}'_k)-f(\mathbf{y}_k)\right\vert<\varepsilon$ for all $k\ge N_0$, and then $\lim_{k\to\infty}\left[f(\mathbf{y}'_k)-f(\mathbf{y}_k)\right]=0$. Thus
+\begin{align*}
+\lim_{k\to\infty}f(\mathbf{y}'_k)
+&=\lim_{k\to\infty}\left[f(\mathbf{y}'_k)-f(\mathbf{y}_k)+f(\mathbf{y}_k)\right] \\
+&=\lim_{k\to\infty}\left[f(\mathbf{y}'_k)-f(\mathbf{y}_k)\right]+\lim_{k\to\infty}f(\mathbf{y}_k) \\
+&=\lim_{k\to\infty}f(\mathbf{y}_k)
+\end{align*}
+and hence $\bar{f}(\mathbf{x})=\lim_{\mathbf{y}\to\mathbf{x}}f(\mathbf{y})$ exists. The continuity of $\bar{f}$ automatically follows by its definition.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $f$ is defined and uniformly continuous on a bounded set $E$, show that $f$ is bounded on $E$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Suppose $f$ is not bounded on $E$, first we can choose $\mathbf{x}_1\in E$ such that $\left\vert f(\mathbf{x}_1)\right\vert>1$. Having chosen $\mathbf{x}_1,\mathbf{x}_2,\ldots,\mathbf{x}_{k-1}\in E$, there is $\mathbf{x}_k\in E$ such that $\left\vert f(\mathbf{x}_k)\right\vert>\left\vert f(\mathbf{x}_{k-1})\right\vert+1$, and continue this process. Since every bounded sequence in $\mathbf{R}^n$ has a convergent subsequence, there is a subsequence $\{\mathbf{x}_{k_j}\}$ of $E$ that is convergent. Now, since every convergent sequence is Cauchy, given $\delta>0$, there exists an integer $N$ such that $\left\vert\mathbf{x}_{k_i}-\mathbf{x}_{k_j}\right\vert<\delta$ for all $i,j\ge N$. But if we let $k_i>k_j$, we have
+\begin{align*}
+\left\vert f(\mathbf{x}_{k_i})-f(\mathbf{x}_{k_j})\right\vert
+&\ge \left\vert f(\mathbf{x}_{k_i})\right\vert-\left\vert f(\mathbf{x}_{k_j})\right\vert \\
+&>\left\vert f(\mathbf{x}_{k_i-1})\right\vert+1-\left\vert f(\mathbf{x}_{k_j})\right\vert \\
+&>\left\vert f(\mathbf{x}_{k_i-2})\right\vert+2-\left\vert f(\mathbf{x}_{k_j})\right\vert \\
+&\,\,\vdots \\
+&>\left\vert f(\mathbf{x}_{k_j})\right\vert+(k_i-k_j)-\left\vert f(\mathbf{x}_{k_j})\right\vert \\
+&=k_i-k_j \\
+&\ge 1
+\end{align*}
+Thus $f$ fails to be uniformly continuous, a contradiction.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Show that a bounded $f$ is Riemann integrable on $I$ if and only if given $\varepsilon>0$, there is a partition $\Gamma$ of $I$ such that $0\le U_\Gamma-L_\Gamma<\varepsilon$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+Suppose $f$ is Riemann integrable on $I$, then given $\varepsilon>0$, there exists $\delta>0$ so that $\left\vert A-R_\Gamma\right\vert<\frac{\varepsilon}{3}$ for any partition $\Gamma$ of $I$ and any chosen $\{\zeta_k\}$, provided only that $\left\vert\Gamma\right\vert<\delta$. On the other hand, for any $\delta>0$, there must exist a partition $\Gamma_0$ such that $\left\vert\Gamma_0\right\vert<\delta$. So $U_{\Gamma_0}\le A+\frac{\varepsilon}{3}$ and $L_{\Gamma_0}\ge A-\frac{\varepsilon}{3}$, and thus
+\begin{align*}
+U_{\Gamma_0}-L_{\Gamma_0}
+\le A+\frac{\varepsilon}{3}-\left(A-\frac{\varepsilon}{3}\right)
+=\frac{2\varepsilon}{3}
+<\varepsilon
+\end{align*}
+Conversely, given $\varepsilon>0$, there exists a partition $\Gamma_0$ of $I$ such that $0\le U_{\Gamma_0}-L_{\Gamma_0}<\varepsilon$ or $U_{\Gamma_0}<L_{\Gamma_0}+\varepsilon$. It follows that $\inf_{\Gamma}U_\Gamma<\sup_{\Gamma}L_\Gamma+\varepsilon$, and thus $\inf_{\Gamma}U_\Gamma\le\sup_{\Gamma}L_\Gamma$ by taking $\varepsilon\to 0$. On the other hand, the inequality $\inf_{\Gamma}U_\Gamma\ge\sup_{\Gamma}L_\Gamma$ always hold [see the proof of Exercise 1.(r)]. So $\inf_{\Gamma}U_\Gamma=\sup_{\Gamma}L_\Gamma$. Finally since $f$ is bounded on $I$, both $\inf_{\Gamma}U_\Gamma$ and $\sup_{\Gamma}L_\Gamma$ have finite values. Hence by Exercise 1.(r), $f$ is Riemann integrable on $I$.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+If $\{f_k\}$ is a sequence of bounded, Riemann integrable functions on an interval $I$ which converges uniformly on $I$ to $f$, show that $f$ is Riemann integrable on $I$ and that
+\begin{align*}
+(R)\int_If_k(\mathbf{x})\,d\mathbf{x}\to(R)\int_If(\mathbf{x})\,d\mathbf{x}
+\end{align*}
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For the first, given $\varepsilon>0$. Since $f_k\to f$ uniformly, there is an integer $K$ such that $k\ge K$ implies $\left\vert f(\mathbf{x})-f_k(\mathbf{x})\right\vert<\varepsilon$ or $f_k(\mathbf{x})-\varepsilon<f(\mathbf{x})<f_k(\mathbf{x})+\varepsilon$, for all $\mathbf{x}\in I$. So we get, for any subset $E\subset I$, 
+\begin{align*}
+\sup_{\mathbf{x}\in E}f(\mathbf{x})\le \sup_{\mathbf{x}\in E}f_k(\mathbf{x})+\varepsilon,\quad
+\inf_{\mathbf{x}\in E}f(\mathbf{x})\ge \inf_{\mathbf{x}\in E}f_k(\mathbf{x})-\varepsilon
+\end{align*}
+Given a partition $\Gamma=\{I_j\}$ of $I$, denote $U_{k,\Gamma}=\sum_{j=1}^N\left[\sup_{\mathbf{x}\in I_j}f_k(\mathbf{x})\right]v(I_j)$ and $L_{k,\Gamma}=\sum_{j=1}^N\left[\inf_{\mathbf{x}\in I_j}f_k(\mathbf{x})\right]v(I_j)$. Then since $f_k$ is Riemann integrable, by Exercise 1.15, there is a partition $\Gamma_k=\{I_j^{(k)}\}_{j=1}^{N_k}$ such that $U_{k,\Gamma_k}-L_{k,\Gamma_k}<\varepsilon$. Now, we have
+\begin{align*}
+U_{\Gamma_K}-L_{\Gamma_K}
+&=\sum_{j=1}^N\left[\sup_{\mathbf{x}\in I_j^{(K)}}f(\mathbf{x})\right]v(I_j^{(K)})
+-\sum_{j=1}^N\left[\inf_{\mathbf{x}\in I_j^{(K)}}f(\mathbf{x})\right]v(I_j^{(K)}) \\
+&\le\sum_{j=1}^N\left[\sup_{\mathbf{x}\in I_j^{(K)}}f_K(\mathbf{x})+\varepsilon\right]v(I_j^{(K)})
+-\sum_{j=1}^N\left[\inf_{\mathbf{x}\in I_j^{(K)}}f_K(\mathbf{x})-\varepsilon\right]v(I_j^{(K)}) \\
+&=2\varepsilon\left\vert I\right\vert
++U_{K,\Gamma_K}-L_{K,\Gamma_K}\\
+&<\left(2\left\vert I\right\vert+1\right)\varepsilon
+\end{align*}
+Thus by Exercise 1.15 again, $f$ is Riemann integrable on $I$.
+For the second, given $\varepsilon>0$. Since $f_k\to f$ uniformly, there is an integer $K$ such that $f_k(\mathbf{x})-\varepsilon<f(\mathbf{x})<f_k(\mathbf{x})+\varepsilon$ for $k\ge K$ and for $\mathbf{x}\in I$. It follows that for any subset $E\subset I$,
+\begin{align*}
+\sup_{\mathbf{x}\in E}f_k(\mathbf{x})-\varepsilon
+\le\sup_{\mathbf{x}\in E}f(\mathbf{x})
+\le \sup_{\mathbf{x}\in E}f_k(\mathbf{x})+\varepsilon
+\end{align*}
+and then
+\begin{align*}
+\inf_{\Gamma}U_{k,\Gamma}-\varepsilon
+\le\inf_{\Gamma}U_\Gamma
+\le \inf_{\Gamma}U_{k,\Gamma}+\varepsilon\quad\mbox{or}\quad
+\left\vert\inf_{\Gamma}U_\Gamma-\inf_{\Gamma}U_{k,\Gamma}\right\vert<\varepsilon
+\end{align*}
+By Exercise 1(r), we have $(R)\int_If(\mathbf{x})\,d\mathbf{x}=\inf_{\Gamma}U_\Gamma$ and $(R)\int_If_k(\mathbf{x})\,d\mathbf{x}=\inf_{k,\Gamma}U_\Gamma$. Thus for all $k\ge K$,
+\begin{align*}
+\left\vert(R)\int_If(\mathbf{x})\,d\mathbf{x}-(R)\int_If_k(\mathbf{x})\,d\mathbf{x}\right\vert<\varepsilon
+\end{align*}
+Hence the result follows.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $f$ be a finite function on $\mathbf{R}^n$ and define
+\begin{align*}
+\omega(\delta)
+=\sup\{\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert:\left\vert \mathbf{x}-\mathbf{y}\right\vert<\delta\}
+\end{align*}
+$\delta>0$, to be the \textit{modulus of continuity} of $f$. Show that $\omega(\delta)$ decreases as $\delta$ decreases to $0$ and that $f$ is uniformly continuous if and only if $\omega(\delta)\to 0$ as $\delta\to 0$.
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For the first, observe that if $0<\delta_1<\delta_2$, one has
+\begin{align*}
+\{\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert:\left\vert \mathbf{x}-\mathbf{y}\right\vert<\delta_1\}
+\subset\{\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert:\left\vert \mathbf{x}-\mathbf{y}\right\vert<\delta_2\}
+\end{align*}
+So $\omega(\delta_1)\le\omega(\delta_2)$, and the result follows.
+For the second, if $f$ is uniformly continuous. Then given $\varepsilon>0$, there exists $\delta_0>0$ such that $\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert<\frac{\varepsilon}{2}$ for all $\mathbf{x},\mathbf{y}\in\mathbf{R}^n$ with $\left\vert \mathbf{x}-\mathbf{y}\right\vert<\delta_0$. Thus by definition, $\omega(\delta_0)\le\frac{\varepsilon}{2}<\varepsilon$, which implies $\lim_{\delta\to 0}\omega(\delta)=0$. Conversely, if $\omega(\delta)\to 0$ as $\delta\to 0$. Then given $\varepsilon>0$, there is a $\delta>0$ such that $\omega(\delta)<\varepsilon$. i.e., $\left\vert f(\mathbf{x})-f(\mathbf{y})\right\vert<\varepsilon$ for all $\mathbf{x},\mathbf{y}\in\mathbf{R}^n$ with $\left\vert \mathbf{x}-\mathbf{y}\right\vert<\delta$, or $f$ is uniformly continuous.
+
+
+
+\bigskip\noindent\hrule\bigskip
+
+Let $F$ be a closed subset of $(-\infty,+\infty)$, and let $f$ be continuous relative to $F$. Show that there is a continuous function $g$ on $(-\infty,+\infty)$ which equals $f$ in $F$. If $\left\vert f(x)\right\vert\le M$ for $x\in F$, show that $g$ can be chosen so that $\left\vert g(x)\right\vert\le M$ for $-\infty<x<+\infty$. (This is the Tietze extension theorem for the real line.)
+
+\smallskip
+\noindent\textbf{Solution.}\quad
+
+For the first question. Suppose $F=\varnothing$, the result is trivial. Suppose $F\ne\varnothing$, then since $\mathrm{C}F$ is open, by Theorem 1.10, there are at most 3 types of open intervals whose union is $\mathrm{C}F$: $(-\infty,a)$, $(b,c)$, and $(d,\infty)$. We only have to consider the following three cases.
+Case 1: If $(-\infty,a)\subset\mathrm{C}F$, where $a\in F$. Then $g$ needs to be defined and continuous on $(-\infty,a)$, and $\lim_{x\to a^-}g(x)=f(a)$. Define $g(x)=f(a)\cdot e^{-(x-a)^2}$ on $(-\infty,a)$, then such $g$ is of desired.
+Case 2: If $(b,c)\subset\mathrm{C}F$, where $b,c\in F$. Since $f$ is defined on $F$, both $f(b)$ and $f(c)$ are defined and finite. So $g$ needs to be defined and continuous on $(b,c)$, and $\lim_{x\to b^+}g(x)=f(b)$ and $\lim_{x\to c^-}g(x)=f(c)$. Define $g(x)=\frac{x-b}{c-b}\left[f(c)-f(b)\right]+f(b)$ on $(b,c)$, then such $g$ is of desired.
+Case 3: If $(d,\infty)\subset\mathrm{C}F$, where $d\in F$. This is similar to Case 1.
+For the second, since $g$ has at most the following four types
+\begin{align*}
+g(x)
+=\left\{\begin{array}{ll}
+f(x)&x\in F \vspace{0.08in}\\
+f(a)\cdot e^{-(x-a)^2}&x\in(-\infty,a)\subset\mathrm{C}F \vspace{0.08in}\\
+\dfrac{x-b}{c-b}\left[f(c)-f(b)\right]+f(b)&x\in(b,c)\subset\mathrm{C}F \vspace{0.08in}\\
+f(d)\cdot e^{-(x-d)^2} & x\in(d,\infty)\subset\mathrm{C}F
+\end{array}\right.
+\end{align*}
+The second type says that $\left\vert g(x)\right\vert<\left\vert f(a)\right\vert$ for $x\in(-\infty,a)$. The third type says that, w.l.o.g., if $f(b)\le f(c)$, then $f(b)\le g(x)\le f(c)$ or $\left\vert g(x)\right\vert\le\max\{\left\vert f(b)\right\vert,\left\vert f(c)\right\vert\}$, for $x\in(b,c)$. The fourth type says that $\left\vert g(x)\right\vert<\left\vert f(b)\right\vert$ for $x\in(b,\infty)$. Combine the above results, we see that for all $x\in(-\infty,\infty)$, $\left\vert g(x)\right\vert\le \left\vert f(x_0)\right\vert$ for some $x_0\in F$. Thus if $\left\vert f(x)\right\vert\le M$ for $x\in F$, we have $\left\vert g(x)\right\vert\le M$ for all $x\in(-\infty,\infty)$.
+
+
+\end{document}
