@@ -529,7 +529,11 @@ private lemma inner_rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
 
 private lemma norm_rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     ‖rotate90 v‖ = ‖v‖ := by
-  sorry
+  simp [rotate90]
+  rw [EuclideanSpace.norm_eq]
+  rw [EuclideanSpace.norm_eq]
+  simp [Fin.sum_univ_two]
+  ring
 
 private noncomputable def normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
     EuclideanSpace ℝ (Fin 2) := ‖v‖⁻¹ • rotate90 v
