@@ -328,13 +328,12 @@ for $\mathbf{y}\in E$ with $\mathbf{y}\in B(\mathbf{x},\delta_K)$. This complete
 
 \smallskip
 \noindent\textbf{Solution.}\quad
-(q) Let $\{G_\alpha\}$ be an open cover of $TE$, we claim that each $T^{-1}G_\alpha$ is open.
-\textit{Proof of the claim.} Given $\mathbf{x}\in T^{-1}G_\alpha$, i.e., $T\mathbf{x}\in G_\alpha$. Since $G_\alpha$ is open, there exists $\varepsilon>0$ such that $B(T\mathbf{x},\varepsilon)\subset G_\alpha$. Also, since $T$ is continuous in $E$ relative to $E$, there exists $\delta>0$ such that $\left\vert T\mathbf{y}-T\mathbf{x}\right\vert<\varepsilon$ for $\mathbf{y}\in B(\mathbf{x},\delta)$. It follows that $T\mathbf{y}\in B(T\mathbf{x},\varepsilon)\subset G_\alpha$ for $\mathbf{y}\in B(\mathbf{x},\delta)$, or $\mathbf{y}\in T^{-1}G_\alpha$ for $\mathbf{y}\in B(\mathbf{x},\delta)$, or equivalently $B(\mathbf{x},\delta)\subset T^{-1}G_\alpha$. Hence $T^{-1}G_\alpha$ is open. $\Box$
+(q) Let $\{G_\alpha\}$ be an open cover of $TE$.  By continuity of $T:E\to T(E)$, each $E\cap T^{-1}G_\alpha$ is open in the relative topology on $E$: for $\mathbf{x}$ in this preimage, continuity supplies $\delta>0$ such that every $\mathbf y\in E\cap B(\mathbf x,\delta)$ is mapped into $G_\alpha$.
 We also claim the following two facts.
 (i) $TE\subset G$ if and only if $E\subset T^{-1}G$;
 (ii) $T^{-1}\left(\bigcup_{\alpha}G_\alpha\right)=\bigcup_{\alpha}T^{-1}G_\alpha$.
 \textit{Proof of the claim.} For (i), let $\mathbf{x}\in E$. Then $T\mathbf{x}\in TE\subset G$, and then $\mathbf{x}\in T^{-1}G$. Conversely, let $\mathbf{y}\in TE$. Then $\mathbf{y}=T\mathbf{x}$ for some $\mathbf{x}\in E\subset T^{-1}G$, but this means that $\mathbf{y}\in G$ (since $T\mathbf{x}\in G$). For (ii), note that $\mathbf{x}\in T^{-1}\left(\bigcup_{\alpha}G_\alpha\right)$ if and only if $T\mathbf{x}\in\bigcup_{\alpha}G_\alpha$, or $T\mathbf{x}\in G_{\alpha}$ for some $\alpha$, if and only if $\mathbf{x}\in T^{-1}G_\alpha$ for some $\alpha$, or $\mathbf{x}\in\bigcup_{\alpha}T^{-1}G_\alpha$. $\Box$
-By using the above two claims, the collection $\{T^{-1}G_\alpha\}$ forms an open cover of $E$. Since $E$ is compact, there exist a finite number of indices $\alpha_1,\alpha_2,\ldots,\alpha_m$, so that
+By using the above two claims, the collection $\{E\cap T^{-1}G_\alpha\}$ forms a relatively open cover of $E$. Since $E$ is compact, there exist a finite number of indices $\alpha_1,\alpha_2,\ldots,\alpha_m$, so that
 $$
 E\subset T^{-1}G_{\alpha_1}\cup T^{-1}G_{\alpha_2}\cup\cdots\cup T^{-1}G_{\alpha_m}
 =T^{-1}\left(\bigcup_{k=1}^mG_{\alpha_k}\right)
@@ -496,17 +495,17 @@ Next, suppose $E_k\searrow E$, then $\bigcup_{k=j}^\infty E_k=E_j$ and $\bigcap_
 \begin{align*}
 \sup_{k\ge j}(a_k+b_k)
 \ge\sup_{k\ge j}(a+b_k-\varepsilon)
-=a+\sup_{k\ge j}b_k+\varepsilon
+=a+\sup_{k\ge j}b_k-\varepsilon
 \end{align*}
 and then 
 \begin{align*}
 \limsup_{k\to\infty}(a_k+b_k)
-&\ge \lim_{j\to\infty}\left(a+\sup_{k\ge j}b_k+\varepsilon\right) \\
-&=a+\lim_{j\to\infty}\left(\sup_{k\ge j}b_k\right)+\varepsilon \\
-&=a+\limsup_{k\to\infty}b_k+\varepsilon \\
-&=\limsup_{k\to\infty}a_k+\limsup_{k\to\infty}b_k+\varepsilon
+&\ge \lim_{j\to\infty}\left(a+\sup_{k\ge j}b_k-\varepsilon\right) \\
+&=a+\lim_{j\to\infty}\left(\sup_{k\ge j}b_k\right)-\varepsilon \\
+&=a+\limsup_{k\to\infty}b_k-\varepsilon \\
+&=\limsup_{k\to\infty}a_k+\limsup_{k\to\infty}b_k-\varepsilon
 \end{align*}
-The result follows by taking $\varepsilon\to 0$. For (c), again, there is an integer $J$ such that $a_k>a-\varepsilon$ for all $k\ge J$, and then $a_kb_k>(a-\varepsilon)b_k$ for all $k\ge J$. It follows that for $j\ge J$,
+The result follows by taking $\varepsilon\to 0$. For (c), if $a=0$, the desired reverse inequality follows from nonnegativity.  If $a>0$, choose $0<\varepsilon<a$. Again, there is an integer $J$ such that $a_k>a-\varepsilon$ for all $k\ge J$, and then $a_kb_k>(a-\varepsilon)b_k$ for all $k\ge J$. It follows that for $j\ge J$,
 \begin{align*}
 \sup_{k\ge j}(a_kb_k)
 \ge\sup_{k\ge j}\left[(a-\varepsilon)b_k\right]
@@ -718,13 +717,8 @@ U_{\Gamma_K}-L_{\Gamma_K}
 &<\left(2\left\vert I\right\vert+1\right)\varepsilon
 \end{align*}
 Thus by Exercise 1.15 again, $f$ is Riemann integrable on $I$.
-For the second, given $\varepsilon>0$. Since $f_k\to f$ uniformly, there is an integer $K$ such that $f_k(\mathbf{x})-\varepsilon<f(\mathbf{x})<f_k(\mathbf{x})+\varepsilon$ for $k\ge K$ and for $\mathbf{x}\in I$. It follows that for any subset $E\subset I$,
-\begin{align*}
-\sup_{\mathbf{x}\in E}f_k(\mathbf{x})-\varepsilon
-\le\sup_{\mathbf{x}\in E}f(\mathbf{x})
-\le \sup_{\mathbf{x}\in E}f_k(\mathbf{x})+\varepsilon
-\end{align*}
-and then
+For the second, given $\varepsilon>0$. Since $f_k\to f$ uniformly, if $|I|=0$ the assertion is immediate. Otherwise, there is an integer $K$ such that $f_k(\mathbf{x})-\varepsilon/|I|<f(\mathbf{x})<f_k(\mathbf{x})+\varepsilon/|I|$ for $k\ge K$ and for $\mathbf{x}\in I$. It follows that each upper sum changes by at most
+$(\varepsilon/|I|)\sum_j |I_j|=\varepsilon$.  Taking infima over partitions therefore gives
 \begin{align*}
 \inf_{\Gamma}U_{k,\Gamma}-\varepsilon
 \le\inf_{\Gamma}U_\Gamma
