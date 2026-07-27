@@ -236,6 +236,17 @@ d(p,q)=0\le d(p,r)+d(r,q)
 is immediate.
 Hence such $d$ is a metric.
 
+Every subset $A\subset X$ is open: for each $p\in A$, the ball of
+radius $1/2$ about $p$ is the singleton $\{p\}$ and is contained in
+$A$.  Since the complement of every subset is likewise open, every
+subset is also closed.
+
+Every finite subset is compact, because an open cover can be reduced to
+one chosen member for each of its finitely many points.  Conversely, if
+$A$ is infinite, then the family of singleton sets $\{\{p\}:p\in A\}$
+is an open cover of $A$ with no finite subcover.  Thus the compact
+subsets are exactly the finite subsets.
+
 
 
 \bigskip\noindent\hrule\bigskip
@@ -416,16 +427,28 @@ Is there a nonempty perfect set in $\mathbb{R}$ which contains no rational numbe
 \smallskip
 \noindent\textbf{Solution.}\quad
 
-Yes. Let $\{r_1,r_2,\ldots\}$ be the set of all rational numbers in $E_0=[\pi,\pi+1]$, construct a subset of $E_0$ as below. Having chosen $E_n$ ($n\ge 0$) the subsets of $E_0$ such that $E_n$ is a disjoint union of at most $2^{n+1}-1$ intervals with irrational endpoints, each of positive length at most $3^{-n}$ and $E_n$ does not contain $r_j$ for $1\le j\le n$. Define the set $F_{n+1}$ obtained from $E_n$ by removing the middle thirds of all intervals of $E_n$. Thus $F_{n+1}$ is a disjoint union of at most $2^{n+2}-2$ intervals with irrational endpoints, each of positive length at most $3^{-(n+1)}$. If $r_{n+1}\notin F_{n+1}$, take $E_{n+1}=F_{n+1}$. If $r_{n+1}\in F_{n+1}$, then $r_{n+1}\in [a,b]$ for some interval $[a,b]\subset F_{n+1}$. Since $a$ and $b$ are irrational, we have $r_{n+1}\in(a,b)$. Let $\delta>0$ be an irrational number such that $\delta<\min\{r_{n+1}-a,b-r_{n+1}\}$, and put
+Yes. Enumerate the rationals as $\{r_1,r_2,\ldots\}$ and start
+with a nondegenerate closed interval $E_0$ having irrational endpoints.
+Inductively suppose that $E_n$ is a finite disjoint union of nondegenerate
+closed intervals, has irrational endpoints, and avoids
+$r_1,\ldots,r_n$.  From the interior of each component $[a,b]$, remove
+an open interval $(c,d)$ whose endpoints are irrational and are chosen
+close enough to the one-third and two-thirds points that both retained
+intervals have length less than $(b-a)/2$.  Density of the irrationals
+makes this choice possible; no claim that arithmetic means of irrational
+numbers remain irrational is needed.  If $r_{n+1}$ lies in one of the
+retained intervals, remove from the interior of that interval a further
+open interval with irrational endpoints which contains $r_{n+1}$ (it
+cannot be an endpoint, since it is rational).  Call the remaining finite
+union $E_{n+1}$.  Every component is nondegenerate, has irrational
+endpoints, and has length less than half the length of its parent
+component; moreover $E_{n+1}$ avoids $r_1,\ldots,r_{n+1}$.  Hence the resulting set
+$P=\bigcap_{n=0}^\infty E_n$ contains no rational number.
+Since $E_n$ is closed for each $n\ge 0$, by Theorem 2.24(b), $P$ is closed. Moreover, since $E_0\supset E_1\supset E_2\supset \cdots$, each $E_n$ is bounded (by $E_0$), i.e., each $E_n$ is actually a (nonempty) compact set. By Theorem 2.36, $P\ne\varnothing$. Finally, let $L$ be the length of $E_0$ and let $x\in P$.  If $[a,b]$ is the component of $E_n$ containing $x$, then $b-a<L2^{-n}$.  Every endpoint created by the construction is retained at all later stages, so $a,b\in P$.  Choose $y=a$ unless $x=a$, in which case choose $y=b$.  Then $y\in P$, $y\ne x$, and
 \begin{align*}
-E_{n+1}=F_{n+1}-(r_{n+1}-\delta,r_{n+1}+\delta)
+\left\vert y-x\right\vert<L2^{-n}.
 \end{align*}
-By doing this, we see that $E_{n+1}$ is a disjoint union of at most $2^{n+2}-1$ intervals with irrational endpoints, each of positive length at most $3^{-(n+1)}$ and $E_{n+1}$ does not contain $r_j$ for $1\le j\le n+1$. Hence the resulting set $P=\bigcap_{n=0}^\infty E_n$ contains no rational number.
-Since $E_n$ is closed for each $n\ge 0$, by Theorem 2.24(b), $P$ is closed. Moreover, since $E_0\supset E_1\supset E_2\supset \cdots$, each $E_n$ is bounded (by $E_0$), i.e., each $E_n$ is actually a (nonempty) compact set. By Theorem 2.36, $P\ne\varnothing$. Finally, to show that $P$ is perfect, let $x\in P$, then $x\in E_n$ for each positive integer $n$. Let $x\in[a,b]$ for some interval $[a,b]\subset E_n$, note that $b-a\le 3^{-n}$. If $x\ne a$, then put $y=a$; If $x=a$, then put $y=b$. In both cases, we see that $y\in P$, $y\ne x$, and
-\begin{align*}
-\left\vert y-x\right\vert\le b-a\le 3^{-n}<2\cdot 3^{-n}
-\end{align*}
-It follows that $x$ is a limit point of $P$, and hence $P$ is perfect.
+As this tends to zero, $x$ is a limit point of $P$.  Hence $P$ is perfect.
 
 
 
