@@ -35,7 +35,7 @@ Each LaTeX source has a configured Lean library, a matching default target, and 
 | `IntroSmoothManifolds_ch21.tex` | `IntroSmoothManifoldsChapter21/` | Source statement is incomplete; only generic supporting facts are currently formalized |
 | `IntroSmoothManifolds_ch22.tex` | `IntroSmoothManifoldsChapter22/` | Partial |
 | `IntroSmoothManifolds_A.tex` | `IntroSmoothManifoldsAReviewofTopology/` | Proposition A.16 formalized |
-| `IntroSmoothManifolds_B.tex` | `IntroSmoothManifoldsBReviewofLinearAlgebra/` | Exercises B.9 and B.13 formalized; other exercises partial/prose-only |
+| `IntroSmoothManifolds_B.tex` | `IntroSmoothManifoldsBReviewofLinearAlgebra/` | Exercises B.9, B.13, B.22(c), and B.49 formalized; other exercises partial/prose-only |
 | `IntroSmoothManifolds_C.tex` | `IntroSmoothManifoldsCReviewofCalculus/` | Propositions C.3 and the inverse-derivative content of C.4 formalized |
 
 ## Configuration and verification
