@@ -507,6 +507,40 @@ theorem equal_radius_spheres {k : ℕ} (hk : 3 ≤ k) (x y : EuclideanSpace ℝ 
     equal_radius_spheres_singleton x y r hr,
     equal_radius_spheres_infinite hk x y r hr hxy⟩
 
+private lemma circle_intersection_radicand_pos
+    (x y : EuclideanSpace ℝ (Fin 2)) (r : ℝ) (hr : 0 < r)
+    (hclose : dist x y < 2 * r) :
+    0 < r ^ 2 - (dist x y) ^ 2 / 4 := by
+  sorry
+
+private noncomputable def rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
+    EuclideanSpace ℝ (Fin 2) :=
+  (-v 1) • EuclideanSpace.single 0 1 + (v 0) • EuclideanSpace.single 1 1
+
+private lemma inner_rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
+    inner ℝ v (rotate90 v) = 0 := by
+  sorry
+
+private lemma norm_rotate90 (v : EuclideanSpace ℝ (Fin 2)) :
+    ‖rotate90 v‖ = ‖v‖ := by
+  sorry
+
+private noncomputable def normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
+    EuclideanSpace ℝ (Fin 2) := ‖v‖⁻¹ • rotate90 v
+
+private lemma normalizedRotate90_norm {v : EuclideanSpace ℝ (Fin 2)} (hv : v ≠ 0) :
+    ‖normalizedRotate90 v‖ = 1 := by
+  sorry
+
+private lemma inner_normalizedRotate90 (v : EuclideanSpace ℝ (Fin 2)) :
+    inner ℝ v (normalizedRotate90 v) = 0 := by
+  sorry
+
+private lemma eq_smul_normalizedRotate90_of_inner_eq_zero
+    {v w : EuclideanSpace ℝ (Fin 2)} (hv : v ≠ 0) (hw : inner ℝ w v = 0) :
+    ∃ t : ℝ, w = t • normalizedRotate90 v := by
+  sorry
+
 /-- In the plane, two equal circles have two intersection points when their
 centers are closer than twice the radius. -/
 theorem equal_radius_circles_two_points (x y : EuclideanSpace ℝ (Fin 2))
