@@ -8,7 +8,7 @@ rev = "v4.28.0"
 
 [[lean_lib]]
 name = "RudinChapter1"
-globs = ["rudin_ch1_exercises.+"]
+globs = ["RudinChapter1.+"]
 
 [[lean_lib]]
 name = "RudinChapter2"
