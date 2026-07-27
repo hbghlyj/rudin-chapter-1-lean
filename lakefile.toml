@@ -1,5 +1,5 @@
 name = "RudinExercises"
-defaultTargets = ["RudinChapter1", "RudinChapter2", "RudinChapter3", "RudinChapter4", "RudinChapter5", "RudinChapter6", "WheedenChapter1"]
+defaultTargets = ["RudinChapter1", "RudinChapter2", "RudinChapter3", "RudinChapter4", "RudinChapter5", "RudinChapter6", "WheedenChapter1", "WheedenChapter2"]
 
 [[require]]
 name = "mathlib"
@@ -33,3 +33,7 @@ globs = ["RudinChapter6.+"]
 [[lean_lib]]
 name = "WheedenChapter1"
 globs = ["WheedenChapter1.+"]
+
+[[lean_lib]]
+name = "WheedenChapter2"
+globs = ["WheedenChapter2.+"]
