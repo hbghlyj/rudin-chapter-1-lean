@@ -74,6 +74,12 @@ private lemma equal_radius_spheres_singleton {k : ℕ} (x y : EuclideanSpace ℝ
       rw [h1]
       ring
 
+private lemma exists_orthonormal_pair_perpendicular {k : ℕ} (hk : 3 ≤ k)
+    (d : EuclideanSpace ℝ (Fin k)) (hd : d ≠ 0) :
+    ∃ u v : EuclideanSpace ℝ (Fin k),
+      ‖u‖ = 1 ∧ ‖v‖ = 1 ∧ inner ℝ d u = 0 ∧ inner ℝ d v = 0 ∧ inner ℝ u v = 0 := by
+  sorry
+
 private lemma equal_radius_spheres_infinite {k : ℕ} (hk : 3 ≤ k)
     (x y : EuclideanSpace ℝ (Fin k)) (r : ℝ) (hr : 0 < r) (hxy : x ≠ y)
     (hclose : dist x y < 2 * r) :
