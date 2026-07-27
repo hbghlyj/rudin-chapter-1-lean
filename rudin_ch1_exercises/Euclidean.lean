@@ -256,7 +256,47 @@ private noncomputable def circleParam {k : ℕ} (u v : EuclideanSpace ℝ (Fin k
 private lemma circleParam_norm {k : ℕ} {u v : EuclideanSpace ℝ (Fin k)}
     (hu : ‖u‖ = 1) (hv : ‖v‖ = 1) (huv : inner ℝ u v = 0) (t : ℝ) :
     ‖circleParam u v t‖ = 1 := by
-  sorry
+  simp only [circleParam]
+  -- Use that the square of the norm equals a²‖u‖² + b²‖v‖² for orthogonal u, v
+  let a := (1 - t^2) / (1 + t^2)
+  let b := (2 * t) / (1 + t^2)
+  have hab : a^2 + b^2 = 1 := by
+    have h1 : (1 + t^2) > 0 := by positivity
+    simp only [a, b]
+    field_simp
+    ring
+  have hreal_inner_comm : ∀ x y : EuclideanSpace ℝ (Fin k), inner ℝ x y = inner ℝ y x := fun _ _ => real_inner_comm _ _
+  -- Compute norm squared using inner product
+  have hnorm_sq : ‖a • u + b • v‖^2 = inner ℝ (a • u + b • v) (a • u + b • v) :=
+    (real_inner_self_eq_norm_sq _).symm
+  -- Expand inner product
+  have hexpand : inner ℝ (a • u + b • v) (a • u + b • v) =
+      inner ℝ (a • u) (a • u) + inner ℝ (a • u) (b • v) +
+      inner ℝ (b • v) (a • u) + inner ℝ (b • v) (b • v) := by
+    rw [inner_add_left, inner_add_right, inner_add_right]
+    ring
+  -- Simplify each term
+  have hterm1 : inner ℝ (a • u) (a • u) = a^2 := by
+    rw [inner_smul_left, inner_smul_right]
+    simp [hu, real_inner_self_eq_norm_sq]
+    ring
+  have hterm2 : inner ℝ (a • u) (b • v) = 0 := by
+    rw [inner_smul_left, inner_smul_right]
+    simp [huv]
+  have hterm3 : inner ℝ (b • v) (a • u) = 0 := by
+    rw [inner_smul_left, inner_smul_right]
+    simp [hreal_inner_comm, huv]
+  have hterm4 : inner ℝ (b • v) (b • v) = b^2 := by
+    rw [inner_smul_left, inner_smul_right]
+    simp [hv, real_inner_self_eq_norm_sq]
+    ring
+  -- Combine
+  have hnorm_sq_eq : ‖a • u + b • v‖^2 = a^2 + b^2 := by
+    rw [hnorm_sq, hexpand, hterm1, hterm2, hterm3, hterm4]
+    ring
+  have hnorm_sq_1 : ‖a • u + b • v‖^2 = 1 := by rw [hnorm_sq_eq, hab]
+  have hnorm_nonneg : 0 ≤ ‖a • u + b • v‖ := norm_nonneg _
+  nlinarith [sq_nonneg ‖a • u + b • v‖]
 
 private lemma circleParam_orthogonal {k : ℕ} {d u v : EuclideanSpace ℝ (Fin k)}
     (hdu : inner ℝ d u = 0) (hdv : inner ℝ d v = 0) (t : ℝ) :
