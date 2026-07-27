@@ -491,14 +491,32 @@ Integration by parts gives
 \]
 Consequently
 \[
- e^xf(x)=\cos(e^x)-e^{-1}\cos(e^{x+1})+r(x),
-\quad |r(x)|\le e^x\int_{e^x}^{e^{x+1}}u^{-2}du<e^{-x}.
+ e^xf(x)=\cos(e^x)-e^{-1}\cos(e^{x+1})+r(x),\qquad
+ r(x)=-e^x\int_{e^x}^{e^{x+1}}{\cos u\over u^2}\,du.
 \]
-The same formula gives
+To obtain decay one must use the oscillation, rather than merely bound
+$|\cos u|$ by $1$.  A second integration by parts gives
 \[
- e^x|f(x)|\le1+e^{-1}+e^{-x}<2
+ \int_A^B{\cos u\over u^2}\,du
+ =\left[{\sin u\over u^2}\right]_A^B
+   +2\int_A^B{\sin u\over u^3}\,du.
 \]
-for $x>0$; at $x=0$ the sharper exact integral bound obtained from the first displayed integral gives the same strict inequality.  Thus the assertions hold, with $C=1$.
+With $A=e^x$ and $B=e^{x+1}$ this yields
+\[
+ |r(x)|\le e^x\left(A^{-2}+B^{-2}
+       +2\int_A^B u^{-3}\,du\right)
+ \le (2+e^{-2})e^{-x}.
+\]
+Thus the asserted remainder estimate holds, for example with
+$C=2+e^{-2}$.  For the first assertion, the first integration-by-parts
+formula directly gives
+\[
+ e^x|f(x)|
+ \le 1+e^{-1}+e^x\int_{e^x}^{e^{x+1}}u^{-2}\,du=2.
+\]
+Equality would require equality throughout the triangle inequalities,
+in particular $|\cos u|=1$ throughout a nondegenerate interval, which
+is impossible.  Hence $e^x|f(x)|<2$.
 
 
 
