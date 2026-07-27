@@ -1,1 +1,2 @@
 import IntroSmoothManifoldsBReviewofLinearAlgebra.Basic
+import IntroSmoothManifoldsBReviewofLinearAlgebra.Exercises
