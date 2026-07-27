@@ -78,7 +78,176 @@ private lemma exists_orthonormal_pair_perpendicular {k : ℕ} (hk : 3 ≤ k)
     (d : EuclideanSpace ℝ (Fin k)) (hd : d ≠ 0) :
     ∃ u v : EuclideanSpace ℝ (Fin k),
       ‖u‖ = 1 ∧ ‖v‖ = 1 ∧ inner ℝ d u = 0 ∧ inner ℝ d v = 0 ∧ inner ℝ u v = 0 := by
-  sorry
+  -- Find indices 0, 1, 2 since k ≥ 3
+  let i0 : Fin k := ⟨0, by omega⟩
+  let i1 : Fin k := ⟨1, by omega⟩
+  let i2 : Fin k := ⟨2, by omega⟩
+  have heq01 : i0 ≠ i1 := by simp [i0, i1]
+  have heq02 : i0 ≠ i2 := by simp [i0, i2]
+  have heq12 : i1 ≠ i2 := by simp [i1, i2]
+  -- First construct w = d_1 * e_0 - d_0 * e_1 (perpendicular to d)
+  let w : EuclideanSpace ℝ (Fin k) := d i1 • EuclideanSpace.single i0 1 - d i0 • EuclideanSpace.single i1 1
+  by_cases hw : w = 0
+  · -- If w = 0, then d_0 = d_1 = 0, so we can use e_0 and e_1
+    have hne01 : i0 ≠ i1 := heq01
+    have hd0 : d i0 = 0 := by
+      have := congr_arg (fun x => x i1) hw
+      simp only [w] at this
+      simp [EuclideanSpace.single_apply, if_neg hne01.symm] at this
+      linarith
+    have hd1 : d i1 = 0 := by
+      have := congr_arg (fun x => x i0) hw
+      simp only [w] at this
+      simp [EuclideanSpace.single_apply, if_neg hne01] at this
+      linarith
+    use EuclideanSpace.single i0 1, EuclideanSpace.single i1 1
+    refine ⟨?_, ?_, ?_, ?_, ?_⟩
+    · simp [EuclideanSpace.norm_single]
+    · simp [EuclideanSpace.norm_single]
+    · simp only [inner, PiLp.inner_apply]
+      rw [Finset.sum_eq_single i0]
+      · simp [hd0]
+      · intro b _ hb
+        simp [EuclideanSpace.single_apply, hb]
+      · simp
+    · simp only [inner, PiLp.inner_apply]
+      rw [Finset.sum_eq_single i1]
+      · simp [hd1]
+      · intro b _ hb
+        simp [EuclideanSpace.single_apply, hb]
+      · simp
+    · simp only [inner, PiLp.inner_apply]
+      rw [Finset.sum_eq_single i0]
+      · simp [heq01]
+      · intro b _ hb
+        simp [EuclideanSpace.single_apply, hb]
+      · simp
+  · -- w ≠ 0 case: normalize w to get u
+    have hw_norm_pos : 0 < ‖w‖ := norm_pos_iff.mpr hw
+    have hw_inner_d : inner ℝ d w = 0 := by
+      simp only [w, inner_sub_right, inner_smul_right, inner_smul_right]
+      simp [EuclideanSpace.inner_single_right]
+      ring
+    let u := (1 / ‖w‖) • w
+    have hu_norm : ‖u‖ = 1 := by
+      rw [norm_smul, Real.norm_of_nonneg (by positivity : (0 : ℝ) ≤ 1 / ‖w‖)]
+      field_simp
+    have hu_ortho_d : inner ℝ d u = 0 := by
+      rw [inner_smul_right, hw_inner_d, mul_zero]
+    -- Construct w2 = d_2 * e_0 - d_0 * e_2 (perpendicular to d)
+    let w2 : EuclideanSpace ℝ (Fin k) := d i2 • EuclideanSpace.single i0 1 - d i0 • EuclideanSpace.single i2 1
+    have hw2_inner_d : inner ℝ d w2 = 0 := by
+      simp only [w2, inner_sub_right, inner_smul_right, inner_smul_right]
+      simp [EuclideanSpace.inner_single_right]
+      ring
+    -- Orthogonalize w2 against w to get w2'
+    let scalar := inner ℝ w2 w / inner ℝ w w
+    let w2' : EuclideanSpace ℝ (Fin k) := w2 - scalar • w
+    have hw2'_inner_w : inner ℝ (w2 - scalar • w) w = 0 := by
+      rw [inner_sub_left, inner_smul_left]
+      simp [scalar]
+      field_simp
+      ring
+    have hw2'_inner_d : inner ℝ (w2 - scalar • w) d = 0 := by
+      rw [inner_sub_left, inner_smul_left]
+      have h1 : inner ℝ w2 d = 0 := hw2_inner_d ▸ inner_conj_symm d w2
+      have h2 : inner ℝ w d = 0 := hw_inner_d ▸ inner_conj_symm d w
+      simp [h1, h2]
+    -- Check w2' ≠ 0
+    by_cases hw2'_ne : w2' = 0
+    · -- w2' = 0 means w2 is parallel to w, which happens when d i0 = 0
+      -- Use w3 = d i2 • e_1 - d i1 • e_2 instead
+      let w3 : EuclideanSpace ℝ (Fin k) := d i2 • EuclideanSpace.single i1 1 - d i1 • EuclideanSpace.single i2 1
+      have hw3_inner_d : inner ℝ d w3 = 0 := by
+        have h1 : inner ℝ d (EuclideanSpace.single i1 1) = d i1 := by
+          simp [EuclideanSpace.inner_single_right]
+        have h2 : inner ℝ d (EuclideanSpace.single i2 1) = d i2 := by
+          simp [EuclideanSpace.inner_single_right]
+        simp only [w3, inner_sub_right, inner_smul_right, h1, h2]
+        ring
+      -- Orthogonalize w3 against w to get w3'
+      let scalar3 := inner ℝ w3 w / inner ℝ w w
+      let w3' : EuclideanSpace ℝ (Fin k) := w3 - scalar3 • w
+      have hw3'_inner_w : inner ℝ w3' w = 0 := by
+        rw [inner_sub_left, inner_smul_left]
+        simp only [scalar3]
+        simp [map_div₀]
+        rw [div_mul_cancel₀]
+        · simp
+        · exact pow_ne_zero 2 hw_norm_pos.ne'
+      have hw3'_inner_d : inner ℝ w3' d = 0 := by
+        rw [inner_sub_left, inner_smul_left]
+        have h1 : inner ℝ w3 d = 0 := hw3_inner_d ▸ inner_conj_symm d w3
+        have h2 : inner ℝ w d = 0 := hw_inner_d ▸ inner_conj_symm d w
+        simp [h1, h2]
+      by_cases hw3'_ne : w3' = 0
+      · -- Both w2' = 0 and w3' = 0 means w = 0 (contradiction with hw)
+        exfalso
+        apply hw
+        -- w = d i1 • e_0 - d i0 • e_1
+        -- From w2' = 0: w2 = scalar • w. At index 0: w2 i0 = d i2, w i0 = d i1
+        --   So d i2 = scalar * d i1
+        -- From w3' = 0: w3 = scalar3 • w. At index 2: w3 i2 = -d i1, w i2 = 0
+        --   So -d i1 = scalar3 * 0 = 0, hence d i1 = 0
+        have hdi1 : d i1 = 0 := by
+          have h : w3 = scalar3 • w := sub_eq_zero.mp hw3'_ne
+          have eq := congr_arg (fun x => x i2) h
+          simp [w3, w, EuclideanSpace.single_apply, smul_eq_mul, heq12.symm, heq01.symm, heq02.symm] at eq
+          linarith
+        -- At index 1: w3 i1 = d i2, w i1 = -d i0
+        -- So d i2 = scalar3 * (-d i0) = -scalar3 * d i0
+        -- From w2' = 0: at index 0: w2 i0 = d i2, w i0 = d i1 = 0
+        -- So d i2 = scalar * 0 = 0
+        have hdi2 : d i2 = 0 := by
+          have h2 : w2 = scalar • w := sub_eq_zero.mp hw2'_ne
+          have eq := congr_arg (fun x => x i0) h2
+          simp [w2, w, EuclideanSpace.single_apply, smul_eq_mul, heq02, heq01, hdi1] at eq
+          linarith
+        -- Now d i1 = 0 and d i2 = 0
+        -- From w2 = scalar • w at index 2: w2 i2 = scalar * w i2
+        -- w2 i2 = -d i0, w i2 = 0, so d i0 = 0
+        have hdi0 : d i0 = 0 := by
+          have h2 : w2 = scalar • w := sub_eq_zero.mp hw2'_ne
+          have eq := congr_arg (fun x => x i2) h2
+          simp [w2, w, EuclideanSpace.single_apply, smul_eq_mul, heq02.symm, heq12.symm, hdi1] at eq
+          linarith
+        -- Now w = d i1 • e_0 - d i0 • e_1 = 0 • e_0 - 0 • e_1 = 0
+        ext j
+        simp [w, hdi1, hdi0]
+      · -- Normalize w3' to get v
+        have hw3'_norm_pos : 0 < ‖w3'‖ := norm_pos_iff.mpr hw3'_ne
+        let v := (1 / ‖w3'‖) • w3'
+        have hv_norm : ‖v‖ = 1 := by
+          rw [norm_smul, Real.norm_of_nonneg (by positivity : (0 : ℝ) ≤ 1 / ‖w3'‖)]
+          field_simp
+        have hv_ortho_d : inner ℝ d v = 0 := by
+          simp only [v, inner_smul_right]
+          rw [real_inner_comm, hw3'_inner_d]
+          ring
+        have hv_ortho_u : inner ℝ u v = 0 := by
+          simp only [v, inner_smul_right]
+          have hu_eq : u = (1 / ‖w‖) • w := rfl
+          rw [hu_eq, inner_smul_left, real_inner_comm]
+          rw [hw3'_inner_w]
+          ring
+        exact ⟨u, v, hu_norm, hv_norm, hu_ortho_d, hv_ortho_d, hv_ortho_u⟩
+    · -- w2' ≠ 0 case: use w2' as v
+      have hw2'_norm_pos : 0 < ‖w2'‖ := norm_pos_iff.mpr hw2'_ne
+      let v := (1 / ‖w2'‖) • w2'
+      have hv_norm : ‖v‖ = 1 := by
+        rw [norm_smul, Real.norm_of_nonneg (by positivity : (0 : ℝ) ≤ 1 / ‖w2'‖)]
+        field_simp
+      have hv_ortho_d : inner ℝ d v = 0 := by
+        simp only [v, inner_smul_right]
+        rw [real_inner_comm, hw2'_inner_d]
+        ring
+      have hv_ortho_u : inner ℝ u v = 0 := by
+        simp only [v, inner_smul_right]
+        have hu_eq : u = (1 / ‖w‖) • w := rfl
+        rw [hu_eq, inner_smul_left, real_inner_comm]
+        rw [hw2'_inner_w]
+        ring
+      exact ⟨u, v, hu_norm, hv_norm, hu_ortho_d, hv_ortho_d, hv_ortho_u⟩
 
 private lemma equal_radius_spheres_infinite {k : ℕ} (hk : 3 ≤ k)
     (x y : EuclideanSpace ℝ (Fin k)) (r : ℝ) (hr : 0 < r) (hxy : x ≠ y)
