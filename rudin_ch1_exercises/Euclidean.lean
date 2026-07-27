@@ -356,7 +356,141 @@ private lemma equal_radius_spheres_infinite {k : ℕ} (hk : 3 ≤ k)
     (x y : EuclideanSpace ℝ (Fin k)) (r : ℝ) (hr : 0 < r) (hxy : x ≠ y)
     (hclose : dist x y < 2 * r) :
     Set.Infinite {z | dist z x = r ∧ dist z y = r} := by
-  sorry
+  have hd_ne : y - x ≠ 0 := sub_ne_zero.mpr hxy.symm
+  obtain ⟨u, v, hu, hv, hdu, hdv, huv⟩ := exists_orthonormal_pair_perpendicular hk (y - x) hd_ne
+  -- Distance from x to midpoint is half of dist x y
+  have hm_center : dist ((2 : ℝ)⁻¹ • (x + y)) x = dist x y / 2 := by
+    rw [dist_eq_norm]
+    have heq : (2 : ℝ)⁻¹ • (x + y) - x = (2 : ℝ)⁻¹ • (y - x) := by ext; simp; ring
+    rw [heq, norm_smul, Real.norm_of_nonneg (by norm_num : (0 : ℝ) ≤ 2⁻¹)]
+    rw [dist_eq_norm, norm_sub_rev]
+    ring
+  -- ρ is the radius of the circle of intersection
+  have hdist_lt : dist x y / 2 < r := by linarith
+  have hdist_nonneg : 0 ≤ dist x y / 2 := by positivity
+  have hdist_sq : (dist x y / 2) ^ 2 < r ^ 2 := by nlinarith
+  have hrho_pos : r ^ 2 - (dist x y / 2) ^ 2 > 0 := by linarith
+  set rho := Real.sqrt (r ^ 2 - (dist x y / 2) ^ 2) with hrho_def
+  have hrho_pos' : 0 < rho := Real.sqrt_pos.mpr hrho_pos
+  -- Define the parameterization
+  let f : ℝ → EuclideanSpace ℝ (Fin k) := fun t => (2 : ℝ)⁻¹ • (x + y) + rho • circleParam u v t
+  -- Show f maps into the set: dist (f t) x = r and dist (f t) y = r
+  have hf_mem : ∀ t, f t ∈ {z | dist z x = r ∧ dist z y = r} := by
+    intro t
+    -- Key: circleParam u v t has norm 1
+    have hcp_norm : ‖circleParam u v t‖ = 1 := circleParam_norm hu hv huv t
+    -- So rho • circleParam u v t has norm rho
+    have hrho_smul : ‖rho • circleParam u v t‖ = rho := by
+      rw [norm_smul, Real.norm_of_nonneg (le_of_lt hrho_pos'), hcp_norm]
+      ring
+    -- The displacement is perpendicular to (y - x)
+    have hortho : inner ℝ (y - x) (rho • circleParam u v t) = 0 := by
+      rw [inner_smul_right]
+      have := circleParam_orthogonal hdu hdv t
+      simp [this]
+    -- f(t) - x = (midpoint - x) + rho • circleParam u v t
+    -- midpoint - x is a scalar multiple of (y - x), so it's also orthogonal to rho • circleParam u v t
+    have hmid_minus_x : (2 : ℝ)⁻¹ • (x + y) - x = (2 : ℝ)⁻¹ • (y - x) := by ext; simp; ring
+    have hortho2 : inner ℝ ((2 : ℝ)⁻¹ • (x + y) - x) (rho • circleParam u v t) = 0 := by
+      rw [hmid_minus_x, inner_smul_left]
+      simp [hortho]
+    have hortho2' : inner ℝ ((2 : ℝ)⁻¹ • (y - x)) (rho • circleParam u v t) = 0 := by
+      rw [← hmid_minus_x]
+      exact hortho2
+    -- Pythagorean theorem: ‖a + b‖² = ‖a‖² + ‖b‖² when ⟪a, b⟫ = 0
+    have hpythag : ‖((2 : ℝ)⁻¹ • (x + y) - x) + rho • circleParam u v t‖ ^ 2 =
+                   ‖(2 : ℝ)⁻¹ • (x + y) - x‖ ^ 2 + ‖rho • circleParam u v t‖ ^ 2 := by
+      have eq1 : ‖(2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t‖ ^ 2 =
+                 inner ℝ ((2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t)
+                         ((2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t) :=
+        (real_inner_self_eq_norm_sq _).symm
+      have eq2 : ‖(2 : ℝ)⁻¹ • (x + y) - x‖ ^ 2 =
+                 inner ℝ ((2 : ℝ)⁻¹ • (x + y) - x) ((2 : ℝ)⁻¹ • (x + y) - x) :=
+        (real_inner_self_eq_norm_sq _).symm
+      have eq3 : ‖rho • circleParam u v t‖ ^ 2 =
+                 inner ℝ (rho • circleParam u v t) (rho • circleParam u v t) :=
+        (real_inner_self_eq_norm_sq _).symm
+      rw [eq1, eq2, eq3]
+      simp only [inner_add_add_self]
+      rw [hmid_minus_x]
+      simp [real_inner_comm, hortho2']
+    -- Simplify: ‖midpoint - x‖ = dist x y / 2, ‖rho • circleParam u v t‖ = rho
+    have hm_center_norm : ‖(2 : ℝ)⁻¹ • (x + y) - x‖ = dist x y / 2 := by
+      rw [← hm_center, dist_eq_norm]
+    have hpythag2 : ‖(2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t‖ ^ 2 = (dist x y / 2) ^ 2 + rho ^ 2 := by
+      rw [hpythag, hm_center_norm, hrho_smul]
+    -- Since rho^2 = r^2 - (dist x y / 2)^2, we get ‖...‖^2 = r^2
+    have hrho_sq : rho ^ 2 = r ^ 2 - (dist x y / 2) ^ 2 := by
+      rw [hrho_def]
+      exact Real.sq_sqrt (le_of_lt hrho_pos)
+    have hdist_sq_eq : ‖(2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t‖ ^ 2 = r ^ 2 := by
+      rw [hpythag2, hrho_sq]
+      ring
+    have hdist_eq : ‖(2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t‖ = r := by
+      have hnorm_nonneg : 0 ≤ ‖(2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t‖ := norm_nonneg _
+      have hr_nonneg : 0 ≤ r := le_of_lt hr
+      nlinarith [sq_nonneg ‖(2 : ℝ)⁻¹ • (x + y) - x + rho • circleParam u v t‖]
+    -- dist (f t) x = r
+    have hdist_fx : dist (f t) x = r := by
+      rw [dist_eq_norm]
+      simp only [f]
+      convert hdist_eq using 2 <;> abel
+    -- Similarly for y
+    have hmid_minus_y : (2 : ℝ)⁻¹ • (x + y) - y = -(2 : ℝ)⁻¹ • (y - x) := by ext; simp; ring
+    have hortho3 : inner ℝ ((2 : ℝ)⁻¹ • (x + y) - y) (rho • circleParam u v t) = 0 := by
+      rw [hmid_minus_y]
+      simp [hortho2']
+    have hpythag_y : ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖ ^ 2 =
+                     ‖(2 : ℝ)⁻¹ • (x + y) - y‖ ^ 2 + ‖rho • circleParam u v t‖ ^ 2 := by
+      have eq1 : ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖ ^ 2 =
+                 inner ℝ ((2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t)
+                         ((2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t) :=
+        (real_inner_self_eq_norm_sq _).symm
+      have eq2 : ‖(2 : ℝ)⁻¹ • (x + y) - y‖ ^ 2 =
+                 inner ℝ ((2 : ℝ)⁻¹ • (x + y) - y) ((2 : ℝ)⁻¹ • (x + y) - y) :=
+        (real_inner_self_eq_norm_sq _).symm
+      have eq3 : ‖rho • circleParam u v t‖ ^ 2 =
+                 inner ℝ (rho • circleParam u v t) (rho • circleParam u v t) :=
+        (real_inner_self_eq_norm_sq _).symm
+      rw [eq1, eq2, eq3]
+      simp only [inner_add_add_self]
+      rw [hmid_minus_y]
+      simp [real_inner_comm, hortho2']
+    have hm_center_norm_y : ‖(2 : ℝ)⁻¹ • (x + y) - y‖ = dist x y / 2 := by
+      rw [hmid_minus_y]
+      simp [norm_smul, Real.norm_of_nonneg (by norm_num : (0 : ℝ) ≤ 2⁻¹)]
+      rw [dist_eq_norm, norm_sub_rev]
+      ring
+    have hpythag2_y : ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖ ^ 2 = (dist x y / 2) ^ 2 + rho ^ 2 := by
+      rw [hpythag_y, hm_center_norm_y, hrho_smul]
+    have hdist_sq_eq_y : ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖ ^ 2 = r ^ 2 := by
+      rw [hpythag2_y, hrho_sq]
+      ring
+    have hdist_eq_y : ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖ = r := by
+      have hnorm_nonneg : 0 ≤ ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖ := norm_nonneg _
+      have hr_nonneg : 0 ≤ r := le_of_lt hr
+      nlinarith [sq_nonneg ‖(2 : ℝ)⁻¹ • (x + y) - y + rho • circleParam u v t‖]
+    have hdist_fy : dist (f t) y = r := by
+      rw [dist_eq_norm]
+      simp only [f]
+      convert hdist_eq_y using 2 <;> abel
+    exact ⟨hdist_fx, hdist_fy⟩
+  -- f is injective because circleParam is injective (since u, v are orthonormal)
+  have hf_inj : Function.Injective f := by
+    intro t₁ t₂ h_eq
+    simp only [f] at h_eq
+    -- Subtract midpoint from both sides
+    have : rho • circleParam u v t₁ = rho • circleParam u v t₂ := by
+      have := congr_arg (· - (2 : ℝ)⁻¹ • (x + y)) h_eq
+      simp at this
+      exact this
+    -- Since rho ≠ 0, we can cancel
+    have hrho_ne : rho ≠ 0 := ne_of_gt hrho_pos'
+    have : circleParam u v t₁ = circleParam u v t₂ := by
+      have := smul_right_injective (EuclideanSpace ℝ (Fin k)) hrho_ne this
+      exact this
+    exact circleParam_injective hu hv huv this
+  exact Set.infinite_of_injective_forall_mem hf_inj hf_mem
 
 /-- The trichotomy for intersections of two equal-radius spheres.  For dimensions at
 least three, the intersection is infinite exactly when the centers are less than
