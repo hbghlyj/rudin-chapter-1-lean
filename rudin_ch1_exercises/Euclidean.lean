@@ -2,6 +2,8 @@ import Mathlib
 
 open scoped BigOperators RealInnerProductSpace
 
+set_option maxHeartbeats 1000000
+
 namespace Rudin.Chapter1
 
 private lemma equal_radius_spheres_empty {k : ℕ} (x y : EuclideanSpace ℝ (Fin k))

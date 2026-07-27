@@ -234,9 +234,15 @@ $d=2r$, or $d<2r$.  In the first case there is no solution (equivalently,
 the triangle inequality would force $d\le 2r$).  In the second, the
 parallelogram identity forces $\norm{(z-x)+(z-y)}=0$, hence $z=m$; in the
 third the solutions form a sphere
-of radius $\sqrt{r^2-d^2/4}$ in a $(k-1)$-dimensional space.  This sphere
-is infinite for $k\ge3$, consists of two points for $k=2$, and is empty
-for $k=1$ (with distinct centers).
+of radius $\sqrt{r^2-d^2/4}$ in a $(k-1)$-dimensional space.  For $k\ge3$,
+choose two orthonormal directions $u,v$ perpendicular to $x-y$; the
+rational parametrization
+\[
+ \frac{1-t^2}{1+t^2}u+\frac{2t}{1+t^2}v\qquad(t\in\R)
+\]
+is injective and supplies infinitely many points on that sphere.  For
+$k=2$ the sphere consists of two points, and for $k=1$ it is empty
+(with distinct centers).
 \end{proof}
 
 \begin{exercise}[Parallelogram identity]
