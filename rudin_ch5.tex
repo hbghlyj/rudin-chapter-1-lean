@@ -185,11 +185,11 @@ whenever $0<\left\vert t-x\right\vert<\delta$, $a\le x\le b$, $a\le t\le b$. (Th
 \smallskip
 \noindent\textbf{Solution.}\quad
 
-(i) By the mean-valued theorem, there exists $c(t)$ between $x$ and $t$ such that $\frac{f(t)-f(x)}{t-x}=f'(c(t))$. Since $f'$ is continuous on $[a,b]$, and since $c(t)\to x$ as $t\to x$ (by the \textit{squeeze theorem}), we have
-\begin{align*}
-\frac{f(t)-f(x)}{t-x}=f'(c(t))\to f'(x)
-\end{align*}
-as $t\to x$. This completes the proof.
+(i) Since $f'$ is continuous on the compact interval $[a,b]$, it is uniformly continuous there.  Choose $\delta>0$ so that $|u-v|<\delta$ implies $|f'(u)-f'(v)|<\varepsilon$ for all $u,v\in[a,b]$.  By the mean value theorem, for $0<|t-x|<\delta$ there is a point $c$ between $x$ and $t$ such that
+\[
+ \frac{f(t)-f(x)}{t-x}=f'(c).
+\]
+Since $|c-x|\le|t-x|<\delta$, the required inequality follows.  The same $\delta$ works for every $x,t\in[a,b]$.
 (ii) Yes. Provided that each component of a given vector-valued function has continuous derivative on an interval.
 
 
@@ -330,7 +330,7 @@ The result then follows.
 Suppose $a$ and $x$ are real numbers, $c>0$, and $f$ is defined on $[-1,1]$ by
 \begin{align*}
 f(x)=\left\{\begin{array}{ll}
-x^a\sin\left(\left\vert x\right\vert^{-c}\right)&\mbox{(if $x\ne 0$)}\vspace{0.08in}\\
+\left\vert x\right\vert^a\sin\left(\left\vert x\right\vert^{-c}\right)&\mbox{(if $x\ne 0$)}\vspace{0.08in}\\
 0&\mbox{(if $x=0$)}
 \end{array}\right.
 \end{align*}
@@ -349,8 +349,8 @@ Prove the following statements:
 (a) It is clear that $f$ is continuous at any nonzero point $x$, so we only consider the point $x=0$. If $a>0$, then
 \begin{align*}
 \left\vert f(x)\right\vert
-=\left\vert x^a\sin\left(\left\vert x\right\vert^{-c}\right)\right\vert
-\le \left\vert x^a\right\vert
+=\left\vert |x|^a\sin\left(\left\vert x\right\vert^{-c}\right)\right\vert
+\le |x|^a
 \to 0\quad\mbox{as }x\to 0
 \end{align*}
 By squeezing, $f(x)\to 0$ as $x\to 0$, and hence $f$ is continuous at $0$. Conversely, if $a\le 0$, let $x_n=\left(2n\pi+\frac{\pi}{2}\right)^{-\frac{1}{c}}$ for $n=1,2,\ldots$. Then $x_n\to 0$ as $n\to\infty$, but $-\frac{a}{c}\ge 0$ implies
@@ -364,7 +364,7 @@ This shows that $\lim_{n\to\infty}f(x_n)\ne 0=f(0)$, and hence $f$ is not contin
 (b) If $a>1$ or $a-1>0$, then
 \begin{align*}
 \left\vert\frac{f(x)-f(0)}{x}\right\vert
-=\left\vert\frac{x^a\sin\left(\left\vert x\right\vert^{-c}\right)}{x}\right\vert
+=\left\vert\frac{|x|^a\sin\left(\left\vert x\right\vert^{-c}\right)}{x}\right\vert
 \le\left\vert x^{a-1}\right\vert
 \to 0\quad\mbox{as }x\to 0
 \end{align*}
@@ -382,23 +382,7 @@ and hence $f'(0)$ does not exist.
 
 \smallskip
 \noindent\textbf{Solution.}\quad
-(c)
-
-\smallskip
-\noindent\textbf{Solution.}\quad
-(d)
-
-\smallskip
-\noindent\textbf{Solution.}\quad
-(e)
-
-\smallskip
-\noindent\textbf{Solution.}\quad
-(f)
-
-\smallskip
-\noindent\textbf{Solution.}\quad
-(g)
+(c)--(g) For $x\ne0$, differentiation shows that $f'(x)$ is a sum of terms of orders $|x|^{a-1}$ and $|x|^{a-c-1}$, while $f''(x)$ is a sum of terms of orders $|x|^{a-2}$, $|x|^{a-c-2}$, and $|x|^{a-2c-2}$.  The oscillatory factors are bounded.  Thus the dominant first-derivative term is bounded exactly when $a\ge1+c$, and tends to zero exactly when $a>1+c$; these give (c) and (d), using $f'(0)=0$.  Likewise the difference quotient for $f'$ at zero tends to zero exactly when $a>2+c$, proving (e).  The dominant second-derivative term has size $|x|^{a-2-2c}$, so it is bounded exactly when $a\ge2+2c$ and tends to zero exactly when $a>2+2c$, proving (f) and (g).  Necessity at each borderline follows by choosing sequences on which the corresponding sine or cosine factor equals $1$ in absolute value.
 
 
 
@@ -557,7 +541,7 @@ for all $x\in(a,\infty)$. So that $N_0\le M_0$ and $N_2\le M_2$. Also, since
 \begin{align*}
 N_1\ge g'(x_0)=\mathbf{u}\cdot\mathbf{f}'(x_0)=\left\vert\mathbf{f}'(x_0)\right\vert>p
 \end{align*}
-and since $N_1\le 4N_0N_2$ [by part (i)], we have $p<4M_0M_2$. Since $p$ is arbitrarily chosen such that $0<p<M_1$, we conclude that $M_1\le 4M_0M_2$.
+and since $N_1^2\le 4N_0N_2$ [by part (i)], we have $p^2<4M_0M_2$. Since $p$ may increase to $M_1$, we conclude that $M_1^2\le 4M_0M_2$.
 
 
 
@@ -1143,14 +1127,11 @@ which has two solutions: $f(x)=0$ and $f(x)=x^2/4$. Find all other solutions.
 &=A\left\vert f(x)\right\vert
 \end{align*}
 for all $x\in[a,b]$. Thus by Exercise 26, $f=0$ on $[a,b]$.
-(ii) It is easy to check that $f(x)=0$ and $f(x)=\frac{x^2}{4}$ are solutions of the given initial-value problem. To find the others, observe that if $f$ is a \textit{nonzero} solution, then $y'=y^{\frac{1}{2}}$ implies $f'(x)=\left[f(x)\right]^{\frac{1}{2}}$. Differentiate it we get
-\begin{align*}
-f''(x)
-=\frac{1}{2}\left[f(x)\right]^{-\frac{1}{2}}f'(x)
-=\frac{1}{2}\left[f(x)\right]^{-\frac{1}{2}}\left[f(x)\right]^{\frac{1}{2}}
-=\frac{1}{2}
-\end{align*}
-So $f'(x)=\frac{x}{2}+c$ for some constant $c$, and then $f(x)=\left(\frac{x}{2}+c\right)^2$. Since $y(0)=0$ implies $f(0)=0$, we get $c=0$. Hence $f(x)=\frac{x^2}{4}$.
+(ii) On a right-hand interval, every $c\ge0$ gives a solution
+\[
+ y_c(x)=\begin{cases}0,&0\le x\le c,\\(x-c)^2/4,&x\ge c.\end{cases}
+\]
+The two formulas and their first derivatives agree at $c$, so $y_c'=\sqrt{y_c}$ everywhere.  Conversely, because every solution is nondecreasing and nonnegative, its zero set is an initial interval $[0,c]$ (possibly all of the domain).  Where the solution is positive, $2\sqrt y$ has derivative $1$, so $2\sqrt{y(x)}=x-c$ and hence $y(x)=(x-c)^2/4$.  These delayed solutions, together with the identically zero solution, are all solutions.
 
 
 
@@ -1226,7 +1207,6 @@ Observe that for $\mathbf{y}_1=(y_{11},y_{21},\ldots,y_{k1})$ and $\mathbf{y}_2=
 Denote $M=\sup\{\left\vert g_j(x)\right\vert:x\in[a,b],\,1\le j\le k\}$, then
 \begin{align*}
 \left\vert\Phi(x,\mathbf{y}_2)-\Phi(x,\mathbf{y}_1)\right\vert^2
-&\le\sum_{i=2}^k\left(y_{i2}-y_{i1}\right)^2+M^2\left[\sum_{j=1}^k\left(y_{j2}-y_{j1}\right)\right]^2 \\
 &\le\sum_{i=2}^k\left(y_{i2}-y_{i1}\right)^2+kM^2\sum_{j=1}^k\left(y_{j2}-y_{j1}\right)^2 \\
 &\le\left(1+kM^2\right)\sum_{j=1}^k\left(y_{j2}-y_{j1}\right)^2 \\
 &=\left(1+kM^2\right)\left\vert\mathbf{y}_2-\mathbf{y}_1\right\vert^2

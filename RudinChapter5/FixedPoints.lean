@@ -17,7 +17,8 @@ theorem contraction_fixed_unique {f : ℝ → ℝ} {A : ℝ} (hA : A < 1)
 noncomputable def newtonCube (a x : ℝ) : ℝ := x - (x ^ 3 - a) / (3 * x ^ 2)
 
 /-- At a nonzero root of `x³=a`, the Newton step is fixed. -/
-theorem newtonCube_fixed {a x : ℝ} (hx : x ^ 3 = a) : newtonCube a x = x := by
-  simp [newtonCube, hx]
+theorem newtonCube_fixed {a x : ℝ} (hx0 : x ≠ 0) (hx : x ^ 3 = a) :
+    newtonCube a x = x := by
+  simp [newtonCube, hx, hx0]
 
 end RudinChapter5
